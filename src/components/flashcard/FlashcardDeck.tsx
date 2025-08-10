@@ -230,7 +230,7 @@ export default function FlashcardDeck() {
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 px-4 sm:px-0">
         <div>
           <p className="text-sm font-medium">
             {currentIndex + 1} / {filteredEvents.length}
@@ -261,9 +261,9 @@ export default function FlashcardDeck() {
         </div>
       )}
 
-      <div className="mt-8 bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
+      <div className="mt-8 bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mx-4 sm:mx-0">
         <h2 className="font-bold mb-2">学習状況</h2>
-        <div className="grid grid-cols-3 gap-4 text-center">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
           <div>
             <p className="text-sm text-gray-500 dark:text-gray-400">学習済み</p>
             <p className="text-xl font-bold">{progressStats.seen}</p>

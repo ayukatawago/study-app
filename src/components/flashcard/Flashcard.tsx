@@ -71,9 +71,9 @@ export default function Flashcard({
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto">
+    <div className="w-full px-4 max-w-lg mx-auto">
       <div
-        className={`relative w-96 h-64 cursor-pointer transition-all duration-500 ${
+        className={`relative w-full max-w-sm sm:max-w-md md:w-96 h-64 cursor-pointer transition-all duration-500 ${
           isFlipped ? 'shadow-xl' : 'shadow-md'
         } mx-auto`}
         onClick={handleFlip}
@@ -94,7 +94,7 @@ export default function Flashcard({
           } bg-white dark:bg-gray-800`}
         >
           {getBackContent()}
-          <div className="mt-4 flex space-x-3">
+          <div className="mt-4 flex flex-wrap justify-center gap-3">
             <button
               onClick={(e) => {
                 e.stopPropagation();

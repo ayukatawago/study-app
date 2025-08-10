@@ -17,9 +17,9 @@ export default function HistoryPage() {
   }
 
   return (
-    <main className="min-h-screen p-6">
+    <main className="min-h-screen p-4 sm:p-6">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center">Japanese History Flashcards</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center">歴史年代</h1>
         <FlashcardDeck />
       </div>
     </main>

@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Japanese History Flashcards',
+  title: '歴史年代',
   description: 'Study app for memorizing Japanese historical events by year',
 };
 
