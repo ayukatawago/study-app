@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a flashcard web application built with Next.js and TailwindCSS to help users memorize Japanese historical events by year. The application uses JSON data from `public/data/history_events.json` to create interactive flashcards and stores user progress in local storage.
+This is a flashcard web application built with Next.js and TailwindCSS to help users memorize Japanese historical events by year. The application (歴史年代) uses JSON data from `public/data/history_events.json` to create interactive flashcards and stores user progress in local storage.
 
 ## Development Setup
 
@@ -39,9 +39,11 @@ study-app/
 ├── public/            # Static files
 │   └── data/         # JSON data for flashcards (history_events.json)
 ├── src/
+│   ├── app/          # Next.js app router pages
+│   │   ├── page.tsx  # Home page
+│   │   └── history/  # History flashcards page
 │   ├── components/   # React components
 │   │   └── flashcard/ # Flashcard related components
-│   ├── pages/        # Next.js pages
 │   ├── hooks/        # Custom React hooks
 │   ├── utils/        # Utility functions
 │   └── styles/       # Global styles
@@ -100,7 +102,9 @@ User progress and settings are stored in local storage with the following struct
   },
   "settings": {
     "cardDirection": "year-to-event",
-    "showMemorize": true
+    "showMemorize": true,
+    "randomOrder": true,
+    "showIncorrectOnly": false
   }
 }
 ```
@@ -113,3 +117,12 @@ User progress and settings are stored in local storage with the following struct
 4. Implement local storage for tracking progress
 5. Add TailwindCSS styling for responsive design
 6. Implement filters and sorting options for flashcards
+
+## Features
+
+1. **Responsive Design**: Optimized for both desktop and mobile devices
+2. **Study Progress Tracking**: Tracks cards seen, correct, and incorrect
+3. **Study Modes**: Option to study all cards or only incorrect cards
+4. **Card Direction**: Switch between year-to-event and event-to-event directions
+5. **Random Order**: Option to study cards in random or sequential order
+6. **Reset Progress**: Clear study history when needed
