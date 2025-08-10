@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import FlashcardDeck from '@/components/flashcard/FlashcardDeck';
 
-export default function FlashcardsPage() {
+export default function HistoryPage() {
   const [isClient, setIsClient] = useState(false);
   
   useEffect(() => {
