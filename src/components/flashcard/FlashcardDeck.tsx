@@ -192,10 +192,19 @@ export default function FlashcardDeck() {
 
   if (!filteredEvents.length && historyEvents.length > 0 && settings.showIncorrectOnly) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-          <h2 className="text-xl font-bold mb-2">不正解のカードがありません</h2>
-          <p>不正解のカードのみ表示モードですが、不正解のカードがありません。設定を変更してください。</p>
+      <div>
+        <div className="flex justify-end mb-6">
+          <SettingsPanel 
+            settings={settings}
+            onSettingsChange={setSettings}
+            onResetProgress={handleResetProgress}
+          />
+        </div>
+        <div className="min-h-[60vh] flex items-center justify-center">
+          <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+            <h2 className="text-xl font-bold mb-2">不正解のカードがありません</h2>
+            <p>不正解のカードのみ表示モードですが、不正解のカードがありません。設定を変更してください。</p>
+          </div>
         </div>
       </div>
     );
