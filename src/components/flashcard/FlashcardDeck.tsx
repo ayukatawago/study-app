@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from 'react';
 import Flashcard, { HistoryEvent } from './Flashcard';
 import { useHistoryEvents } from '@/hooks/useHistoryEvents';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { removeFromStorage } from '@/utils/localStorage';
 import SettingsPanel from './SettingsPanel';
 
 export default function FlashcardDeck() {
@@ -161,6 +162,25 @@ export default function FlashcardDeck() {
     // Update the key to force a re-render of the flashcard component
     setKey(prevKey => prevKey + 1);
   };
+  
+  const handleResetProgress = () => {
+    // Reset the progress data
+    setProgress({
+      seen: [] as number[],
+      correct: [] as number[],
+      incorrect: [] as number[],
+    });
+    
+    // Force refresh of the deck
+    if (settings.randomOrder) {
+      const randomIndex = Math.floor(Math.random() * filteredEvents.length);
+      setCurrentIndex(randomIndex);
+    } else {
+      setCurrentIndex(0);
+    }
+    
+    setKey(prevKey => prevKey + 1);
+  };
 
   if (isLoading) {
     return (
@@ -210,6 +230,7 @@ export default function FlashcardDeck() {
         <SettingsPanel 
           settings={settings}
           onSettingsChange={setSettings}
+          onResetProgress={handleResetProgress}
         />
       </div>
 

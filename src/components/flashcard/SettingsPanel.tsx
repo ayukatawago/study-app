@@ -12,11 +12,13 @@ type Settings = {
 type SettingsPanelProps = {
   settings: Settings;
   onSettingsChange: (settings: Settings) => void;
+  onResetProgress?: () => void;
 };
 
 export default function SettingsPanel({ 
   settings, 
-  onSettingsChange 
+  onSettingsChange,
+  onResetProgress
 }: SettingsPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -164,6 +166,22 @@ export default function SettingsPanel({
               </div>
             </div>
           </div>
+          
+          {onResetProgress && (
+            <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <button 
+                onClick={() => {
+                  if (window.confirm('学習状況をリセットします。よろしいですか？')) {
+                    onResetProgress();
+                    setIsOpen(false);
+                  }
+                }}
+                className="w-full py-2 px-4 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md transition-colors"
+              >
+                学習状況をリセット
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
