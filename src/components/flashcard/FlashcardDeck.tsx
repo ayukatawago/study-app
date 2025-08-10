@@ -9,10 +9,20 @@ import SettingsPanel from './SettingsPanel';
 export default function FlashcardDeck() {
   const { historyEvents, isLoading, error } = useHistoryEvents();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [key, setKey] = useState(0); // Add a key to force re-render when switching cards
   const [settings, setSettings] = useLocalStorage('flashcard_settings', {
     cardDirection: 'year-to-event' as 'year-to-event' | 'event-to-year',
     showMemorize: true,
+    randomOrder: true,
   });
+
+  // Set initial random card when history events are loaded
+  useEffect(() => {
+    if (!isLoading && historyEvents.length > 0 && settings.randomOrder) {
+      const randomIndex = Math.floor(Math.random() * historyEvents.length);
+      setCurrentIndex(randomIndex);
+    }
+  }, [historyEvents, isLoading, settings.randomOrder]);
 
   const [progress, setProgress] = useLocalStorage('flashcard_progress', {
     seen: [] as number[],
@@ -73,13 +83,31 @@ export default function FlashcardDeck() {
     moveToNextCard();
   };
 
+  // Helper function to get random index (different from current)
+  const getRandomIndex = () => {
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * historyEvents.length);
+    } while (historyEvents.length > 1 && randomIndex === currentIndex);
+    return randomIndex;
+  };
+
   const moveToNextCard = () => {
-    if (currentIndex < historyEvents.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+    if (settings.randomOrder) {
+      // Pick a random card, but not the current one
+      setCurrentIndex(getRandomIndex());
     } else {
-      // If reached the end, start over
-      setCurrentIndex(0);
+      // Sequential mode
+      if (currentIndex < historyEvents.length - 1) {
+        setCurrentIndex(currentIndex + 1);
+      } else {
+        // If reached the end, start over
+        setCurrentIndex(0);
+      }
     }
+    
+    // Update the key to force a re-render of the flashcard component
+    setKey(prevKey => prevKey + 1);
   };
 
   if (isLoading) {
@@ -124,6 +152,7 @@ export default function FlashcardDeck() {
       </div>
 
       <Flashcard
+        key={key}
         event={currentEvent}
         showMemorize={settings.showMemorize}
         direction={settings.cardDirection}

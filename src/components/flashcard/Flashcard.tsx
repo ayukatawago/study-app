@@ -88,7 +88,10 @@ export default function Flashcard({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                onIncorrect();
+                setIsFlipped(false);
+                setTimeout(() => {
+                  onIncorrect();
+                }, 300); // Wait for the flip animation
               }}
               className="px-3 py-1.5 text-sm bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
             >
@@ -97,7 +100,10 @@ export default function Flashcard({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                onCorrect();
+                setIsFlipped(false);
+                setTimeout(() => {
+                  onCorrect();
+                }, 300); // Wait for the flip animation
               }}
               className="px-3 py-1.5 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
             >

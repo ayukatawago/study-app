@@ -5,6 +5,7 @@ import { useState } from 'react';
 type Settings = {
   cardDirection: 'year-to-event' | 'event-to-year';
   showMemorize: boolean;
+  randomOrder: boolean;
 };
 
 type SettingsPanelProps = {
@@ -33,6 +34,13 @@ export default function SettingsPanel({
     onSettingsChange({
       ...settings,
       showMemorize: event.target.checked,
+    });
+  };
+
+  const handleRandomOrderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onSettingsChange({
+      ...settings,
+      randomOrder: event.target.checked,
     });
   };
 
@@ -102,7 +110,7 @@ export default function SettingsPanel({
               </div>
             </div>
             
-            <div>
+            <div className="space-y-2">
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -113,6 +121,18 @@ export default function SettingsPanel({
                 />
                 <label htmlFor="show-memorize" className="text-sm">
                   覚え方を表示する
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="random-order"
+                  checked={settings.randomOrder}
+                  onChange={handleRandomOrderChange}
+                  className="mr-2"
+                />
+                <label htmlFor="random-order" className="text-sm">
+                  カードをランダム表示
                 </label>
               </div>
             </div>
