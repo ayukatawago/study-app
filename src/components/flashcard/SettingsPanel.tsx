@@ -6,6 +6,7 @@ type Settings = {
   cardDirection: 'year-to-event' | 'event-to-year';
   showMemorize: boolean;
   randomOrder: boolean;
+  showIncorrectOnly: boolean;
 };
 
 type SettingsPanelProps = {
@@ -42,6 +43,20 @@ export default function SettingsPanel({
       ...settings,
       randomOrder: event.target.checked,
     });
+  };
+
+  const handleShowIncorrectOnlyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // Get the new value
+    const showIncorrectOnly = event.target.checked;
+    
+    // Update the settings with the new showIncorrectOnly value
+    onSettingsChange({
+      ...settings,
+      showIncorrectOnly,
+    });
+    
+    // Close the panel after changing this setting to show the refreshed cards immediately
+    setIsOpen(false);
   };
 
   return (
@@ -133,6 +148,18 @@ export default function SettingsPanel({
                 />
                 <label htmlFor="random-order" className="text-sm">
                   カードをランダム表示
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="show-incorrect-only"
+                  checked={settings.showIncorrectOnly === true}
+                  onChange={handleShowIncorrectOnlyChange}
+                  className="mr-2"
+                />
+                <label htmlFor="show-incorrect-only" className="text-sm">
+                  不正解のカードのみ表示
                 </label>
               </div>
             </div>

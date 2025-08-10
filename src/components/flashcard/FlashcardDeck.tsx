@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Flashcard, { HistoryEvent } from './Flashcard';
 import { useHistoryEvents } from '@/hooks/useHistoryEvents';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
@@ -14,26 +14,78 @@ export default function FlashcardDeck() {
     cardDirection: 'year-to-event' as 'year-to-event' | 'event-to-year',
     showMemorize: true,
     randomOrder: true,
+    showIncorrectOnly: false,
   });
-
-  // Set initial random card when history events are loaded
-  useEffect(() => {
-    if (!isLoading && historyEvents.length > 0 && settings.randomOrder) {
-      const randomIndex = Math.floor(Math.random() * historyEvents.length);
-      setCurrentIndex(randomIndex);
-    }
-  }, [historyEvents, isLoading, settings.randomOrder]);
 
   const [progress, setProgress] = useLocalStorage('flashcard_progress', {
     seen: [] as number[],
     correct: [] as number[],
     incorrect: [] as number[],
   });
+  
+  // Ensure all settings and progress have default values
+  useEffect(() => {
+    if (settings && typeof settings.showIncorrectOnly === 'undefined') {
+      setSettings({
+        ...settings,
+        showIncorrectOnly: false
+      });
+    }
+    
+    // Ensure progress has all required properties
+    if (progress) {
+      const updatedProgress = { ...progress };
+      let needsUpdate = false;
+      
+      if (!Array.isArray(updatedProgress.seen)) {
+        updatedProgress.seen = [];
+        needsUpdate = true;
+      }
+      
+      if (!Array.isArray(updatedProgress.correct)) {
+        updatedProgress.correct = [];
+        needsUpdate = true;
+      }
+      
+      if (!Array.isArray(updatedProgress.incorrect)) {
+        updatedProgress.incorrect = [];
+        needsUpdate = true;
+      }
+      
+      if (needsUpdate) {
+        setProgress(updatedProgress);
+      }
+    }
+  }, [settings, setSettings, progress, setProgress]);
+
+  // Filter history events based on settings
+  const filteredEvents = useMemo(() => {
+    if (settings.showIncorrectOnly && progress && progress.incorrect && Array.isArray(progress.incorrect)) {
+      // Only show events that are in the incorrect list
+      return historyEvents.filter(event => progress.incorrect.includes(event.id));
+    }
+    return historyEvents;
+  }, [historyEvents, progress, settings.showIncorrectOnly]);
+  
+  // Handle card selection when any relevant property changes
+  useEffect(() => {
+    // Set card index when data is loaded or settings change
+    if (!isLoading && filteredEvents.length > 0) {
+      if (settings.randomOrder) {
+        const randomIndex = Math.floor(Math.random() * filteredEvents.length);
+        setCurrentIndex(randomIndex);
+      } else {
+        setCurrentIndex(0);
+      }
+      // Force re-render of the flashcard component
+      setKey(prevKey => prevKey + 1);
+    }
+  }, [isLoading, filteredEvents.length, settings.randomOrder, settings.showIncorrectOnly]);
 
   const handleCorrect = () => {
-    if (!historyEvents.length) return;
+    if (!filteredEvents.length) return;
 
-    const currentEventId = historyEvents[currentIndex].id;
+    const currentEventId = filteredEvents[currentIndex].id;
     
     setProgress((prev) => {
       // Add to seen and correct lists if not already there
@@ -59,9 +111,9 @@ export default function FlashcardDeck() {
   };
 
   const handleIncorrect = () => {
-    if (!historyEvents.length) return;
+    if (!filteredEvents.length) return;
 
-    const currentEventId = historyEvents[currentIndex].id;
+    const currentEventId = filteredEvents[currentIndex].id;
     
     setProgress((prev) => {
       // Add to seen and incorrect lists if not already there
@@ -87,8 +139,8 @@ export default function FlashcardDeck() {
   const getRandomIndex = () => {
     let randomIndex;
     do {
-      randomIndex = Math.floor(Math.random() * historyEvents.length);
-    } while (historyEvents.length > 1 && randomIndex === currentIndex);
+      randomIndex = Math.floor(Math.random() * filteredEvents.length);
+    } while (filteredEvents.length > 1 && randomIndex === currentIndex);
     return randomIndex;
   };
 
@@ -98,7 +150,7 @@ export default function FlashcardDeck() {
       setCurrentIndex(getRandomIndex());
     } else {
       // Sequential mode
-      if (currentIndex < historyEvents.length - 1) {
+      if (currentIndex < filteredEvents.length - 1) {
         setCurrentIndex(currentIndex + 1);
       } else {
         // If reached the end, start over
@@ -118,7 +170,16 @@ export default function FlashcardDeck() {
     );
   }
 
-  if (error || !historyEvents.length) {
+  if (!filteredEvents.length && historyEvents.length > 0 && settings.showIncorrectOnly) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+          <h2 className="text-xl font-bold mb-2">不正解のカードがありません</h2>
+          <p>不正解のカードのみ表示モードですが、不正解のカードがありません。設定を変更してください。</p>
+        </div>
+      </div>
+    );
+  } else if (error || !historyEvents.length) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center p-6 bg-red-100 dark:bg-red-900 rounded-lg">
@@ -129,12 +190,13 @@ export default function FlashcardDeck() {
     );
   }
 
-  const currentEvent = historyEvents[currentIndex];
+  // Safely get current event, it could be undefined if filtered events are empty
+  const currentEvent = filteredEvents.length > 0 ? filteredEvents[currentIndex] : undefined;
   const progressStats = {
     total: historyEvents.length,
-    seen: progress.seen.length,
-    correct: progress.correct.length,
-    incorrect: progress.incorrect.length,
+    seen: Array.isArray(progress.seen) ? progress.seen.length : 0,
+    correct: Array.isArray(progress.correct) ? progress.correct.length : 0,
+    incorrect: Array.isArray(progress.incorrect) ? progress.incorrect.length : 0,
   };
 
   return (
@@ -142,7 +204,7 @@ export default function FlashcardDeck() {
       <div className="flex justify-between items-center mb-6">
         <div>
           <p className="text-sm font-medium">
-            {currentIndex + 1} / {historyEvents.length}
+            {currentIndex + 1} / {filteredEvents.length}
           </p>
         </div>
         <SettingsPanel 
@@ -151,14 +213,23 @@ export default function FlashcardDeck() {
         />
       </div>
 
-      <Flashcard
-        key={key}
-        event={currentEvent}
-        showMemorize={settings.showMemorize}
-        direction={settings.cardDirection}
-        onCorrect={handleCorrect}
-        onIncorrect={handleIncorrect}
-      />
+      {currentEvent ? (
+        <Flashcard
+          key={key}
+          event={currentEvent}
+          showMemorize={settings.showMemorize}
+          direction={settings.cardDirection}
+          onCorrect={handleCorrect}
+          onIncorrect={handleIncorrect}
+        />
+      ) : (
+        <div className="min-h-[300px] flex items-center justify-center">
+          <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+            <h2 className="text-xl font-bold mb-2">カードがありません</h2>
+            <p>現在の設定に合うカードがありません。設定を変更してください。</p>
+          </div>
+        </div>
+      )}
 
       <div className="mt-8 bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
         <h2 className="font-bold mb-2">学習状況</h2>

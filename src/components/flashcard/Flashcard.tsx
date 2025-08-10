@@ -31,6 +31,11 @@ export default function Flashcard({
   };
 
   const getFrontContent = () => {
+    // Safety check in case event is undefined
+    if (!event) {
+      return <div className="text-lg">No card available</div>;
+    }
+    
     return direction === 'year-to-event' ? (
       <div className="text-5xl font-bold">{event.year}</div>
     ) : (
@@ -39,6 +44,11 @@ export default function Flashcard({
   };
 
   const getBackContent = () => {
+    // Safety check in case event is undefined
+    if (!event) {
+      return <div className="text-lg">No card available</div>;
+    }
+    
     return direction === 'year-to-event' ? (
       <>
         <div className="text-lg mb-3">{event.item}</div>
@@ -89,9 +99,11 @@ export default function Flashcard({
               onClick={(e) => {
                 e.stopPropagation();
                 setIsFlipped(false);
-                setTimeout(() => {
-                  onIncorrect();
-                }, 300); // Wait for the flip animation
+                if (event) { // Only call onIncorrect if event exists
+                  setTimeout(() => {
+                    onIncorrect();
+                  }, 300); // Wait for the flip animation
+                }
               }}
               className="px-3 py-1.5 text-sm bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
             >
@@ -101,9 +113,11 @@ export default function Flashcard({
               onClick={(e) => {
                 e.stopPropagation();
                 setIsFlipped(false);
-                setTimeout(() => {
-                  onCorrect();
-                }, 300); // Wait for the flip animation
+                if (event) { // Only call onCorrect if event exists
+                  setTimeout(() => {
+                    onCorrect();
+                  }, 300); // Wait for the flip animation
+                }
               }}
               className="px-3 py-1.5 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
             >
