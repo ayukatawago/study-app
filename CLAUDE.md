@@ -4,22 +4,112 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This appears to be a newly created repository named "study-app". The repository currently does not contain any code files or configuration files. It only has an initial commit.
+This is a flashcard web application built with Next.js and TailwindCSS to help users memorize Japanese historical events by year. The application uses JSON data from `public/data/history_events.json` to create interactive flashcards and stores user progress in local storage.
 
 ## Development Setup
 
-As the codebase develops, common commands for building, testing, and linting will be documented here.
+### Technologies
+- Next.js (React framework)
+- TailwindCSS (styling)
+- Local Storage (data persistence)
+
+### Commands
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+
+# Run linting
+npm run lint
+```
 
 ## Architecture
 
-The architecture of this application will be documented here as it develops.
+### Directory Structure
+```
+study-app/
+├── public/            # Static files
+│   └── data/         # JSON data for flashcards (history_events.json)
+├── src/
+│   ├── components/   # React components
+│   │   └── flashcard/ # Flashcard related components
+│   ├── pages/        # Next.js pages
+│   ├── hooks/        # Custom React hooks
+│   ├── utils/        # Utility functions
+│   └── styles/       # Global styles
+└── .next/           # Next.js build output
+```
 
-## Note
+### Core Features
+1. **Flashcard System**
+   - Display Japanese year numbers and associated historical events
+   - Allow flipping between year and event content
+   - Track correct/incorrect responses in local storage
+   - Use the "memorize" field for memory aids
 
-This CLAUDE.md file is an initial version and should be updated as the codebase grows to include:
+2. **Data Management**
+   - Uses local storage to persist user progress
+   - Pulls flashcard data from history_events.json
 
-1. Commands for building, running, testing, and linting the application
-2. High-level architectural patterns and code organization
-3. Important workflows and development processes
+3. **User Interface**
+   - Responsive design using TailwindCSS
+   - Simple and intuitive flashcard interaction
 
-When adding new functionality to the codebase, please update this file accordingly.
+## Data Structure
+
+The application uses the following JSON structure for flashcard data (from `public/data/history_events.json`):
+
+```json
+{
+  "history": [
+    {
+      "id": 1,
+      "year": 239,
+      "item": "邪馬台国の女王である卑弥呼が魏に使者を送る",
+      "memorize": "「親魏倭王」と　銅鏡100枚　２つもサンキュー　魏にペコリ"
+    },
+    {
+      "id": 2,
+      "year": 538,
+      "item": "百済から公に仏教が伝わる",
+      "memorize": "聖明王が　送ってくれた　百済の仏に　ご参拝"
+    }
+    // More year-event pairs
+  ]
+}
+```
+
+## Local Storage
+
+User progress and settings are stored in local storage with the following structure:
+
+```json
+{
+  "progress": {
+    "seen": [1, 2, 5],
+    "correct": [1, 2],
+    "incorrect": [5]
+  },
+  "settings": {
+    "cardDirection": "year-to-event",
+    "showMemorize": true
+  }
+}
+```
+
+## Development Workflow
+
+1. Build out the Next.js application structure
+2. Implement flashcard components
+3. Create a system for displaying and flipping cards
+4. Implement local storage for tracking progress
+5. Add TailwindCSS styling for responsive design
+6. Implement filters and sorting options for flashcards
