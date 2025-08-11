@@ -203,7 +203,37 @@ export default function FlashcardDeck() {
     );
   }
 
-  if (!filteredEvents.length && historyEvents.length > 0 && settings.showIncorrectOnly) {
+  // Check if all cards have been answered correctly (when not in showIncorrectOnly mode)
+  const allCardsAnsweredCorrectly = 
+    !settings.showIncorrectOnly && 
+    historyEvents.length > 0 && 
+    progress.correct.length === historyEvents.length;
+
+  // Check if we're in showIncorrectOnly mode and there are no incorrect cards
+  const noIncorrectCardsInIncorrectMode = 
+    settings.showIncorrectOnly && 
+    historyEvents.length > 0 && 
+    !filteredEvents.length;
+    
+  if (allCardsAnsweredCorrectly) {
+    return (
+      <div>
+        <div className="flex justify-end mb-6">
+          <SettingsPanel 
+            settings={settings}
+            onSettingsChange={setSettings}
+            onResetProgress={handleResetProgress}
+          />
+        </div>
+        <div className="min-h-[60vh] flex items-center justify-center">
+          <div className="text-center p-6 bg-green-100 dark:bg-green-900 rounded-lg">
+            <h2 className="text-xl font-bold mb-2">おめでとうございます！</h2>
+            <p>すべてのカードに正解しました！学習を続けるには「学習状況をリセット」してください。</p>
+          </div>
+        </div>
+      </div>
+    );
+  } else if (noIncorrectCardsInIncorrectMode) {
     return (
       <div>
         <div className="flex justify-end mb-6">
