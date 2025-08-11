@@ -67,7 +67,7 @@ study-app/
 
 ## Data Structure
 
-The application uses the following JSON structure for flashcard data (from `public/data/history_events_2.json`):
+The application uses the following JSON structure for flashcard data (from `public/data/history_events.json`):
 
 ```json
 {
