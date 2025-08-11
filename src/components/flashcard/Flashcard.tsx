@@ -36,7 +36,14 @@ export default function Flashcard({
     }
     
     return direction === 'year-to-event' ? (
-      <div className="text-5xl font-bold">{event.year}</div>
+      <div className="text-5xl font-bold">
+        {event.year}
+        {event.events.length > 2 && (
+          <div className="text-sm font-normal mt-1 text-gray-500">
+            {event.events.length}件のイベント
+          </div>
+        )}
+      </div>
     ) : (
       <div className="text-lg">
         {event.events.map((item, index) => (
