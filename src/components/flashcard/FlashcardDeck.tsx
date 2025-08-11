@@ -126,9 +126,12 @@ export default function FlashcardDeck() {
         ? prev.incorrect
         : [...prev.incorrect, currentEventId];
       
+      // Remove from correct list if it was there
+      const newCorrect = prev.correct.filter(id => id !== currentEventId);
+      
       return {
-        ...prev,
         seen: newSeen,
+        correct: newCorrect,
         incorrect: newIncorrect,
       };
     });
