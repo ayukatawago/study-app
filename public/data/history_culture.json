@@ -1,0 +1,167 @@
+{
+   "culture": [
+      {
+         "person": "井原西鶴",
+         "period": "元禄文化",
+         "descriptions": [
+            "浮世草子"
+         ]
+      },
+      {
+         "person": "近松門左衛門",
+         "period": "元禄文化",
+         "descriptions": [
+            "人形浄瑠璃の脚本",
+            "「曽根崎心中」"
+         ]
+      },
+      {
+         "person": "松尾芭蕉",
+         "period": "元禄文化",
+         "descriptions": [
+            "俳諧",
+            "「奥の細道」"
+         ]
+      },
+      {
+         "person": "尾形光琳",
+         "period": "元禄文化",
+         "descriptions": [
+            "俵屋宗達の後に装飾画を大成"
+         ]
+      },
+      {
+         "person": "菱川師宣",
+         "period": "元禄文化",
+         "descriptions": [
+            "見返り美人"
+         ]
+      },
+      {
+         "person": "杉田玄白",
+         "period": "化政文化",
+         "descriptions": [
+            "「解体新書」の翻訳"
+         ]
+      },
+      {
+         "person": "伊能忠敬",
+         "period": "化政文化",
+         "descriptions": [
+            "日本地図の作成"
+         ]
+      },
+      {
+         "person": "十返舎一九",
+         "period": "化政文化",
+         "descriptions": [
+            "「東海道中膝栗毛」"
+         ]
+      },
+      {
+         "person": "葛飾北斎",
+         "period": "化政文化",
+         "descriptions": [
+            "「富嶽三十六景」"
+         ]
+      },
+      {
+         "person": "歌川広重",
+         "period": "化政文化",
+         "descriptions": [
+            "「東海道五十三次」"
+         ]
+      },
+      {
+         "person": "曲亭馬琴",
+         "period": "化政文化",
+         "descriptions": [
+            "「南総里見八犬伝」"
+         ]
+      },
+      {
+         "person": "鈴木春信",
+         "period": "化政文化",
+         "descriptions": [
+            "錦絵"
+         ]
+      },
+      {
+         "person": "喜多川歌麿",
+         "period": "化政文化",
+         "descriptions": [
+            "美人画"
+         ]
+      },
+      {
+         "person": "森鴎外",
+         "period": "明治①",
+         "descriptions": [
+            "「舞姫」"
+         ]
+      },
+      {
+         "person": "北里柴三郎",
+         "period": "明治①",
+         "descriptions": [
+            "破傷風の血清療法を発見"
+         ]
+      },
+      {
+         "person": "樋口一葉",
+         "period": "明治①",
+         "descriptions": [
+            "「たけくらべ」"
+         ]
+      },
+      {
+         "person": "黒田清輝",
+         "period": "明治①",
+         "descriptions": [
+            "「湖畔」"
+         ]
+      },
+      {
+         "person": "志賀潔",
+         "period": "明治①",
+         "descriptions": [
+            "赤痢菌発見"
+         ]
+      },
+      {
+         "person": "フェノロサ・岡倉天心",
+         "period": "明治①",
+         "descriptions": [
+            "日本美術の復興"
+         ]
+      },
+      {
+         "person": "与謝野晶子",
+         "period": "明治②",
+         "descriptions": [
+            "「みだれ髪」"
+         ]
+      },
+      {
+         "person": "夏目漱石",
+         "period": "明治②",
+         "descriptions": [
+            "「こころ」"
+         ]
+      },
+      {
+         "person": "石川啄木",
+         "period": "明治②",
+         "descriptions": [
+            "「一握の砂」"
+         ]
+      },
+      {
+         "person": "平塚らいてう",
+         "period": "明治②",
+         "descriptions": [
+            "「青鞜」"
+         ]
+      }
+   ]
+}
