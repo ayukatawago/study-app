@@ -67,22 +67,26 @@ study-app/
 
 ## Data Structure
 
-The application uses the following JSON structure for flashcard data (from `public/data/history_events.json`):
+The application uses the following JSON structure for flashcard data (from `public/data/history_events_2.json`):
 
 ```json
 {
   "history": [
     {
-      "id": 1,
-      "year": 239,
-      "item": "邪馬台国の女王である卑弥呼が魏に使者を送る",
-      "memorize": "「親魏倭王」と　銅鏡100枚　２つもサンキュー　魏にペコリ"
+      "year": 1603,
+      "events": [
+        "徳川家康が征夷大将軍になる"
+      ],
+      "memorize": "家康 征夷大将軍だ 人群れさわぐ 江戸幕府"
     },
     {
-      "id": 2,
-      "year": 538,
-      "item": "百済から公に仏教が伝わる",
-      "memorize": "聖明王が　送ってくれた　百済の仏に　ご参拝"
+      "year": 1615,
+      "events": [
+        "大阪夏の陣（豊臣氏滅亡）",
+        "武家諸法度を制定（大名統制）",
+        "禁中並公家諸法度を制定（朝廷統制）"
+      ],
+      "memorize": "秀忠のころ 制定されて 異論以後ダメ 武家諸法度"
     }
     // More year-event pairs
   ]
@@ -96,9 +100,9 @@ User progress and settings are stored in local storage with the following struct
 ```json
 {
   "progress": {
-    "seen": [1, 2, 5],
-    "correct": [1, 2],
-    "incorrect": [5]
+    "seen": [1603, 1615, 1853],
+    "correct": [1603, 1615],
+    "incorrect": [1853]
   },
   "settings": {
     "cardDirection": "year-to-event",
