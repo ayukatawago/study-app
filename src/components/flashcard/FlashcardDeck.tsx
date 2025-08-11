@@ -136,12 +136,25 @@ export default function FlashcardDeck() {
     moveToNextCard();
   };
 
-  // Helper function to get random index (different from current)
+  // Helper function to get random index (different from current and not correctly answered)
   const getRandomIndex = () => {
     let randomIndex;
+    let attempts = 0;
+    const maxAttempts = filteredEvents.length * 2; // Prevent infinite loop
+    
     do {
       randomIndex = Math.floor(Math.random() * filteredEvents.length);
-    } while (filteredEvents.length > 1 && randomIndex === currentIndex);
+      attempts++;
+      // Break the loop if we've tried too many times to prevent infinite loops
+      if (attempts > maxAttempts) break;
+      
+    } while (
+      filteredEvents.length > 1 && 
+      (randomIndex === currentIndex || 
+       // Skip cards that have been correctly answered
+       (progress.correct && progress.correct.includes(filteredEvents[randomIndex]?.year)))
+    );
+    
     return randomIndex;
   };
 
