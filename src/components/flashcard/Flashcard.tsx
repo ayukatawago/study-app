@@ -3,10 +3,9 @@
 import { useState } from 'react';
 
 export type HistoryEvent = {
-  id: number;
   year: number;
-  item: string;
-  memorize: string;
+  events: string[];
+  memorize?: string;
 };
 
 type FlashcardProps = {
@@ -39,7 +38,13 @@ export default function Flashcard({
     return direction === 'year-to-event' ? (
       <div className="text-5xl font-bold">{event.year}</div>
     ) : (
-      <div className="text-lg">{event.item}</div>
+      <div className="text-lg">
+        {event.events.map((item, index) => (
+          <div key={index} className={index > 0 ? "mt-2" : ""}>
+            {item}
+          </div>
+        ))}
+      </div>
     );
   };
 
@@ -51,8 +56,14 @@ export default function Flashcard({
     
     return direction === 'year-to-event' ? (
       <>
-        <div className="text-lg mb-3">{event.item}</div>
-        {showMemorize && (
+        <div className="text-lg mb-3">
+          {event.events.map((item, index) => (
+            <div key={index} className={index > 0 ? "mt-2" : ""}>
+              {item}
+            </div>
+          ))}
+        </div>
+        {showMemorize && event.memorize && (
           <div className="text-xs italic border-t pt-2 mt-2 border-gray-300">
             <span className="font-medium">覚え方:</span> {event.memorize}
           </div>
@@ -61,7 +72,7 @@ export default function Flashcard({
     ) : (
       <>
         <div className="text-5xl font-bold mb-3">{event.year}</div>
-        {showMemorize && (
+        {showMemorize && event.memorize && (
           <div className="text-xs italic border-t pt-2 mt-2 border-gray-300">
             <span className="font-medium">覚え方:</span> {event.memorize}
           </div>

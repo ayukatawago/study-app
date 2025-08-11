@@ -63,7 +63,7 @@ export default function FlashcardDeck() {
   const filteredEvents = useMemo(() => {
     if (settings.showIncorrectOnly && progress && progress.incorrect && Array.isArray(progress.incorrect)) {
       // Only show events that are in the incorrect list
-      return historyEvents.filter(event => progress.incorrect.includes(event.id));
+      return historyEvents.filter(event => progress.incorrect.includes(event.year));
     }
     return historyEvents;
   }, [historyEvents, progress, settings.showIncorrectOnly]);
@@ -86,7 +86,7 @@ export default function FlashcardDeck() {
   const handleCorrect = () => {
     if (!filteredEvents.length) return;
 
-    const currentEventId = filteredEvents[currentIndex].id;
+    const currentEventId = filteredEvents[currentIndex].year;
     
     setProgress((prev) => {
       // Add to seen and correct lists if not already there
@@ -114,7 +114,7 @@ export default function FlashcardDeck() {
   const handleIncorrect = () => {
     if (!filteredEvents.length) return;
 
-    const currentEventId = filteredEvents[currentIndex].id;
+    const currentEventId = filteredEvents[currentIndex].year;
     
     setProgress((prev) => {
       // Add to seen and incorrect lists if not already there
