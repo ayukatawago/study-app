@@ -21,6 +21,12 @@ export default function Home() {
           >
             文化人物を学習する
           </Link>
+          <Link
+            href="/constitution"
+            className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+          >
+            日本国憲法を学習する
+          </Link>
         </div>
       </div>
     </main>
