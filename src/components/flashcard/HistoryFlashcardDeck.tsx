@@ -1,14 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
-import Flashcard from './Flashcard';
+import HistoryFlashcard from './HistoryFlashcard';
 import { useHistoryEvents } from '@/hooks/useHistoryEvents';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import SettingsPanel from './SettingsPanel';
 import BaseDeck from './BaseDeck';
 import { HistoryEventData, HistoryFlashcardSettings } from '@/types/flashcard';
 
-export default function FlashcardDeck() {
+export default function HistoryFlashcardDeck() {
   const { historyEvents, isLoading, error } = useHistoryEvents();
   
   const [settings, setSettings] = useLocalStorage<HistoryFlashcardSettings>('flashcard_settings', {
@@ -26,7 +26,7 @@ export default function FlashcardDeck() {
   // Render individual history flashcard
   const renderCard = (event: HistoryEventData, onCorrect: () => void, onIncorrect: () => void) => {
     return (
-      <Flashcard
+      <HistoryFlashcard
         event={event}
         showMemorize={settings.showMemorize}
         direction={settings.cardDirection}

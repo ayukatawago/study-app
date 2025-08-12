@@ -4,7 +4,7 @@ import BaseFlashcard from './BaseFlashcard';
 import { HistoryEventData, HistoryFlashcardSettings } from '@/types/flashcard';
 import { useMemo } from 'react';
 
-type FlashcardProps = {
+type HistoryFlashcardProps = {
   event: HistoryEventData;
   showMemorize: boolean;
   direction: 'year-to-event' | 'event-to-year';
@@ -12,13 +12,13 @@ type FlashcardProps = {
   onIncorrect: () => void;
 };
 
-export default function Flashcard({
+export default function HistoryFlashcard({
   event,
   showMemorize,
   direction,
   onCorrect,
   onIncorrect,
-}: FlashcardProps) {
+}: HistoryFlashcardProps) {
   
   // Determine card height based on events count and memorize presence
   const getCardHeight = () => {
