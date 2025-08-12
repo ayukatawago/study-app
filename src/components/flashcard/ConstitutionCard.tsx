@@ -1,6 +1,7 @@
 'use client';
 
 import { ConstitutionArticle, ConstitutionSection } from '@/hooks/useConstitution';
+import { useState } from 'react';
 
 type ConstitutionCardProps = {
   section: ConstitutionSection;
@@ -15,6 +16,62 @@ export default function ConstitutionCard({
   onCorrect,
   onIncorrect,
 }: ConstitutionCardProps) {
+  // Track revealed answers for each span
+  const [revealedAnswers, setRevealedAnswers] = useState<{ [key: string]: boolean }>({});
+
+  // Function to process text and handle <span> tags and newlines
+  const processText = (text: string, paragraphIndex: number) => {
+    // First, split by newlines to handle paragraph breaks
+    const paragraphs = text.split('\n');
+    
+    return (
+      <>
+        {paragraphs.map((paragraph, pIndex) => {
+          // Split by <span> and </span> tags
+          const parts = paragraph.split(/<span>|<\/span>/);
+          
+          // Create the content for this paragraph
+          const content = parts.length === 1 
+            ? <>{paragraph}</> 
+            : parts.map((part, index) => {
+                // Even indexes are regular text, odd indexes are quiz content
+                if (index % 2 === 0) {
+                  return <span key={`${paragraphIndex}-${pIndex}-${index}`}>{part}</span>;
+                } else {
+                  // This is content inside a span tag
+                  const answerKey = `${paragraphIndex}-${pIndex}-${index}`;
+                  const isRevealed = revealedAnswers[answerKey];
+                  
+                  return (
+                    <span 
+                      key={answerKey}
+                      onClick={() => {
+                        setRevealedAnswers(prev => ({
+                          ...prev,
+                          [answerKey]: !prev[answerKey]
+                        }));
+                      }}
+                      className={`cursor-pointer ${isRevealed 
+                        ? 'font-bold text-red-600' 
+                        : 'bg-gray-200 dark:bg-gray-700 px-1 rounded'}`}
+                    >
+                      {isRevealed ? part : '[？]'}
+                    </span>
+                  );
+                }
+              });
+          
+          // Return this paragraph with a margin bottom (except for the last one)
+          return (
+            <div key={`para-${paragraphIndex}-${pIndex}`} className={pIndex < paragraphs.length - 1 ? "mb-4" : ""}>
+              {content}
+            </div>
+          );
+        })}
+      </>
+    );
+  };
+
   return (
     <div className="w-full mb-6 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
       <div className="mb-4">
@@ -29,11 +86,11 @@ export default function ConstitutionCard({
         </h2>
       </div>
       
-      <div className="space-y-2 mb-6">
+      <div className="mb-6">
         {article.text.map((paragraph, index) => (
-          <p key={index} className="text-gray-700 dark:text-gray-300">
-            {paragraph}
-          </p>
+          <div key={index} className="text-gray-700 dark:text-gray-300">
+            {processText(paragraph, index)}
+          </div>
         ))}
       </div>
       
