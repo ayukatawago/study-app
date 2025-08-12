@@ -93,14 +93,16 @@ export default function ConstitutionCard({
     <div className="w-full mb-6 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
       <div className="mb-4">
         <span className="text-xs text-gray-500 dark:text-gray-400">{section.title}</span>
-        <h2 className="text-xl font-bold flex items-center gap-2">
+        <h2 className="text-xl font-bold">
           {article.article !== 0 ? `第${article.article}条` : '前文'}
-          {article.summary && (
-            <span className="text-base font-normal text-gray-600 dark:text-gray-300">
-              - {article.summary}
-            </span>
-          )}
         </h2>
+        {article.summary && allRevealed && (
+          <div className="mt-2 p-2 bg-green-50 dark:bg-green-900 border-l-4 border-green-500 animate-fade-in">
+            <p className="text-base text-green-700 dark:text-green-300">
+              {article.summary}
+            </p>
+          </div>
+        )}
       </div>
       
       <div className="mb-6">
