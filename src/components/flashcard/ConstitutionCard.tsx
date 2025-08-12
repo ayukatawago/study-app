@@ -105,7 +105,12 @@ export default function ConstitutionCard({
       
       <div className="mb-6">
         {article.paragraphs.map((para, index) => (
-          <div key={index} className="text-gray-700 dark:text-gray-300">
+          <div key={index} className="text-gray-700 dark:text-gray-300 mb-4">
+            {article.paragraphs.length > 1 && (
+              <span className="inline-block bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full text-xs mr-2 mb-1">
+                {index + 1}
+              </span>
+            )}
             {processText(para, index)}
           </div>
         ))}
