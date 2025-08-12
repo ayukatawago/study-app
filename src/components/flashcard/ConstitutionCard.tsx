@@ -23,12 +23,12 @@ export default function ConstitutionCard({
   
   // Count total number of span tags in all paragraphs
   const totalSpans = useMemo(() => {
-    return article.text.reduce((total, paragraph) => {
+    return article.paragraphs.reduce((total, para) => {
       // Count <span> tags in the paragraph
-      const matches = paragraph.match(/<span>/g);
+      const matches = para.match(/<span>/g);
       return total + (matches ? matches.length : 0);
     }, 0);
-  }, [article.text]);
+  }, [article.paragraphs]);
   
   // Check if all answers are revealed
   useEffect(() => {
@@ -104,9 +104,9 @@ export default function ConstitutionCard({
       </div>
       
       <div className="mb-6">
-        {article.text.map((paragraph, index) => (
+        {article.paragraphs.map((para, index) => (
           <div key={index} className="text-gray-700 dark:text-gray-300">
-            {processText(paragraph, index)}
+            {processText(para, index)}
           </div>
         ))}
       </div>

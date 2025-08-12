@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 export interface ConstitutionArticle {
   article: number;
   summary?: string;
-  text: string[];
+  paragraphs: string[];
 }
 
 export interface ConstitutionSection {
