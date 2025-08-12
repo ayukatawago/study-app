@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useConstitution } from '@/hooks/useConstitution';
 import ConstitutionCard from './ConstitutionCard';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
@@ -18,6 +18,11 @@ export default function ConstitutionDeck() {
     correct: [] as Array<{section: number; article: number}>,
     incorrect: [] as Array<{section: number; article: number}>,
   });
+  
+  // Current card index
+  const [currentIndex, setCurrentIndex] = useState(0);
+  // Add a key to force re-render when switching cards
+  const [key, setKey] = useState(0);
 
   // Flatten all sections and articles for display
   const allArticles = useMemo(() => {
@@ -46,13 +51,59 @@ export default function ConstitutionDeck() {
     return allArticles;
   }, [allArticles, progress, settings.showIncorrectOnly]);
 
-  // Randomize the order if setting is enabled
+  // Randomize or sort the cards
   const displayArticles = useMemo(() => {
     if (settings.randomOrder) {
       return [...filteredArticles].sort(() => Math.random() - 0.5);
     }
     return filteredArticles;
   }, [filteredArticles, settings.randomOrder]);
+  
+  // When display articles change, reset to the first card
+  useEffect(() => {
+    setCurrentIndex(0);
+    setKey(prevKey => prevKey + 1);
+  }, [displayArticles]);
+  
+  // Helper function to get random index (different from current)
+  const getRandomIndex = () => {
+    let randomIndex;
+    let attempts = 0;
+    const maxAttempts = displayArticles.length * 2; // Prevent infinite loop
+    
+    do {
+      randomIndex = Math.floor(Math.random() * displayArticles.length);
+      attempts++;
+      // Break the loop if we've tried too many times to prevent infinite loops
+      if (attempts > maxAttempts) break;
+      
+    } while (
+      displayArticles.length > 1 && randomIndex === currentIndex
+    );
+    
+    return randomIndex;
+  };
+  
+  // Move to next card
+  const moveToNextCard = () => {
+    if (displayArticles.length <= 1) return;
+    
+    if (settings.randomOrder) {
+      // Pick a random card, but not the current one
+      setCurrentIndex(getRandomIndex());
+    } else {
+      // Sequential mode
+      if (currentIndex < displayArticles.length - 1) {
+        setCurrentIndex(currentIndex + 1);
+      } else {
+        // If reached the end, start over
+        setCurrentIndex(0);
+      }
+    }
+    
+    // Force re-render
+    setKey(prevKey => prevKey + 1);
+  };
 
   const handleCorrect = (sectionId: number, articleId: number) => {
     setProgress(prev => {
@@ -78,6 +129,9 @@ export default function ConstitutionDeck() {
         incorrect: newIncorrect,
       };
     });
+    
+    // Move to the next card
+    moveToNextCard();
   };
 
   const handleIncorrect = (sectionId: number, articleId: number) => {
@@ -104,6 +158,9 @@ export default function ConstitutionDeck() {
         incorrect: newIncorrect,
       };
     });
+    
+    // Move to the next card
+    moveToNextCard();
   };
 
   const handleResetProgress = () => {
@@ -243,7 +300,7 @@ export default function ConstitutionDeck() {
       <div className="flex justify-between items-center mb-6">
         <div>
           <p className="text-sm font-medium">
-            全部で {totalArticlesCount} 項目
+            {currentIndex + 1} / {displayArticles.length}
           </p>
         </div>
         <div className="flex space-x-2">
@@ -273,15 +330,24 @@ export default function ConstitutionDeck() {
       </div>
 
       {displayArticles.length > 0 ? (
-        displayArticles.map((item, index) => (
+        <div>
           <ConstitutionCard
-            key={`${item.section.section}-${item.article.article}`}
-            section={item.section}
-            article={item.article}
+            key={`card-${key}`}
+            section={displayArticles[currentIndex].section}
+            article={displayArticles[currentIndex].article}
             onCorrect={handleCorrect}
             onIncorrect={handleIncorrect}
           />
-        ))
+          
+          <div className="mt-4 flex justify-center">
+            <button
+              onClick={moveToNextCard}
+              className="px-4 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+            >
+              次のカード
+            </button>
+          </div>
+        </div>
       ) : (
         <div className="min-h-[300px] flex items-center justify-center">
           <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
