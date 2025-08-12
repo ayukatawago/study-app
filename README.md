@@ -1,13 +1,18 @@
-# Japanese History Flashcards
+# 社会学習 (Social Studies Learning App)
 
-A Next.js application to help users memorize Japanese historical events by year using flashcards.
+A Next.js application to help users memorize Japanese history, cultural figures, and constitution articles using interactive flashcards.
 
 ## Features
 
-- Interactive flashcards for studying Japanese historical events
-- Toggle between year-to-event and event-to-year modes
+- Interactive flashcards for studying Japanese historical events, cultural figures, and constitution articles
+- Multiple study modes:
+  - History: Toggle between year-to-event and event-to-year modes
+  - Culture: Toggle between person-to-description and description-to-person modes
+  - Constitution: Interactive quiz with tap-to-reveal answers
 - Track learning progress with local storage
-- Show/hide memorization aids
+- Show/hide memorization aids and summaries
+- Card-by-card navigation with options for random or sequential order
+- Focus on incorrect answers with filtering options
 - Responsive design with TailwindCSS
 
 ## Tech Stack
@@ -49,9 +54,15 @@ A Next.js application to help users memorize Japanese historical events by year 
 ```
 study-app/
 ├── public/            # Static files
-│   └── data/         # JSON data for flashcards (history_events.json)
+│   └── data/         # JSON data for flashcards
+│       ├── history_events.json # History events data
+│       ├── history_culture.json # Cultural figures data
+│       └── constitution.json # Constitution articles data
 ├── src/
 │   ├── app/          # Next.js App Router
+│   │   ├── history/  # History flashcards page
+│   │   ├── culture/  # Culture flashcards page
+│   │   └── constitution/ # Constitution flashcards page
 │   ├── components/   # React components
 │   │   └── flashcard/ # Flashcard related components
 │   ├── hooks/        # Custom React hooks
@@ -64,21 +75,72 @@ study-app/
 
 ## Data Structure
 
-The application uses the following JSON structure for flashcard data (from `public/data/history_events.json`):
+### History Events
+
+The application uses the following JSON structure for history flashcard data (from `public/data/history_events.json`):
 
 ```json
 {
   "history": [
     {
-      "id": 1,
-      "year": 239,
-      "item": "邪馬台国の女王である卑弥呼が魏に使者を送る",
-      "memorize": "「親魏倭王」と　銅鏡100枚　２つもサンキュー　魏にペコリ"
+      "year": 1603,
+      "events": [
+        "徳川家康が征夷大将軍になる"
+      ],
+      "memorize": "家康 征夷大将軍だ 人群れさわぐ 江戸幕府"
     },
     // More year-event pairs
   ]
 }
 ```
+
+### Culture Figures
+
+The application uses the following JSON structure for culture flashcard data (from `public/data/history_culture.json`):
+
+```json
+{
+  "culture": [
+    {
+      "person": "井原西鶴",
+      "period": "元禄文化",
+      "descriptions": [
+        "浮世草子"
+      ]
+    },
+    // More person-description pairs
+  ]
+}
+```
+
+### Constitution Articles
+
+The application uses the following JSON structure for constitution quiz data (from `public/data/constitution.json`):
+
+```json
+{
+  "constitution": {
+    "title": "日本国憲法",
+    "sections": [
+      {
+        "section": 1,
+        "title": "天皇",
+        "articles": [
+          {
+            "article": 1,
+            "summary": "天皇の地位と主権在民",
+            "paragraphs": [
+              "天皇は、日本国の<span>象徴</span>であり日本国民統合の象徴であつて、この地位は、<span>主権</span>の存する日本国民の総意に基く。"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Text within `<span>` tags becomes interactive quiz elements that can be revealed by tapping.
 
 ## Scripts
 
