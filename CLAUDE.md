@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a flashcard web application built with Next.js and TailwindCSS to help users memorize Japanese historical events by year. The application (歴史年代) uses JSON data from `public/data/history_events.json` to create interactive flashcards and stores user progress in local storage.
+This is a flashcard web application built with Next.js and TailwindCSS to help users memorize Japanese history, culture, and constitution. The application (社会学習) uses JSON data from various files in `public/data/` to create interactive flashcards and stores user progress in local storage.
 
 ## Development Setup
 
@@ -39,12 +39,14 @@ study-app/
 ├── public/            # Static files
 │   └── data/         # JSON data for flashcards
 │       ├── history_events.json # History events data
-│       └── history_culture.json # Cultural figures data
+│       ├── history_culture.json # Cultural figures data
+│       └── constitution.json # Japanese constitution data
 ├── src/
 │   ├── app/          # Next.js app router pages
 │   │   ├── page.tsx  # Home page
 │   │   ├── history/  # History flashcards page
-│   │   └── culture/  # Culture flashcards page
+│   │   ├── culture/  # Culture flashcards page
+│   │   └── constitution/ # Constitution flashcards page
 │   ├── components/   # React components
 │   │   └── flashcard/ # Flashcard related components
 │   ├── hooks/        # Custom React hooks
@@ -66,12 +68,20 @@ study-app/
    - Show period information on flipped cards
    - Track correct/incorrect responses in local storage
 
-3. **Data Management**
+3. **Constitution Quiz System**
+   - Display Japanese constitution articles with hidden quiz elements
+   - Interactive text revealing - tap on placeholder text to reveal answers
+   - Show article summaries when all answers are revealed
+   - Display paragraph numbers for multi-paragraph articles
+   - Track correct/incorrect responses in local storage
+
+4. **Data Management**
    - Uses local storage to persist user progress
    - Pulls history flashcard data from history_events.json
    - Pulls culture flashcard data from history_culture.json
+   - Pulls constitution quiz data from constitution.json
 
-4. **User Interface**
+5. **User Interface**
    - Responsive design using TailwindCSS
    - Simple and intuitive flashcard interaction
    - Settings panel for customizing study experience
@@ -133,6 +143,33 @@ The application also uses the following JSON structure for culture flashcard dat
 }
 ```
 
+### Constitution Articles
+
+The application uses the following JSON structure for constitution quiz data (from `public/data/constitution.json`):
+
+```json
+{
+  "constitution": {
+    "title": "日本国憲法",
+    "sections": [
+      {
+        "section": 1,
+        "title": "天皇",
+        "articles": [
+          {
+            "article": 1,
+            "summary": "天皇の地位と主権在民",
+            "paragraphs": [
+              "天皇は、日本国の<span>象徴</span>であり日本国民統合の象徴であつて、この地位は、<span>主権</span>の存する日本国民の総意に基く。"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## Local Storage
 
 ### History Flashcards
@@ -175,6 +212,31 @@ User progress and settings for culture flashcards are stored in local storage wi
 }
 ```
 
+### Constitution Flashcards
+
+User progress and settings for constitution flashcards are stored in local storage with the following structure:
+
+```json
+{
+  "constitution_progress": {
+    "seen": [
+      {"section": 1, "article": 1},
+      {"section": 2, "article": 9}
+    ],
+    "correct": [
+      {"section": 1, "article": 1}
+    ],
+    "incorrect": [
+      {"section": 2, "article": 9}
+    ]
+  },
+  "constitution_settings": {
+    "randomOrder": true,
+    "showIncorrectOnly": false
+  }
+}
+```
+
 ## Development Workflow
 
 1. Build out the Next.js application structure
@@ -198,3 +260,6 @@ User progress and settings for culture flashcards are stored in local storage wi
 8. **Smart Card Selection**: In random mode, prioritizes showing cards not yet answered correctly
 9. **Progress Display**: Shows statistics on correctly and incorrectly answered cards
 10. **Completion Message**: Displays congratulatory message when all cards are answered correctly
+11. **Interactive Quiz**: For constitution content, clickable placeholders reveal answers when tapped
+12. **Contextual Information**: Shows article summaries when all quiz answers are revealed
+13. **Paragraph Numbering**: Automatically numbers paragraphs in multi-paragraph articles
