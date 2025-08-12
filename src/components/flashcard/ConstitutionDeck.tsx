@@ -176,6 +176,11 @@ export default function ConstitutionDeck() {
       ...settings,
       showIncorrectOnly: !settings.showIncorrectOnly,
     });
+    
+    // Reset index to 0 when the setting changes
+    setCurrentIndex(0);
+    // Force re-render of the card
+    setKey(prevKey => prevKey + 1);
   };
 
   const toggleRandomOrder = () => {
@@ -183,6 +188,11 @@ export default function ConstitutionDeck() {
       ...settings,
       randomOrder: !settings.randomOrder,
     });
+    
+    // Reset index to 0 when the setting changes
+    setCurrentIndex(0);
+    // Force re-render of the card
+    setKey(prevKey => prevKey + 1);
   };
 
   if (isLoading) {
