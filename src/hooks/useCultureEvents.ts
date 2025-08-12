@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { CultureEvent } from '@/components/flashcard/CultureFlashcard';
+import { CultureEventData } from '@/types/flashcard';
 
 interface CultureData {
-  culture: CultureEvent[];
+  culture: CultureEventData[];
 }
 
 /**
@@ -13,7 +13,7 @@ interface CultureData {
  * @returns Object with culture events, loading state, and error state
  */
 export function useCultureEvents() {
-  const [cultureEvents, setCultureEvents] = useState<CultureEvent[]>([]);
+  const [cultureEvents, setCultureEvents] = useState<CultureEventData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,7 +28,12 @@ export function useCultureEvents() {
         }
         
         const data: CultureData = await response.json();
-        setCultureEvents(data.culture || []);
+        // Map to ensure each event has an id
+        const eventsWithId = (data.culture || []).map(event => ({
+          ...event,
+          id: event.person // Use person name as id
+        }));
+        setCultureEvents(eventsWithId);
         setError(null);
       } catch (err) {
         console.error('Error fetching culture events:', err);

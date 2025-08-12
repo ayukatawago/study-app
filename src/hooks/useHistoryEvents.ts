@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { HistoryEvent } from '@/components/flashcard/Flashcard';
+import { HistoryEventData } from '@/types/flashcard';
 
 interface HistoryData {
-  history: HistoryEvent[];
+  history: HistoryEventData[];
 }
 
 /**
@@ -13,7 +13,7 @@ interface HistoryData {
  * @returns Object with history events, loading state, and error state
  */
 export function useHistoryEvents() {
-  const [historyEvents, setHistoryEvents] = useState<HistoryEvent[]>([]);
+  const [historyEvents, setHistoryEvents] = useState<HistoryEventData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,7 +28,12 @@ export function useHistoryEvents() {
         }
         
         const data: HistoryData = await response.json();
-        setHistoryEvents(data.history || []);
+        // Map to ensure each event has an id
+        const eventsWithId = (data.history || []).map(event => ({
+          ...event,
+          id: event.year // Use year as id
+        }));
+        setHistoryEvents(eventsWithId);
         setError(null);
       } catch (err) {
         console.error('Error fetching history events:', err);

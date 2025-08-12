@@ -1,15 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-
-export type HistoryEvent = {
-  year: number;
-  events: string[];
-  memorize?: string;
-};
+import BaseFlashcard from './BaseFlashcard';
+import { HistoryEventData, HistoryFlashcardSettings } from '@/types/flashcard';
+import { useMemo } from 'react';
 
 type FlashcardProps = {
-  event: HistoryEvent;
+  event: HistoryEventData;
   showMemorize: boolean;
   direction: 'year-to-event' | 'event-to-year';
   onCorrect: () => void;
@@ -23,13 +19,30 @@ export default function Flashcard({
   onCorrect,
   onIncorrect,
 }: FlashcardProps) {
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
+  
+  // Determine card height based on events count and memorize presence
+  const getCardHeight = () => {
+    if (!event) return 'h-64'; // Default height
+    
+    const eventsCount = event.events.length;
+    const hasMemorize = showMemorize && event.memorize;
+    
+    // For year-to-event direction with events on back
+    if (direction === 'year-to-event') {
+      if (eventsCount > 3 && hasMemorize) return 'h-96'; // Many events with memorize
+      if (eventsCount > 3) return 'h-80'; // Many events without memorize
+      if (eventsCount > 1 && hasMemorize) return 'h-80'; // Multiple events with memorize
+    }
+    
+    // For event-to-year direction with events on front
+    if (direction === 'event-to-year' && eventsCount > 3) {
+      return 'h-80'; // Taller card for many events on front
+    }
+    
+    return 'h-64'; // Default height
   };
 
-  const getFrontContent = () => {
+  const renderFrontContent = () => {
     // Safety check in case event is undefined
     if (!event) {
       return <div className="text-lg">No card available</div>;
@@ -55,7 +68,7 @@ export default function Flashcard({
     );
   };
 
-  const getBackContent = () => {
+  const renderBackContent = () => {
     // Safety check in case event is undefined
     if (!event) {
       return <div className="text-lg">No card available</div>;
@@ -87,86 +100,15 @@ export default function Flashcard({
       </>
     );
   };
-
-  // Determine card height based on events count and memorize presence
-  const getCardHeight = () => {
-    if (!event) return 'h-64'; // Default height
-    
-    const eventsCount = event.events.length;
-    const hasMemorize = showMemorize && event.memorize;
-    
-    // For year-to-event direction with flipped card (showing events)
-    if (direction === 'year-to-event' && isFlipped) {
-      if (eventsCount > 3 && hasMemorize) return 'h-96'; // Many events with memorize
-      if (eventsCount > 3) return 'h-80'; // Many events without memorize
-      if (eventsCount > 1 && hasMemorize) return 'h-80'; // Multiple events with memorize
-      return 'h-64'; // Default for simple cases
-    }
-    
-    // For event-to-year direction with events on front
-    if (direction === 'event-to-year' && !isFlipped && eventsCount > 3) {
-      return 'h-80'; // Taller card for many events on front
-    }
-    
-    return 'h-64'; // Default height
-  };
   
   return (
-    <div className="w-full px-4 max-w-lg mx-auto">
-      <div
-        className={`relative w-full max-w-sm sm:max-w-md md:w-96 ${getCardHeight()} cursor-pointer transition-all duration-500 ${
-          isFlipped ? 'shadow-xl' : 'shadow-md'
-        } mx-auto`}
-        onClick={handleFlip}
-      >
-        <div
-          className={`absolute inset-0 rounded-xl p-6 flex flex-col items-center justify-center backface-hidden transition-all duration-500 ${
-            isFlipped ? 'opacity-0 rotate-y-180' : 'opacity-100'
-          } bg-white dark:bg-gray-800`}
-        >
-          {getFrontContent()}
-          <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">
-            (タップして答えを見る)
-          </div>
-        </div>
-        <div
-          className={`absolute inset-0 rounded-xl p-6 flex flex-col items-center justify-center backface-hidden transition-all duration-500 ${
-            isFlipped ? 'opacity-100 rotate-y-0' : 'opacity-0 rotate-y-180'
-          } bg-white dark:bg-gray-800`}
-        >
-          {getBackContent()}
-          <div className="mt-4 flex flex-wrap justify-center gap-3">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsFlipped(false);
-                if (event) { // Only call onIncorrect if event exists
-                  setTimeout(() => {
-                    onIncorrect();
-                  }, 300); // Wait for the flip animation
-                }
-              }}
-              className="px-3 py-1.5 text-sm bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
-            >
-              不正解
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsFlipped(false);
-                if (event) { // Only call onCorrect if event exists
-                  setTimeout(() => {
-                    onCorrect();
-                  }, 300); // Wait for the flip animation
-                }
-              }}
-              className="px-3 py-1.5 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
-            >
-              正解
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <BaseFlashcard
+      event={event}
+      onCorrect={onCorrect}
+      onIncorrect={onIncorrect}
+      renderFrontContent={renderFrontContent}
+      renderBackContent={renderBackContent}
+      getCardHeight={getCardHeight}
+    />
   );
 }
