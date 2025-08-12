@@ -4,9 +4,9 @@ export default function Home() {
   return (
     <main className="bg-white dark:bg-gray-900 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
       <div className="max-w-3xl w-full text-center space-y-8 px-4 sm:px-0">
-        <h1 className="text-blue-600 text-4xl font-bold">歴史学習</h1>
+        <h1 className="text-blue-600 text-4xl font-bold">社会学習</h1>
         <p className="text-gray-700 dark:text-gray-300 text-xl">
-          日本史の年代と文化を暗記するための学習アプリ
+          日本史の年代・文化・憲法を暗記するための学習アプリ
         </p>
         <div className="flex flex-col space-y-4">
           <Link

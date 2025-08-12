@@ -2,8 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '歴史年代',
-  description: 'Study app for memorizing Japanese historical events by year',
+  title: '社会学習',
+  description: 'Study app for memorizing Japanese history, culture and constitution',
 };
 
 export default function RootLayout({
