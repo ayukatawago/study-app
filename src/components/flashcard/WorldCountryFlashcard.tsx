@@ -6,14 +6,12 @@ import WorldMap from '../map/WorldMap';
 
 type WorldCountryFlashcardProps = {
   event: WorldCountryData;
-  showCapital: boolean;
   onCorrect: () => void;
   onIncorrect: () => void;
 };
 
 export default function WorldCountryFlashcard({
   event,
-  showCapital,
   onCorrect,
   onIncorrect,
 }: WorldCountryFlashcardProps) {
@@ -63,11 +61,9 @@ export default function WorldCountryFlashcard({
         <div className="text-3xl font-bold mb-1">
           {event.countryName}
         </div>
-        {showCapital && (
-          <div className="text-lg mt-1 mb-2">
-            <span className="font-medium">首都:</span> {event.capitalCity}
-          </div>
-        )}
+        <div className="text-lg mt-1 mb-2">
+          <span className="font-medium">首都:</span> {event.capitalCity}
+        </div>
         {event.descriptions && event.descriptions.length > 0 && (
           <div className="mt-2 px-2">
             <ul className="text-left list-disc list-outside pl-4">

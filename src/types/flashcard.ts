@@ -52,7 +52,7 @@ export interface CultureFlashcardSettings extends BaseFlashcardSettings {
 
 // World country settings
 export interface WorldCountrySettings extends BaseFlashcardSettings {
-  showCapital: boolean;
+  // No additional settings needed
 }
 
 // Base progress interface

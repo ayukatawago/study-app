@@ -12,7 +12,6 @@ export default function WorldCountryFlashcardDeck() {
   const { worldCountries, isLoading, error } = useWorldCountries();
   
   const [settings, setSettings] = useLocalStorage<WorldCountrySettings>('world_country_settings', {
-    showCapital: true,
     randomOrder: true,
     showIncorrectOnly: false,
   });
@@ -27,7 +26,6 @@ export default function WorldCountryFlashcardDeck() {
     return (
       <WorldCountryFlashcard
         event={country}
-        showCapital={settings.showCapital}
         onCorrect={onCorrect}
         onIncorrect={onIncorrect}
       />
