@@ -12,7 +12,7 @@ interface BaseDeckProps<T extends BaseFlashcardData, S extends BaseFlashcardSett
   settings: S;
   setSettings: (settings: S) => void;
   renderCard: (item: T, onCorrect: () => void, onIncorrect: () => void, onFlip?: (isFlipped: boolean) => void) => ReactNode;
-  renderSettingsPanel: () => ReactNode;
+  renderSettingsPanel: (onResetProgress: () => void) => ReactNode;
   getItemId: (item: T) => string | number;  // Function to extract the unique identifier from an item
   filterItems?: (items: T[], incorrectIds: (string | number)[]) => T[];  // Custom filter function
   showNextButton?: boolean; // Whether to show the "next card" button
@@ -226,7 +226,7 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
     return (
       <div>
         <div className="flex justify-end mb-6">
-          {renderSettingsPanel()}
+          {renderSettingsPanel(handleResetProgress)}
         </div>
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center p-6 bg-green-100 dark:bg-green-900 rounded-lg">
@@ -240,7 +240,7 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
     return (
       <div>
         <div className="flex justify-end mb-6">
-          {renderSettingsPanel()}
+          {renderSettingsPanel(handleResetProgress)}
         </div>
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
@@ -278,7 +278,7 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
             {currentIndex + 1} / {filteredItems.length}
           </p>
         </div>
-        {renderSettingsPanel()}
+        {renderSettingsPanel(handleResetProgress)}
       </div>
 
       {currentItem ? (
