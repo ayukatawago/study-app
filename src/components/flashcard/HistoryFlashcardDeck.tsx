@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import HistoryFlashcard from './HistoryFlashcard';
 import { useHistoryEvents } from '@/hooks/useHistoryEvents';
 import { useLocalStorage } from '@/hooks/useLocalStorage';

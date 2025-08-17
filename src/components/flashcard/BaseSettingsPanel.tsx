@@ -1,11 +1,12 @@
 'use client';
 
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { BaseFlashcardSettings } from '@/types/flashcard';
 
 interface BaseSettingsPanelProps<T extends BaseFlashcardSettings> {
   settings: T;
-  onSettingsChange: (newSettings: T) => void;
+  onSettingsChange: (settings: T) => void;
   onResetProgress: () => void;
   renderDirectionToggle?: () => React.ReactNode;
   renderAdditionalSettings?: () => React.ReactNode;

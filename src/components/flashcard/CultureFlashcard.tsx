@@ -1,7 +1,7 @@
 'use client';
 
 import BaseFlashcard from './BaseFlashcard';
-import { CultureEventData, CultureFlashcardSettings } from '@/types/flashcard';
+import { CultureEventData } from '@/types/flashcard';
 
 type CultureFlashcardProps = {
   event: CultureEventData;

@@ -1,8 +1,7 @@
 'use client';
 
 import BaseFlashcard from './BaseFlashcard';
-import { HistoryEventData, HistoryFlashcardSettings } from '@/types/flashcard';
-import { useMemo } from 'react';
+import { HistoryEventData } from '@/types/flashcard';
 
 type HistoryFlashcardProps = {
   event: HistoryEventData;

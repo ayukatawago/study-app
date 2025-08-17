@@ -36,7 +36,6 @@ export function useHistoryEvents() {
         setHistoryEvents(eventsWithId);
         setError(null);
       } catch (err) {
-        console.error('Error fetching history events:', err);
         setError(err instanceof Error ? err.message : 'エラーが発生しました');
         setHistoryEvents([]);
       } finally {

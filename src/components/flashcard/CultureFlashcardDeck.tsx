@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import CultureFlashcard from './CultureFlashcard';
 import { useCultureEvents } from '@/hooks/useCultureEvents';
 import { useLocalStorage } from '@/hooks/useLocalStorage';

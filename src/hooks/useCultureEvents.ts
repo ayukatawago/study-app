@@ -36,7 +36,6 @@ export function useCultureEvents() {
         setCultureEvents(eventsWithId);
         setError(null);
       } catch (err) {
-        console.error('Error fetching culture events:', err);
         setError(err instanceof Error ? err.message : 'エラーが発生しました');
         setCultureEvents([]);
       } finally {

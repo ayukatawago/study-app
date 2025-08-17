@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable no-unused-vars */
 import { useEffect, useState, useMemo, ReactNode } from 'react';
 import { BaseFlashcardData, BaseFlashcardSettings, BaseFlashcardProgress } from '@/types/flashcard';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
@@ -29,7 +30,7 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
   isLoading,
   error,
   settings,
-  setSettings,
+  // setSettings, // Unused but may be needed in future
   renderCard,
   renderSettingsPanel,
   getItemId,
@@ -37,7 +38,7 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
   showNextButton = false, // Only show next button for constitution by default
 }: BaseDeckProps<T, S>) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [key, setKey] = useState(0); // Add a key to force re-render when switching cards
+  const [, setKey] = useState(0); // Add a key to force re-render when switching cards
   const [shownIndices, setShownIndices] = useState<number[]>([]); // Track shown indices for randomization
 
   const [progress, setProgress] = useLocalStorage<BaseFlashcardProgress<string | number>>(

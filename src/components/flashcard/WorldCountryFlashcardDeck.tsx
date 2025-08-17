@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import WorldCountryFlashcard from './WorldCountryFlashcard';
 import { useWorldCountries } from '@/hooks/useWorldCountries';
 import { useLocalStorage } from '@/hooks/useLocalStorage';

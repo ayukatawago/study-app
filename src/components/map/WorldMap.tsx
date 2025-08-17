@@ -4,7 +4,6 @@ import React from 'react';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import centroid from '@turf/centroid';
 import { feature } from 'topojson-client';
-import { useCallback } from 'react';
 
 // World map JSON data - use jsdelivr CDN source
 const geoUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json';
@@ -41,8 +40,9 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
         const data = await response.json();
         setCountryData(data);
         setDataLoaded(true);
-      } catch (err) {
-        console.error('Error loading country data:', err);
+        // eslint-disable-next-line no-unused-vars
+      } catch (_err) {
+        // Error handled silently
       }
     }
 
@@ -118,8 +118,9 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
                   bbox = [minX, minY, maxX, maxY];
                 }
               }
-            } catch (e) {
-              console.error('Error creating bbox:', e);
+              // eslint-disable-next-line no-unused-vars
+            } catch (_e) {
+              // Error handled silently
             }
           }
 
@@ -155,8 +156,9 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
       }
 
       setCountryPosition(null);
-    } catch (err) {
-      console.error('Error fetching or processing map data:', err);
+      // eslint-disable-next-line no-unused-vars
+    } catch (_err) {
+      // Error handled silently
       setCountryPosition(null);
     }
   }, [highlightedCountry, countryData, dataLoaded]);

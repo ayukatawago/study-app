@@ -6,8 +6,8 @@ import { useState, useEffect, useMemo } from 'react';
 type ConstitutionCardProps = {
   section: ConstitutionSection;
   article: ConstitutionArticle;
-  onCorrect: (sectionId: number, articleId: number) => void;
-  onIncorrect: (sectionId: number, articleId: number) => void;
+  onCorrect: () => void;
+  onIncorrect: () => void;
 };
 
 export default function ConstitutionCard({
@@ -126,13 +126,13 @@ export default function ConstitutionCard({
 
       <div className="flex justify-end gap-3">
         <button
-          onClick={() => onIncorrect(section.section, article.article)}
+          onClick={() => onIncorrect()}
           className="px-4 py-2 text-sm rounded-md bg-red-500 text-white hover:bg-red-600 transition-colors"
         >
           不正解
         </button>
         <button
-          onClick={() => onCorrect(section.section, article.article)}
+          onClick={() => onCorrect()}
           disabled={!allRevealed && totalSpans > 0}
           className={`px-4 py-2 text-sm rounded-md transition-colors ${
             allRevealed || totalSpans === 0

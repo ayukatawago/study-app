@@ -48,7 +48,6 @@ export function useConstitution() {
         setConstitutionData(data.constitution || { title: '', sections: [] });
         setError(null);
       } catch (err) {
-        console.error('Error fetching constitution data:', err);
         setError(err instanceof Error ? err.message : 'エラーが発生しました');
         setConstitutionData({ title: '', sections: [] });
       } finally {

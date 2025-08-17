@@ -36,7 +36,6 @@ export function useWorldCountries() {
         setWorldCountries(countriesWithId);
         setError(null);
       } catch (err) {
-        console.error('Error fetching world countries:', err);
         setError(err instanceof Error ? err.message : 'エラーが発生しました');
         setWorldCountries([]);
       } finally {

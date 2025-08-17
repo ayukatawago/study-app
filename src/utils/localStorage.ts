@@ -13,8 +13,9 @@ export function getFromStorage<T>(key: string, defaultValue: T): T {
   try {
     const item = window.localStorage.getItem(key);
     return item ? (JSON.parse(item) as T) : defaultValue;
-  } catch (error) {
-    console.error(`Error getting item ${key} from localStorage:`, error);
+    // eslint-disable-next-line no-unused-vars
+  } catch (_error) {
+    // Silent fail and return default value
     return defaultValue;
   }
 }
@@ -31,8 +32,9 @@ export function setToStorage<T>(key: string, value: T): void {
 
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
-  } catch (error) {
-    console.error(`Error setting item ${key} in localStorage:`, error);
+    // eslint-disable-next-line no-unused-vars
+  } catch (_error) {
+    // Silent fail
   }
 }
 
@@ -47,8 +49,9 @@ export function removeFromStorage(key: string): void {
 
   try {
     window.localStorage.removeItem(key);
-  } catch (error) {
-    console.error(`Error removing item ${key} from localStorage:`, error);
+    // eslint-disable-next-line no-unused-vars
+  } catch (_error) {
+    // Silent fail
   }
 }
 
@@ -62,7 +65,8 @@ export function clearStorage(): void {
 
   try {
     window.localStorage.clear();
-  } catch (error) {
-    console.error('Error clearing localStorage:', error);
+    // eslint-disable-next-line no-unused-vars
+  } catch (_error) {
+    // Silent fail
   }
 }

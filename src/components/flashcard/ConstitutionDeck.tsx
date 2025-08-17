@@ -4,7 +4,6 @@ import { useState, useMemo, useEffect } from 'react';
 import { useConstitution } from '@/hooks/useConstitution';
 import ConstitutionCard from './ConstitutionCard';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import BaseDeck from './BaseDeck';
 
 interface ConstitutionDeckProps {
   showNextButton?: boolean;
@@ -361,8 +360,18 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
             key={`card-${key}`}
             section={displayArticles[currentIndex].section}
             article={displayArticles[currentIndex].article}
-            onCorrect={handleCorrect}
-            onIncorrect={handleIncorrect}
+            onCorrect={() =>
+              handleCorrect(
+                displayArticles[currentIndex].section.section,
+                displayArticles[currentIndex].article.article
+              )
+            }
+            onIncorrect={() =>
+              handleIncorrect(
+                displayArticles[currentIndex].section.section,
+                displayArticles[currentIndex].article.article
+              )
+            }
           />
 
           {showNextButton && (

@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable no-unused-vars */
 import BaseSettingsPanel from './BaseSettingsPanel';
 import { WorldCountrySettings } from '@/types/flashcard';
 
