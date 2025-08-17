@@ -24,10 +24,21 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
     zoom: 1,
   });
   const [isZoomed, setIsZoomed] = React.useState(false);
+  // Track zoom transition state
+  const [isTransitioning, setIsTransitioning] = React.useState(false);
   const [countryPosition, setCountryPosition] = React.useState<{
     coordinates: [number, number];
     bbox?: number[];
   } | null>(null);
+
+  // Ref to track animation frames for smoother transitions
+  const animationRef = React.useRef<number | null>(null);
+  // Ref to track animation start time
+  const animationStartRef = React.useRef<number>(0);
+  // Ref to track animation target values
+  const animationTargetRef = React.useRef<{ coordinates: [number, number]; zoom: number } | null>(
+    null
+  );
 
   // Load country data from JSON
   const [countryData, setCountryData] = React.useState<any>(null);
@@ -50,6 +61,14 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
 
     loadCountryData();
   }, [dataLoaded]);
+
+  // Use refs to access position values without creating dependency cycles
+  const positionRef = React.useRef<{ coordinates: [number, number]; zoom: number }>(position);
+
+  // Keep the ref updated with latest position
+  React.useEffect(() => {
+    positionRef.current = position;
+  }, [position]);
 
   // Find the highlighted country's position in the TopoJSON data
   const findCountryPosition = React.useCallback(async () => {
@@ -144,12 +163,18 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
 
               // Small delay to let the UI update first
               setTimeout(() => {
-                setPosition({
-                  coordinates: newPosition.coordinates,
-                  zoom: zoomLevel,
-                });
-                setIsZoomed(true);
-              }, 100);
+                // Use ref to access current position without creating dependency
+                const currentCoords = positionRef.current.coordinates;
+                const currentZoom = positionRef.current.zoom;
+
+                // Target position
+                const targetCoords = newPosition.coordinates;
+
+                // Animate to the target position
+                animateToPosition(currentCoords, targetCoords, currentZoom, zoomLevel, () =>
+                  setIsZoomed(true)
+                );
+              }, 200);
             }
           }
           return;
@@ -175,7 +200,63 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
     }
   }, [highlightedCountry, findCountryPosition, dataLoaded]);
 
-  // Function to zoom in to the target country
+  // Helper function for smooth animation between zoom levels
+  const animateToPosition = (
+    startCoords: [number, number],
+    endCoords: [number, number],
+    startZoom: number,
+    endZoom: number,
+    onComplete?: () => void
+  ) => {
+    // Mark as transitioning
+    setIsTransitioning(true);
+
+    const steps = 10; // More steps for smoother animation
+    let currentStep = 0;
+    const stepDuration = 50; // Faster steps for a total of 500ms animation
+
+    const animateStep = () => {
+      currentStep++;
+      const progress = currentStep / steps;
+
+      // Calculate intermediate position using cubic easing for more natural motion
+      const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+      const easedProgress = easeOutCubic(progress);
+
+      // Calculate intermediate coordinates and zoom
+      const nextX = startCoords[0] + (endCoords[0] - startCoords[0]) * easedProgress;
+      const nextY = startCoords[1] + (endCoords[1] - startCoords[1]) * easedProgress;
+      const nextZoom = startZoom + (endZoom - startZoom) * easedProgress;
+
+      // Update position
+      setPosition({
+        coordinates: [nextX, nextY],
+        zoom: nextZoom,
+      });
+
+      // Continue animation or complete
+      if (currentStep < steps) {
+        setTimeout(animateStep, stepDuration);
+      } else {
+        // Final position - ensure we end exactly at the target
+        setPosition({
+          coordinates: endCoords,
+          zoom: endZoom,
+        });
+
+        // End transition after a short delay
+        setTimeout(() => {
+          setIsTransitioning(false);
+          if (onComplete) onComplete();
+        }, 100);
+      }
+    };
+
+    // Start animation
+    requestAnimationFrame(() => animateStep());
+  };
+
+  // Function to zoom in to the target country with animation
   const handleZoomIn = (e: React.MouseEvent) => {
     // Stop event propagation to prevent card flip
     e.stopPropagation();
@@ -192,39 +273,61 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
       );
 
       if (countryInfo?.zoomLevel) {
-        setPosition({
-          coordinates: countryPosition.coordinates,
-          zoom: countryInfo.zoomLevel,
-        });
-        setIsZoomed(true);
+        // Get current position
+        const currentCoords = position.coordinates;
+        const currentZoom = position.zoom;
+
+        // Target position
+        const targetCoords = countryPosition.coordinates;
+        const targetZoom = countryInfo.zoomLevel;
+
+        // Animate to the target position
+        animateToPosition(currentCoords, targetCoords, currentZoom, targetZoom, () =>
+          setIsZoomed(true)
+        );
       }
     }
   };
 
-  // Function to reset zoom
+  // Function to reset zoom with animation
   const handleZoomOut = (e: React.MouseEvent) => {
     // Stop event propagation to prevent card flip
     e.stopPropagation();
 
-    setPosition({ coordinates: [0, 0] as [number, number], zoom: 1 });
-    setIsZoomed(false);
+    // Get current position
+    const currentCoords = position.coordinates;
+    const currentZoom = position.zoom;
+
+    // World view position
+    const worldCoords: [number, number] = [0, 0];
+    const worldZoom = 1;
+
+    // Animate to world view
+    animateToPosition(currentCoords, worldCoords, currentZoom, worldZoom, () => setIsZoomed(false));
   };
 
   return (
     <div
-      className="world-map-container relative"
-      style={{ width: '100%', height: '100%', padding: 0, margin: 0 }}
+      className={`world-map-container relative ${isTransitioning ? 'transition-opacity' : ''}`}
+      style={{
+        width: '100%',
+        height: '100%',
+        padding: 0,
+        margin: 0,
+        transition: 'all 0.5s ease-in-out',
+      }}
     >
-      <div className="absolute top-0 right-0 z-10 flex space-x-1">
+      <div className="absolute top-2 right-2 z-10 flex space-x-1">
         {countryPosition && !isZoomed && (
           <button
-            className="p-1 rounded-full bg-white/80 hover:bg-blue-100 active:bg-blue-200 transition-all duration-150 text-blue-600"
+            className="p-1.5 rounded-full bg-white shadow-md hover:bg-blue-100 active:bg-blue-200 transition-all duration-300 text-blue-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
             onClick={handleZoomIn}
             title="Zoom to country"
+            aria-label="Zoom in to country"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
+              className="h-5 w-5"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -239,13 +342,14 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
 
         {isZoomed && (
           <button
-            className="p-1 rounded-full bg-white/80 hover:bg-blue-100 active:bg-blue-200 transition-all duration-150 text-blue-600"
+            className="p-1.5 rounded-full bg-white shadow-md hover:bg-blue-100 active:bg-blue-200 transition-all duration-300 text-blue-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
             onClick={handleZoomOut}
             title="Zoom out"
+            aria-label="Zoom out to world view"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
+              className="h-5 w-5"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -259,15 +363,34 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
         )}
       </div>
 
+      {/* Add a visual feedback during transitions */}
+      {isTransitioning && (
+        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+          <div className="relative">
+            <div className="w-12 h-12 rounded-full bg-blue-200 bg-opacity-20 animate-ping"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-blue-300 bg-opacity-30 animate-pulse"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-blue-400 bg-opacity-40"></div>
+          </div>
+        </div>
+      )}
+
       <ComposableMap
         projection="geoEquirectangular"
         projectionConfig={{
-          scale: 160,
+          scale: 120,
           rotate: [0, 0, 0],
         }}
         width={width}
         height={height}
-        style={{ width: '100%', height: '100%', display: 'block', margin: 0, padding: 0 }}
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'block',
+          margin: 0,
+          padding: 0,
+          filter: isTransitioning ? 'brightness(1.05)' : 'none',
+          transition: 'filter 0.3s ease-in-out',
+        }}
       >
         <ZoomableGroup
           center={position.coordinates}
@@ -280,6 +403,9 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
           onMoveEnd={({ coordinates, zoom }: { coordinates: [number, number]; zoom: number }) =>
             setPosition({ coordinates, zoom })
           }
+          // Add smooth animation for zoom transitions
+          transitionDuration={800}
+          transitionEase="easeQuadOut"
         >
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
