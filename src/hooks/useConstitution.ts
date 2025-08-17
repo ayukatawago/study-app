@@ -23,7 +23,7 @@ interface ConstitutionData {
 
 /**
  * Custom hook to fetch and manage constitution articles
- * 
+ *
  * @returns Object with constitution data, loading state, and error state
  */
 export function useConstitution() {
@@ -39,11 +39,11 @@ export function useConstitution() {
       try {
         setIsLoading(true);
         const response = await fetch('/data/constitution.json');
-        
+
         if (!response.ok) {
           throw new Error(`Failed to fetch constitution data: ${response.statusText}`);
         }
-        
+
         const data: ConstitutionData = await response.json();
         setConstitutionData(data.constitution || { title: '', sections: [] });
         setError(null);

@@ -9,7 +9,7 @@ interface CultureData {
 
 /**
  * Custom hook to fetch and manage culture events
- * 
+ *
  * @returns Object with culture events, loading state, and error state
  */
 export function useCultureEvents() {
@@ -22,16 +22,16 @@ export function useCultureEvents() {
       try {
         setIsLoading(true);
         const response = await fetch('/data/history_culture.json');
-        
+
         if (!response.ok) {
           throw new Error(`Failed to fetch culture events: ${response.statusText}`);
         }
-        
+
         const data: CultureData = await response.json();
         // Map to ensure each event has an id
         const eventsWithId = (data.culture || []).map(event => ({
           ...event,
-          id: event.person // Use person name as id
+          id: event.person, // Use person name as id
         }));
         setCultureEvents(eventsWithId);
         setError(null);

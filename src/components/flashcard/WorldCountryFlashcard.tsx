@@ -15,7 +15,6 @@ export default function WorldCountryFlashcard({
   onCorrect,
   onIncorrect,
 }: WorldCountryFlashcardProps) {
-  
   // Determine card height based on content
   const getCardHeight = () => {
     // Increase height if there are descriptions
@@ -38,13 +37,11 @@ export default function WorldCountryFlashcard({
     if (!event) {
       return <div className="text-lg">No card available</div>;
     }
-    
+
     // Always show map on front side
     return (
       <div className="w-full h-full">
-        <WorldMap
-          highlightedCountry={String(event.countryCode)}
-        />
+        <WorldMap highlightedCountry={String(event.countryCode)} />
       </div>
     );
   };
@@ -54,13 +51,11 @@ export default function WorldCountryFlashcard({
     if (!event) {
       return <div className="text-lg">No card available</div>;
     }
-    
+
     // Show country name, capital, and descriptions on back side
     return (
       <div className="text-center py-2 max-h-full overflow-y-auto">
-        <div className="text-3xl font-bold mb-1">
-          {event.countryName}
-        </div>
+        <div className="text-3xl font-bold mb-1">{event.countryName}</div>
         <div className="text-lg mt-1 mb-2">
           <span className="font-medium">首都:</span> {event.capitalCity}
         </div>
@@ -68,7 +63,9 @@ export default function WorldCountryFlashcard({
           <div className="mt-2 px-2">
             <ul className="text-left list-disc list-outside pl-4">
               {event.descriptions.map((desc, index) => (
-                <li key={index} className="text-sm my-1 leading-snug">{desc}</li>
+                <li key={index} className="text-sm my-1 leading-snug">
+                  {desc}
+                </li>
               ))}
             </ul>
           </div>
@@ -76,7 +73,7 @@ export default function WorldCountryFlashcard({
       </div>
     );
   };
-  
+
   return (
     <BaseFlashcard
       event={event}

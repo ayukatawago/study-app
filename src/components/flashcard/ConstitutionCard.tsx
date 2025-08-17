@@ -20,7 +20,7 @@ export default function ConstitutionCard({
   const [revealedAnswers, setRevealedAnswers] = useState<{ [key: string]: boolean }>({});
   // Track if all answers are revealed
   const [allRevealed, setAllRevealed] = useState(false);
-  
+
   // Count total number of span tags in all paragraphs
   const totalSpans = useMemo(() => {
     return article.paragraphs.reduce((total, para) => {
@@ -29,7 +29,7 @@ export default function ConstitutionCard({
       return total + (matches ? matches.length : 0);
     }, 0);
   }, [article.paragraphs]);
-  
+
   // Check if all answers are revealed
   useEffect(() => {
     const revealedCount = Object.values(revealedAnswers).filter(value => value).length;
@@ -40,17 +40,19 @@ export default function ConstitutionCard({
   const processText = (text: string, paragraphIndex: number) => {
     // First, split by newlines to handle paragraph breaks
     const paragraphs = text.split('\n');
-    
+
     return (
       <>
         {paragraphs.map((paragraph, pIndex) => {
           // Split by <span> and </span> tags
           const parts = paragraph.split(/<span>|<\/span>/);
-          
+
           // Create the content for this paragraph
-          const content = parts.length === 1 
-            ? <>{paragraph}</> 
-            : parts.map((part, index) => {
+          const content =
+            parts.length === 1 ? (
+              <>{paragraph}</>
+            ) : (
+              parts.map((part, index) => {
                 // Even indexes are regular text, odd indexes are quiz content
                 if (index % 2 === 0) {
                   return <span key={`${paragraphIndex}-${pIndex}-${index}`}>{part}</span>;
@@ -58,29 +60,35 @@ export default function ConstitutionCard({
                   // This is content inside a span tag
                   const answerKey = `${paragraphIndex}-${pIndex}-${index}`;
                   const isRevealed = revealedAnswers[answerKey];
-                  
+
                   return (
-                    <span 
+                    <span
                       key={answerKey}
                       onClick={() => {
                         setRevealedAnswers(prev => ({
                           ...prev,
-                          [answerKey]: !prev[answerKey]
+                          [answerKey]: !prev[answerKey],
                         }));
                       }}
                       className="cursor-pointer"
                     >
-                      {isRevealed ? 
-                        <span className="font-bold text-blue-600">{part}</span> : 
-                        <span className="text-red-600">( ??? )</span>}
+                      {isRevealed ? (
+                        <span className="font-bold text-blue-600">{part}</span>
+                      ) : (
+                        <span className="text-red-600">( ??? )</span>
+                      )}
                     </span>
                   );
                 }
-              });
-          
+              })
+            );
+
           // Return this paragraph with a margin bottom (except for the last one)
           return (
-            <div key={`para-${paragraphIndex}-${pIndex}`} className={pIndex < paragraphs.length - 1 ? "mb-4" : ""}>
+            <div
+              key={`para-${paragraphIndex}-${pIndex}`}
+              className={pIndex < paragraphs.length - 1 ? 'mb-4' : ''}
+            >
               {content}
             </div>
           );
@@ -98,13 +106,11 @@ export default function ConstitutionCard({
         </h2>
         {article.summary && allRevealed && (
           <div className="mt-2 p-2 bg-green-50 dark:bg-green-900 border-l-4 border-green-500 animate-fade-in">
-            <p className="text-base text-green-700 dark:text-green-300">
-              {article.summary}
-            </p>
+            <p className="text-base text-green-700 dark:text-green-300">{article.summary}</p>
           </div>
         )}
       </div>
-      
+
       <div className="mb-6">
         {article.paragraphs.map((para, index) => (
           <div key={index} className="text-gray-700 dark:text-gray-300 mb-4">
@@ -117,7 +123,7 @@ export default function ConstitutionCard({
           </div>
         ))}
       </div>
-      
+
       <div className="flex justify-end gap-3">
         <button
           onClick={() => onIncorrect(section.section, article.article)}
@@ -130,8 +136,8 @@ export default function ConstitutionCard({
           disabled={!allRevealed && totalSpans > 0}
           className={`px-4 py-2 text-sm rounded-md transition-colors ${
             allRevealed || totalSpans === 0
-              ? "bg-green-500 text-white hover:bg-green-600" 
-              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              ? 'bg-green-500 text-white hover:bg-green-600'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
           }`}
         >
           正解

@@ -9,12 +9,14 @@ This is a flashcard web application built with Next.js and TailwindCSS to help u
 ## Development Setup
 
 ### Technologies
+
 - Next.js (React framework)
 - TailwindCSS (styling)
 - Local Storage (data persistence)
 - react-simple-maps (for world map visualization)
 
 ### Commands
+
 ```bash
 # Install dependencies
 npm install
@@ -35,6 +37,7 @@ npm run lint
 ## Architecture
 
 ### Directory Structure
+
 ```
 study-app/
 ├── public/            # Static files
@@ -60,6 +63,7 @@ study-app/
 ```
 
 ### Core Features
+
 1. **History Flashcard System**
    - Display Japanese year numbers and associated historical events
    - Allow flipping between year and event content
@@ -110,9 +114,7 @@ The application uses the following JSON structure for history flashcard data (fr
   "history": [
     {
       "year": 1603,
-      "events": [
-        "徳川家康が征夷大将軍になる"
-      ],
+      "events": ["徳川家康が征夷大将軍になる"],
       "memorize": "家康 征夷大将軍だ 人群れさわぐ 江戸幕府"
     },
     {
@@ -139,17 +141,12 @@ The application also uses the following JSON structure for culture flashcard dat
     {
       "person": "井原西鶴",
       "period": "元禄文化",
-      "descriptions": [
-        "浮世草子"
-      ]
+      "descriptions": ["浮世草子"]
     },
     {
       "person": "近松門左衛門",
       "period": "元禄文化",
-      "descriptions": [
-        "人形浄瑠璃の脚本",
-        "「曽根崎心中」"
-      ]
+      "descriptions": ["人形浄瑠璃の脚本", "「曽根崎心中」"]
     }
     // More person-description pairs
   ]
@@ -267,15 +264,11 @@ User progress and settings for constitution flashcards are stored in local stora
 {
   "constitution_progress": {
     "seen": [
-      {"section": 1, "article": 1},
-      {"section": 2, "article": 9}
+      { "section": 1, "article": 1 },
+      { "section": 2, "article": 9 }
     ],
-    "correct": [
-      {"section": 1, "article": 1}
-    ],
-    "incorrect": [
-      {"section": 2, "article": 9}
-    ]
+    "correct": [{ "section": 1, "article": 1 }],
+    "incorrect": [{ "section": 2, "article": 9 }]
   },
   "constitution_settings": {
     "randomOrder": true,
@@ -317,7 +310,7 @@ User progress and settings for world country flashcards are stored in local stor
 1. **Responsive Design**: Optimized for both desktop and mobile devices
 2. **Study Progress Tracking**: Tracks cards seen, correct, and incorrect
 3. **Study Modes**: Option to study all cards or only incorrect cards
-4. **Card Direction**: 
+4. **Card Direction**:
    - For history: Switch between year-to-event and event-to-year directions
    - For culture: Switch between person-to-description and description-to-person directions
 5. **Random Order**: Option to study cards in random or sequential order

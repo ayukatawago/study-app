@@ -14,18 +14,17 @@ export default function WorldCountrySettingsPanel({
   onSettingsChange,
   onResetProgress,
 }: WorldCountrySettingsPanelProps) {
-  
   // No direction change needed anymore
-  
+
   // No capital toggle needed anymore
-  
+
   // No direction toggle needed for world countries
-  
+
   // No additional settings needed for world countries
   const renderAdditionalSettings = () => {
     return null;
   };
-  
+
   return (
     <BaseSettingsPanel
       settings={settings}

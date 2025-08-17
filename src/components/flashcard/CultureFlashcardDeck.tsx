@@ -10,13 +10,16 @@ import { CultureEventData, CultureFlashcardSettings } from '@/types/flashcard';
 
 export default function CultureFlashcardDeck() {
   const { cultureEvents, isLoading, error } = useCultureEvents();
-  
-  const [settings, setSettings] = useLocalStorage<CultureFlashcardSettings>('culture_flashcard_settings', {
-    cardDirection: 'person-to-desc',
-    showMemorize: true,
-    randomOrder: true,
-    showIncorrectOnly: false,
-  });
+
+  const [settings, setSettings] = useLocalStorage<CultureFlashcardSettings>(
+    'culture_flashcard_settings',
+    {
+      cardDirection: 'person-to-desc',
+      showMemorize: true,
+      randomOrder: true,
+      showIncorrectOnly: false,
+    }
+  );
 
   // Filter culture events based on settings
   const filterItems = (items: CultureEventData[], incorrectIds: (string | number)[]) => {
@@ -41,7 +44,7 @@ export default function CultureFlashcardDeck() {
       <CultureSettingsPanel
         settings={settings}
         onSettingsChange={setSettings}
-        onResetProgress={() => {}}  // This will be handled by BaseDeck
+        onResetProgress={() => {}} // This will be handled by BaseDeck
       />
     );
   };

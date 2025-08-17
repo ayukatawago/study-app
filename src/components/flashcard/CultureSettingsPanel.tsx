@@ -26,10 +26,12 @@ export default function CultureSettingsPanel({
               id="person-to-desc"
               name="cardDirection"
               checked={settings.cardDirection === 'person-to-desc'}
-              onChange={() => onSettingsChange({
-                ...settings,
-                cardDirection: 'person-to-desc',
-              })}
+              onChange={() =>
+                onSettingsChange({
+                  ...settings,
+                  cardDirection: 'person-to-desc',
+                })
+              }
               className="mr-2"
             />
             <label htmlFor="person-to-desc" className="text-sm">
@@ -42,10 +44,12 @@ export default function CultureSettingsPanel({
               id="desc-to-person"
               name="cardDirection"
               checked={settings.cardDirection === 'desc-to-person'}
-              onChange={() => onSettingsChange({
-                ...settings,
-                cardDirection: 'desc-to-person',
-              })}
+              onChange={() =>
+                onSettingsChange({
+                  ...settings,
+                  cardDirection: 'desc-to-person',
+                })
+              }
               className="mr-2"
             />
             <label htmlFor="desc-to-person" className="text-sm">

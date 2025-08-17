@@ -12,18 +12,18 @@ interface ConstitutionDeckProps {
 
 export default function ConstitutionDeck({ showNextButton = true }: ConstitutionDeckProps) {
   const { constitutionData, isLoading, error } = useConstitution();
-  
+
   const [settings, setSettings] = useLocalStorage('constitution_settings', {
     showIncorrectOnly: false,
     randomOrder: true,
   });
 
   const [progress, setProgress] = useLocalStorage('constitution_progress', {
-    seen: [] as Array<{section: number; article: number}>,
-    correct: [] as Array<{section: number; article: number}>,
-    incorrect: [] as Array<{section: number; article: number}>,
+    seen: [] as Array<{ section: number; article: number }>,
+    correct: [] as Array<{ section: number; article: number }>,
+    incorrect: [] as Array<{ section: number; article: number }>,
   });
-  
+
   // Current card index
   const [currentIndex, setCurrentIndex] = useState(0);
   // Add a key to force re-render when switching cards
@@ -36,7 +36,7 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
       for (const article of section.articles) {
         articles.push({
           section,
-          article
+          article,
         });
       }
     }
@@ -47,9 +47,9 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
   const filteredArticles = useMemo(() => {
     if (settings.showIncorrectOnly && progress && progress.incorrect) {
       // Only show articles that are in the incorrect list
-      return allArticles.filter(item => 
-        progress.incorrect.some(inc => 
-          inc.section === item.section.section && inc.article === item.article.article
+      return allArticles.filter(item =>
+        progress.incorrect.some(
+          inc => inc.section === item.section.section && inc.article === item.article.article
         )
       );
     }
@@ -63,36 +63,33 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
     }
     return filteredArticles;
   }, [filteredArticles, settings.randomOrder]);
-  
+
   // When display articles change, reset to the first card
   useEffect(() => {
     setCurrentIndex(0);
     setKey(prevKey => prevKey + 1);
   }, [displayArticles]);
-  
+
   // Helper function to get random index (different from current)
   const getRandomIndex = () => {
     let randomIndex;
     let attempts = 0;
     const maxAttempts = displayArticles.length * 2; // Prevent infinite loop
-    
+
     do {
       randomIndex = Math.floor(Math.random() * displayArticles.length);
       attempts++;
       // Break the loop if we've tried too many times to prevent infinite loops
       if (attempts > maxAttempts) break;
-      
-    } while (
-      displayArticles.length > 1 && randomIndex === currentIndex
-    );
-    
+    } while (displayArticles.length > 1 && randomIndex === currentIndex);
+
     return randomIndex;
   };
-  
+
   // Move to next card
   const moveToNextCard = () => {
     if (displayArticles.length <= 1) return;
-    
+
     if (settings.randomOrder) {
       // Pick a random card, but not the current one
       setCurrentIndex(getRandomIndex());
@@ -105,7 +102,7 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
         setCurrentIndex(0);
       }
     }
-    
+
     // Force re-render
     setKey(prevKey => prevKey + 1);
   };
@@ -117,24 +114,24 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
       if (!prev.seen.some(item => item.section === sectionId && item.article === articleId)) {
         newSeen.push({ section: sectionId, article: articleId });
       }
-      
+
       const newCorrect = [...prev.correct];
       if (!prev.correct.some(item => item.section === sectionId && item.article === articleId)) {
         newCorrect.push({ section: sectionId, article: articleId });
       }
-      
+
       // Remove from incorrect list if it was there
       const newIncorrect = prev.incorrect.filter(
         item => !(item.section === sectionId && item.article === articleId)
       );
-      
+
       return {
         seen: newSeen,
         correct: newCorrect,
         incorrect: newIncorrect,
       };
     });
-    
+
     // Move to the next card
     moveToNextCard();
   };
@@ -146,24 +143,24 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
       if (!prev.seen.some(item => item.section === sectionId && item.article === articleId)) {
         newSeen.push({ section: sectionId, article: articleId });
       }
-      
+
       const newIncorrect = [...prev.incorrect];
       if (!prev.incorrect.some(item => item.section === sectionId && item.article === articleId)) {
         newIncorrect.push({ section: sectionId, article: articleId });
       }
-      
+
       // Remove from correct list if it was there
       const newCorrect = prev.correct.filter(
         item => !(item.section === sectionId && item.article === articleId)
       );
-      
+
       return {
         seen: newSeen,
         correct: newCorrect,
         incorrect: newIncorrect,
       };
     });
-    
+
     // Move to the next card
     moveToNextCard();
   };
@@ -181,7 +178,7 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
       ...settings,
       showIncorrectOnly: !settings.showIncorrectOnly,
     });
-    
+
     // Reset index to 0 when the setting changes
     setCurrentIndex(0);
     // Force re-render of the card
@@ -193,7 +190,7 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
       ...settings,
       randomOrder: !settings.randomOrder,
     });
-    
+
     // Reset index to 0 when the setting changes
     setCurrentIndex(0);
     // Force re-render of the card
@@ -229,9 +226,9 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
   const noIncorrectCardsInIncorrectMode = settings.showIncorrectOnly && !filteredArticles.length;
 
   // Check if all cards have been answered correctly
-  const allCardsAnsweredCorrectly = 
-    !settings.showIncorrectOnly && 
-    totalArticlesCount > 0 && 
+  const allCardsAnsweredCorrectly =
+    !settings.showIncorrectOnly &&
+    totalArticlesCount > 0 &&
     progress.correct.length === totalArticlesCount;
 
   if (allCardsAnsweredCorrectly) {
@@ -239,23 +236,27 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
       <div>
         <div className="flex justify-end mb-6">
           <div className="flex space-x-2">
-            <button 
+            <button
               onClick={toggleRandomOrder}
-              className={`px-3 py-1 text-sm rounded-md ${settings.randomOrder 
-                ? 'bg-blue-500 text-white' 
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'}`}
+              className={`px-3 py-1 text-sm rounded-md ${
+                settings.randomOrder
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
+              }`}
             >
               ランダム順
             </button>
-            <button 
+            <button
               onClick={toggleShowIncorrectOnly}
-              className={`px-3 py-1 text-sm rounded-md ${settings.showIncorrectOnly 
-                ? 'bg-blue-500 text-white' 
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'}`}
+              className={`px-3 py-1 text-sm rounded-md ${
+                settings.showIncorrectOnly
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
+              }`}
             >
               不正解のみ
             </button>
-            <button 
+            <button
               onClick={handleResetProgress}
               className="px-3 py-1 text-sm bg-red-500 text-white rounded-md hover:bg-red-600"
             >
@@ -276,23 +277,27 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
       <div>
         <div className="flex justify-end mb-6">
           <div className="flex space-x-2">
-            <button 
+            <button
               onClick={toggleRandomOrder}
-              className={`px-3 py-1 text-sm rounded-md ${settings.randomOrder 
-                ? 'bg-blue-500 text-white' 
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'}`}
+              className={`px-3 py-1 text-sm rounded-md ${
+                settings.randomOrder
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
+              }`}
             >
               ランダム順
             </button>
-            <button 
+            <button
               onClick={toggleShowIncorrectOnly}
-              className={`px-3 py-1 text-sm rounded-md ${settings.showIncorrectOnly 
-                ? 'bg-blue-500 text-white' 
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'}`}
+              className={`px-3 py-1 text-sm rounded-md ${
+                settings.showIncorrectOnly
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
+              }`}
             >
               不正解のみ
             </button>
-            <button 
+            <button
               onClick={handleResetProgress}
               className="px-3 py-1 text-sm bg-red-500 text-white rounded-md hover:bg-red-600"
             >
@@ -303,7 +308,9 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
             <h2 className="text-xl font-bold mb-2">不正解のカードがありません</h2>
-            <p>不正解のカードのみ表示モードですが、不正解のカードがありません。設定を変更してください。</p>
+            <p>
+              不正解のカードのみ表示モードですが、不正解のカードがありません。設定を変更してください。
+            </p>
           </div>
         </div>
       </div>
@@ -319,23 +326,27 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
           </p>
         </div>
         <div className="flex space-x-2">
-          <button 
+          <button
             onClick={toggleRandomOrder}
-            className={`px-3 py-1 text-sm rounded-md ${settings.randomOrder 
-              ? 'bg-blue-500 text-white' 
-              : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'}`}
+            className={`px-3 py-1 text-sm rounded-md ${
+              settings.randomOrder
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
+            }`}
           >
             ランダム順
           </button>
-          <button 
+          <button
             onClick={toggleShowIncorrectOnly}
-            className={`px-3 py-1 text-sm rounded-md ${settings.showIncorrectOnly 
-              ? 'bg-blue-500 text-white' 
-              : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'}`}
+            className={`px-3 py-1 text-sm rounded-md ${
+              settings.showIncorrectOnly
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
+            }`}
           >
             不正解のみ
           </button>
-          <button 
+          <button
             onClick={handleResetProgress}
             className="px-3 py-1 text-sm bg-red-500 text-white rounded-md hover:bg-red-600"
           >
@@ -353,7 +364,7 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
             onCorrect={handleCorrect}
             onIncorrect={handleIncorrect}
           />
-          
+
           {showNextButton && (
             <div className="mt-4 flex justify-center">
               <button

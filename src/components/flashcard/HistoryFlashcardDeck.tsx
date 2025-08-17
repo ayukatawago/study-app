@@ -10,7 +10,7 @@ import { HistoryEventData, HistoryFlashcardSettings } from '@/types/flashcard';
 
 export default function HistoryFlashcardDeck() {
   const { historyEvents, isLoading, error } = useHistoryEvents();
-  
+
   const [settings, setSettings] = useLocalStorage<HistoryFlashcardSettings>('flashcard_settings', {
     cardDirection: 'year-to-event',
     showMemorize: true,
@@ -42,7 +42,7 @@ export default function HistoryFlashcardDeck() {
       <SettingsPanel
         settings={settings}
         onSettingsChange={setSettings}
-        onResetProgress={() => {}}  // This will be handled by BaseDeck
+        onResetProgress={() => {}} // This will be handled by BaseDeck
       />
     );
   };

@@ -26,10 +26,12 @@ export default function SettingsPanel({
               id="year-to-event"
               name="cardDirection"
               checked={settings.cardDirection === 'year-to-event'}
-              onChange={() => onSettingsChange({
-                ...settings,
-                cardDirection: 'year-to-event',
-              })}
+              onChange={() =>
+                onSettingsChange({
+                  ...settings,
+                  cardDirection: 'year-to-event',
+                })
+              }
               className="mr-2"
             />
             <label htmlFor="year-to-event" className="text-sm">
@@ -42,10 +44,12 @@ export default function SettingsPanel({
               id="event-to-year"
               name="cardDirection"
               checked={settings.cardDirection === 'event-to-year'}
-              onChange={() => onSettingsChange({
-                ...settings,
-                cardDirection: 'event-to-year',
-              })}
+              onChange={() =>
+                onSettingsChange({
+                  ...settings,
+                  cardDirection: 'event-to-year',
+                })
+              }
               className="mr-2"
             />
             <label htmlFor="event-to-year" className="text-sm">
@@ -65,15 +69,15 @@ export default function SettingsPanel({
           <input
             type="checkbox"
             checked={settings.showMemorize}
-            onChange={(e) => onSettingsChange({
-              ...settings,
-              showMemorize: e.target.checked,
-            })}
+            onChange={e =>
+              onSettingsChange({
+                ...settings,
+                showMemorize: e.target.checked,
+              })
+            }
             className="form-checkbox h-4 w-4 text-blue-600 rounded"
           />
-          <span className="ml-2 text-gray-700 dark:text-gray-300">
-            覚え方を表示する
-          </span>
+          <span className="ml-2 text-gray-700 dark:text-gray-300">覚え方を表示する</span>
         </label>
       </div>
     );

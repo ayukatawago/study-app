@@ -10,7 +10,7 @@ import { WorldCountryData, WorldCountrySettings } from '@/types/flashcard';
 
 export default function WorldCountryFlashcardDeck() {
   const { worldCountries, isLoading, error } = useWorldCountries();
-  
+
   const [settings, setSettings] = useLocalStorage<WorldCountrySettings>('world_country_settings', {
     randomOrder: true,
     showIncorrectOnly: false,
@@ -22,13 +22,13 @@ export default function WorldCountryFlashcardDeck() {
   };
 
   // Render individual world country flashcard
-  const renderCard = (country: WorldCountryData, onCorrect: () => void, onIncorrect: () => void) => {
+  const renderCard = (
+    country: WorldCountryData,
+    onCorrect: () => void,
+    onIncorrect: () => void
+  ) => {
     return (
-      <WorldCountryFlashcard
-        event={country}
-        onCorrect={onCorrect}
-        onIncorrect={onIncorrect}
-      />
+      <WorldCountryFlashcard event={country} onCorrect={onCorrect} onIncorrect={onIncorrect} />
     );
   };
 

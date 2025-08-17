@@ -16,21 +16,18 @@ export default function CultureFlashcard({
   onCorrect,
   onIncorrect,
 }: CultureFlashcardProps) {
-  
   const renderFrontContent = () => {
     // Safety check in case event is undefined
     if (!event) {
       return <div className="text-lg">No card available</div>;
     }
-    
+
     return direction === 'person-to-desc' ? (
-      <div className="text-3xl font-bold">
-        {event.person}
-      </div>
+      <div className="text-3xl font-bold">{event.person}</div>
     ) : (
       <div className="text-lg">
         {event.descriptions.map((item, index) => (
-          <div key={index} className={index > 0 ? "mt-2" : ""}>
+          <div key={index} className={index > 0 ? 'mt-2' : ''}>
             {item}
           </div>
         ))}
@@ -43,26 +40,22 @@ export default function CultureFlashcard({
     if (!event) {
       return <div className="text-lg">No card available</div>;
     }
-    
+
     return direction === 'person-to-desc' ? (
       <>
         <div className="text-lg mb-3">
           {event.descriptions.map((item, index) => (
-            <div key={index} className={index > 0 ? "mt-2" : ""}>
+            <div key={index} className={index > 0 ? 'mt-2' : ''}>
               {item}
             </div>
           ))}
         </div>
-        <div className="text-sm text-gray-500 mt-4">
-          時代: {event.period}
-        </div>
+        <div className="text-sm text-gray-500 mt-4">時代: {event.period}</div>
       </>
     ) : (
       <>
         <div className="text-3xl font-bold mb-3">{event.person}</div>
-        <div className="text-sm text-gray-500 mt-4">
-          時代: {event.period}
-        </div>
+        <div className="text-sm text-gray-500 mt-4">時代: {event.period}</div>
       </>
     );
   };

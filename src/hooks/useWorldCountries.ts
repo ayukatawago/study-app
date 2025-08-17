@@ -9,7 +9,7 @@ interface WorldCountriesData {
 
 /**
  * Custom hook to fetch and manage world country data
- * 
+ *
  * @returns Object with world countries, loading state, and error state
  */
 export function useWorldCountries() {
@@ -22,16 +22,16 @@ export function useWorldCountries() {
       try {
         setIsLoading(true);
         const response = await fetch('/data/world_countries.json');
-        
+
         if (!response.ok) {
           throw new Error(`Failed to fetch world countries: ${response.statusText}`);
         }
-        
+
         const data: WorldCountriesData = await response.json();
         // Map to ensure each country has an id
         const countriesWithId = (data.countries || []).map(country => ({
           ...country,
-          id: country.countryCode // Use country code as id
+          id: country.countryCode, // Use country code as id
         }));
         setWorldCountries(countriesWithId);
         setError(null);

@@ -19,26 +19,25 @@ export default function HistoryFlashcard({
   onCorrect,
   onIncorrect,
 }: HistoryFlashcardProps) {
-  
   // Determine card height based on events count and memorize presence
   const getCardHeight = () => {
     if (!event) return 'h-64'; // Default height
-    
+
     const eventsCount = event.events.length;
     const hasMemorize = showMemorize && event.memorize;
-    
+
     // For year-to-event direction with events on back
     if (direction === 'year-to-event') {
       if (eventsCount > 3 && hasMemorize) return 'h-96'; // Many events with memorize
       if (eventsCount > 3) return 'h-80'; // Many events without memorize
       if (eventsCount > 1 && hasMemorize) return 'h-80'; // Multiple events with memorize
     }
-    
+
     // For event-to-year direction with events on front
     if (direction === 'event-to-year' && eventsCount > 3) {
       return 'h-80'; // Taller card for many events on front
     }
-    
+
     return 'h-64'; // Default height
   };
 
@@ -47,7 +46,7 @@ export default function HistoryFlashcard({
     if (!event) {
       return <div className="text-lg">No card available</div>;
     }
-    
+
     return direction === 'year-to-event' ? (
       <div className="text-5xl font-bold">
         {event.year}
@@ -60,7 +59,7 @@ export default function HistoryFlashcard({
     ) : (
       <div className="text-lg">
         {event.events.map((item, index) => (
-          <div key={index} className={index > 0 ? "mt-2" : ""}>
+          <div key={index} className={index > 0 ? 'mt-2' : ''}>
             {item}
           </div>
         ))}
@@ -73,12 +72,12 @@ export default function HistoryFlashcard({
     if (!event) {
       return <div className="text-lg">No card available</div>;
     }
-    
+
     return direction === 'year-to-event' ? (
       <>
         <div className="text-lg mb-3 max-h-60 overflow-y-auto">
           {event.events.map((item, index) => (
-            <div key={index} className={index > 0 ? "mt-2" : ""}>
+            <div key={index} className={index > 0 ? 'mt-2' : ''}>
               {item}
             </div>
           ))}
@@ -100,7 +99,7 @@ export default function HistoryFlashcard({
       </>
     );
   };
-  
+
   return (
     <BaseFlashcard
       event={event}

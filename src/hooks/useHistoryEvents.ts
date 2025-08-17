@@ -9,7 +9,7 @@ interface HistoryData {
 
 /**
  * Custom hook to fetch and manage history events
- * 
+ *
  * @returns Object with history events, loading state, and error state
  */
 export function useHistoryEvents() {
@@ -22,16 +22,16 @@ export function useHistoryEvents() {
       try {
         setIsLoading(true);
         const response = await fetch('/data/history_events.json');
-        
+
         if (!response.ok) {
           throw new Error(`Failed to fetch history events: ${response.statusText}`);
         }
-        
+
         const data: HistoryData = await response.json();
         // Map to ensure each event has an id
         const eventsWithId = (data.history || []).map(event => ({
           ...event,
-          id: event.year // Use year as id
+          id: event.year, // Use year as id
         }));
         setHistoryEvents(eventsWithId);
         setError(null);

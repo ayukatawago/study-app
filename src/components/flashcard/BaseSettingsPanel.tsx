@@ -66,13 +66,13 @@ export default function BaseSettingsPanel<T extends BaseFlashcardSettings>({
       {showSettings && (
         <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 shadow-lg rounded-md p-4 z-10">
           <h3 className="font-medium text-lg mb-3">設定</h3>
-          
+
           {/* Direction toggle (if provided) */}
           {renderDirectionToggle && renderDirectionToggle()}
-          
+
           {/* Additional settings (if provided) */}
           {renderAdditionalSettings && renderAdditionalSettings()}
-          
+
           {/* Common settings */}
           <div className="mt-4">
             <label className="flex items-center cursor-pointer mb-3">
@@ -82,12 +82,10 @@ export default function BaseSettingsPanel<T extends BaseFlashcardSettings>({
                 onChange={handleRandomOrderChange}
                 className="form-checkbox h-4 w-4 text-blue-600 rounded"
               />
-              <span className="ml-2 text-gray-700 dark:text-gray-300">
-                ランダム順に表示
-              </span>
+              <span className="ml-2 text-gray-700 dark:text-gray-300">ランダム順に表示</span>
             </label>
           </div>
-          
+
           <div className="mb-4">
             <label className="flex items-center cursor-pointer">
               <input
@@ -96,19 +94,17 @@ export default function BaseSettingsPanel<T extends BaseFlashcardSettings>({
                 onChange={handleShowIncorrectOnlyChange}
                 className="form-checkbox h-4 w-4 text-blue-600 rounded"
               />
-              <span className="ml-2 text-gray-700 dark:text-gray-300">
-                不正解のみ表示
-              </span>
+              <span className="ml-2 text-gray-700 dark:text-gray-300">不正解のみ表示</span>
             </label>
           </div>
-          
+
           <button
             onClick={onResetProgress}
             className="w-full py-2 mt-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded"
           >
             学習状況をリセット
           </button>
-          
+
           <button
             onClick={() => setShowSettings(false)}
             className="w-full py-2 mt-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white text-sm rounded"

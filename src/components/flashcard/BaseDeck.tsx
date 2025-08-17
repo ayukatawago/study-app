@@ -5,16 +5,21 @@ import { BaseFlashcardData, BaseFlashcardSettings, BaseFlashcardProgress } from 
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 interface BaseDeckProps<T extends BaseFlashcardData, S extends BaseFlashcardSettings> {
-  id: string;  // Unique identifier for localStorage keys
-  items: T[];  // Items to display in the deck
+  id: string; // Unique identifier for localStorage keys
+  items: T[]; // Items to display in the deck
   isLoading: boolean;
   error: string | null;
   settings: S;
   setSettings: (settings: S) => void;
-  renderCard: (item: T, onCorrect: () => void, onIncorrect: () => void, onFlip?: (isFlipped: boolean) => void) => ReactNode;
+  renderCard: (
+    item: T,
+    onCorrect: () => void,
+    onIncorrect: () => void,
+    onFlip?: (isFlipped: boolean) => void
+  ) => ReactNode;
   renderSettingsPanel: (onResetProgress: () => void) => ReactNode;
-  getItemId: (item: T) => string | number;  // Function to extract the unique identifier from an item
-  filterItems?: (items: T[], incorrectIds: (string | number)[]) => T[];  // Custom filter function
+  getItemId: (item: T) => string | number; // Function to extract the unique identifier from an item
+  filterItems?: (items: T[], incorrectIds: (string | number)[]) => T[]; // Custom filter function
   showNextButton?: boolean; // Whether to show the "next card" button
 }
 
@@ -34,13 +39,16 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
   const [currentIndex, setCurrentIndex] = useState(0);
   const [key, setKey] = useState(0); // Add a key to force re-render when switching cards
   const [shownIndices, setShownIndices] = useState<number[]>([]); // Track shown indices for randomization
-  
-  const [progress, setProgress] = useLocalStorage<BaseFlashcardProgress<string | number>>(`${id}_progress`, {
-    seen: [],
-    correct: [],
-    incorrect: [],
-  });
-  
+
+  const [progress, setProgress] = useLocalStorage<BaseFlashcardProgress<string | number>>(
+    `${id}_progress`,
+    {
+      seen: [],
+      correct: [],
+      incorrect: [],
+    }
+  );
+
   // Reset shown indices when page loads
   useEffect(() => {
     setShownIndices([]);
@@ -48,7 +56,12 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
 
   // Filter items based on settings
   const filteredItems = useMemo(() => {
-    if (settings.showIncorrectOnly && progress && progress.incorrect && Array.isArray(progress.incorrect)) {
+    if (
+      settings.showIncorrectOnly &&
+      progress &&
+      progress.incorrect &&
+      Array.isArray(progress.incorrect)
+    ) {
       // Use custom filter function if provided
       if (filterItems) {
         return filterItems(items, progress.incorrect);
@@ -58,7 +71,7 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
     }
     return items;
   }, [items, progress, settings.showIncorrectOnly, filterItems, getItemId]);
-  
+
   // Handle card selection when any relevant property changes
   useEffect(() => {
     // Set card index when data is loaded or settings change
@@ -78,20 +91,18 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
     if (!filteredItems.length) return;
 
     const currentItemId = getItemId(filteredItems[currentIndex]);
-    
-    setProgress((prev) => {
+
+    setProgress(prev => {
       // Add to seen and correct lists if not already there
-      const newSeen = prev.seen.includes(currentItemId) 
-        ? prev.seen 
-        : [...prev.seen, currentItemId];
-      
+      const newSeen = prev.seen.includes(currentItemId) ? prev.seen : [...prev.seen, currentItemId];
+
       const newCorrect = prev.correct.includes(currentItemId)
         ? prev.correct
         : [...prev.correct, currentItemId];
-        
+
       // Remove from incorrect list if it was there
-      const newIncorrect = prev.incorrect.filter((id) => id !== currentItemId);
-      
+      const newIncorrect = prev.incorrect.filter(id => id !== currentItemId);
+
       return {
         seen: newSeen,
         correct: newCorrect,
@@ -106,20 +117,18 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
     if (!filteredItems.length) return;
 
     const currentItemId = getItemId(filteredItems[currentIndex]);
-    
-    setProgress((prev) => {
+
+    setProgress(prev => {
       // Add to seen and incorrect lists if not already there
-      const newSeen = prev.seen.includes(currentItemId) 
-        ? prev.seen 
-        : [...prev.seen, currentItemId];
-      
+      const newSeen = prev.seen.includes(currentItemId) ? prev.seen : [...prev.seen, currentItemId];
+
       const newIncorrect = prev.incorrect.includes(currentItemId)
         ? prev.incorrect
         : [...prev.incorrect, currentItemId];
-      
+
       // Remove from correct list if it was there
       const newCorrect = prev.correct.filter(id => id !== currentItemId);
-      
+
       return {
         seen: newSeen,
         correct: newCorrect,
@@ -135,27 +144,26 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
     let randomIndex;
     let attempts = 0;
     const maxAttempts = filteredItems.length * 2; // Prevent infinite loop
-    
+
     // If we've shown all cards, reset the shown indices
     if (shownIndices.length >= filteredItems.length - 1) {
       setShownIndices([currentIndex]);
     }
-    
+
     do {
       randomIndex = Math.floor(Math.random() * filteredItems.length);
       attempts++;
       // Break the loop if we've tried too many times to prevent infinite loops
       if (attempts > maxAttempts) break;
-      
     } while (
-      filteredItems.length > 1 && 
-      (randomIndex === currentIndex || 
-       // Skip cards that have been correctly answered
-       (progress.correct && progress.correct.includes(getItemId(filteredItems[randomIndex]))) ||
-       // Don't show cards we've already shown in this session
-       shownIndices.includes(randomIndex))
+      filteredItems.length > 1 &&
+      (randomIndex === currentIndex ||
+        // Skip cards that have been correctly answered
+        (progress.correct && progress.correct.includes(getItemId(filteredItems[randomIndex]))) ||
+        // Don't show cards we've already shown in this session
+        shownIndices.includes(randomIndex))
     );
-    
+
     return randomIndex;
   };
 
@@ -175,11 +183,11 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
         setCurrentIndex(0);
       }
     }
-    
+
     // Update the key to force a re-render of the flashcard component
     setKey(prevKey => prevKey + 1);
   };
-  
+
   const handleResetProgress = () => {
     // Reset the progress data
     setProgress({
@@ -187,10 +195,10 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
       correct: [],
       incorrect: [],
     });
-    
+
     // Reset shown indices
     setShownIndices([]);
-    
+
     // Force refresh of the deck
     if (settings.randomOrder) {
       const randomIndex = Math.floor(Math.random() * filteredItems.length);
@@ -198,7 +206,7 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
     } else {
       setCurrentIndex(0);
     }
-    
+
     setKey(prevKey => prevKey + 1);
   };
 
@@ -211,27 +219,23 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
   }
 
   // Check if all cards have been answered correctly (when not in showIncorrectOnly mode)
-  const allCardsAnsweredCorrectly = 
-    !settings.showIncorrectOnly && 
-    items.length > 0 && 
-    progress.correct.length === items.length;
+  const allCardsAnsweredCorrectly =
+    !settings.showIncorrectOnly && items.length > 0 && progress.correct.length === items.length;
 
   // Check if we're in showIncorrectOnly mode and there are no incorrect cards
-  const noIncorrectCardsInIncorrectMode = 
-    settings.showIncorrectOnly && 
-    items.length > 0 && 
-    !filteredItems.length;
-    
+  const noIncorrectCardsInIncorrectMode =
+    settings.showIncorrectOnly && items.length > 0 && !filteredItems.length;
+
   if (allCardsAnsweredCorrectly) {
     return (
       <div>
-        <div className="flex justify-end mb-6">
-          {renderSettingsPanel(handleResetProgress)}
-        </div>
+        <div className="flex justify-end mb-6">{renderSettingsPanel(handleResetProgress)}</div>
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center p-6 bg-green-100 dark:bg-green-900 rounded-lg">
             <h2 className="text-xl font-bold mb-2">おめでとうございます！</h2>
-            <p>すべてのカードに正解しました！学習を続けるには「学習状況をリセット」してください。</p>
+            <p>
+              すべてのカードに正解しました！学習を続けるには「学習状況をリセット」してください。
+            </p>
           </div>
         </div>
       </div>
@@ -239,13 +243,13 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
   } else if (noIncorrectCardsInIncorrectMode) {
     return (
       <div>
-        <div className="flex justify-end mb-6">
-          {renderSettingsPanel(handleResetProgress)}
-        </div>
+        <div className="flex justify-end mb-6">{renderSettingsPanel(handleResetProgress)}</div>
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
             <h2 className="text-xl font-bold mb-2">不正解のカードがありません</h2>
-            <p>不正解のカードのみ表示モードですが、不正解のカードがありません。設定を変更してください。</p>
+            <p>
+              不正解のカードのみ表示モードですが、不正解のカードがありません。設定を変更してください。
+            </p>
           </div>
         </div>
       </div>
@@ -284,7 +288,7 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
       {currentItem ? (
         <div>
           {renderCard(currentItem, handleCorrect, handleIncorrect)}
-          
+
           {showNextButton && (
             <div className="mt-4 flex justify-center">
               <button
