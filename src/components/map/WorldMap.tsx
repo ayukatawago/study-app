@@ -20,24 +20,39 @@ interface WorldMapProps {
 const WorldMap: React.FC<WorldMapProps> = ({
   highlightedCountry,
   width = 800,
-  height = 400
+  height = 300
 }) => {
-  // Component initialization
+  // Add animation when a country is highlighted
+  const [position, setPosition] = React.useState({ coordinates: [0, 0], zoom: 1 });
+  
+  React.useEffect(() => {
+    if (highlightedCountry) {
+      setPosition({ coordinates: [0, 0], zoom: 1 });
+    }
+  }, [highlightedCountry]);
 
   return (
-    <div className="world-map-container" style={{ width: '100%', height: '100%' }}>
+    <div className="world-map-container" style={{ width: '100%', height: '100%', padding: 0, margin: 0 }}>
       <ComposableMap
-        projection="geoMercator"
+        projection="geoEquirectangular"
         projectionConfig={{
-          scale: 43,
-          rotate: [0, 0, 0],
-          center: [0, 25]
+          scale: 120,  // Adjusted scale for proper visibility
+          rotate: [0, 0, 0]
         }}
         width={width}
         height={height}
-        style={{ width: '100%', height: '100%', display: 'block', margin: '0 auto' }}
+        style={{ width: '100%', height: '80%', display: 'block', margin: 0, padding: 0 }}
       >
-        <ZoomableGroup center={[0, 0]} zoom={1}>
+        <ZoomableGroup 
+          center={position.coordinates} 
+          zoom={position.zoom}
+          maxZoom={1.5}
+          translateExtent={[
+            [-width, -height/2], // Extended negative width to ensure full map visibility
+            [width, height/2]  // Extended positive width to ensure full map visibility
+          ]}
+          onMoveEnd={({ coordinates, zoom }) => setPosition({ coordinates, zoom })}
+        >
           <Geographies geography={geoUrl}>
             {({ geographies }) => 
               geographies.map(geo => {

@@ -20,7 +20,7 @@ export default function WorldCountryFlashcard({
   
   // Determine card height based on content
   const getCardHeight = () => {
-    return 'h-96'; // 24rem = 384px, appropriate for the map component
+    return 'h-64'; // 16rem = 256px
   };
 
   const renderFrontContent = () => {
@@ -31,16 +31,9 @@ export default function WorldCountryFlashcard({
     
     // Always show map on front side
     return (
-      <div className="w-full h-64 flex flex-col items-center justify-center">
-        {/* Show map on front side */}
-        <div className="relative w-full h-full">
-          <WorldMap 
-            highlightedCountry={String(event.countryCode)}
-            width={320}
-            height={200}
-          />
-        </div>
-      </div>
+      <WorldMap
+        highlightedCountry={String(event.countryCode)}
+      />
     );
   };
 
