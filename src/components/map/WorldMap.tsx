@@ -25,29 +25,25 @@ const WorldMap: React.FC<WorldMapProps> = ({
   width = 800,
   height = 300
 }) => {
-  // Add animation when a country is highlighted
+  // Map position state
   const [position, setPosition] = React.useState<{ coordinates: [number, number]; zoom: number }>({ coordinates: [0, 0], zoom: 1 });
   const [isZoomed, setIsZoomed] = React.useState(false);
   const [countryPosition, setCountryPosition] = React.useState<{ coordinates: [number, number]; bbox?: number[] } | null>(null);
   
-  // We won't need a default zoom level function anymore since all countries have zoom level in JSON
-
   // Load country data from JSON
   const [countryData, setCountryData] = React.useState<any>(null);
   const [dataLoaded, setDataLoaded] = React.useState(false);
   
+  // Fetch country data on initial load
   React.useEffect(() => {
-    // Fetch the country data from the JSON file
     async function loadCountryData() {
       if (dataLoaded) return; // Don't load multiple times
       
       try {
-        console.log('Loading country data...');
         const response = await fetch('/data/world_countries.json');
         const data = await response.json();
         setCountryData(data);
         setDataLoaded(true);
-        console.log('🟢 Loaded country data with zoom levels');
       } catch (err) {
         console.error('Error loading country data:', err);
       }
@@ -55,161 +51,121 @@ const WorldMap: React.FC<WorldMapProps> = ({
     
     loadCountryData();
   }, [dataLoaded]);
-  
-  // No flag needed
 
   // Find the highlighted country's position in the TopoJSON data
   const findCountryPosition = React.useCallback(async () => {
-    if (highlightedCountry) {      
-      console.log('🟠 findCountryPosition called, countryData:', countryData ? 'present' : 'null', 'dataLoaded:', dataLoaded);
+    if (!highlightedCountry || !countryData || !dataLoaded) {
+      return;
+    }
+    
+    try {
+      // Load the topology data
+      const response = await fetch(geoUrl);
+      const topojsonData = await response.json();
       
-      // Safety check - don't proceed if country data isn't loaded
-      if (!countryData || !dataLoaded) {
-        console.log('🔶 findCountryPosition: Country data not fully loaded yet, skipping');
-        return;
-      }
+      // Use the country ID as is (string)
+      const countryId = highlightedCountry;
       
-      try {
-        // Load the topology data
-        const response = await fetch(geoUrl);
-        const topojsonData = await response.json();
+      if (topojsonData?.objects?.countries) {
+        // Find the country in the TopoJSON geometries
+        const countryGeom = topojsonData.objects.countries.geometries.find(
+          (g: any) => String(g.id) === countryId
+        );
         
-        // Use the country ID as is (string)
-        const countryId = highlightedCountry;
-        console.log('Looking for country:', countryId);
-        
-        if (topojsonData && topojsonData.objects && topojsonData.objects.countries) {
-          // Find the country in the TopoJSON geometries
-          const countryGeom = topojsonData.objects.countries.geometries.find(
-            (g: any) => String(g.id) === countryId
-          );
+        if (countryGeom) {
+          // Extract the country as a GeoJSON feature
+          const countryFeature = feature(topojsonData, countryGeom);
           
-          if (countryGeom) {
-            console.log('Found country in TopoJSON:', countryGeom.id);
-            
-            // Extract the country as a GeoJSON feature
-            const countryFeature = feature(
-              topojsonData, 
-              countryGeom
+          // Calculate centroid using turf
+          const countryCentroid = centroid(countryFeature);
+          const centerCoords = countryCentroid.geometry.coordinates;
+          
+          // Get the bounding box if available
+          let bbox: number[] | undefined;
+          if (countryGeom.bbox) {
+            bbox = countryGeom.bbox as number[];
+          } else {
+            // If there's no bbox, calculate one from the geometry
+            try {
+              // Get coordinates from the feature
+              const coords = countryFeature.geometry.coordinates;
+              if (coords && coords.length > 0) {
+                // Flatten nested arrays to get all coordinate points
+                const flattenCoords = (arr: any[]): [number, number][] => {
+                  return arr.reduce((acc: [number, number][], val: any) => 
+                    Array.isArray(val[0]) 
+                      ? acc.concat(flattenCoords(val)) 
+                      : acc.concat([val as [number, number]]), 
+                    [] as [number, number][]);
+                };
+                
+                // Try to flatten the coordinates to extract min/max
+                const points = flattenCoords(coords);
+                
+                if (points.length > 0) {
+                  // Find min and max values
+                  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+                  
+                  for (const [x, y] of points) {
+                    minX = Math.min(minX, x);
+                    minY = Math.min(minY, y);
+                    maxX = Math.max(maxX, x);
+                    maxY = Math.max(maxY, y);
+                  }
+                  
+                  bbox = [minX, minY, maxX, maxY];
+                }
+              }
+            } catch (e) {
+              console.error('Error creating bbox:', e);
+            }
+          }
+          
+          // Create position object for state and zooming
+          const newPosition = {
+            coordinates: [centerCoords[0], centerCoords[1]] as [number, number],
+            bbox: bbox
+          };
+          
+          // Update country position state
+          setCountryPosition(newPosition);
+          
+          // Get zoom level from JSON data
+          if (countryData.countries) {
+            // Find the country in the JSON data
+            const countryInfo = countryData.countries.find(
+              (c: any) => c.countryCode === countryId
             );
             
-            // Calculate centroid using turf
-            const countryCentroid = centroid(countryFeature);
-            const centerCoords = countryCentroid.geometry.coordinates;
-            
-            console.log('Country centroid:', centerCoords);
-            
-            // Get the bounding box if available
-            let bbox: number[] | undefined;
-            if (countryGeom.bbox) {
-              bbox = countryGeom.bbox as number[];
-              console.log('Found bbox in geometry:', bbox);
-            } else {
-              console.log('No bbox found in country geometry, trying to create one');
-              // If there's no bbox, we could potentially calculate one from the geometry
-              // This is a simple approach - might not be perfect
-              try {
-                // Get coordinates from the feature
-                const coords = countryFeature.geometry.coordinates;
-                if (coords && coords.length > 0) {
-                  // Flatten nested arrays to get all coordinate points
-                  const flattenCoords = (arr: any[]): [number, number][] => {
-                    return arr.reduce((acc: [number, number][], val: any) => 
-                      Array.isArray(val[0]) 
-                        ? acc.concat(flattenCoords(val)) 
-                        : acc.concat([val as [number, number]]), 
-                      [] as [number, number][]);
-                  };
-                  
-                  // Try to flatten the coordinates to extract min/max
-                  const points = flattenCoords(coords);
-                  
-                  if (points.length > 0) {
-                    // Find min and max values
-                    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-                    
-                    for (const [x, y] of points) {
-                      minX = Math.min(minX, x);
-                      minY = Math.min(minY, y);
-                      maxX = Math.max(maxX, x);
-                      maxY = Math.max(maxY, y);
-                    }
-                    
-                    bbox = [minX, minY, maxX, maxY];
-                    console.log('Created bbox from coordinates:', bbox);
-                  }
-                }
-              } catch (e) {
-                console.error('Error creating bbox:', e);
-              }
-            }
-            
-            // Create position object to use both for state and immediate zooming
-            const newPosition = {
-              coordinates: [centerCoords[0], centerCoords[1]] as [number, number],
-              bbox: bbox
-            };
-            
-            // Update country position state
-            setCountryPosition(newPosition);
-            
-            // For debugging
-            console.log('Country position set:', newPosition);
-            
-            // Get zoom level immediately instead of in setTimeout
-            let zoomLevel;
-            
-            if (countryData.countries) {
-              // Find the country in the JSON data
-              const countryInfo = countryData.countries.find(
-                (c: any) => c.countryCode === countryId
-              );
+            if (countryInfo?.zoomLevel) {
+              const zoomLevel = countryInfo.zoomLevel;
               
-              if (countryInfo && countryInfo.zoomLevel) {
-                zoomLevel = countryInfo.zoomLevel;
-                console.log(`Using JSON zoom level for ${countryInfo.countryName}: ${zoomLevel}`);
-                
-                // Small delay to let the UI update first
-                setTimeout(() => {
-                  setPosition({ 
-                    coordinates: newPosition.coordinates, 
-                    zoom: zoomLevel
-                  });
-                  setIsZoomed(true);
-                  console.log(`Auto-zoom complete: zoom level ${zoomLevel} for country ${countryId}`);
-                }, 100);
-              } else {
-                console.error(`No zoom level found for ${countryId} in JSON, auto-zoom will not work properly`);
-              }
-            } else {
-              console.error('Country data format is invalid');
+              // Small delay to let the UI update first
+              setTimeout(() => {
+                setPosition({ 
+                  coordinates: newPosition.coordinates, 
+                  zoom: zoomLevel
+                });
+                setIsZoomed(true);
+              }, 100);
             }
-            
-            return;
           }
+          return;
         }
-        
-        console.log('Country not found in TopoJSON data:', highlightedCountry);
-        setCountryPosition(null);
-      } catch (err) {
-        console.error('Error fetching or processing map data:', err);
-        setCountryPosition(null);
       }
-    } else {
+      
+      setCountryPosition(null);
+    } catch (err) {
+      console.error('Error fetching or processing map data:', err);
       setCountryPosition(null);
     }
   }, [highlightedCountry, countryData, dataLoaded]);
   
   // When highlighted country changes or data loads, find its position
   React.useEffect(() => {
-    if (highlightedCountry) {
-      if (dataLoaded) {
-        console.log('🟡 Country highlighted and data loaded, finding position');
-        findCountryPosition();
-      } else {
-        console.log('Country highlighted but waiting for data to load');
-      }
-    } else {
+    if (highlightedCountry && dataLoaded) {
+      findCountryPosition();
+    } else if (!highlightedCountry) {
       // Reset when no country is highlighted
       setPosition({ coordinates: [0, 0] as [number, number], zoom: 1 });
       setIsZoomed(false);
@@ -222,38 +178,23 @@ const WorldMap: React.FC<WorldMapProps> = ({
     // Stop event propagation to prevent card flip
     e.stopPropagation();
     
-    if (countryPosition) {
-      console.log('Zoom in button clicked with country position:', countryPosition);
+    if (!countryPosition || !countryData || !highlightedCountry) {
+      return;
+    }
+    
+    // Get zoom level from JSON data
+    if (countryData.countries) {
+      // Find the country in the JSON data
+      const countryInfo = countryData.countries.find(
+        (c: any) => c.countryCode === highlightedCountry
+      );
       
-      const countryId = highlightedCountry;
-      
-      // Wait until country data is loaded
-      if (!countryData) {
-        console.log('Country data not loaded yet, cannot zoom in');
-        return;
-      }
-      
-      // Get zoom level from JSON data
-      if (countryData.countries) {
-        // Find the country in the JSON data
-        const countryInfo = countryData.countries.find(
-          (c: any) => c.countryCode === countryId
-        );
-        
-        if (countryInfo && countryInfo.zoomLevel) {
-          const zoomLevel = countryInfo.zoomLevel;
-          console.log(`Using JSON zoom level for ${countryInfo.countryName}: ${zoomLevel}`);
-          
-          setPosition({ 
-            coordinates: countryPosition.coordinates, 
-            zoom: zoomLevel
-          });
-          setIsZoomed(true);
-        } else {
-          console.error(`No zoom level found for ${countryId}, zoom will not work properly`);
-        }
-      } else {
-        console.error('Country data format is invalid');
+      if (countryInfo?.zoomLevel) {
+        setPosition({ 
+          coordinates: countryPosition.coordinates, 
+          zoom: countryInfo.zoomLevel
+        });
+        setIsZoomed(true);
       }
     }
   };
@@ -300,7 +241,7 @@ const WorldMap: React.FC<WorldMapProps> = ({
       <ComposableMap
         projection="geoEquirectangular"
         projectionConfig={{
-          scale: 160,  // Increased scale for better visibility
+          scale: 160,
           rotate: [0, 0, 0]
         }}
         width={width}
@@ -310,10 +251,10 @@ const WorldMap: React.FC<WorldMapProps> = ({
         <ZoomableGroup 
           center={position.coordinates} 
           zoom={position.zoom}
-          maxZoom={20} // Increased max zoom to support very small countries
+          maxZoom={20}
           translateExtent={[
-            [-width, -height/2], // Extended negative width to ensure full map visibility
-            [width, height/2]  // Extended positive width to ensure full map visibility
+            [-width, -height/2],
+            [width, height/2]
           ]}
           onMoveEnd={({ coordinates, zoom }: { coordinates: [number, number]; zoom: number }) => setPosition({ coordinates, zoom })}
         >
