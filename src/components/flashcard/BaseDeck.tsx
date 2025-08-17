@@ -11,10 +11,11 @@ interface BaseDeckProps<T extends BaseFlashcardData, S extends BaseFlashcardSett
   error: string | null;
   settings: S;
   setSettings: (settings: S) => void;
-  renderCard: (item: T, onCorrect: () => void, onIncorrect: () => void) => ReactNode;
+  renderCard: (item: T, onCorrect: () => void, onIncorrect: () => void, onFlip?: (isFlipped: boolean) => void) => ReactNode;
   renderSettingsPanel: () => ReactNode;
   getItemId: (item: T) => string | number;  // Function to extract the unique identifier from an item
   filterItems?: (items: T[], incorrectIds: (string | number)[]) => T[];  // Custom filter function
+  showNextButton?: boolean; // Whether to show the "next card" button
 }
 
 export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlashcardSettings>({
@@ -28,6 +29,7 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
   renderSettingsPanel,
   getItemId,
   filterItems,
+  showNextButton = false, // Only show next button for constitution by default
 }: BaseDeckProps<T, S>) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [key, setKey] = useState(0); // Add a key to force re-render when switching cards
@@ -283,14 +285,16 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
         <div>
           {renderCard(currentItem, handleCorrect, handleIncorrect)}
           
-          <div className="mt-4 flex justify-center">
-            <button
-              onClick={moveToNextCard}
-              className="px-4 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-            >
-              次のカード
-            </button>
-          </div>
+          {showNextButton && (
+            <div className="mt-4 flex justify-center">
+              <button
+                onClick={moveToNextCard}
+                className="px-4 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+              >
+                次のカード
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="min-h-[300px] flex items-center justify-center">

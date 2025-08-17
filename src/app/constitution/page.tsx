@@ -21,7 +21,7 @@ export default function ConstitutionPage() {
     <main className="min-h-screen p-4 sm:p-6">
       <div className="max-w-3xl mx-auto">
         <PageHeader title="日本国憲法" />
-        <ConstitutionDeck />
+        <ConstitutionDeck showNextButton={true} />
       </div>
     </main>
   );

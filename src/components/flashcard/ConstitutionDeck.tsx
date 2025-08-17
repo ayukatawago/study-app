@@ -4,8 +4,13 @@ import { useState, useMemo, useEffect } from 'react';
 import { useConstitution } from '@/hooks/useConstitution';
 import ConstitutionCard from './ConstitutionCard';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import BaseDeck from './BaseDeck';
 
-export default function ConstitutionDeck() {
+interface ConstitutionDeckProps {
+  showNextButton?: boolean;
+}
+
+export default function ConstitutionDeck({ showNextButton = true }: ConstitutionDeckProps) {
   const { constitutionData, isLoading, error } = useConstitution();
   
   const [settings, setSettings] = useLocalStorage('constitution_settings', {
@@ -349,14 +354,16 @@ export default function ConstitutionDeck() {
             onIncorrect={handleIncorrect}
           />
           
-          <div className="mt-4 flex justify-center">
-            <button
-              onClick={moveToNextCard}
-              className="px-4 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-            >
-              次のカード
-            </button>
-          </div>
+          {showNextButton && (
+            <div className="mt-4 flex justify-center">
+              <button
+                onClick={moveToNextCard}
+                className="px-4 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+              >
+                次のカード
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="min-h-[300px] flex items-center justify-center">
