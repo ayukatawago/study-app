@@ -67,21 +67,41 @@ const WorldMap: React.FC<WorldMapProps> = ({
     return zoomLevel;
   }, []);
 
+  // Load country data from JSON
+  const [countryData, setCountryData] = React.useState<any>(null);
+  
+  React.useEffect(() => {
+    // Fetch the country data from the JSON file
+    async function loadCountryData() {
+      try {
+        const response = await fetch('/data/world_countries.json');
+        const data = await response.json();
+        setCountryData(data);
+        console.log('Loaded country data with zoom levels');
+      } catch (err) {
+        console.error('Error loading country data:', err);
+      }
+    }
+    
+    loadCountryData();
+  }, []);
+  
   // Find the highlighted country's position in the TopoJSON data
   const findCountryPosition = React.useCallback(async () => {
     if (highlightedCountry) {
       try {
+        // Load the topology data
         const response = await fetch(geoUrl);
         const topojsonData = await response.json();
         
-        // Convert countryId to number for comparison
-        const countryId = Number(highlightedCountry);
+        // Use the country ID as is (string)
+        const countryId = highlightedCountry;
         console.log('Looking for country:', countryId);
         
         if (topojsonData && topojsonData.objects && topojsonData.objects.countries) {
           // Find the country in the TopoJSON geometries
           const countryGeom = topojsonData.objects.countries.geometries.find(
-            (g: any) => Number(g.id) === countryId
+            (g: any) => String(g.id) === countryId
           );
           
           if (countryGeom) {
@@ -145,8 +165,8 @@ const WorldMap: React.FC<WorldMapProps> = ({
             }
             
             // Calculate appropriate zoom level based on country size
-            const zoomLevel = calculateZoomLevel(bbox);
-            console.log('Calculated zoom level:', zoomLevel);
+            const calculatedZoomLevel = calculateZoomLevel(bbox);
+            console.log('Calculated zoom level:', calculatedZoomLevel);
             
             // Update country position state
             setCountryPosition({
@@ -162,60 +182,35 @@ const WorldMap: React.FC<WorldMapProps> = ({
             
             // Auto-zoom to country if countryPosition is set
             setTimeout(() => {
-              // Force specific zoom levels for countries
-              let testZoom;
-              if (countryId === 156) { // China
-                testZoom = 2.0;
-                console.log('Auto-zoom: Forcing zoom level for China to:', testZoom);
-              } else if (countryId === 643) { // Russia
-                testZoom = 1.7; 
-                console.log('Auto-zoom: Forcing zoom level for Russia to:', testZoom);
-              } else if (countryId === 702 || countryId === 706) { // Singapore (both codes)
-                testZoom = 7.0;
-                console.log('Auto-zoom: Forcing zoom level for Singapore to:', testZoom);
-              } else if (countryId === 840) { // USA
-                testZoom = 2.3;
-                console.log('Auto-zoom: Forcing zoom level for USA to:', testZoom);
-              } else if (countryId === 76) { // Brazil
-                testZoom = 2.5;
-                console.log('Auto-zoom: Forcing zoom level for Brazil to:', testZoom);
-              } else if (countryId === 356) { // India
-                testZoom = 2.8;
-                console.log('Auto-zoom: Forcing zoom level for India to:', testZoom);
-              } else if (countryId === 392) { // Japan
-                testZoom = 3.5;
-                console.log('Auto-zoom: Forcing zoom level for Japan to:', testZoom);
-              } else if (countryId === 276) { // Germany
-                testZoom = 4.0;
-                console.log('Auto-zoom: Forcing zoom level for Germany to:', testZoom);
-              } else {
-                // Default zoom levels based on area if we have a valid bbox
-                if (bbox && bbox.length === 4) {
-                  const [west, south, east, north] = bbox;
-                  const width = Math.abs(east - west);
-                  const height = Math.abs(north - south);
-                  const area = width * height;
-                  
-                  if (area > 100) testZoom = 1.7;      // Very large
-                  else if (area > 30) testZoom = 2.5;  // Large
-                  else if (area > 10) testZoom = 3.2;  // Medium
-                  else if (area > 1) testZoom = 4.5;   // Small
-                  else testZoom = 6.0;                 // Very small
-                  
-                  console.log(`Auto-zoom: Area-based zoom level ${testZoom} for area ${area.toFixed(2)}`);
-                } else {
-                  // Fallback for countries without bbox
-                  testZoom = 3.0;
-                  console.log('Auto-zoom: Using fallback zoom level:', testZoom);
+              // Get zoom level from JSON data if available
+              let zoomLevel;
+              
+              if (countryData && countryData.countries) {
+                // Find the country in the JSON data
+                const countryInfo = countryData.countries.find(
+                  (c: any) => c.countryCode === countryId
+                );
+                console.log(`Country info ${countryId} from JSON:`, countryInfo);
+                
+                if (countryInfo && countryInfo.zoomLevel) {
+                  zoomLevel = countryInfo.zoomLevel;
+                  console.log(`Using JSON zoom level for ${countryInfo.countryName}: ${zoomLevel}`);
                 }
+              }
+              
+              // If no zoom level found in JSON, fallback to calculated values
+              if (!zoomLevel) {
+                // Fallback for countries without bbox
+                zoomLevel = 3.0;
+                console.error(`Using fallback zoom level: ${zoomLevel} for ${countryId}`);
               }
               
               setPosition({ 
                 coordinates: [centerCoords[0], centerCoords[1]] as [number, number], 
-                zoom: testZoom || zoomLevel // Use test zoom if available, otherwise calculated zoom
+                zoom: zoomLevel
               });
               setIsZoomed(true);
-              console.log(`Auto-zoom complete: zoom level ${testZoom || zoomLevel} for country ${countryId}`);
+              console.log(`Auto-zoom complete: zoom level ${zoomLevel} for country ${countryId}`);
             }, 500);
             
             return;
@@ -253,43 +248,32 @@ const WorldMap: React.FC<WorldMapProps> = ({
     if (countryPosition) {
       console.log('Zoom in button clicked with country position:', countryPosition);
       
-      // Calculate zoom level based on country size
-      const zoomLevel = calculateZoomLevel(countryPosition.bbox);
-      console.log('Zoom button - calculated zoom level:', zoomLevel);
+      const countryId = highlightedCountry;
       
-      // Force specific zoom levels matching auto-zoom settings
-      let testZoom;
-      const countryId = Number(highlightedCountry);
+      // Get zoom level from JSON data if available
+      let zoomLevel;
       
-      if (countryId === 156) { // China
-        testZoom = 2.0;
-        console.log('Forcing zoom level for China to:', testZoom);
-      } else if (countryId === 643) { // Russia
-        testZoom = 1.7; 
-        console.log('Forcing zoom level for Russia to:', testZoom);
-      } else if (countryId === 702 || countryId === 706) { // Singapore (both codes)
-        testZoom = 7.0;
-        console.log('Forcing zoom level for Singapore to:', testZoom);
-      } else if (countryId === 840) { // USA
-        testZoom = 2.3;
-        console.log('Forcing zoom level for USA to:', testZoom);
-      } else if (countryId === 76) { // Brazil
-        testZoom = 2.5;
-        console.log('Forcing zoom level for Brazil to:', testZoom);
-      } else if (countryId === 356) { // India
-        testZoom = 2.8;
-        console.log('Forcing zoom level for India to:', testZoom);
-      } else if (countryId === 392) { // Japan
-        testZoom = 3.5;
-        console.log('Forcing zoom level for Japan to:', testZoom);
-      } else if (countryId === 276) { // Germany
-        testZoom = 4.0;
-        console.log('Forcing zoom level for Germany to:', testZoom);
+      if (countryData && countryData.countries) {
+        // Find the country in the JSON data
+        const countryInfo = countryData.countries.find(
+          (c: any) => c.countryCode === countryId
+        );
+        
+        if (countryInfo && countryInfo.zoomLevel) {
+          zoomLevel = countryInfo.zoomLevel;
+          console.log(`Using JSON zoom level for ${countryInfo.countryName}: ${zoomLevel}`);
+        }
+      }
+      
+      // If no zoom level found in JSON, fallback to calculated value
+      if (!zoomLevel) {
+        zoomLevel = calculateZoomLevel(countryPosition.bbox);
+        console.log('Using calculated zoom level:', zoomLevel);
       }
       
       setPosition({ 
         coordinates: countryPosition.coordinates, 
-        zoom: testZoom || zoomLevel // Use test zoom if available, otherwise calculated zoom
+        zoom: zoomLevel
       });
       setIsZoomed(true);
     }
@@ -348,7 +332,7 @@ const WorldMap: React.FC<WorldMapProps> = ({
         <ZoomableGroup 
           center={position.coordinates} 
           zoom={position.zoom}
-          maxZoom={8} // Increased max zoom to support very small countries
+          maxZoom={20} // Increased max zoom to support very small countries
           translateExtent={[
             [-width, -height/2], // Extended negative width to ensure full map visibility
             [width, height/2]  // Extended positive width to ensure full map visibility

@@ -8,7 +8,8 @@
         "漢民族を中心とする、50を超える民族からなる国",
         "かつては人口を抑制する一人っ子政策を実施していた"
       ],
-      "isoCode": "CHN"
+      "isoCode": "CHN",
+      "zoomLevel": 2.0
     },
     {
       "countryCode": "408",
@@ -17,7 +18,8 @@
       "descriptions": [
         "北朝鮮とも呼ばれる"
       ],
-      "isoCode": "PRK"
+      "isoCode": "PRK",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "410",
@@ -27,7 +29,8 @@
         "ハングルという文字を使っている",
         "家では靴を脱ぐ点や、食事の際に箸を使う点で日本と似ている"
       ],
-      "isoCode": "KOR"
+      "isoCode": "KOR",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "356",
@@ -37,7 +40,8 @@
         "国民の多くがヒンドゥー教徒",
         "近年、IT文分野で大きな成長を遂げている"
       ],
-      "isoCode": "IND"
+      "isoCode": "IND",
+      "zoomLevel": 2.8
     },
     {
       "countryCode": "764",
@@ -47,7 +51,8 @@
         "仏教徒が多く、男子は一生に一度は僧の修行をする",
         "13世紀以来、東南アジアでは唯一植民地にならず独立を保ってきた"
       ],
-      "isoCode": "THA"
+      "isoCode": "THA",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "704",
@@ -56,7 +61,8 @@
       "descriptions": [
         "1955年に始まった内戦をきっかけにアメリカ軍による攻撃を受けた"
       ],
-      "isoCode": "VNM"
+      "isoCode": "VNM",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "116",
@@ -65,7 +71,8 @@
       "descriptions": [
         "1992年に制定されたPKO協力法に基づき、日本の自衛隊が初めてPKOの一環として海外派遣された"
       ],
-      "isoCode": "KHM"
+      "isoCode": "KHM",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "702",
@@ -74,7 +81,8 @@
       "descriptions":[
         "面積は日本の琵琶湖とほぼ同じで、人口密度が高い"
       ],
-      "isoCode": "SGP"
+      "isoCode": "SGP",
+      "zoomLevel": 10.0
     },
     {
       "countryCode": "360",
@@ -84,7 +92,8 @@
         "世界で最もイスラム教徒が多い",
         "天然ガスや石炭など、資源が豊富"
       ],
-      "isoCode": "IDN"
+      "isoCode": "IDN",
+      "zoomLevel": 3.0
     },
     {
       "countryCode": "458",
@@ -93,7 +102,8 @@
       "descriptions": [
         "工業化によって、輸出物の中心は農作物から機械類へと変わった"
       ],
-      "isoCode": "MYS"
+      "isoCode": "MYS",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "608",
@@ -103,7 +113,8 @@
         "キリスト教とが多い国",
         "バナナの生産がさかんで、日本のバナナの輸入相手国第1位"
       ],
-      "isoCode": "PHL"
+      "isoCode": "PHL",
+      "zoomLevel": 4.0
     },
     {
       "countryCode": "004",
@@ -112,7 +123,8 @@
       "descriptions": [
         "2001年、テロを起こした組織を匿っているとしてアメリカがイギリスとともに空爆を行った"
       ],
-      "isoCode": "AFG"
+      "isoCode": "AFG",
+      "zoomLevel": 3.0
     },
     {
       "countryCode": "364",
@@ -122,7 +134,8 @@
         "イスラム教シーア派の国",
         "かつてペルシャと呼ばれていた"
       ],
-      "isoCode": "IRN"
+      "isoCode": "IRN",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "368",
@@ -131,7 +144,8 @@
       "descriptions": [
         "大量破壊兵器を持っている疑いから、2003年にアメリカとイギリスが空爆を行った"
       ],
-      "isoCode": "IRQ"
+      "isoCode": "IRQ",
+      "zoomLevel": 4.0
     },
     {
       "countryCode": "818",
@@ -140,7 +154,8 @@
       "descriptions": [
         "世界最長のナイル川が流れる"
       ],
-      "isoCode": "EGY"
+      "isoCode": "EGY",
+      "zoomLevel": 4.0
     },
     {
       "countryCode": "376",
@@ -150,7 +165,8 @@
         "ユダヤ人の国",
         "周辺のアラブ諸国との対立から中東戦争が起こった"
       ],
-      "isoCode": "ISR"
+      "isoCode": "ISR",
+      "zoomLevel": 8.0
     },
     {
       "countryCode": "682",
@@ -159,7 +175,8 @@
       "descriptions": [
         "イスラム教の聖地メッカとメディナがある、イスラム教を国教とする国"
       ],
-      "isoCode": "SAU"
+      "isoCode": "SAU",
+      "zoomLevel": 4.0
     },
     {
       "countryCode": "826",
@@ -171,7 +188,8 @@
         "通貨単位はポンド",
         "2020年1月31日にEUを離脱し、移行期間を経て2020年12月31日に完全に離脱した"
       ],
-      "isoCode": "GBR"
+      "isoCode": "GBR",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "643",
@@ -182,7 +200,8 @@
         "面積は日本の45倍",
         "2022年2月にウクライナへの軍事侵攻を開始"
       ],
-      "isoCode": "RUS"
+      "isoCode": "RUS",
+      "zoomLevel": 1.5
     },
     {
       "countryCode": "620",
@@ -191,7 +210,8 @@
       "descriptions": [
         "この国出身のフランシスコ=ザビエルが日本に初めてキリスト教を伝えた"
       ],
-      "isoCode": "PRT"
+      "isoCode": "PRT",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "528",
@@ -201,7 +221,8 @@
         "面積は日本の九州とほぼ同じ",
         "国土の1/4がポルダーと呼ばれる干拓地"
       ],
-      "isoCode": "NLD"
+      "isoCode": "NLD",
+      "zoomLevel": 8.0
     },
     {
       "countryCode": "276",
@@ -212,7 +233,8 @@
         "1990年に東西統一を果たした",
         "ヨーロッパ最大の工業国"
       ],
-      "isoCode": "DEU"
+      "isoCode": "DEU",
+      "zoomLevel": 4.0
     },
     {
       "countryCode": "756",
@@ -222,7 +244,8 @@
           "酪農がさかんで、精密機械工業も発達している",
           "永世中立国ということもあり、多くの国際機関が置かれている"
         ],
-        "isoCode": "CHE"
+        "isoCode": "CHE",
+        "zoomLevel": 6.0
     },
     {
       "countryCode": "752",
@@ -232,7 +255,8 @@
         "社会保障制度の整った国",
         "ノーベル賞の授与式が行われる国(平和賞の授賞式のみノルウェーのオスロで開催)"
       ],
-      "isoCode": "SWE"
+      "isoCode": "SWE",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "380",
@@ -243,7 +267,8 @@
         "乾燥に強いオリーブやブドウの栽培がさかん",
         "首都のローマにはバチカン市国がある"
       ],
-      "isoCode": "ITA"
+      "isoCode": "ITA",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "300",
@@ -253,7 +278,8 @@
         "近代オリンピック発祥の地",
         "かつて経済破綻した"
       ],
-      "isoCode": "GRC"
+      "isoCode": "GRC",
+      "zoomLevel": 8.0
     },
     {
       "countryCode": "124",
@@ -263,7 +289,8 @@
         "世界で2番目に面積が広い国",
         "資源に恵まれ、日本へは石炭や鉄鉱石、木材はどを輸出している"
       ],
-      "isoCode": "CAN"
+      "isoCode": "CAN",
+      "zoomLevel": 2.0
     },
     {
       "countryCode": "840",
@@ -273,7 +300,8 @@
         "世界の政治・経済の中心地",
         "人口・面積はともに世界3位"
       ],
-      "isoCode": "USA"
+      "isoCode": "USA",
+      "zoomLevel": 2.3
     },
     {
       "countryCode": "192",
@@ -284,7 +312,8 @@
         "1962年にソ連はこの国にミサイル基地を建設しようとした",
         "2015年に54年ぶりにアメリカと国交を回復した"
       ],
-      "isoCode": "CUB"
+      "isoCode": "CUB",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "484",
@@ -294,7 +323,8 @@
         "かつてアステカ文明やマヤ文明が栄えた地域",
         "銀や石油、天然ガスなどの地下資源が豊富"
       ],
-      "isoCode": "MEX"
+      "isoCode": "MEX",
+      "zoomLevel": 4.0
     },
     {
       "countryCode": "076",
@@ -304,7 +334,8 @@
         "アマゾン川流域には熱帯林が広がっている",
         "鉄鉱石などの地下資源に恵まれており、コーヒー豆の産地としても知られる"
       ],
-      "isoCode": "BRA"
+      "isoCode": "BRA",
+      "zoomLevel": 2.5
     },
     {
       "countryCode": "032",
@@ -313,7 +344,8 @@
       "descriptions": [
         "パンパと呼ばれる広大な草原地帯では農放牧がさかんで、大豆やとうもろこしなどの穀物生産量は世界有数"
       ],
-      "isoCode": "ARG"
+      "isoCode": "ARG",
+      "zoomLevel": 3.0
     },
     {
       "countryCode": "218",
@@ -323,7 +355,8 @@
         "国名はスペイン語で「赤道」という意味",
         "ガラパゴス諸島がある"
       ],
-      "isoCode": "ECU"
+      "isoCode": "ECU",
+      "zoomLevel": 6.0
     },
     {
       "countryCode": "604",
@@ -334,7 +367,8 @@
         "マチュピチュやナスカの地上絵などの世界遺産が有名",
         "漁獲量は世界有数"
       ],
-      "isoCode": "PER"
+      "isoCode": "PER",
+      "zoomLevel": 4.0
     },
     {
       "countryCode": "152",
@@ -344,17 +378,19 @@
         "銅の埋蔵量が多く、日本へも輸出している",
         "モアイ像で有名なイースター島がある"
       ],
-      "isoCode": "CHL"
+      "isoCode": "CHL",
+      "zoomLevel": 3.0
     },
     {
       "countryCode": "710",
       "countryName": "南アフリカ共和国",
       "capitalCity": "プレトリア",
       "descriptions": [
-        "BRICSの１つ",
+        "BRICSの1つ",
         "かつてアパルトヘイトという人種差別政策が行われていた"
       ],
-      "isoCode": "ZAF"
+      "isoCode": "ZAF",
+      "zoomLevel": 3.0
     },
     {
       "countryCode": "250",
@@ -363,13 +399,18 @@
       "descriptions": [
         "ワインやチーズなどの食文化が豊か"
       ],
-      "isoCode": "FRA"
+      "isoCode": "FRA",
+      "zoomLevel": 4.0
     },
     {
       "countryCode": "036",
       "countryName": "オーストラリア",
       "capitalCity": "キャンベラ",
-      "isoCode": "AUS"
+      "isoCode": "AUS",
+      "descriptions": [
+        "世界で最も乾燥した大陸"
+      ],
+      "zoomLevel": 2.0
     }
   ]
 }
