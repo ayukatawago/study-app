@@ -56,6 +56,21 @@ const config = [
         },
       },
       {
+        files: ['**/components/**/*.tsx'],
+        rules: {
+          'no-unused-vars': [
+            'warn',
+            {
+              argsIgnorePattern:
+                '^_|^props$|^e$|^err$|^error$|^settings$|^item$|^onCorrect$|^onIncorrect$|^onFlip$|^isFlipped$|^onResetProgress$|^incorrectIds$',
+              varsIgnorePattern: '^_|^props$|^e$|^err$|^error$',
+              destructuredArrayIgnorePattern: '^_',
+              ignoreRestSiblings: true,
+            },
+          ],
+        },
+      },
+      {
         files: ['**/utils/logger.ts'],
         rules: {
           'no-console': 'off',

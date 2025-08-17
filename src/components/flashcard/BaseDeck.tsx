@@ -1,6 +1,5 @@
 'use client';
 
-/* eslint-disable no-unused-vars */
 import { useEffect, useState, useMemo, ReactNode } from 'react';
 import { BaseFlashcardData, BaseFlashcardSettings, BaseFlashcardProgress } from '@/types/flashcard';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
@@ -20,7 +19,7 @@ interface BaseDeckProps<T extends BaseFlashcardData, S extends BaseFlashcardSett
   ) => ReactNode;
   renderSettingsPanel: (onResetProgress: () => void) => ReactNode;
   getItemId: (item: T) => string | number; // Function to extract the unique identifier from an item
-  filterItems?: (items: T[], incorrectIds: (string | number)[]) => T[]; // Custom filter function
+  filterItems?: (_items: T[], incorrectIds: (string | number)[]) => T[]; // Custom filter function
   showNextButton?: boolean; // Whether to show the "next card" button
 }
 

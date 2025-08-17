@@ -1,6 +1,5 @@
 'use client';
 
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { BaseFlashcardSettings } from '@/types/flashcard';
 
