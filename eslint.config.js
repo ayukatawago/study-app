@@ -55,6 +55,12 @@ const config = [
           'no-unused-vars': 'off',
         },
       },
+      {
+        files: ['**/utils/logger.ts'],
+        rules: {
+          'no-console': 'off',
+        },
+      },
     ],
   }),
 ];

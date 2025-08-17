@@ -1,4 +1,7 @@
 // Local Storage utility functions
+import { createLogger } from './logger';
+
+const logger = createLogger({ prefix: 'localStorage' });
 
 /**
  * Get an item from local storage and parse it as JSON
@@ -13,9 +16,9 @@ export function getFromStorage<T>(key: string, defaultValue: T): T {
   try {
     const item = window.localStorage.getItem(key);
     return item ? (JSON.parse(item) as T) : defaultValue;
-    // eslint-disable-next-line no-unused-vars
-  } catch (_error) {
-    // Silent fail and return default value
+  } catch (error) {
+    // Log the error and return default value
+    logger.debug(`Failed to get item from storage: ${key}`, error);
     return defaultValue;
   }
 }
@@ -32,9 +35,8 @@ export function setToStorage<T>(key: string, value: T): void {
 
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
-    // eslint-disable-next-line no-unused-vars
-  } catch (_error) {
-    // Silent fail
+  } catch (error) {
+    logger.debug(`Failed to set item to storage: ${key}`, error);
   }
 }
 
@@ -49,9 +51,8 @@ export function removeFromStorage(key: string): void {
 
   try {
     window.localStorage.removeItem(key);
-    // eslint-disable-next-line no-unused-vars
-  } catch (_error) {
-    // Silent fail
+  } catch (error) {
+    logger.debug(`Failed to remove item from storage: ${key}`, error);
   }
 }
 
@@ -65,8 +66,7 @@ export function clearStorage(): void {
 
   try {
     window.localStorage.clear();
-    // eslint-disable-next-line no-unused-vars
-  } catch (_error) {
-    // Silent fail
+  } catch (error) {
+    logger.debug('Failed to clear storage', error);
   }
 }

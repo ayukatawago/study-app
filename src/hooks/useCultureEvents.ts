@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { CultureEventData } from '@/types/flashcard';
+import { createLogger } from '@/utils/logger';
+
+const logger = createLogger({ prefix: 'useCultureEvents' });
 
 interface CultureData {
   culture: CultureEventData[];
@@ -36,7 +39,9 @@ export function useCultureEvents() {
         setCultureEvents(eventsWithId);
         setError(null);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'エラーが発生しました');
+        const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました';
+        logger.error(`Failed to fetch culture events: ${errorMessage}`, err);
+        setError(errorMessage);
         setCultureEvents([]);
       } finally {
         setIsLoading(false);

@@ -1,6 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createLogger } from '@/utils/logger';
+
+const logger = createLogger({ prefix: 'useConstitution' });
 
 export interface ConstitutionArticle {
   article: number;
@@ -48,7 +51,9 @@ export function useConstitution() {
         setConstitutionData(data.constitution || { title: '', sections: [] });
         setError(null);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'エラーが発生しました');
+        const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました';
+        logger.error(`Failed to fetch constitution data: ${errorMessage}`, err);
+        setError(errorMessage);
         setConstitutionData({ title: '', sections: [] });
       } finally {
         setIsLoading(false);

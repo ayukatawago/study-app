@@ -4,6 +4,9 @@ import React from 'react';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import centroid from '@turf/centroid';
 import { feature } from 'topojson-client';
+import { createLogger } from '@/utils/logger';
+
+const logger = createLogger({ prefix: 'WorldMap' });
 
 // World map JSON data - use jsdelivr CDN source
 const geoUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json';
@@ -40,9 +43,8 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
         const data = await response.json();
         setCountryData(data);
         setDataLoaded(true);
-        // eslint-disable-next-line no-unused-vars
-      } catch (_err) {
-        // Error handled silently
+      } catch (err) {
+        logger.debug('Failed to load country data', err);
       }
     }
 
@@ -118,9 +120,8 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
                   bbox = [minX, minY, maxX, maxY];
                 }
               }
-              // eslint-disable-next-line no-unused-vars
-            } catch (_e) {
-              // Error handled silently
+            } catch (e) {
+              logger.debug('Failed to calculate bbox from coordinates', e);
             }
           }
 
@@ -156,9 +157,8 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
       }
 
       setCountryPosition(null);
-      // eslint-disable-next-line no-unused-vars
-    } catch (_err) {
-      // Error handled silently
+    } catch (err) {
+      logger.debug('Failed to find country position', err);
       setCountryPosition(null);
     }
   }, [highlightedCountry, countryData, dataLoaded]);

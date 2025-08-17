@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { HistoryEventData } from '@/types/flashcard';
+import { createLogger } from '@/utils/logger';
+
+const logger = createLogger({ prefix: 'useHistoryEvents' });
 
 interface HistoryData {
   history: HistoryEventData[];
@@ -36,7 +39,9 @@ export function useHistoryEvents() {
         setHistoryEvents(eventsWithId);
         setError(null);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'エラーが発生しました');
+        const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました';
+        logger.error(`Failed to fetch history events: ${errorMessage}`, err);
+        setError(errorMessage);
         setHistoryEvents([]);
       } finally {
         setIsLoading(false);

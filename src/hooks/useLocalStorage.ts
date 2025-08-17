@@ -2,6 +2,10 @@
 
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { getFromStorage, setToStorage } from '@/utils/localStorage';
+import { createLogger } from '@/utils/logger';
+
+// Create logger for debugging localStorage issues
+const _logger = createLogger({ prefix: 'useLocalStorage' });
 
 type SetValue<T> = Dispatch<SetStateAction<T>>;
 

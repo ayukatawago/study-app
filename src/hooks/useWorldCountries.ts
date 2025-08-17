@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { WorldCountryData } from '@/types/flashcard';
+import { createLogger } from '@/utils/logger';
+
+const logger = createLogger({ prefix: 'useWorldCountries' });
 
 interface WorldCountriesData {
   countries: Omit<WorldCountryData, 'id'>[];
@@ -36,7 +39,9 @@ export function useWorldCountries() {
         setWorldCountries(countriesWithId);
         setError(null);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'エラーが発生しました');
+        const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました';
+        logger.error(`Failed to fetch world countries: ${errorMessage}`, err);
+        setError(errorMessage);
         setWorldCountries([]);
       } finally {
         setIsLoading(false);
