@@ -14,6 +14,9 @@ This is a flashcard web application built with Next.js and TailwindCSS to help u
 - TailwindCSS (styling)
 - Local Storage (data persistence)
 - react-simple-maps (for world map visualization)
+- Prettier (code formatting)
+- ESLint (code linting)
+- Husky & lint-staged (pre-commit hooks)
 
 ### Commands
 
@@ -32,6 +35,12 @@ npm start
 
 # Run linting
 npm run lint
+
+# Format code with Prettier
+npm run format
+
+# Check formatting without making changes
+npm run format:check
 ```
 
 ## Architecture
@@ -58,11 +67,45 @@ study-app/
 │   │   └── map/      # Map related components
 │   ├── hooks/        # Custom React hooks
 │   ├── utils/        # Utility functions
+│   │   └── logger.ts  # Debug logging utility
 │   └── styles/       # Global styles
 └── .next/           # Next.js build output
 ```
 
-### Core Features
+### Code Quality
+
+### ESLint Configuration
+
+The project uses ESLint for code quality with the following configuration:
+
+- ESLint with modern flat config format (eslint.config.js)
+- Integration with Prettier for formatting
+- No-unused-vars warnings are disabled to avoid false positives with TypeScript interfaces
+- Console logs are only allowed in the logger utility
+
+### Debug Logging
+
+The application includes a structured logging utility (`src/utils/logger.ts`) with the following features:
+
+- Different log levels (debug, info, warn, error)
+- Log prefixes for easy identification
+- Automatic disabling in production
+- Example usage:
+
+```typescript
+import { createLogger } from '@/utils/logger';
+
+// Create a logger with a component prefix
+const logger = createLogger({ prefix: 'ComponentName' });
+
+// Log at different levels
+logger.debug('Detailed debug info');
+logger.info('General information');
+logger.warn('Warning message');
+logger.error('Error occurred', errorObject);
+```
+
+## Core Features
 
 1. **History Flashcard System**
    - Display Japanese year numbers and associated historical events
