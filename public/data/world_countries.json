@@ -135,7 +135,7 @@
         "かつてペルシャと呼ばれていた"
       ],
       "isoCode": "IRN",
-      "zoomLevel": 6.0
+      "zoomLevel": 4.0
     },
     {
       "countryCode": "368",
@@ -201,7 +201,7 @@
         "2022年2月にウクライナへの軍事侵攻を開始"
       ],
       "isoCode": "RUS",
-      "zoomLevel": 1.5
+      "zoomLevel": 1.2
     },
     {
       "countryCode": "620",
@@ -256,7 +256,7 @@
         "ノーベル賞の授与式が行われる国(平和賞の授賞式のみノルウェーのオスロで開催)"
       ],
       "isoCode": "SWE",
-      "zoomLevel": 6.0
+      "zoomLevel": 4.0
     },
     {
       "countryCode": "380",
