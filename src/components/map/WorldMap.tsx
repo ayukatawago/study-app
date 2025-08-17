@@ -116,7 +116,10 @@ const WorldMap: React.FC<WorldMapProps> = ({
   }, [highlightedCountry, findCountryPosition]);
   
   // Function to zoom in to the target country
-  const handleZoomIn = () => {
+  const handleZoomIn = (e: React.MouseEvent) => {
+    // Stop event propagation to prevent card flip
+    e.stopPropagation();
+    
     if (countryPosition) {
       setPosition({ 
         coordinates: countryPosition.coordinates, 
@@ -127,7 +130,10 @@ const WorldMap: React.FC<WorldMapProps> = ({
   };
   
   // Function to reset zoom
-  const handleZoomOut = () => {
+  const handleZoomOut = (e: React.MouseEvent) => {
+    // Stop event propagation to prevent card flip
+    e.stopPropagation();
+    
     setPosition({ coordinates: [0, 0] as [number, number], zoom: 1 });
     setIsZoomed(false);
   };
@@ -135,29 +141,29 @@ const WorldMap: React.FC<WorldMapProps> = ({
   return (
     <div className="world-map-container relative" style={{ width: '100%', height: '100%', padding: 0, margin: 0 }}>
       <div 
-        className="absolute top-2 right-2 z-20 flex space-x-2 p-1" 
-        style={{ backgroundColor: 'rgba(255,255,255,0.8)', borderRadius: '4px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
+        className="absolute top-2 right-2 z-20 flex space-x-2 p-1.5 rounded-md" 
+        style={{ backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(2px)', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}
       >
         {countryPosition && !isZoomed && (
           <button 
-            className="bg-white p-1 rounded shadow-md hover:bg-gray-100 transition-colors border border-gray-300"
+            className="bg-blue-50 p-2 rounded-full shadow-md hover:bg-blue-100 active:bg-blue-200 transition-all duration-150 border border-blue-200 text-blue-600"
             onClick={handleZoomIn}
             title="Zoom to country"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M9 3a1 1 0 012 0v5.5h5.5a1 1 0 110 2H11V16a1 1 0 11-2 0v-5.5H3.5a1 1 0 110-2H9V3z" clipRule="evenodd" />
             </svg>
           </button>
         )}
         
         {isZoomed && (
           <button 
-            className="bg-white p-1 rounded shadow-md hover:bg-gray-100 transition-colors border border-gray-300"
+            className="bg-blue-50 p-2 rounded-full shadow-md hover:bg-blue-100 active:bg-blue-200 transition-all duration-150 border border-blue-200 text-blue-600"
             onClick={handleZoomOut}
             title="Zoom out"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7" />
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
             </svg>
           </button>
         )}
