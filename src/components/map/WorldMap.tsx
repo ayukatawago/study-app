@@ -11,7 +11,7 @@ import centroid from '@turf/centroid';
 import { feature } from 'topojson-client';
 
 // World map JSON data - use jsdelivr CDN source
-const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json";
 
 interface WorldMapProps {
   highlightedCountry?: string; // ISO Alpha-2 or Alpha-3 country code
