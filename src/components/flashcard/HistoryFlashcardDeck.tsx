@@ -36,12 +36,12 @@ export default function HistoryFlashcardDeck() {
   };
 
   // Render settings panel
-  const renderSettingsPanel = () => {
+  const renderSettingsPanel = (onResetProgress: () => void) => {
     return (
       <SettingsPanel
         settings={settings}
         onSettingsChange={setSettings}
-        onResetProgress={() => {}} // This will be handled by BaseDeck
+        onResetProgress={onResetProgress}
       />
     );
   };

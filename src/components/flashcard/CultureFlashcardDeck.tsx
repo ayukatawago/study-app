@@ -38,12 +38,12 @@ export default function CultureFlashcardDeck() {
   };
 
   // Render settings panel
-  const renderSettingsPanel = () => {
+  const renderSettingsPanel = (onResetProgress: () => void) => {
     return (
       <CultureSettingsPanel
         settings={settings}
         onSettingsChange={setSettings}
-        onResetProgress={() => {}} // This will be handled by BaseDeck
+        onResetProgress={onResetProgress}
       />
     );
   };
