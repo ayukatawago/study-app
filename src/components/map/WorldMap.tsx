@@ -9,6 +9,7 @@ import {
 } from 'react-simple-maps';
 import centroid from '@turf/centroid';
 import { feature } from 'topojson-client';
+import { useCallback } from 'react';
 
 // World map JSON data - use jsdelivr CDN source
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json";
@@ -29,33 +30,45 @@ const WorldMap: React.FC<WorldMapProps> = ({
   const [isZoomed, setIsZoomed] = React.useState(false);
   const [countryPosition, setCountryPosition] = React.useState<{ coordinates: [number, number]; bbox?: number[] } | null>(null);
   
-  // Default zoom level if none specified in JSON
-  const getDefaultZoomLevel = React.useCallback(() => {
-    return 3.0; // Default zoom level
-  }, []);
+  // We won't need a default zoom level function anymore since all countries have zoom level in JSON
 
   // Load country data from JSON
   const [countryData, setCountryData] = React.useState<any>(null);
+  const [dataLoaded, setDataLoaded] = React.useState(false);
   
   React.useEffect(() => {
     // Fetch the country data from the JSON file
     async function loadCountryData() {
+      if (dataLoaded) return; // Don't load multiple times
+      
       try {
+        console.log('Loading country data...');
         const response = await fetch('/data/world_countries.json');
         const data = await response.json();
         setCountryData(data);
-        console.log('Loaded country data with zoom levels');
+        setDataLoaded(true);
+        console.log('🟢 Loaded country data with zoom levels');
       } catch (err) {
         console.error('Error loading country data:', err);
       }
     }
     
     loadCountryData();
-  }, []);
+  }, [dataLoaded]);
   
+  // No flag needed
+
   // Find the highlighted country's position in the TopoJSON data
   const findCountryPosition = React.useCallback(async () => {
-    if (highlightedCountry) {
+    if (highlightedCountry) {      
+      console.log('🟠 findCountryPosition called, countryData:', countryData ? 'present' : 'null', 'dataLoaded:', dataLoaded);
+      
+      // Safety check - don't proceed if country data isn't loaded
+      if (!countryData || !dataLoaded) {
+        console.log('🔶 findCountryPosition: Country data not fully loaded yet, skipping');
+        return;
+      }
+      
       try {
         // Load the topology data
         const response = await fetch(geoUrl);
@@ -131,52 +144,46 @@ const WorldMap: React.FC<WorldMapProps> = ({
               }
             }
             
-            console.log('Using zoom level from JSON or default');
-            
-            // Update country position state
-            setCountryPosition({
+            // Create position object to use both for state and immediate zooming
+            const newPosition = {
               coordinates: [centerCoords[0], centerCoords[1]] as [number, number],
               bbox: bbox
-            });
+            };
+            
+            // Update country position state
+            setCountryPosition(newPosition);
             
             // For debugging
-            console.log('Country position set:', {
-              coordinates: [centerCoords[0], centerCoords[1]],
-              bbox: bbox
-            });
+            console.log('Country position set:', newPosition);
             
-            // Auto-zoom to country if countryPosition is set
-            setTimeout(() => {
-              // Get zoom level from JSON data if available
-              let zoomLevel;
+            // Get zoom level immediately instead of in setTimeout
+            let zoomLevel;
+            
+            if (countryData.countries) {
+              // Find the country in the JSON data
+              const countryInfo = countryData.countries.find(
+                (c: any) => c.countryCode === countryId
+              );
               
-              if (countryData && countryData.countries) {
-                // Find the country in the JSON data
-                const countryInfo = countryData.countries.find(
-                  (c: any) => c.countryCode === countryId
-                );
-                console.log(`Country info ${countryId} from JSON:`, countryInfo);
+              if (countryInfo && countryInfo.zoomLevel) {
+                zoomLevel = countryInfo.zoomLevel;
+                console.log(`Using JSON zoom level for ${countryInfo.countryName}: ${zoomLevel}`);
                 
-                if (countryInfo && countryInfo.zoomLevel) {
-                  zoomLevel = countryInfo.zoomLevel;
-                  console.log(`Using JSON zoom level for ${countryInfo.countryName}: ${zoomLevel}`);
-                }
+                // Small delay to let the UI update first
+                setTimeout(() => {
+                  setPosition({ 
+                    coordinates: newPosition.coordinates, 
+                    zoom: zoomLevel
+                  });
+                  setIsZoomed(true);
+                  console.log(`Auto-zoom complete: zoom level ${zoomLevel} for country ${countryId}`);
+                }, 100);
+              } else {
+                console.error(`No zoom level found for ${countryId} in JSON, auto-zoom will not work properly`);
               }
-              
-              // If no zoom level found in JSON, fallback to calculated values
-              if (!zoomLevel) {
-                // Fallback for countries without bbox
-                zoomLevel = 3.0;
-                console.error(`Using fallback zoom level: ${zoomLevel} for ${countryId}`);
-              }
-              
-              setPosition({ 
-                coordinates: [centerCoords[0], centerCoords[1]] as [number, number], 
-                zoom: zoomLevel
-              });
-              setIsZoomed(true);
-              console.log(`Auto-zoom complete: zoom level ${zoomLevel} for country ${countryId}`);
-            }, 500);
+            } else {
+              console.error('Country data format is invalid');
+            }
             
             return;
           }
@@ -191,19 +198,24 @@ const WorldMap: React.FC<WorldMapProps> = ({
     } else {
       setCountryPosition(null);
     }
-  }, [highlightedCountry, getDefaultZoomLevel]);
+  }, [highlightedCountry, countryData, dataLoaded]);
   
-  // When highlighted country changes, find its position
+  // When highlighted country changes or data loads, find its position
   React.useEffect(() => {
     if (highlightedCountry) {
-      findCountryPosition();
+      if (dataLoaded) {
+        console.log('🟡 Country highlighted and data loaded, finding position');
+        findCountryPosition();
+      } else {
+        console.log('Country highlighted but waiting for data to load');
+      }
     } else {
       // Reset when no country is highlighted
       setPosition({ coordinates: [0, 0] as [number, number], zoom: 1 });
       setIsZoomed(false);
       setCountryPosition(null);
     }
-  }, [highlightedCountry, findCountryPosition]);
+  }, [highlightedCountry, findCountryPosition, dataLoaded]);
   
   // Function to zoom in to the target country
   const handleZoomIn = (e: React.MouseEvent) => {
@@ -215,32 +227,34 @@ const WorldMap: React.FC<WorldMapProps> = ({
       
       const countryId = highlightedCountry;
       
-      // Get zoom level from JSON data if available
-      let zoomLevel;
+      // Wait until country data is loaded
+      if (!countryData) {
+        console.log('Country data not loaded yet, cannot zoom in');
+        return;
+      }
       
-      if (countryData && countryData.countries) {
+      // Get zoom level from JSON data
+      if (countryData.countries) {
         // Find the country in the JSON data
         const countryInfo = countryData.countries.find(
           (c: any) => c.countryCode === countryId
         );
         
         if (countryInfo && countryInfo.zoomLevel) {
-          zoomLevel = countryInfo.zoomLevel;
+          const zoomLevel = countryInfo.zoomLevel;
           console.log(`Using JSON zoom level for ${countryInfo.countryName}: ${zoomLevel}`);
+          
+          setPosition({ 
+            coordinates: countryPosition.coordinates, 
+            zoom: zoomLevel
+          });
+          setIsZoomed(true);
+        } else {
+          console.error(`No zoom level found for ${countryId}, zoom will not work properly`);
         }
+      } else {
+        console.error('Country data format is invalid');
       }
-      
-      // If no zoom level found in JSON, use default
-      if (!zoomLevel) {
-        zoomLevel = getDefaultZoomLevel();
-        console.log('Using default zoom level:', zoomLevel);
-      }
-      
-      setPosition({ 
-        coordinates: countryPosition.coordinates, 
-        zoom: zoomLevel
-      });
-      setIsZoomed(true);
     }
   };
   
