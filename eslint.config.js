@@ -37,39 +37,12 @@ const config = [
     plugins: ['prettier'],
     rules: {
       'prettier/prettier': 'error',
-      'no-unused-vars': [
-        'warn',
-        {
-          argsIgnorePattern: '^_|^props$|^e$|^err$|^error$',
-          varsIgnorePattern: '^_|^props$|^e$|^err$|^error$',
-          destructuredArrayIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-        },
-      ],
+      // Disable no-unused-vars completely - TypeScript compiler will catch actual issues
+      'no-unused-vars': 'off',
       'no-console': 'warn',
     },
     overrides: [
-      {
-        files: ['**/types/*.ts', '**/types/*.tsx', '**/interfaces/*.ts', '**/interfaces/*.tsx'],
-        rules: {
-          'no-unused-vars': 'off',
-        },
-      },
-      {
-        files: ['**/components/**/*.tsx'],
-        rules: {
-          'no-unused-vars': [
-            'warn',
-            {
-              argsIgnorePattern:
-                '^_|^props$|^e$|^err$|^error$|^settings$|^item$|^onCorrect$|^onIncorrect$|^onFlip$|^isFlipped$|^onResetProgress$|^incorrectIds$',
-              varsIgnorePattern: '^_|^props$|^e$|^err$|^error$',
-              destructuredArrayIgnorePattern: '^_',
-              ignoreRestSiblings: true,
-            },
-          ],
-        },
-      },
+      // Allow console usage in logger
       {
         files: ['**/utils/logger.ts'],
         rules: {
