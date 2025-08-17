@@ -43,9 +43,11 @@ export default function WorldCountryFlashcard({
     
     // Always show map on front side
     return (
-      <WorldMap
-        highlightedCountry={String(event.countryCode)}
-      />
+      <div className="w-full h-full">
+        <WorldMap
+          highlightedCountry={String(event.countryCode)}
+        />
+      </div>
     );
   };
 

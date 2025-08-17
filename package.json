@@ -14,6 +14,7 @@
   "description": "Flashcard application for studying Japanese history",
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.11",
+    "@turf/centroid": "^7.2.0",
     "@types/node": "^24.2.1",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
@@ -22,6 +23,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-simple-maps": "^3.0.0",
+    "topojson-client": "^3.1.0",
     "typescript": "^5.9.2"
   },
   "devDependencies": {
