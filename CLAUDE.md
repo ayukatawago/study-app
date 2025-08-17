@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a flashcard web application built with Next.js and TailwindCSS to help users memorize Japanese history, culture, and constitution. The application (社会学習) uses JSON data from various files in `public/data/` to create interactive flashcards and stores user progress in local storage.
+This is a flashcard web application built with Next.js and TailwindCSS to help users memorize Japanese history, culture, constitution, and world countries. The application (社会学習) uses JSON data from various files in `public/data/` to create interactive flashcards and stores user progress in local storage.
 
 ## Development Setup
 
@@ -12,6 +12,7 @@ This is a flashcard web application built with Next.js and TailwindCSS to help u
 - Next.js (React framework)
 - TailwindCSS (styling)
 - Local Storage (data persistence)
+- react-simple-maps (for world map visualization)
 
 ### Commands
 ```bash
@@ -38,17 +39,20 @@ npm run lint
 study-app/
 ├── public/            # Static files
 │   └── data/         # JSON data for flashcards
-│       ├── history_events.json # History events data
-│       ├── history_culture.json # Cultural figures data
-│       └── constitution.json # Japanese constitution data
+│       ├── history_events.json    # History events data
+│       ├── history_culture.json   # Cultural figures data
+│       ├── constitution.json      # Japanese constitution data
+│       └── world_countries.json   # World countries data with zoom levels
 ├── src/
 │   ├── app/          # Next.js app router pages
 │   │   ├── page.tsx  # Home page
 │   │   ├── history/  # History flashcards page
 │   │   ├── culture/  # Culture flashcards page
-│   │   └── constitution/ # Constitution flashcards page
+│   │   ├── constitution/ # Constitution flashcards page
+│   │   └── world-country/ # World countries flashcards page
 │   ├── components/   # React components
-│   │   └── flashcard/ # Flashcard related components
+│   │   ├── flashcard/ # Flashcard related components
+│   │   └── map/      # Map related components
 │   ├── hooks/        # Custom React hooks
 │   ├── utils/        # Utility functions
 │   └── styles/       # Global styles
@@ -75,16 +79,25 @@ study-app/
    - Display paragraph numbers for multi-paragraph articles
    - Track correct/incorrect responses in local storage
 
-4. **Data Management**
+4. **World Countries Flashcard System**
+   - Display interactive maps highlighting various countries
+   - Show country information on card flip
+   - Zoom in/out functionality for better map visibility
+   - Country-specific zoom levels stored in JSON data
+   - Track correct/incorrect responses in local storage
+
+5. **Data Management**
    - Uses local storage to persist user progress
    - Pulls history flashcard data from history_events.json
    - Pulls culture flashcard data from history_culture.json
    - Pulls constitution quiz data from constitution.json
+   - Pulls world country data from world_countries.json
 
-5. **User Interface**
+6. **User Interface**
    - Responsive design using TailwindCSS
    - Simple and intuitive flashcard interaction
    - Settings panel for customizing study experience
+   - Interactive world map for geography learning
 
 ## Data Structure
 
@@ -170,6 +183,40 @@ The application uses the following JSON structure for constitution quiz data (fr
 }
 ```
 
+### World Countries
+
+The application uses the following JSON structure for world countries data (from `public/data/world_countries.json`):
+
+```json
+{
+  "countries": [
+    {
+      "countryCode": "156",
+      "countryName": "中華人民共和国",
+      "capitalCity": "北京",
+      "descriptions": [
+        "漢民族を中心とする、50を超える民族からなる国",
+        "かつては人口を抑制する一人っ子政策を実施していた"
+      ],
+      "isoCode": "CHN",
+      "zoomLevel": 2.0
+    },
+    {
+      "countryCode": "643",
+      "countryName": "ロシア連邦",
+      "capitalCity": "モスクワ",
+      "descriptions": [
+        "日本と国交はあるが、北方領土問題があるため、いまだ平和条約を結んでいない",
+        "面積は日本の45倍"
+      ],
+      "isoCode": "RUS",
+      "zoomLevel": 1.2
+    }
+    // More country entries
+  ]
+}
+```
+
 ## Local Storage
 
 ### History Flashcards
@@ -237,6 +284,24 @@ User progress and settings for constitution flashcards are stored in local stora
 }
 ```
 
+### World Country Flashcards
+
+User progress and settings for world country flashcards are stored in local storage with the following structure:
+
+```json
+{
+  "world_country_progress": {
+    "seen": ["156", "643", "392"],
+    "correct": ["156", "643"],
+    "incorrect": ["392"]
+  },
+  "world_country_settings": {
+    "randomOrder": true,
+    "showIncorrectOnly": false
+  }
+}
+```
+
 ## Development Workflow
 
 1. Build out the Next.js application structure
@@ -245,6 +310,7 @@ User progress and settings for constitution flashcards are stored in local stora
 4. Implement local storage for tracking progress
 5. Add TailwindCSS styling for responsive design
 6. Implement filters and sorting options for flashcards
+7. Add interactive map functionality for world countries
 
 ## Features
 
@@ -263,3 +329,5 @@ User progress and settings for constitution flashcards are stored in local stora
 11. **Interactive Quiz**: For constitution content, clickable placeholders reveal answers when tapped
 12. **Contextual Information**: Shows article summaries when all quiz answers are revealed
 13. **Paragraph Numbering**: Automatically numbers paragraphs in multi-paragraph articles
+14. **Interactive World Map**: Shows countries on an interactive map with zoom controls
+15. **Dynamic Zoom Levels**: Country-specific zoom levels for optimal map viewing
