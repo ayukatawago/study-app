@@ -1,0 +1,94 @@
+{
+  "countries": [
+    {
+      "countryCode": "840",
+      "countryName": "アメリカ合衆国",
+      "capitalCity": "ワシントンD.C.",
+      "isoCode": "USA"
+    },
+    {
+      "countryCode": "826",
+      "countryName": "イギリス",
+      "capitalCity": "ロンドン",
+      "isoCode": "GBR"
+    },
+    {
+      "countryCode": "250",
+      "countryName": "フランス",
+      "capitalCity": "パリ",
+      "isoCode": "FRA"
+    },
+    {
+      "countryCode": "276",
+      "countryName": "ドイツ",
+      "capitalCity": "ベルリン",
+      "isoCode": "DEU"
+    },
+    {
+      "countryCode": "380",
+      "countryName": "イタリア",
+      "capitalCity": "ローマ",
+      "isoCode": "ITA"
+    },
+    {
+      "countryCode": "724",
+      "countryName": "スペイン",
+      "capitalCity": "マドリード",
+      "isoCode": "ESP"
+    },
+    {
+      "countryCode": "156",
+      "countryName": "中国",
+      "capitalCity": "北京",
+      "isoCode": "CHN"
+    },
+    {
+      "countryCode": "392",
+      "countryName": "日本",
+      "capitalCity": "東京",
+      "isoCode": "JPN"
+    },
+    {
+      "countryCode": "356",
+      "countryName": "インド",
+      "capitalCity": "ニューデリー",
+      "isoCode": "IND"
+    },
+    {
+      "countryCode": "076",
+      "countryName": "ブラジル",
+      "capitalCity": "ブラジリア",
+      "isoCode": "BRA"
+    },
+    {
+      "countryCode": "036",
+      "countryName": "オーストラリア",
+      "capitalCity": "キャンベラ",
+      "isoCode": "AUS"
+    },
+    {
+      "countryCode": "124",
+      "countryName": "カナダ",
+      "capitalCity": "オタワ",
+      "isoCode": "CAN"
+    },
+    {
+      "countryCode": "643",
+      "countryName": "ロシア",
+      "capitalCity": "モスクワ",
+      "isoCode": "RUS"
+    },
+    {
+      "countryCode": "710",
+      "countryName": "南アフリカ共和国",
+      "capitalCity": "プレトリア",
+      "isoCode": "ZAF"
+    },
+    {
+      "countryCode": "818",
+      "countryName": "エジプト",
+      "capitalCity": "カイロ",
+      "isoCode": "EGY"
+    }
+  ]
+}

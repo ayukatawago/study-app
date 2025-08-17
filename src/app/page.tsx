@@ -27,6 +27,12 @@ export default function Home() {
           >
             日本国憲法を学習する
           </Link>
+          <Link
+            href="/world-country"
+            className="bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+          >
+            世界地図を学習する
+          </Link>
         </div>
       </div>
     </main>

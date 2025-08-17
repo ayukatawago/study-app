@@ -23,6 +23,14 @@ export interface CultureEventData extends BaseFlashcardData {
   descriptions: string[];
 }
 
+// World country data
+export interface WorldCountryData extends BaseFlashcardData {
+  countryCode: string; // Used as the unique id for countries (ISO Alpha-2 code)
+  countryName: string; // Name of the country
+  capitalCity: string; // Capital city of the country
+  isoCode: string; // ISO Alpha-3 country code for map highlighting
+}
+
 // Base settings interface
 export interface BaseFlashcardSettings {
   randomOrder: boolean;
@@ -39,6 +47,11 @@ export interface HistoryFlashcardSettings extends BaseFlashcardSettings {
 export interface CultureFlashcardSettings extends BaseFlashcardSettings {
   cardDirection: 'person-to-desc' | 'desc-to-person';
   showMemorize: boolean;
+}
+
+// World country settings
+export interface WorldCountrySettings extends BaseFlashcardSettings {
+  showCapital: boolean;
 }
 
 // Base progress interface
