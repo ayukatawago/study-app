@@ -23,11 +23,11 @@ const WorldMap: React.FC<WorldMapProps> = ({
   height = 300
 }) => {
   // Add animation when a country is highlighted
-  const [position, setPosition] = React.useState({ coordinates: [0, 0], zoom: 1 });
+  const [position, setPosition] = React.useState<{ coordinates: [number, number]; zoom: number }>({ coordinates: [0, 0], zoom: 1 });
   
   React.useEffect(() => {
     if (highlightedCountry) {
-      setPosition({ coordinates: [0, 0], zoom: 1 });
+      setPosition({ coordinates: [0, 0] as [number, number], zoom: 1 });
     }
   }, [highlightedCountry]);
 
@@ -51,7 +51,7 @@ const WorldMap: React.FC<WorldMapProps> = ({
             [-width, -height/2], // Extended negative width to ensure full map visibility
             [width, height/2]  // Extended positive width to ensure full map visibility
           ]}
-          onMoveEnd={({ coordinates, zoom }) => setPosition({ coordinates, zoom })}
+          onMoveEnd={({ coordinates, zoom }: { coordinates: [number, number]; zoom: number }) => setPosition({ coordinates, zoom })}
         >
           <Geographies geography={geoUrl}>
             {({ geographies }) => 
