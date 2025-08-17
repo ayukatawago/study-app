@@ -1,94 +1,375 @@
 {
   "countries": [
     {
-      "countryCode": "840",
-      "countryName": "アメリカ合衆国",
-      "capitalCity": "ワシントンD.C.",
-      "isoCode": "USA"
-    },
-    {
-      "countryCode": "826",
-      "countryName": "イギリス",
-      "capitalCity": "ロンドン",
-      "isoCode": "GBR"
-    },
-    {
-      "countryCode": "250",
-      "countryName": "フランス",
-      "capitalCity": "パリ",
-      "isoCode": "FRA"
-    },
-    {
-      "countryCode": "276",
-      "countryName": "ドイツ",
-      "capitalCity": "ベルリン",
-      "isoCode": "DEU"
-    },
-    {
-      "countryCode": "380",
-      "countryName": "イタリア",
-      "capitalCity": "ローマ",
-      "isoCode": "ITA"
-    },
-    {
-      "countryCode": "724",
-      "countryName": "スペイン",
-      "capitalCity": "マドリード",
-      "isoCode": "ESP"
-    },
-    {
       "countryCode": "156",
-      "countryName": "中国",
+      "countryName": "中華人民共和国",
       "capitalCity": "北京",
+      "descriptions": [
+        "漢民族を中心とする、50を超える民族からなる国",
+        "かつては人口を抑制する一人っ子政策を実施していた"
+      ],
       "isoCode": "CHN"
     },
     {
-      "countryCode": "392",
-      "countryName": "日本",
-      "capitalCity": "東京",
-      "isoCode": "JPN"
+      "countryCode": "408",
+      "countryName": "朝鮮民主主義人民共和国",
+      "capitalCity": "平壌",
+      "descriptions": [
+        "北朝鮮とも呼ばれる"
+      ],
+      "isoCode": "PRK"
+    },
+    {
+      "countryCode": "410",
+      "countryName": "大韓民国",
+      "capitalCity": "ソウル",
+      "descriptions": [
+        "ハングルという文字を使っている",
+        "家では靴を脱ぐ点や、食事の際に箸を使う点で日本と似ている"
+      ],
+      "isoCode": "KOR"
     },
     {
       "countryCode": "356",
       "countryName": "インド",
       "capitalCity": "ニューデリー",
+      "descriptions": [
+        "国民の多くがヒンドゥー教徒",
+        "近年、IT文分野で大きな成長を遂げている"
+      ],
       "isoCode": "IND"
+    },
+    {
+      "countryCode": "764",
+      "countryName": "タイ",
+      "capitalCity": "バンコク",
+      "descriptions": [
+        "仏教徒が多く、男子は一生に一度は僧の修行をする",
+        "13世紀以来、東南アジアでは唯一植民地にならず独立を保ってきた"
+      ],
+      "isoCode": "THA"
+    },
+    {
+      "countryCode": "704",
+      "countryName": "ベトナム",
+      "capitalCity": "ハノイ",
+      "descriptions": [
+        "1955年に始まった内戦をきっかけにアメリカ軍による攻撃を受けた"
+      ],
+      "isoCode": "VNM"
+    },
+    {
+      "countryCode": "116",
+      "countryName": "カンボジア",
+      "capitalCity": "プノンペン",
+      "descriptions": [
+        "1992年に制定されたPKO協力法に基づき、日本の自衛隊が初めてPKOの一環として海外派遣された"
+      ],
+      "isoCode": "KHM"
+    },
+    {
+      "countryCode": "702",
+      "countryName": "シンガポール",
+      "capitalCity": "シンガポール",
+      "descriptions":[
+        "面積は日本の琵琶湖とほぼ同じで、人口密度が高い"
+      ],
+      "isoCode": "SGP"
+    },
+    {
+      "countryCode": "360",
+      "countryName": "インドネシア",
+      "capitalCity": "ジャカルタ",
+      "descriptions": [
+        "世界で最もイスラム教徒が多い",
+        "天然ガスや石炭など、資源が豊富"
+      ],
+      "isoCode": "IDN"
+    },
+    {
+      "countryCode": "458",
+      "countryName": "マレーシア",
+      "capitalCity": "クアラルンプール",
+      "descriptions": [
+        "工業化によって、輸出物の中心は農作物から機械類へと変わった"
+      ],
+      "isoCode": "MYS"
+    },
+    {
+      "countryCode": "608",
+      "countryName": "フィリピン",
+      "capitalCity": "マニラ",
+      "descriptions": [
+        "キリスト教とが多い国",
+        "バナナの生産がさかんで、日本のバナナの輸入相手国第1位"
+      ],
+      "isoCode": "PHL"
+    },
+    {
+      "countryCode": "004",
+      "countryName": "アフガニスタン",
+      "capitalCity": "カブール",
+      "descriptions": [
+        "2001年、テロを起こした組織を匿っているとしてアメリカがイギリスとともに空爆を行った"
+      ],
+      "isoCode": "AFG"
+    },
+    {
+      "countryCode": "364",
+      "countryName": "イラン",
+      "capitalCity": "テヘラン",
+      "descriptions": [
+        "イスラム教シーア派の国",
+        "かつてペルシャと呼ばれていた"
+      ],
+      "isoCode": "IRN"
+    },
+    {
+      "countryCode": "368",
+      "countryName": "イラク",
+      "capitalCity": "バグダッド",
+      "descriptions": [
+        "大量破壊兵器を持っている疑いから、2003年にアメリカとイギリスが空爆を行った"
+      ],
+      "isoCode": "IRQ"
+    },
+    {
+      "countryCode": "818",
+      "countryName": "エジプト",
+      "capitalCity": "カイロ",
+      "descriptions": [
+        "世界最長のナイル川が流れる"
+      ],
+      "isoCode": "EGY"
+    },
+    {
+      "countryCode": "376",
+      "countryName": "イスラエル",
+      "capitalCity": "エルサレム",
+      "descriptions": [
+        "ユダヤ人の国",
+        "周辺のアラブ諸国との対立から中東戦争が起こった"
+      ],
+      "isoCode": "ISR"
+    },
+    {
+      "countryCode": "682",
+      "countryName": "サウジアラビア",
+      "capitalCity": "リヤド",
+      "descriptions": [
+        "イスラム教の聖地メッカとメディナがある、イスラム教を国教とする国"
+      ],
+      "isoCode": "SAU"
+    },
+    {
+      "countryCode": "826",
+      "countryName": "イギリス",
+      "capitalCity": "ロンドン",
+      "descriptions": [
+        "元首はチャールズ3世",
+        "かつては世界の各地に植民地を持っていた",
+        "通貨単位はポンド",
+        "2020年1月31日にEUを離脱し、移行期間を経て2020年12月31日に完全に離脱した"
+      ],
+      "isoCode": "GBR"
+    },
+    {
+      "countryCode": "643",
+      "countryName": "ロシア連邦",
+      "capitalCity": "モスクワ",
+      "descriptions": [
+        "日本と国交はあるが、北方領土問題があるため、いまだ平和条約を結んでいない",
+        "面積は日本の45倍",
+        "2022年2月にウクライナへの軍事侵攻を開始"
+      ],
+      "isoCode": "RUS"
+    },
+    {
+      "countryCode": "620",
+      "countryName": "ポルトガル",
+      "capitalCity": "リスボン",
+      "descriptions": [
+        "この国出身のフランシスコ=ザビエルが日本に初めてキリスト教を伝えた"
+      ],
+      "isoCode": "PRT"
+    },
+    {
+      "countryCode": "528",
+      "countryName": "オランダ",
+      "capitalCity": "アムステルダム",
+      "descriptions": [
+        "面積は日本の九州とほぼ同じ",
+        "国土の1/4がポルダーと呼ばれる干拓地"
+      ],
+      "isoCode": "NLD"
+    },
+    {
+      "countryCode": "276",
+      "countryName": "ドイツ",
+      "capitalCity": "ベルリン",
+      "descriptions": [
+        "面積は日本の九州とほぼ同じ",
+        "1990年に東西統一を果たした",
+        "ヨーロッパ最大の工業国"
+      ],
+      "isoCode": "DEU"
+    },
+    {
+      "countryCode": "756",
+      "countryName": "スイス",
+        "capitalCity": "ベルン",
+        "descriptions": [
+          "酪農がさかんで、精密機械工業も発達している",
+          "永世中立国ということもあり、多くの国際機関が置かれている"
+        ],
+        "isoCode": "CHE"
+    },
+    {
+      "countryCode": "752",
+      "countryName": "スウェーデン",
+      "capitalCity": "ストックホルム",
+      "descriptions": [
+        "社会保障制度の整った国",
+        "ノーベル賞の授与式が行われる国(平和賞の授賞式のみノルウェーのオスロで開催)"
+      ],
+      "isoCode": "SWE"
+    },
+    {
+      "countryCode": "380",
+      "countryName": "イタリア",
+      "capitalCity": "ローマ",
+      "descriptions": [
+        "古代遺跡が多く残る国",
+        "乾燥に強いオリーブやブドウの栽培がさかん",
+        "首都のローマにはバチカン市国がある"
+      ],
+      "isoCode": "ITA"
+    },
+    {
+      "countryCode": "300",
+      "countryName": "ギリシャ",
+      "capitalCity": "アテネ",
+      "descriptions": [
+        "近代オリンピック発祥の地",
+        "かつて経済破綻した"
+      ],
+      "isoCode": "GRC"
+    },
+    {
+      "countryCode": "124",
+      "countryName": "カナダ",
+      "capitalCity": "オタワ",
+      "descriptions": [
+        "世界で2番目に面積が広い国",
+        "資源に恵まれ、日本へは石炭や鉄鉱石、木材はどを輸出している"
+      ],
+      "isoCode": "CAN"
+    },
+    {
+      "countryCode": "840",
+      "countryName": "アメリカ合衆国",
+      "capitalCity": "ワシントンD.C.",
+      "descriptions": [
+        "世界の政治・経済の中心地",
+        "人口・面積はともに世界3位"
+      ],
+      "isoCode": "USA"
+    },
+    {
+      "countryCode": "192",
+      "countryName": "キューバ",
+      "capitalCity": "ハバナ",
+      "descriptions": [
+        "社会主義国",
+        "1962年にソ連はこの国にミサイル基地を建設しようとした",
+        "2015年に54年ぶりにアメリカと国交を回復した"
+      ],
+      "isoCode": "CUB"
+    },
+    {
+      "countryCode": "484",
+      "countryName": "メキシコ",
+      "capitalCity": "メキシコシティ",
+      "descriptions": [
+        "かつてアステカ文明やマヤ文明が栄えた地域",
+        "銀や石油、天然ガスなどの地下資源が豊富"
+      ],
+      "isoCode": "MEX"
     },
     {
       "countryCode": "076",
       "countryName": "ブラジル",
       "capitalCity": "ブラジリア",
+      "descriptions": [
+        "アマゾン川流域には熱帯林が広がっている",
+        "鉄鉱石などの地下資源に恵まれており、コーヒー豆の産地としても知られる"
+      ],
       "isoCode": "BRA"
+    },
+    {
+      "countryCode": "032",
+      "countryName": "アルゼンチン",
+      "capitalCity": "ブエノスアイレス",
+      "descriptions": [
+        "パンパと呼ばれる広大な草原地帯では農放牧がさかんで、大豆やとうもろこしなどの穀物生産量は世界有数"
+      ],
+      "isoCode": "ARG"
+    },
+    {
+      "countryCode": "218",
+      "countryName": "エクアドル",
+      "capitalCity": "キト",
+      "descriptions": [
+        "国名はスペイン語で「赤道」という意味",
+        "ガラパゴス諸島がある"
+      ],
+      "isoCode": "ECU"
+    },
+    {
+      "countryCode": "604",
+      "countryName": "ペルー",
+      "capitalCity": "リマ",
+      "descriptions": [
+        "かつてインカ帝国が栄えた地域",
+        "マチュピチュやナスカの地上絵などの世界遺産が有名",
+        "漁獲量は世界有数"
+      ],
+      "isoCode": "PER"
+    },
+    {
+      "countryCode": "152",
+      "countryName": "チリ",
+      "capitalCity": "サンティアゴ",
+      "descriptions": [
+        "銅の埋蔵量が多く、日本へも輸出している",
+        "モアイ像で有名なイースター島がある"
+      ],
+      "isoCode": "CHL"
+    },
+    {
+      "countryCode": "710",
+      "countryName": "南アフリカ共和国",
+      "capitalCity": "プレトリア",
+      "descriptions": [
+        "BRICSの１つ",
+        "かつてアパルトヘイトという人種差別政策が行われていた"
+      ],
+      "isoCode": "ZAF"
+    },
+    {
+      "countryCode": "250",
+      "countryName": "フランス",
+      "capitalCity": "パリ",
+      "descriptions": [
+        "ワインやチーズなどの食文化が豊か"
+      ],
+      "isoCode": "FRA"
     },
     {
       "countryCode": "036",
       "countryName": "オーストラリア",
       "capitalCity": "キャンベラ",
       "isoCode": "AUS"
-    },
-    {
-      "countryCode": "124",
-      "countryName": "カナダ",
-      "capitalCity": "オタワ",
-      "isoCode": "CAN"
-    },
-    {
-      "countryCode": "643",
-      "countryName": "ロシア",
-      "capitalCity": "モスクワ",
-      "isoCode": "RUS"
-    },
-    {
-      "countryCode": "710",
-      "countryName": "南アフリカ共和国",
-      "capitalCity": "プレトリア",
-      "isoCode": "ZAF"
-    },
-    {
-      "countryCode": "818",
-      "countryName": "エジプト",
-      "capitalCity": "カイロ",
-      "isoCode": "EGY"
     }
   ]
 }
