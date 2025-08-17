@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import CultureFlashcardDeck from '@/components/flashcard/CultureFlashcardDeck';
+import PageHeader from '@/components/common/PageHeader';
 
 export default function CulturePage() {
   const [isClient, setIsClient] = useState(false);
@@ -19,7 +20,7 @@ export default function CulturePage() {
   return (
     <main className="min-h-screen p-4 sm:p-6">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center">文化人物</h1>
+        <PageHeader title="文化人物" />
         <CultureFlashcardDeck />
       </div>
     </main>
