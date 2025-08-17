@@ -21,6 +21,9 @@ A Next.js application to help users memorize Japanese history, cultural figures,
 - React
 - TypeScript
 - TailwindCSS
+- Prettier (code formatting)
+- ESLint (code linting)
+- Husky & lint-staged (pre-commit hooks)
 - Local Storage for data persistence
 
 ## Getting Started
@@ -32,17 +35,20 @@ A Next.js application to help users memorize Japanese history, cultural figures,
 ### Installation
 
 1. Clone the repository
+
    ```bash
    git clone https://github.com/yourusername/study-app.git
    cd study-app
    ```
 
 2. Install dependencies
+
    ```bash
    npm install
    ```
 
 3. Run the development server
+
    ```bash
    npm run dev
    ```
@@ -84,11 +90,9 @@ The application uses the following JSON structure for history flashcard data (fr
   "history": [
     {
       "year": 1603,
-      "events": [
-        "徳川家康が征夷大将軍になる"
-      ],
+      "events": ["徳川家康が征夷大将軍になる"],
       "memorize": "家康 征夷大将軍だ 人群れさわぐ 江戸幕府"
-    },
+    }
     // More year-event pairs
   ]
 }
@@ -104,10 +108,8 @@ The application uses the following JSON structure for culture flashcard data (fr
     {
       "person": "井原西鶴",
       "period": "元禄文化",
-      "descriptions": [
-        "浮世草子"
-      ]
-    },
+      "descriptions": ["浮世草子"]
+    }
     // More person-description pairs
   ]
 }
@@ -148,6 +150,40 @@ Text within `<span>` tags becomes interactive quiz elements that can be revealed
 - `npm run build` - Build the application for production
 - `npm start` - Start the production server
 - `npm run lint` - Run ESLint
+- `npm run format` - Format all files with Prettier
+- `npm run format:check` - Check formatting without making changes
+
+## Code Formatting and Linting
+
+This project uses:
+
+- **Prettier** for code formatting
+- **ESLint** for code linting
+- **Husky** for Git hooks
+- **lint-staged** for running linters on staged Git files
+
+### Formatting Code
+
+Format all files:
+
+```bash
+npm run format
+```
+
+Check formatting without making changes:
+
+```bash
+npm run format:check
+```
+
+### Pre-commit Hooks
+
+The project is configured with pre-commit hooks that automatically:
+
+- Run ESLint to fix linting issues
+- Format code with Prettier
+
+These hooks ensure that all committed code follows the project's formatting and linting rules.
 
 ## License
 
