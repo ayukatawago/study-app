@@ -25,6 +25,7 @@ A Next.js application to help users memorize Japanese history, cultural figures,
 - ESLint (code linting)
 - Husky & lint-staged (pre-commit hooks)
 - Local Storage for data persistence
+- Structured logging system for debugging
 
 ## Getting Started
 
@@ -73,6 +74,7 @@ study-app/
 │   │   └── flashcard/ # Flashcard related components
 │   ├── hooks/        # Custom React hooks
 │   ├── utils/        # Utility functions
+│   │   └── logger.ts # Debug logging utility
 │   └── styles/       # Global styles
 ├── CLAUDE.md        # Development guide for Claude AI
 ├── README.md        # Project documentation (this file)
@@ -158,9 +160,10 @@ Text within `<span>` tags becomes interactive quiz elements that can be revealed
 This project uses:
 
 - **Prettier** for code formatting
-- **ESLint** for code linting
+- **ESLint** for code linting (with modern flat config)
 - **Husky** for Git hooks
 - **lint-staged** for running linters on staged Git files
+- **Structured logging** for debugging with different log levels
 
 ### Formatting Code
 
@@ -184,6 +187,30 @@ The project is configured with pre-commit hooks that automatically:
 - Format code with Prettier
 
 These hooks ensure that all committed code follows the project's formatting and linting rules.
+
+## Logging System
+
+The application includes a structured logging utility for debugging:
+
+```typescript
+import { createLogger } from '@/utils/logger';
+
+// Create a logger with a component prefix
+const logger = createLogger({ prefix: 'ComponentName' });
+
+// Use different log levels
+logger.debug('Detailed information useful during development');
+logger.info('General information about application flow');
+logger.warn("Warning that doesn't break the application");
+logger.error('Error that affects functionality', errorObject);
+```
+
+Logging features:
+
+- Automatic disabling in production environment
+- Configurable log levels (debug, info, warn, error)
+- Component prefixes for easy identification
+- Support for error objects
 
 ## License
 
