@@ -29,42 +29,9 @@ const WorldMap: React.FC<WorldMapProps> = ({
   const [isZoomed, setIsZoomed] = React.useState(false);
   const [countryPosition, setCountryPosition] = React.useState<{ coordinates: [number, number]; bbox?: number[] } | null>(null);
   
-  // Calculate zoom level based on country size (bounding box)
-  const calculateZoomLevel = React.useCallback((bbox?: number[]) => {
-    console.log('Calculate zoom level called with bbox:', bbox);
-    
-    if (!bbox || bbox.length !== 4) {
-      console.log('No valid bbox, returning default zoom 3');
-      return 3; // Default zoom level if no bbox
-    }
-
-    // Extract bounding box dimensions
-    const [west, south, east, north] = bbox;
-    const width = Math.abs(east - west);
-    const height = Math.abs(north - south);
-    
-    // Calculate area to get a sense of country size
-    const area = width * height;
-    
-    // Log for debugging
-    console.log(`Country dimensions: ${width.toFixed(2)} x ${height.toFixed(2)}, area: ${area.toFixed(2)}`);
-    
-    let zoomLevel;
-    // Country size categories (adjusted for better zoom levels)
-    if (area > 100) { // Very large countries (Russia, Canada, USA, China, Brazil, etc)
-      zoomLevel = 1.5; // Reduced zoom for very large countries
-    } else if (area > 30) { // Large countries (India, Australia, most of Europe)
-      zoomLevel = 2.5;
-    } else if (area > 10) { // Medium-sized countries
-      zoomLevel = 3.5;
-    } else if (area > 1) { // Small countries
-      zoomLevel = 4.5;
-    } else { // Very small countries and islands
-      zoomLevel = 5.5;
-    }
-    
-    console.log(`Calculated zoom level: ${zoomLevel} for area ${area.toFixed(2)}`);
-    return zoomLevel;
+  // Default zoom level if none specified in JSON
+  const getDefaultZoomLevel = React.useCallback(() => {
+    return 3.0; // Default zoom level
   }, []);
 
   // Load country data from JSON
@@ -164,9 +131,7 @@ const WorldMap: React.FC<WorldMapProps> = ({
               }
             }
             
-            // Calculate appropriate zoom level based on country size
-            const calculatedZoomLevel = calculateZoomLevel(bbox);
-            console.log('Calculated zoom level:', calculatedZoomLevel);
+            console.log('Using zoom level from JSON or default');
             
             // Update country position state
             setCountryPosition({
@@ -226,7 +191,7 @@ const WorldMap: React.FC<WorldMapProps> = ({
     } else {
       setCountryPosition(null);
     }
-  }, [highlightedCountry, calculateZoomLevel]);
+  }, [highlightedCountry, getDefaultZoomLevel]);
   
   // When highlighted country changes, find its position
   React.useEffect(() => {
@@ -265,10 +230,10 @@ const WorldMap: React.FC<WorldMapProps> = ({
         }
       }
       
-      // If no zoom level found in JSON, fallback to calculated value
+      // If no zoom level found in JSON, use default
       if (!zoomLevel) {
-        zoomLevel = calculateZoomLevel(countryPosition.bbox);
-        console.log('Using calculated zoom level:', zoomLevel);
+        zoomLevel = getDefaultZoomLevel();
+        console.log('Using default zoom level:', zoomLevel);
       }
       
       setPosition({ 
