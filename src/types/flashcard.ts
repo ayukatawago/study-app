@@ -29,6 +29,7 @@ export interface WorldCountryData extends BaseFlashcardData {
   countryName: string; // Name of the country
   capitalCity: string; // Capital city of the country
   isoCode: string; // ISO Alpha-3 country code for map highlighting
+  descriptions?: string[]; // Optional descriptions about the country
 }
 
 // Base settings interface

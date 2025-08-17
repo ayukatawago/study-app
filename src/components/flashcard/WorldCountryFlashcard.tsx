@@ -20,7 +20,19 @@ export default function WorldCountryFlashcard({
   
   // Determine card height based on content
   const getCardHeight = () => {
-    return 'h-64'; // 16rem = 256px
+    // Increase height if there are descriptions
+    if (event.descriptions && event.descriptions.length > 0) {
+      // Adjust height based on number of descriptions
+      const descCount = event.descriptions.length;
+      if (descCount >= 3) {
+        return 'h-96'; // 24rem = 384px for 3+ descriptions
+      } else if (descCount === 2) {
+        return 'h-80'; // 20rem = 320px for 2 descriptions
+      } else {
+        return 'h-72'; // 18rem = 288px for 1 description
+      }
+    }
+    return 'h-64'; // 16rem = 256px for no descriptions
   };
 
   const renderFrontContent = () => {
@@ -43,15 +55,24 @@ export default function WorldCountryFlashcard({
       return <div className="text-lg">No card available</div>;
     }
     
-    // Always show country name and capital on back side
+    // Show country name, capital, and descriptions on back side
     return (
-      <div className="text-center py-8">
-        <div className="text-4xl font-bold mb-4">
+      <div className="text-center py-2 max-h-full overflow-y-auto">
+        <div className="text-3xl font-bold mb-1">
           {event.countryName}
         </div>
         {showCapital && (
-          <div className="text-xl mt-4">
+          <div className="text-lg mt-1 mb-2">
             <span className="font-medium">首都:</span> {event.capitalCity}
+          </div>
+        )}
+        {event.descriptions && event.descriptions.length > 0 && (
+          <div className="mt-2 px-2">
+            <ul className="text-left list-disc list-outside pl-4">
+              {event.descriptions.map((desc, index) => (
+                <li key={index} className="text-sm my-1 leading-snug">{desc}</li>
+              ))}
+            </ul>
           </div>
         )}
       </div>
