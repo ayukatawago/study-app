@@ -291,16 +291,15 @@ const WorldMap: React.FC<WorldMapProps> = ({
   return (
     <div className="world-map-container relative" style={{ width: '100%', height: '100%', padding: 0, margin: 0 }}>
       <div 
-        className="absolute top-2 right-2 z-20 flex space-x-2 p-1.5 rounded-md" 
-        style={{ backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(2px)', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}
+        className="absolute top-0 right-0 z-10 flex space-x-1" 
       >
         {countryPosition && !isZoomed && (
           <button 
-            className="bg-blue-50 p-2 rounded-full shadow-md hover:bg-blue-100 active:bg-blue-200 transition-all duration-150 border border-blue-200 text-blue-600"
+            className="p-1 rounded-full bg-white/80 hover:bg-blue-100 active:bg-blue-200 transition-all duration-150 text-blue-600"
             onClick={handleZoomIn}
             title="Zoom to country"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M9 3a1 1 0 012 0v5.5h5.5a1 1 0 110 2H11V16a1 1 0 11-2 0v-5.5H3.5a1 1 0 110-2H9V3z" clipRule="evenodd" />
             </svg>
           </button>
@@ -308,11 +307,11 @@ const WorldMap: React.FC<WorldMapProps> = ({
         
         {isZoomed && (
           <button 
-            className="bg-blue-50 p-2 rounded-full shadow-md hover:bg-blue-100 active:bg-blue-200 transition-all duration-150 border border-blue-200 text-blue-600"
+            className="p-1 rounded-full bg-white/80 hover:bg-blue-100 active:bg-blue-200 transition-all duration-150 text-blue-600"
             onClick={handleZoomOut}
             title="Zoom out"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
             </svg>
           </button>
