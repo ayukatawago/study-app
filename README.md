@@ -1,18 +1,21 @@
-# 社会学習 (Social Studies Learning App)
+# 暗記学習サポート (Memorization Learning Support)
 
-A Next.js application to help users memorize Japanese history, cultural figures, and constitution articles using interactive flashcards.
+A Next.js application to help users memorize important points in social studies and science subjects using interactive flashcards.
 
 ## Features
 
-- Interactive flashcards for studying Japanese historical events, cultural figures, and constitution articles
+- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, and animal science
 - Multiple study modes:
   - History: Toggle between year-to-event and event-to-year modes
   - Culture: Toggle between person-to-description and description-to-person modes
   - Constitution: Interactive quiz with tap-to-reveal answers
+  - World Geography: Interactive map with country highlights and information
+  - Animal Science: Quiz questions with answers
 - Track learning progress with local storage
 - Show/hide memorization aids and summaries
 - Card-by-card navigation with options for random or sequential order
 - Focus on incorrect answers with filtering options
+- Category filtering for specialized content
 - Responsive design with TailwindCSS
 
 ## Tech Stack
@@ -25,6 +28,7 @@ A Next.js application to help users memorize Japanese history, cultural figures,
 - ESLint (code linting)
 - Husky & lint-staged (pre-commit hooks)
 - Local Storage for data persistence
+- react-simple-maps (for world map visualization)
 - Structured logging system for debugging
 
 ## Getting Started
@@ -62,16 +66,28 @@ A Next.js application to help users memorize Japanese history, cultural figures,
 study-app/
 ├── public/            # Static files
 │   └── data/         # JSON data for flashcards
-│       ├── history_events.json # History events data
-│       ├── history_culture.json # Cultural figures data
-│       └── constitution.json # Constitution articles data
+│       ├── history_events.json    # History events data
+│       ├── history_culture.json   # Cultural figures data
+│       ├── constitution.json      # Japanese constitution data
+│       ├── world_countries.json   # World countries data with zoom levels
+│       └── science/              # Science data directory
+│           └── animals.json      # Animal quiz data
 ├── src/
 │   ├── app/          # Next.js App Router
-│   │   ├── history/  # History flashcards page
-│   │   ├── culture/  # Culture flashcards page
-│   │   └── constitution/ # Constitution flashcards page
+│   │   ├── history/        # History flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   ├── culture/        # Culture flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   ├── constitution/   # Constitution flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   ├── world-country/  # World countries flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   └── animals/        # Animal quiz flashcards page
+│   │       └── components/ # Page-specific components
 │   ├── components/   # React components
-│   │   └── flashcard/ # Flashcard related components
+│   │   ├── common/   # Common UI components
+│   │   ├── flashcard/ # Common flashcard related components
+│   │   └── map/      # Map related components
 │   ├── hooks/        # Custom React hooks
 │   ├── utils/        # Utility functions
 │   │   └── logger.ts # Debug logging utility
@@ -80,6 +96,20 @@ study-app/
 ├── README.md        # Project documentation (this file)
 └── package.json     # Project dependencies and scripts
 ```
+
+## Subject Areas
+
+### Social Studies (社会)
+
+- Japanese Historical Events (年代)
+- Japanese Cultural Figures (文化人物)
+- Japanese Constitution (日本国憲法)
+- World Geography (世界地図)
+
+### Science (理科)
+
+- Animal Science (動物)
+- (More coming soon)
 
 ## Data Structure
 
@@ -145,6 +175,54 @@ The application uses the following JSON structure for constitution quiz data (fr
 ```
 
 Text within `<span>` tags becomes interactive quiz elements that can be revealed by tapping.
+
+### World Countries
+
+The application uses the following JSON structure for world countries data (from `public/data/world_countries.json`):
+
+```json
+{
+  "countries": [
+    {
+      "countryCode": "156",
+      "countryName": "中華人民共和国",
+      "capitalCity": "北京",
+      "descriptions": [
+        "漢民族を中心とする、50を超える民族からなる国",
+        "かつては人口を抑制する一人っ子政策を実施していた"
+      ],
+      "isoCode": "CHN",
+      "zoomLevel": 2.0
+    }
+    // More country entries
+  ]
+}
+```
+
+### Animal Quiz
+
+The application uses the following JSON structure for animal quiz data (from `public/data/science/animals.json`):
+
+```json
+{
+  "animal_1": [
+    {
+      "id": 1,
+      "question": "メダカを飼うとき、水そうはどのようなところに置きますか",
+      "answer": "直射日光のあたらない明るいところ"
+    }
+    // More animal questions
+  ],
+  "animal_2": [
+    {
+      "id": 1,
+      "question": "昆虫の体は3つの部分に分かれていますが、それぞれ何といいますか",
+      "answer": "頭部、胸部、腹部（頭、胸、腹）"
+    }
+    // More insect questions
+  ]
+}
+```
 
 ## Scripts
 
