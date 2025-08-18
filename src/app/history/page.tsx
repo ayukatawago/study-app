@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import HistoryFlashcardDeck from '@/components/flashcard/HistoryFlashcardDeck';
+import HistoryFlashcardDeck from './components/HistoryFlashcardDeck';
 import PageHeader from '@/components/common/PageHeader';
 
 export default function HistoryPage() {

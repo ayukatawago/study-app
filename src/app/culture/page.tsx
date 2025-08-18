@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import CultureFlashcardDeck from '@/components/flashcard/CultureFlashcardDeck';
+import CultureFlashcardDeck from './components/CultureFlashcardDeck';
 import PageHeader from '@/components/common/PageHeader';
 
 export default function CulturePage() {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import WorldCountryFlashcardDeck from '@/components/flashcard/WorldCountryFlashcardDeck';
+import WorldCountryFlashcardDeck from './components/WorldCountryFlashcardDeck';
 import PageHeader from '@/components/common/PageHeader';
 
 export default function WorldCountryPage() {

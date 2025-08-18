@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import ConstitutionDeck from '@/components/flashcard/ConstitutionDeck';
+import ConstitutionDeck from './components/ConstitutionDeck';
 import PageHeader from '@/components/common/PageHeader';
 
 export default function ConstitutionPage() {
