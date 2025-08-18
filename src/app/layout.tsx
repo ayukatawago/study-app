@@ -2,8 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '社会学習',
-  description: 'Study app for memorizing Japanese history, culture and constitution',
+  title: '暗記学習サポート',
+  description: '社会・理科の重要ポイントを効率的に暗記するための学習アプリ',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
