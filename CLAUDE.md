@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a flashcard web application built with Next.js and TailwindCSS to help users memorize Japanese history, culture, constitution, and world countries. The application (社会学習) uses JSON data from various files in `public/data/` to create interactive flashcards and stores user progress in local storage.
+This is a flashcard web application built with Next.js and TailwindCSS to help users memorize important points in social studies and science subjects. The application (暗記学習サポート) uses JSON data from various files in `public/data/` to create interactive flashcards and stores user progress in local storage.
 
 ## Development Setup
 
@@ -54,16 +54,25 @@ study-app/
 │       ├── history_events.json    # History events data
 │       ├── history_culture.json   # Cultural figures data
 │       ├── constitution.json      # Japanese constitution data
-│       └── world_countries.json   # World countries data with zoom levels
+│       ├── world_countries.json   # World countries data with zoom levels
+│       └── science/              # Science data directory
+│           └── animals.json      # Animal quiz data
 ├── src/
 │   ├── app/          # Next.js app router pages
 │   │   ├── page.tsx  # Home page
 │   │   ├── history/  # History flashcards page
+│   │   │   └── components/ # Page-specific components
 │   │   ├── culture/  # Culture flashcards page
+│   │   │   └── components/ # Page-specific components
 │   │   ├── constitution/ # Constitution flashcards page
-│   │   └── world-country/ # World countries flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   ├── world-country/ # World countries flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   └── animals/ # Animal quiz flashcards page
+│   │       └── components/ # Page-specific components
 │   ├── components/   # React components
-│   │   ├── flashcard/ # Flashcard related components
+│   │   ├── common/   # Common UI components
+│   │   ├── flashcard/ # Common flashcard related components
 │   │   └── map/      # Map related components
 │   ├── hooks/        # Custom React hooks
 │   ├── utils/        # Utility functions
@@ -133,18 +142,26 @@ logger.error('Error occurred', errorObject);
    - Country-specific zoom levels stored in JSON data
    - Track correct/incorrect responses in local storage
 
-5. **Data Management**
+5. **Animal Quiz System**
+   - Display question and answer pairs about animal science
+   - Category filtering between different sets of questions
+   - Track correct/incorrect responses in local storage
+   - Adaptable card height based on content length
+
+6. **Data Management**
    - Uses local storage to persist user progress
    - Pulls history flashcard data from history_events.json
    - Pulls culture flashcard data from history_culture.json
    - Pulls constitution quiz data from constitution.json
    - Pulls world country data from world_countries.json
+   - Pulls animal quiz data from science/animals.json
 
-6. **User Interface**
+7. **User Interface**
    - Responsive design using TailwindCSS
    - Simple and intuitive flashcard interaction
    - Settings panel for customizing study experience
    - Interactive world map for geography learning
+   - Organized by subject category (社会 and 理科)
 
 ## Data Structure
 
@@ -257,6 +274,31 @@ The application uses the following JSON structure for world countries data (from
 }
 ```
 
+### Animal Quiz
+
+The application uses the following JSON structure for animal quiz data (from `public/data/science/animals.json`):
+
+```json
+{
+  "animal_1": [
+    {
+      "id": 1,
+      "question": "メダカを飼うとき、水そうはどのようなところに置きますか",
+      "answer": "直射日光のあたらない明るいところ"
+    }
+    // More animal questions
+  ],
+  "animal_2": [
+    {
+      "id": 1,
+      "question": "昆虫の体は3つの部分に分かれていますが、それぞれ何といいますか",
+      "answer": "頭部、胸部、腹部（頭、胸、腹）"
+    }
+    // More insect questions
+  ]
+}
+```
+
 ## Local Storage
 
 ### History Flashcards
@@ -338,6 +380,25 @@ User progress and settings for world country flashcards are stored in local stor
 }
 ```
 
+### Animal Quiz Flashcards
+
+User progress and settings for animal quiz flashcards are stored in local storage with the following structure:
+
+```json
+{
+  "animal_quiz_progress": {
+    "seen": [1, 2, 3],
+    "correct": [1, 2],
+    "incorrect": [3]
+  },
+  "animal_quiz_settings": {
+    "randomOrder": true,
+    "showIncorrectOnly": false,
+    "category": "all"
+  }
+}
+```
+
 ## Development Workflow
 
 1. Build out the Next.js application structure
@@ -347,6 +408,8 @@ User progress and settings for world country flashcards are stored in local stor
 5. Add TailwindCSS styling for responsive design
 6. Implement filters and sorting options for flashcards
 7. Add interactive map functionality for world countries
+8. Organize content by subject categories
+9. Add new subject areas as needed
 
 ## Features
 
@@ -367,3 +430,5 @@ User progress and settings for world country flashcards are stored in local stor
 13. **Paragraph Numbering**: Automatically numbers paragraphs in multi-paragraph articles
 14. **Interactive World Map**: Shows countries on an interactive map with zoom controls
 15. **Dynamic Zoom Levels**: Country-specific zoom levels for optimal map viewing
+16. **Subject Categorization**: Organized by subject areas (社会 and 理科)
+17. **Category Filtering**: For animal quiz questions between different sets
