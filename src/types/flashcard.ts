@@ -32,6 +32,13 @@ export interface WorldCountryData extends BaseFlashcardData {
   descriptions?: string[]; // Optional descriptions about the country
 }
 
+// Animal quiz data
+export interface AnimalQuizData extends BaseFlashcardData {
+  id: number; // Unique identifier for the quiz question
+  question: string;
+  answer: string;
+}
+
 // Base settings interface
 export interface BaseFlashcardSettings {
   randomOrder: boolean;
@@ -53,6 +60,11 @@ export interface CultureFlashcardSettings extends BaseFlashcardSettings {
 // World country settings
 export interface WorldCountrySettings extends BaseFlashcardSettings {
   // No additional settings needed
+}
+
+// Animal quiz settings
+export interface AnimalQuizSettings extends BaseFlashcardSettings {
+  category: 'animal_1' | 'animal_2' | 'all';
 }
 
 // Base progress interface
