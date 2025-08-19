@@ -56,7 +56,8 @@ study-app/
 │       ├── constitution.json      # Japanese constitution data
 │       ├── world_countries.json   # World countries data with zoom levels
 │       └── science/              # Science data directory
-│           └── animals.json      # Animal quiz data
+│           ├── animals.json      # Animal quiz data
+│           └── human.json        # Human biology quiz data
 ├── src/
 │   ├── app/          # Next.js app router pages
 │   │   ├── page.tsx  # Home page
@@ -68,7 +69,9 @@ study-app/
 │   │   │   └── components/ # Page-specific components
 │   │   ├── world-country/ # World countries flashcards page
 │   │   │   └── components/ # Page-specific components
-│   │   └── animals/ # Animal quiz flashcards page
+│   │   ├── animals/ # Animal quiz flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   └── human/   # Human biology quiz flashcards page
 │   │       └── components/ # Page-specific components
 │   ├── components/   # React components
 │   │   ├── common/   # Common UI components
@@ -148,15 +151,21 @@ logger.error('Error occurred', errorObject);
    - Track correct/incorrect responses in local storage
    - Adaptable card height based on content length
 
-6. **Data Management**
+6. **Human Biology Quiz System**
+   - Display question and answer pairs about human biology
+   - Track correct/incorrect responses in local storage
+   - Adaptable card height based on content length
+
+7. **Data Management**
    - Uses local storage to persist user progress
    - Pulls history flashcard data from history_events.json
    - Pulls culture flashcard data from history_culture.json
    - Pulls constitution quiz data from constitution.json
    - Pulls world country data from world_countries.json
    - Pulls animal quiz data from science/animals.json
+   - Pulls human quiz data from science/human.json
 
-7. **User Interface**
+8. **User Interface**
    - Responsive design using TailwindCSS
    - Simple and intuitive flashcard interaction
    - Settings panel for customizing study experience
@@ -299,6 +308,28 @@ The application uses the following JSON structure for animal quiz data (from `pu
 }
 ```
 
+### Human Quiz
+
+The application uses the following JSON structure for human biology quiz data (from `public/data/science/human.json`):
+
+```json
+{
+  "human": [
+    {
+      "id": 1,
+      "question": "食物が消化されるときに通る管のことを何といいますか",
+      "answer": "消化管"
+    },
+    {
+      "id": 2,
+      "question": "胆汁をつくる器官は何ですか",
+      "answer": "肝臓"
+    }
+    // More human biology questions
+  ]
+}
+```
+
 ## Local Storage
 
 ### History Flashcards
@@ -395,6 +426,24 @@ User progress and settings for animal quiz flashcards are stored in local storag
     "randomOrder": true,
     "showIncorrectOnly": false,
     "category": "all"
+  }
+}
+```
+
+### Human Quiz Flashcards
+
+User progress and settings for human quiz flashcards are stored in local storage with the following structure:
+
+```json
+{
+  "human_quiz_progress": {
+    "seen": [1, 2, 3],
+    "correct": [1, 2],
+    "incorrect": [3]
+  },
+  "human_quiz_settings": {
+    "randomOrder": true,
+    "showIncorrectOnly": false
   }
 }
 ```
