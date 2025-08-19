@@ -48,6 +48,12 @@ export default function Home() {
               >
                 動物
               </Link>
+              <Link
+                href="/human"
+                className="bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+              >
+                人体
+              </Link>
               {/* 将来的に追加されるであろう理科のコンテンツ用のプレースホルダー */}
               <div className="text-gray-500 dark:text-gray-400 italic mt-2 text-sm">
                 近日中に植物学習、地球科学など追加予定

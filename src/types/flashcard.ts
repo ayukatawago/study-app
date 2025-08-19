@@ -39,6 +39,13 @@ export interface AnimalQuizData extends BaseFlashcardData {
   answer: string;
 }
 
+// Human quiz data
+export interface HumanQuizData extends BaseFlashcardData {
+  id: number; // Unique identifier for the quiz question
+  question: string;
+  answer: string;
+}
+
 // Base settings interface
 export interface BaseFlashcardSettings {
   randomOrder: boolean;
@@ -65,6 +72,11 @@ export interface WorldCountrySettings extends BaseFlashcardSettings {
 // Animal quiz settings
 export interface AnimalQuizSettings extends BaseFlashcardSettings {
   category: 'animal_1' | 'animal_2' | 'all';
+}
+
+// Human quiz settings
+export interface HumanQuizSettings extends BaseFlashcardSettings {
+  // No additional settings needed for human quiz
 }
 
 // Base progress interface
