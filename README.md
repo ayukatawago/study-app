@@ -4,13 +4,14 @@ A Next.js application to help users memorize important points in social studies 
 
 ## Features
 
-- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, and animal science
+- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, animal science, and human biology
 - Multiple study modes:
   - History: Toggle between year-to-event and event-to-year modes
   - Culture: Toggle between person-to-description and description-to-person modes
   - Constitution: Interactive quiz with tap-to-reveal answers
   - World Geography: Interactive map with country highlights and information
   - Animal Science: Quiz questions with answers
+  - Human Biology: Quiz questions with answers
 - Track learning progress with local storage
 - Show/hide memorization aids and summaries
 - Card-by-card navigation with options for random or sequential order
@@ -71,7 +72,8 @@ study-app/
 │       ├── constitution.json      # Japanese constitution data
 │       ├── world_countries.json   # World countries data with zoom levels
 │       └── science/              # Science data directory
-│           └── animals.json      # Animal quiz data
+│           ├── animals.json      # Animal quiz data
+│           └── human.json        # Human biology quiz data
 ├── src/
 │   ├── app/          # Next.js App Router
 │   │   ├── history/        # History flashcards page
@@ -82,7 +84,9 @@ study-app/
 │   │   │   └── components/ # Page-specific components
 │   │   ├── world-country/  # World countries flashcards page
 │   │   │   └── components/ # Page-specific components
-│   │   └── animals/        # Animal quiz flashcards page
+│   │   ├── animals/        # Animal quiz flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   └── human/          # Human biology quiz flashcards page
 │   │       └── components/ # Page-specific components
 │   ├── components/   # React components
 │   │   ├── common/   # Common UI components
@@ -109,6 +113,7 @@ study-app/
 ### Science (理科)
 
 - Animal Science (動物)
+- Human Biology (人体)
 - (More coming soon)
 
 ## Data Structure
@@ -220,6 +225,28 @@ The application uses the following JSON structure for animal quiz data (from `pu
       "answer": "頭部、胸部、腹部（頭、胸、腹）"
     }
     // More insect questions
+  ]
+}
+```
+
+### Human Quiz
+
+The application uses the following JSON structure for human biology quiz data (from `public/data/science/human.json`):
+
+```json
+{
+  "human": [
+    {
+      "id": 1,
+      "question": "食物が消化されるときに通る管のことを何といいますか",
+      "answer": "消化管"
+    },
+    {
+      "id": 2,
+      "question": "胆汁をつくる器官は何ですか",
+      "answer": "肝臓"
+    }
+    // More human biology questions
   ]
 }
 ```
