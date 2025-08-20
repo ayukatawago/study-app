@@ -54,7 +54,8 @@ study-app/
 │       ├── history/              # History data directory
 │       │   ├── events.json      # History events data
 │       │   └── culture.json     # Cultural figures data
-│       ├── constitution.json      # Japanese constitution data
+│       ├── civics/               # Civics data directory
+│       │   └── constitution.json # Japanese constitution data
 │       ├── world_countries.json   # World countries data with zoom levels
 │       └── science/              # Science data directory
 │           ├── animals.json      # Animal quiz data
@@ -161,7 +162,7 @@ logger.error('Error occurred', errorObject);
    - Uses local storage to persist user progress
    - Pulls history flashcard data from history/events.json
    - Pulls culture flashcard data from history/culture.json
-   - Pulls constitution quiz data from constitution.json
+   - Pulls constitution quiz data from civics/constitution.json
    - Pulls world country data from world_countries.json
    - Pulls animal quiz data from science/animals.json
    - Pulls human quiz data from science/human.json
@@ -225,7 +226,7 @@ The application also uses the following JSON structure for culture flashcard dat
 
 ### Constitution Articles
 
-The application uses the following JSON structure for constitution quiz data (from `public/data/constitution.json`):
+The application uses the following JSON structure for constitution quiz data (from `public/data/civics/constitution.json`):
 
 ```json
 {

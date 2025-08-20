@@ -41,7 +41,7 @@ export function useConstitution() {
     async function fetchConstitution() {
       try {
         setIsLoading(true);
-        const response = await fetch('/data/constitution.json');
+        const response = await fetch('/data/civics/constitution.json');
 
         if (!response.ok) {
           throw new Error(`Failed to fetch constitution data: ${response.statusText}`);

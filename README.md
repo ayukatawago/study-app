@@ -70,7 +70,8 @@ study-app/
 │       ├── history/              # History data directory
 │       │   ├── events.json      # History events data
 │       │   └── culture.json     # Cultural figures data
-│       ├── constitution.json      # Japanese constitution data
+│       ├── civics/               # Civics data directory
+│       │   └── constitution.json # Japanese constitution data
 │       ├── world_countries.json   # World countries data with zoom levels
 │       └── science/              # Science data directory
 │           ├── animals.json      # Animal quiz data
@@ -155,7 +156,7 @@ The application uses the following JSON structure for culture flashcard data (fr
 
 ### Constitution Articles
 
-The application uses the following JSON structure for constitution quiz data (from `public/data/constitution.json`):
+The application uses the following JSON structure for constitution quiz data (from `public/data/civics/constitution.json`):
 
 ```json
 {
