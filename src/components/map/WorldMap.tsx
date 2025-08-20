@@ -75,9 +75,6 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
           onMoveEnd={({ coordinates, zoom }: { coordinates: [number, number]; zoom: number }) =>
             setPosition({ coordinates, zoom })
           }
-          // Add smooth animation for zoom transitions
-          transitionDuration={800}
-          transitionEase="easeQuadOut"
         >
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
