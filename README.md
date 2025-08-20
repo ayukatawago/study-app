@@ -67,8 +67,9 @@ A Next.js application to help users memorize important points in social studies 
 study-app/
 ├── public/            # Static files
 │   └── data/         # JSON data for flashcards
-│       ├── history_events.json    # History events data
-│       ├── history_culture.json   # Cultural figures data
+│       ├── history/              # History data directory
+│       │   ├── events.json      # History events data
+│       │   └── culture.json     # Cultural figures data
 │       ├── constitution.json      # Japanese constitution data
 │       ├── world_countries.json   # World countries data with zoom levels
 │       └── science/              # Science data directory
@@ -120,7 +121,7 @@ study-app/
 
 ### History Events
 
-The application uses the following JSON structure for history flashcard data (from `public/data/history_events.json`):
+The application uses the following JSON structure for history flashcard data (from `public/data/history/events.json`):
 
 ```json
 {
@@ -137,7 +138,7 @@ The application uses the following JSON structure for history flashcard data (fr
 
 ### Culture Figures
 
-The application uses the following JSON structure for culture flashcard data (from `public/data/history_culture.json`):
+The application uses the following JSON structure for culture flashcard data (from `public/data/history/culture.json`):
 
 ```json
 {

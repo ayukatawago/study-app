@@ -51,8 +51,9 @@ npm run format:check
 study-app/
 ├── public/            # Static files
 │   └── data/         # JSON data for flashcards
-│       ├── history_events.json    # History events data
-│       ├── history_culture.json   # Cultural figures data
+│       ├── history/              # History data directory
+│       │   ├── events.json      # History events data
+│       │   └── culture.json     # Cultural figures data
 │       ├── constitution.json      # Japanese constitution data
 │       ├── world_countries.json   # World countries data with zoom levels
 │       └── science/              # Science data directory
@@ -158,8 +159,8 @@ logger.error('Error occurred', errorObject);
 
 7. **Data Management**
    - Uses local storage to persist user progress
-   - Pulls history flashcard data from history_events.json
-   - Pulls culture flashcard data from history_culture.json
+   - Pulls history flashcard data from history/events.json
+   - Pulls culture flashcard data from history/culture.json
    - Pulls constitution quiz data from constitution.json
    - Pulls world country data from world_countries.json
    - Pulls animal quiz data from science/animals.json
@@ -176,7 +177,7 @@ logger.error('Error occurred', errorObject);
 
 ### History Events
 
-The application uses the following JSON structure for history flashcard data (from `public/data/history_events.json`):
+The application uses the following JSON structure for history flashcard data (from `public/data/history/events.json`):
 
 ```json
 {
@@ -202,7 +203,7 @@ The application uses the following JSON structure for history flashcard data (fr
 
 ### Culture Figures
 
-The application also uses the following JSON structure for culture flashcard data (from `public/data/history_culture.json`):
+The application also uses the following JSON structure for culture flashcard data (from `public/data/history/culture.json`):
 
 ```json
 {

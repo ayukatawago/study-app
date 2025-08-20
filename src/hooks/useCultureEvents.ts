@@ -24,7 +24,7 @@ export function useCultureEvents() {
     async function fetchCultureEvents() {
       try {
         setIsLoading(true);
-        const response = await fetch('/data/history_culture.json');
+        const response = await fetch('/data/history/culture.json');
 
         if (!response.ok) {
           throw new Error(`Failed to fetch culture events: ${response.statusText}`);

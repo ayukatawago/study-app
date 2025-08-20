@@ -24,7 +24,7 @@ export function useHistoryEvents() {
     async function fetchHistoryEvents() {
       try {
         setIsLoading(true);
-        const response = await fetch('/data/history_events.json');
+        const response = await fetch('/data/history/events.json');
 
         if (!response.ok) {
           throw new Error(`Failed to fetch history events: ${response.statusText}`);
