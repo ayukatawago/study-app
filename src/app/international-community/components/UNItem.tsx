@@ -15,14 +15,20 @@ export default function UNItem({ item, onCorrect, onIncorrect }: UNItemProps) {
   // Track if all answers are revealed
   const [allRevealed, setAllRevealed] = useState(false);
 
-  // Count total number of span tags in all description items
+  // Count total number of span tags in title and all description items
   const totalSpans = useMemo(() => {
-    return item.description.reduce((total, desc) => {
-      // Count <span> tags in the description
+    // Count spans in title
+    const titleMatches = item.title.match(/<span>/g);
+    let titleSpans = titleMatches ? titleMatches.length : 0;
+
+    // Count spans in descriptions
+    const descSpans = item.description.reduce((total, desc) => {
       const matches = desc.match(/<span>/g);
       return total + (matches ? matches.length : 0);
     }, 0);
-  }, [item.description]);
+
+    return titleSpans + descSpans;
+  }, [item.title, item.description]);
 
   // Check if all answers are revealed
   useEffect(() => {
@@ -31,7 +37,7 @@ export default function UNItem({ item, onCorrect, onIncorrect }: UNItemProps) {
   }, [revealedAnswers, totalSpans]);
 
   // Function to process text and handle <span> tags
-  const processText = (text: string, descIndex: number) => {
+  const processText = (text: string, textType: string, textIndex: number = 0) => {
     // Split by <span> and </span> tags
     const parts = text.split(/<span>|<\/span>/);
 
@@ -42,10 +48,10 @@ export default function UNItem({ item, onCorrect, onIncorrect }: UNItemProps) {
     return parts.map((part, index) => {
       // Even indexes are regular text, odd indexes are quiz content
       if (index % 2 === 0) {
-        return <span key={`${descIndex}-${index}`}>{part}</span>;
+        return <span key={`${textType}-${textIndex}-${index}`}>{part}</span>;
       } else {
         // This is content inside a span tag
-        const answerKey = `${descIndex}-${index}`;
+        const answerKey = `${textType}-${textIndex}-${index}`;
         const isRevealed = revealedAnswers[answerKey];
 
         return (
@@ -73,7 +79,9 @@ export default function UNItem({ item, onCorrect, onIncorrect }: UNItemProps) {
   return (
     <div className="w-full mb-6 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
       <div className="mb-4">
-        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">{item.title}</h2>
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">
+          {processText(item.title, 'title', 0)}
+        </h2>
       </div>
 
       <div className="mb-6">
@@ -83,7 +91,7 @@ export default function UNItem({ item, onCorrect, onIncorrect }: UNItemProps) {
               <span className="inline-block bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full text-xs mr-2 mt-1 flex-shrink-0">
                 {index + 1}
               </span>
-              <div className="flex-1">{processText(desc, index)}</div>
+              <div className="flex-1">{processText(desc, 'desc', index)}</div>
             </div>
           </div>
         ))}
