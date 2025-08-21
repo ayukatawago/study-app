@@ -25,7 +25,7 @@ export const useCountryData = () => {
       if (dataLoaded) return;
 
       try {
-        const response = await fetch('/data/world_countries.json');
+        const response = await fetch('/data/geography/world_countries.json');
         const data = await response.json();
         setCountryData(data);
         setDataLoaded(true);

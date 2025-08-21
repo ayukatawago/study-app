@@ -24,7 +24,7 @@ export function useWorldCountries() {
     async function fetchWorldCountries() {
       try {
         setIsLoading(true);
-        const response = await fetch('/data/world_countries.json');
+        const response = await fetch('/data/geography/world_countries.json');
 
         if (!response.ok) {
           throw new Error(`Failed to fetch world countries: ${response.statusText}`);

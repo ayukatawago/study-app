@@ -56,7 +56,8 @@ study-app/
 │       │   └── culture.json     # Cultural figures data
 │       ├── civics/               # Civics data directory
 │       │   └── constitution.json # Japanese constitution data
-│       ├── world_countries.json   # World countries data with zoom levels
+│       ├── geography/            # Geography data directory
+│       │   └── world_countries.json # World countries data with zoom levels
 │       └── science/              # Science data directory
 │           ├── animals.json      # Animal quiz data
 │           └── human.json        # Human biology quiz data
@@ -163,7 +164,7 @@ logger.error('Error occurred', errorObject);
    - Pulls history flashcard data from history/events.json
    - Pulls culture flashcard data from history/culture.json
    - Pulls constitution quiz data from civics/constitution.json
-   - Pulls world country data from world_countries.json
+   - Pulls world country data from geography/world_countries.json
    - Pulls animal quiz data from science/animals.json
    - Pulls human quiz data from science/human.json
 
@@ -253,7 +254,7 @@ The application uses the following JSON structure for constitution quiz data (fr
 
 ### World Countries
 
-The application uses the following JSON structure for world countries data (from `public/data/world_countries.json`):
+The application uses the following JSON structure for world countries data (from `public/data/geography/world_countries.json`):
 
 ```json
 {
