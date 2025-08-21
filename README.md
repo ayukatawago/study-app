@@ -4,12 +4,13 @@ A Next.js application to help users memorize important points in social studies 
 
 ## Features
 
-- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, animal science, and human biology
+- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, international community, animal science, and human biology
 - Multiple study modes:
   - History: Toggle between year-to-event and event-to-year modes
   - Culture: Toggle between person-to-description and description-to-person modes
   - Constitution: Interactive quiz with tap-to-reveal answers
   - World Geography: Interactive map with country highlights and information
+  - International Community: Interactive quiz about United Nations and international organizations
   - Animal Science: Quiz questions with answers
   - Human Biology: Quiz questions with answers
 - Track learning progress with local storage
@@ -71,7 +72,8 @@ study-app/
 │       │   ├── events.json      # History events data
 │       │   └── culture.json     # Cultural figures data
 │       ├── civics/               # Civics data directory
-│       │   └── constitution.json # Japanese constitution data
+│       │   ├── constitution.json # Japanese constitution data
+│       │   └── united_nations.json # United Nations and international organizations data
 │       ├── geography/            # Geography data directory
 │       │   └── world_countries.json # World countries data with zoom levels
 │       └── science/              # Science data directory
@@ -86,6 +88,8 @@ study-app/
 │   │   ├── constitution/   # Constitution flashcards page
 │   │   │   └── components/ # Page-specific components
 │   │   ├── world-country/  # World countries flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   ├── international-community/ # International community quiz page
 │   │   │   └── components/ # Page-specific components
 │   │   ├── animals/        # Animal quiz flashcards page
 │   │   │   └── components/ # Page-specific components
@@ -112,6 +116,7 @@ study-app/
 - Japanese Cultural Figures (文化人物)
 - Japanese Constitution (日本国憲法)
 - World Geography (世界地図)
+- International Community (国際社会)
 
 ### Science (理科)
 
@@ -179,6 +184,53 @@ The application uses the following JSON structure for constitution quiz data (fr
       }
     ]
   }
+}
+```
+
+Text within `<span>` tags becomes interactive quiz elements that can be revealed by tapping.
+
+### United Nations and International Organizations
+
+The application uses the following JSON structure for international community quiz data (from `public/data/civics/united_nations.json`):
+
+```json
+{
+  "general": [
+    {
+      "id": 1,
+      "title": "成立・加盟国・本部",
+      "description": [
+        "成立： <span>1945年10月</span>",
+        "加盟国：<span>193</span>か国",
+        "本部：<span>ニューヨーク</span>"
+      ]
+    }
+    // More general information items
+  ],
+  "agencies": [
+    {
+      "id": 1,
+      "title": "総会 - 国連の最高機関",
+      "description": ["毎年9月に通常総会が開かれる", "1国1票の多数決で議決が行われる"]
+    }
+    // More UN agencies and organizations
+  ],
+  "human_rights": [
+    {
+      "id": 1,
+      "title": "<span>世界人権宣言</span>",
+      "description": ["採択年 : 1948年", "すべての国が達成すべき基本的人権についての宣言"]
+    }
+    // More human rights treaties
+  ],
+  "global_environment": [
+    {
+      "id": 1,
+      "title": "<span>国連人間環境会議</span>",
+      "description": ["開催年 : 1972年", "開催都市 : <span>ストックホルム</span>"]
+    }
+    // More global environment conferences
+  ]
 }
 ```
 

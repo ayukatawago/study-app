@@ -1,0 +1,171 @@
+{
+    "general": [
+        {
+            "id": 1,
+            "title": "国際連盟",
+            "description": ["成立： <span>1945年10月</span>", "加盟国：<span>193</span>か国", "本部：<span>ニューヨーク</span>"]
+        },
+        {
+            "id": 2,
+            "title": "国連と日本の関係",
+            "description": ["<span>1956</span>年に国連に加盟", "<span>PKO</span>の自衛隊派遣は1992年のカンボジアが初"]
+        },
+        {
+            "id": 3,
+            "title": "国連の負担金",
+            "description": ["<span>アメリカ</span> : 22.0%", "<span>中国</span> : 15.3%", "<span>日本</span> : 8.0%", "ドイツ : 6.1%", "イギリス : 4.4%"]
+        }
+    ],
+    "agencies": [
+        {
+            "id": 1,
+            "title": "総会 - 国連の最高機関",
+            "description": ["毎年<span>9月</span>に通常総会が開かれる", "1国1票の多数決で議決が行われる", "一般議題 : 過半数の賛成で可決", "重要議題 : 2/3以上の賛成で可決"]
+        },
+        {
+            "id": 2,
+            "title": "<span>安全保障</span>理事会 - 平和と安全の維持",
+            "description": ["常任理事国：5か国（<span>アメリカ</span>・<span>イギリス</span>・<span>フランス</span>・<span>ロシア</span>・<span>中国</span>）", "非常任理事国：10か国 (任期2年)", "決議は常任理事国を含む9か国以上の賛成が必要", "常任理事国は<span>拒否権</span>を持つ", "平和的解決の勧告と経済制裁や武力制裁の決議を行う"]
+        },
+        {
+            "id": 3,
+            "title": "<span>経済社会</span>理事会 - 平和・安全以外の役割",
+            "description": ["多くの専門機関や国連機関と協力", "加盟国から選出された54か国で構成"]
+        },
+        {
+            "id": 4,
+            "title": "国際司法裁判所 - 加盟国の争いの解決",
+            "description": ["本部 : <span>ハーグ (オランダ)</span>"]
+        },
+        {
+            "id": 5,
+            "title": "事務局 - 各機関の運営",
+            "description": ["事務総長 : <span>グテーレス (ポルトガル)</span>"]
+        },
+        {
+            "id": 6,
+            "title": "信任統治理事会 - 未開発地域の独立を支援",
+            "description": ["1994年の<span>パラオ</span>の独立をもって活動を終了"]
+        },
+        {
+            "id": 7,
+            "title": "<span>国連環境計画</span> (<span>UNEP</span>)",
+            "description": ["環境保護分野での国際的な協力"]
+        },
+        {
+            "id": 8,
+            "title": "<span>国連児童基金</span> (<span>UNICEF</span>)",
+            "description": ["発展途上国の児童への援助"]
+        },
+        {
+            "id": 9,
+            "title": "<span>国連難民高等弁務官事務所</span> (<span>UNHCR</span>)",
+            "description": ["難民の保護と支援"]
+        },
+        {
+            "id": 10,
+            "title": "<span>国連貿易開発会議</span> (<span>UNCTAD</span>)",
+            "description": ["南北問題の解決"]
+        },
+        {
+            "id": 11,
+            "title": "<span>国連世界食料計画</span> (<span>WEP</span>)",
+            "description": ["飢餓問題の解決"]
+        },
+        {
+            "id": 12,
+            "title": "<span>国際原子力機関</span> (<span>IAEA</span>)",
+            "description": ["原子力の平和的利用の推進"]
+        },
+        {
+            "id": 13,
+            "title": "<span>世界貿易機関</span> (<span>WTO</span>)",
+            "description": ["自由貿易の推進"]
+        },
+        {
+            "id": 14,
+            "title": "<span>国連教育科学文化機関</span> (<span>UNESCO</span>)",
+            "description": ["世界遺産の登録"]
+        },
+        {
+            "id": 15,
+            "title": "<span>世界保健機関</span> (<span>WHO</span>)",
+            "description": ["健康の増進や感染症の予防"]
+        },
+        {
+            "id": 16,
+            "title": "<span>国際労働機関</span> (<span>ILO</span>)",
+            "description": ["労働環境や労働条件の改善"]
+        },
+        {
+            "id": 17,
+            "title": "<span>国際通貨基金</span> (<span>IMF</span>)",
+            "description": ["通貨や為替相場の安定"]
+        },
+        {
+            "id": 18,
+            "title": "<span>国連食糧農業機関</span> (<span>FAO</span>)",
+            "description": ["食料安全保障の実現"]
+        },
+        {
+            "id": 19,
+            "title": "<span>国連平和維持活動</span> (<span>PKO</span>)",
+            "description": ["紛争地域での停戦監視や人道支援を行う", "安全保障理事会や総会の決議によって実施される"]
+        }
+    ],
+    "human_rights": [
+        {
+            "id": 1,
+            "title": "<span>世界人権宣言</span>",
+            "description": ["採択年 : 1948年", "すべての国が達成すべき基本的人権についての宣言"]
+        },
+        {
+            "id": 2,
+            "title": "<span>国際人権規約</span>",
+            "description": ["採択年 : 1966年 / 発行年 : 1976年", "市民的及び政治的権利に関する国際規約", "<span>世界人権宣言</span>の内容をもとに条約化したもの"]
+        },
+        {
+            "id": 3,
+            "title": "<span>女性差別撤廃条約</span>",
+            "description": ["採択年 : 1979年 / 発行年 : 1981年", "女性に対するあらゆる形態の差別を撤廃するための国際条約", "日本では<span>男女雇用機会均等法</span> (1985年)など法整備" ]
+        },
+        {
+            "id": 4,
+            "title": "<span>子どもの権利条約</span>",
+            "description": ["採択年 : 1989年 / 発行年 : 1990年", "18歳未満の全ての子どもの権利を保護し、促進するための国際条約"]
+        }
+    ],
+    "global_environment" : [
+        {
+            "id": 1,
+            "title": "<span>国連人間環境会議</span>",
+            "description": ["開催年 : 1972年", "開催都市 : <span>ストックホルム</span>", "テーマ : 「かけがえのない地球」", "人間環境宣言の採択", "国連環境計画 (UNEP)の設立"]
+        },
+        {
+            "id": 2,
+            "title": "<span>国連環境開発会議</span> (地球サミット)",
+            "description": ["開催年 : 1992年", "開催都市 : <span>リオデジャネイロ</span>", "テーマ : 「持続可能な開発」", "気候変動枠組条約の採択"]
+        },
+        {
+            "id": 3,
+            "title": "<span>気候変動枠組条約</span>第3回締約国会議 (COP3)",
+            "description": ["開催年 : 1997年", "開催都市 : <span>京都</span>", "京都議定書の採択", "先進国に対する各国の温室効果ガス排出削減の具体的な数値目標"]
+        },
+        {
+            "id": 4,
+            "title": "<span>環境開発サミット</span>",
+            "description": ["開催年 : 2002年", "開催都市 : ヨハネスバーグ (南アフリカ)"]
+        },
+        {
+            "id": 5,
+            "title": "<span>国連持続可能な開発会議</span>",
+            "description": ["開催年 : 2012年", "開催都市 : <span>リオデジャネイロ</span>", "グリーン経済", "<span>持続可能な開発目標 (SDGs)</span> : 2030年までに達成すべき17の目標"]
+        },
+        {
+            "id": 6,
+            "title": "<span>気候変動枠組条約</span>第21回締約国会議 (COP21)",
+            "description": ["開催年 : 2015年", "開催都市 : <span>パリ</span>", "テーマ : 「気候変動対策」", "<span>パリ</span>協定の採択", "産業革命の時期と比べて、地球の平均気温上昇を2℃未満に抑えることを目指す", "各国への温室効果ガス削減の具体的な数値目標"]
+        }
+    ]
+    
+}

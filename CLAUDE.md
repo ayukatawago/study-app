@@ -55,7 +55,8 @@ study-app/
 │       │   ├── events.json      # History events data
 │       │   └── culture.json     # Cultural figures data
 │       ├── civics/               # Civics data directory
-│       │   └── constitution.json # Japanese constitution data
+│       │   ├── constitution.json # Japanese constitution data
+│       │   └── united_nations.json # United Nations and international organizations data
 │       ├── geography/            # Geography data directory
 │       │   └── world_countries.json # World countries data with zoom levels
 │       └── science/              # Science data directory
@@ -71,6 +72,8 @@ study-app/
 │   │   ├── constitution/ # Constitution flashcards page
 │   │   │   └── components/ # Page-specific components
 │   │   ├── world-country/ # World countries flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   ├── international-community/ # International community quiz page
 │   │   │   └── components/ # Page-specific components
 │   │   ├── animals/ # Animal quiz flashcards page
 │   │   │   └── components/ # Page-specific components
@@ -159,7 +162,14 @@ logger.error('Error occurred', errorObject);
    - Track correct/incorrect responses in local storage
    - Adaptable card height based on content length
 
-7. **Data Management**
+7. **International Community Quiz System**
+   - Display interactive quiz content about United Nations and international organizations
+   - Interactive text revealing - tap on placeholder text to reveal answers
+   - Category filtering between different topics (general, agencies, human rights, global environment)
+   - Track correct/incorrect responses in local storage
+   - Adaptable card height based on content length
+
+8. **Data Management**
    - Uses local storage to persist user progress
    - Pulls history flashcard data from history/events.json
    - Pulls culture flashcard data from history/culture.json
@@ -167,8 +177,9 @@ logger.error('Error occurred', errorObject);
    - Pulls world country data from geography/world_countries.json
    - Pulls animal quiz data from science/animals.json
    - Pulls human quiz data from science/human.json
+   - Pulls international community quiz data from civics/united_nations.json
 
-8. **User Interface**
+9. **User Interface**
    - Responsive design using TailwindCSS
    - Simple and intuitive flashcard interaction
    - Settings panel for customizing study experience

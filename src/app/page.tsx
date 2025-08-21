@@ -35,6 +35,12 @@ export default function Home() {
               >
                 世界地図
               </Link>
+              <Link
+                href="/international-community"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+              >
+                国際社会
+              </Link>
             </div>
           </div>
 
