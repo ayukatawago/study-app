@@ -5,7 +5,7 @@ import { CultureEventData } from '@/types/flashcard';
 
 type CultureFlashcardProps = {
   event: CultureEventData;
-  direction: 'person-to-desc' | 'desc-to-person';
+  direction: 'keyword-to-desc' | 'desc-to-keyword';
   onCorrect: () => void;
   onIncorrect: () => void;
 };
@@ -22,8 +22,8 @@ export default function CultureFlashcard({
       return <div className="text-lg">No card available</div>;
     }
 
-    return direction === 'person-to-desc' ? (
-      <div className="text-3xl font-bold">{event.person}</div>
+    return direction === 'keyword-to-desc' ? (
+      <div className="text-3xl font-bold">{event.keyword}</div>
     ) : (
       <div className="text-lg">
         {event.descriptions.map((item, index) => (
@@ -41,7 +41,7 @@ export default function CultureFlashcard({
       return <div className="text-lg">No card available</div>;
     }
 
-    return direction === 'person-to-desc' ? (
+    return direction === 'keyword-to-desc' ? (
       <>
         <div className="text-lg mb-3">
           {event.descriptions.map((item, index) => (
@@ -54,7 +54,7 @@ export default function CultureFlashcard({
       </>
     ) : (
       <>
-        <div className="text-3xl font-bold mb-3">{event.person}</div>
+        <div className="text-3xl font-bold mb-3">{event.keyword}</div>
         <div className="text-sm text-gray-500 mt-4">時代: {event.period}</div>
       </>
     );

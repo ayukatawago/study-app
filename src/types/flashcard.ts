@@ -18,7 +18,7 @@ export interface HistoryEventData extends BaseFlashcardData {
 
 // Culture event data
 export interface CultureEventData extends BaseFlashcardData {
-  person: string; // Used as the unique id for culture events
+  keyword: string; // Used as the unique id for culture events
   period: string;
   descriptions: string[];
 }
@@ -60,7 +60,7 @@ export interface HistoryFlashcardSettings extends BaseFlashcardSettings {
 
 // Culture settings
 export interface CultureFlashcardSettings extends BaseFlashcardSettings {
-  cardDirection: 'person-to-desc' | 'desc-to-person';
+  cardDirection: 'keyword-to-desc' | 'desc-to-keyword';
   showMemorize: boolean;
 }
 

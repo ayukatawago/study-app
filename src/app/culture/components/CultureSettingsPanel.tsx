@@ -23,37 +23,37 @@ export default function CultureSettingsPanel({
           <div className="flex items-center">
             <input
               type="radio"
-              id="person-to-desc"
+              id="keyword-to-desc"
               name="cardDirection"
-              checked={settings.cardDirection === 'person-to-desc'}
+              checked={settings.cardDirection === 'keyword-to-desc'}
               onChange={() =>
                 onSettingsChange({
                   ...settings,
-                  cardDirection: 'person-to-desc',
+                  cardDirection: 'keyword-to-desc',
                 })
               }
               className="mr-2"
             />
-            <label htmlFor="person-to-desc" className="text-sm">
-              人物 → 説明
+            <label htmlFor="keyword-to-desc" className="text-sm">
+              キーワード → 説明
             </label>
           </div>
           <div className="flex items-center">
             <input
               type="radio"
-              id="desc-to-person"
+              id="desc-to-keyword"
               name="cardDirection"
-              checked={settings.cardDirection === 'desc-to-person'}
+              checked={settings.cardDirection === 'desc-to-keyword'}
               onChange={() =>
                 onSettingsChange({
                   ...settings,
-                  cardDirection: 'desc-to-person',
+                  cardDirection: 'desc-to-keyword',
                 })
               }
               className="mr-2"
             />
-            <label htmlFor="desc-to-person" className="text-sm">
-              説明 → 人物
+            <label htmlFor="desc-to-keyword" className="text-sm">
+              説明 → キーワード
             </label>
           </div>
         </div>

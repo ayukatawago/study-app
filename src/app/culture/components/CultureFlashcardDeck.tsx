@@ -13,7 +13,7 @@ export default function CultureFlashcardDeck() {
   const [settings, setSettings] = useLocalStorage<CultureFlashcardSettings>(
     'culture_flashcard_settings',
     {
-      cardDirection: 'person-to-desc',
+      cardDirection: 'keyword-to-desc',
       showMemorize: true,
       randomOrder: true,
       showIncorrectOnly: false,
@@ -22,7 +22,7 @@ export default function CultureFlashcardDeck() {
 
   // Filter culture events based on settings
   const filterItems = (items: CultureEventData[], incorrectIds: (string | number)[]) => {
-    return items.filter(event => incorrectIds.includes(event.person));
+    return items.filter(event => incorrectIds.includes(event.keyword));
   };
 
   // Render individual culture flashcard
@@ -49,7 +49,7 @@ export default function CultureFlashcardDeck() {
   };
 
   // Extract the unique identifier from a culture event
-  const getItemId = (event: CultureEventData) => event.person;
+  const getItemId = (event: CultureEventData) => event.keyword;
 
   return (
     <BaseDeck

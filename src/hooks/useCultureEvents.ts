@@ -34,7 +34,7 @@ export function useCultureEvents() {
         // Map to ensure each event has an id
         const eventsWithId = (data.culture || []).map(event => ({
           ...event,
-          id: event.person, // Use person name as id
+          id: event.keyword, // Use keyword as id
         }));
         setCultureEvents(eventsWithId);
         setError(null);
