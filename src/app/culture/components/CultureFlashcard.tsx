@@ -23,15 +23,21 @@ export default function CultureFlashcard({
     }
 
     return direction === 'keyword-to-desc' ? (
-      <div className="text-3xl font-bold">{event.keyword}</div>
+      <>
+        <div className="text-3xl font-bold mb-3">{event.keyword}</div>
+        <div className="text-sm text-gray-500">項目数: {event.descriptions.length}</div>
+      </>
     ) : (
-      <div className="text-lg">
-        {event.descriptions.map((item, index) => (
-          <div key={index} className={index > 0 ? 'mt-2' : ''}>
-            {item}
-          </div>
-        ))}
-      </div>
+      <>
+        <div className="text-lg mb-3">
+          {event.descriptions.map((item, index) => (
+            <div key={index} className={index > 0 ? 'mt-2' : ''}>
+              {item}
+            </div>
+          ))}
+        </div>
+        <div className="text-sm text-gray-500">項目数: {event.descriptions.length}</div>
+      </>
     );
   };
 
