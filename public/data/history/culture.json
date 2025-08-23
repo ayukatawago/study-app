@@ -1,14 +1,236 @@
 {
    "culture": [
       {
-         "person": "井原西鶴",
+         "keyword": "旧石器時代の特徴",
+         "period": "旧石器時代",
+         "descriptions": [
+            "打製石器",
+            "狩猟・採集による"
+         ]
+      },
+      {
+         "keyword": "旧石器時代の遺跡",
+         "period": "旧石器時代",
+         "descriptions": [
+            "岩宿遺跡 (群馬)",
+            "野尻湖遺跡 (長野)"
+         ]
+      },
+      {
+         "keyword": "縄文時代の特徴",
+         "period": "縄文時代",
+         "descriptions": [
+            "縄文土器",
+            "竪穴住居",
+            "土偶"
+         ]
+      },
+      {
+         "keyword": "縄文時代の遺跡",
+         "period": "縄文時代",
+         "descriptions": [
+            "三内丸山遺跡 (青森)",
+            "大森貝塚 (東京)"
+         ]
+      },
+      {
+         "keyword": "弥生時代の特徴",
+         "period": "弥生時代",
+         "descriptions": [
+            "弥生土器",
+            "金属器 (鉄器・青銅器) の使用",
+            "環濠集落 -> 争いの証拠"
+         ]
+      },
+      {
+         "keyword": "弥生時代の遺跡",
+         "period": "弥生時代",
+         "descriptions": [
+            "吉野ヶ里遺跡 (佐賀)",
+            "登呂遺跡 (静岡)",
+            "板付遺跡 (福岡)"
+         ]
+      },
+      {
+         "keyword": "飛鳥文化の代表的な建築物",
+         "period": "飛鳥文化",
+         "descriptions": [
+            "法隆寺",
+            "飛鳥寺",
+            "四天王寺"
+         ]
+      },
+      {
+         "keyword": "白鳳文化の代表",
+         "period": "白鳳文化",
+         "descriptions": [
+            "高松塚古墳壁画",
+            "薬師寺東塔"
+         ]
+      },
+      {
+         "keyword": "天平文化の代表",
+         "period": "天平文化",
+         "descriptions": [
+            "東大寺",
+            "正倉院",
+            "万葉集の完成など"
+         ]
+      },
+      {
+         "keyword": "国風文化の特徴",
+         "period": "国風文化の特徴",
+         "descriptions": [
+            "かな文字の使用",
+            "束帯・女房装束(十二単)",
+            "寝殿造",
+            "浄土信仰の広まり"
+         ]
+      },
+      {
+         "keyword": "紀貫之",
+         "period": "国風文化",
+         "descriptions": [
+            "「土佐日記」"
+         ]
+      },
+      {
+         "keyword": "清少納言",
+         "period": "国風文化",
+         "descriptions": [
+            "「枕草子」"
+         ]
+      },
+      {
+         "keyword": "紫式部",
+         "period": "国風文化",
+         "descriptions": [
+            "「源氏物語」"
+         ]
+      },
+      {
+         "keyword": "法然",
+         "period": "鎌倉文化",
+         "descriptions": [
+            "浄土宗"
+         ]
+      },
+      {
+         "keyword": "親鸞",
+         "period": "鎌倉文化",
+         "descriptions": [
+            "浄土真宗"
+         ]
+      },
+      {
+         "keyword": "一遍",
+         "period": "鎌倉文化",
+         "descriptions": [
+            "時宗"
+         ]
+      },
+      {
+         "keyword": "日蓮",
+         "period": "鎌倉文化",
+         "descriptions": [
+            "日蓮宗"
+         ]
+      },
+      {
+         "keyword": "栄西",
+         "period": "鎌倉文化",
+         "descriptions": [
+            "臨済宗"
+         ]
+      },
+      {
+         "keyword": "道元",
+         "period": "鎌倉文化",
+         "descriptions": [
+            "曹洞宗"
+         ]
+      },
+      {
+         "keyword": "鎌倉文化の建築物",
+         "period": "鎌倉文化",
+         "descriptions": [
+            "東大寺南大門 (運慶・快慶の金剛力士像)",
+            "円覚寺舎利殿"
+         ]
+      },
+      {
+         "keyword": "藤原定家",
+         "period": "鎌倉文化",
+         "descriptions": [
+            "「新古今和歌集」"
+         ]
+      },
+      {
+         "keyword": "吉田兼好",
+         "period": "鎌倉文化",
+         "descriptions": [
+            "「徒然草」"
+         ]
+      },
+      {
+         "keyword": "室町文化の建築物",
+         "period": "室町文化",
+         "descriptions": [
+            "金閣 (鹿苑寺)",
+            "銀閣 (慈照寺)"
+         ]
+      },
+      {
+         "keyword": "室町文化の特徴",
+         "period": "室町文化",
+         "descriptions": [
+            "枯山水の庭園",
+            "能楽",
+            "連歌",
+            "水墨画",
+            "「御伽草子」"
+         ]
+      },
+      {
+         "keyword": "雪舟",
+         "period": "室町文化",
+         "descriptions": [
+            "「秋冬山水図」"
+         ]
+      },
+      {
+         "keyword": "桃山文化の特徴",
+         "period": "桃山文化",
+         "descriptions": [
+            "安土城・大阪城・姫路城などの城郭建築",
+            "茶道 (千利休)",
+            "陶磁器",
+            "障壁画"
+         ]
+      },
+      {
+         "keyword": "狩野永徳",
+         "period": "桃山文化",
+         "descriptions": [
+            "障壁画 (「唐獅子図屏風」など)"
+         ]
+      },
+      {
+         "keyword": "出雲阿国",
+         "period": "桃山文化",
+         "descriptions": [
+            "かぶき踊り"
+         ]
+      },
+      {
+         "keyword": "井原西鶴",
          "period": "元禄文化",
          "descriptions": [
             "浮世草子"
          ]
       },
       {
-         "person": "近松門左衛門",
+         "keyword": "近松門左衛門",
          "period": "元禄文化",
          "descriptions": [
             "人形浄瑠璃の脚本",
@@ -16,7 +238,7 @@
          ]
       },
       {
-         "person": "松尾芭蕉",
+         "keyword": "松尾芭蕉",
          "period": "元禄文化",
          "descriptions": [
             "俳諧",
@@ -24,140 +246,140 @@
          ]
       },
       {
-         "person": "尾形光琳",
+         "keyword": "尾形光琳",
          "period": "元禄文化",
          "descriptions": [
             "俵屋宗達の後に装飾画を大成"
          ]
       },
       {
-         "person": "菱川師宣",
+         "keyword": "菱川師宣",
          "period": "元禄文化",
          "descriptions": [
             "見返り美人"
          ]
       },
       {
-         "person": "杉田玄白",
+         "keyword": "杉田玄白",
          "period": "化政文化",
          "descriptions": [
             "「解体新書」の翻訳"
          ]
       },
       {
-         "person": "伊能忠敬",
+         "keyword": "伊能忠敬",
          "period": "化政文化",
          "descriptions": [
             "日本地図の作成"
          ]
       },
       {
-         "person": "十返舎一九",
+         "keyword": "十返舎一九",
          "period": "化政文化",
          "descriptions": [
             "「東海道中膝栗毛」"
          ]
       },
       {
-         "person": "葛飾北斎",
+         "keyword": "葛飾北斎",
          "period": "化政文化",
          "descriptions": [
             "「富嶽三十六景」"
          ]
       },
       {
-         "person": "歌川広重",
+         "keyword": "歌川広重",
          "period": "化政文化",
          "descriptions": [
             "「東海道五十三次」"
          ]
       },
       {
-         "person": "曲亭馬琴",
+         "keyword": "曲亭馬琴",
          "period": "化政文化",
          "descriptions": [
             "「南総里見八犬伝」"
          ]
       },
       {
-         "person": "鈴木春信",
+         "keyword": "鈴木春信",
          "period": "化政文化",
          "descriptions": [
             "錦絵"
          ]
       },
       {
-         "person": "喜多川歌麿",
+         "keyword": "喜多川歌麿",
          "period": "化政文化",
          "descriptions": [
             "美人画"
          ]
       },
       {
-         "person": "森鴎外",
+         "keyword": "森鴎外",
          "period": "明治①",
          "descriptions": [
             "「舞姫」"
          ]
       },
       {
-         "person": "北里柴三郎",
+         "keyword": "北里柴三郎",
          "period": "明治①",
          "descriptions": [
             "破傷風の血清療法を発見"
          ]
       },
       {
-         "person": "樋口一葉",
+         "keyword": "樋口一葉",
          "period": "明治①",
          "descriptions": [
             "「たけくらべ」"
          ]
       },
       {
-         "person": "黒田清輝",
+         "keyword": "黒田清輝",
          "period": "明治①",
          "descriptions": [
             "「湖畔」"
          ]
       },
       {
-         "person": "志賀潔",
+         "keyword": "志賀潔",
          "period": "明治①",
          "descriptions": [
             "赤痢菌発見"
          ]
       },
       {
-         "person": "フェノロサ・岡倉天心",
+         "keyword": "フェノロサ・岡倉天心",
          "period": "明治①",
          "descriptions": [
             "日本美術の復興"
          ]
       },
       {
-         "person": "与謝野晶子",
+         "keyword": "与謝野晶子",
          "period": "明治②",
          "descriptions": [
             "「みだれ髪」"
          ]
       },
       {
-         "person": "夏目漱石",
+         "keyword": "夏目漱石",
          "period": "明治②",
          "descriptions": [
             "「こころ」"
          ]
       },
       {
-         "person": "石川啄木",
+         "keyword": "石川啄木",
          "period": "明治②",
          "descriptions": [
             "「一握の砂」"
          ]
       },
       {
-         "person": "平塚らいてう",
+         "keyword": "平塚らいてう",
          "period": "明治②",
          "descriptions": [
             "「青鞜」"
