@@ -132,9 +132,9 @@ logger.error('Error occurred', errorObject);
    - Use the "memorize" field for memory aids
 
 2. **Culture Flashcard System**
-   - Display Japanese cultural figures and their contributions
-   - Allow flipping between person and description content
-   - Show period information on flipped cards
+   - Display Japanese cultural keywords and their descriptions
+   - Allow flipping between keyword and description content
+   - Show period information and description count on cards
    - Track correct/incorrect responses in local storage
 
 3. **Constitution Quiz System**
@@ -222,16 +222,16 @@ The application also uses the following JSON structure for culture flashcard dat
 {
   "culture": [
     {
-      "person": "井原西鶴",
+      "keyword": "井原西鶴",
       "period": "元禄文化",
       "descriptions": ["浮世草子"]
     },
     {
-      "person": "近松門左衛門",
+      "keyword": "近松門左衛門",
       "period": "元禄文化",
       "descriptions": ["人形浄瑠璃の脚本", "「曽根崎心中」"]
     }
-    // More person-description pairs
+    // More keyword-description pairs
   ]
 }
 ```
@@ -378,7 +378,7 @@ User progress and settings for culture flashcards are stored in local storage wi
     "incorrect": ["松尾芭蕉"]
   },
   "culture_flashcard_settings": {
-    "cardDirection": "person-to-desc",
+    "cardDirection": "keyword-to-desc",
     "showMemorize": true,
     "randomOrder": true,
     "showIncorrectOnly": false
@@ -481,7 +481,7 @@ User progress and settings for human quiz flashcards are stored in local storage
 3. **Study Modes**: Option to study all cards or only incorrect cards
 4. **Card Direction**:
    - For history: Switch between year-to-event and event-to-year directions
-   - For culture: Switch between person-to-description and description-to-person directions
+   - For culture: Switch between keyword-to-description and description-to-keyword directions
 5. **Random Order**: Option to study cards in random or sequential order
 6. **Reset Progress**: Clear study history when needed
 7. **Dynamic Card Height**: Adjusts card height based on content length

@@ -7,7 +7,7 @@ A Next.js application to help users memorize important points in social studies 
 - Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, international community, animal science, and human biology
 - Multiple study modes:
   - History: Toggle between year-to-event and event-to-year modes
-  - Culture: Toggle between person-to-description and description-to-person modes
+  - Culture: Toggle between keyword-to-description and description-to-keyword modes
   - Constitution: Interactive quiz with tap-to-reveal answers
   - World Geography: Interactive map with country highlights and information
   - International Community: Interactive quiz about United Nations and international organizations
@@ -151,11 +151,11 @@ The application uses the following JSON structure for culture flashcard data (fr
 {
   "culture": [
     {
-      "person": "井原西鶴",
+      "keyword": "井原西鶴",
       "period": "元禄文化",
       "descriptions": ["浮世草子"]
     }
-    // More person-description pairs
+    // More keyword-description pairs
   ]
 }
 ```
