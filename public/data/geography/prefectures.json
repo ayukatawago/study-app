@@ -1,0 +1,884 @@
+{
+  "prefectures": [
+    {
+      "prefecture": "北海道",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "稲作",
+          "answer": "石狩平野・上川盆地 石狩川"
+        },
+        {
+          "id": 2,
+          "keyword": "畑作",
+          "answer": "十勝平野"
+        },
+        {
+          "id": 3,
+          "keyword": "酪農",
+          "answer": "根釧台地"
+        },
+        {
+          "id": 4,
+          "keyword": "漁業",
+          "answer": "釧路港"
+        },
+        {
+          "id": 5,
+          "keyword": "ホタテ貝の洋食",
+          "answer": "サロマ湖"
+        },
+        {
+          "id": 6,
+          "keyword": "北海道最高峰",
+          "answer": "大雪山"
+        },
+        {
+          "id": 7,
+          "keyword": "蝦夷富士",
+          "answer": "羊蹄山"
+        },
+        {
+          "id": 8,
+          "keyword": "カルデラ湖の洞爺湖・世界ジオパーク",
+          "answer": "有珠山"
+        },
+        {
+          "id": 9,
+          "keyword": "ラムサール条約",
+          "answer": "釧路湿原"
+        },
+        {
+          "id": 10,
+          "keyword": "世界自然遺産",
+          "answer": "知床"
+        },
+        {
+          "id": 11,
+          "keyword": "人口196万人・屯田兵による開拓",
+          "answer": "札幌市"
+        },
+        {
+          "id": 12,
+          "keyword": "鉄鋼業",
+          "answer": "室蘭市"
+        },
+        {
+          "id": 13,
+          "keyword": "製紙工業・石油精製",
+          "answer": "苫小牧市"
+        }
+      ]
+    },
+    {
+      "prefecture": "青森県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "りんご",
+          "answer": "津軽平野（弘前市など）"
+        },
+        {
+          "id": 2,
+          "keyword": "いか漁",
+          "answer": "八戸港"
+        },
+        {
+          "id": 3,
+          "keyword": "ホタテ貝の養殖",
+          "answer": "陸奥湾"
+        },
+        {
+          "id": 4,
+          "keyword": "三大美林",
+          "answer": "津軽ひば"
+        },
+        {
+          "id": 5,
+          "keyword": "東北三大祭り",
+          "answer": "ねぶた"
+        },
+        {
+          "id": 6,
+          "keyword": "核燃料再処理施設",
+          "answer": "六ヶ所村 (下北半島)"
+        }
+      ]
+    },
+    {
+      "prefecture": "岩手県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "気候の特徴",
+          "answer": "やませによる夏の冷害"
+        },
+        {
+          "id": 2,
+          "keyword": "飼育",
+          "answer": "乳牛"
+        },
+        {
+          "id": 3,
+          "keyword": "漁業",
+          "answer": "三陸海岸 宮古港"
+        },
+        {
+          "id": 4,
+          "keyword": "世界文化遺産",
+          "answer": "平泉"
+        }
+      ]
+    },
+    {
+      "prefecture": "宮城県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "稲作",
+          "answer": "仙台平野 北上川河口（ひとめぼれ）"
+        },
+        {
+          "id": 2,
+          "keyword": "日本三景",
+          "answer": "松島"
+        },
+        {
+          "id": 3,
+          "keyword": "東北三大祭り",
+          "answer": "七夕祭り"
+        },
+        {
+          "id": 4,
+          "keyword": "百万都市",
+          "answer": "仙台市・「杜の都」"
+        }
+      ]
+    },
+    {
+      "prefecture": "秋田県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "稲作",
+          "answer": "八郎潟の干拓（大潟村）(あきたこまち）"
+        },
+        {
+          "id": 2,
+          "keyword": "三大美林",
+          "answer": "秋田すぎ"
+        },
+        {
+          "id": 3,
+          "keyword": "日本一深い湖",
+          "answer": "田沢湖"
+        },
+        {
+          "id": 4,
+          "keyword": "東北三大祭り",
+          "answer": "竿燈・秋田市"
+        },
+        {
+          "id": 5,
+          "keyword": "民俗行事",
+          "answer": "男鹿のなまはげ"
+        }
+      ]
+    },
+    {
+      "prefecture": "山形県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "稲作",
+          "answer": "庄内平野"
+        },
+        {
+          "id": 2,
+          "keyword": "さくらんぼ・紅花",
+          "answer": "山形盆地"
+        },
+        {
+          "id": 3,
+          "keyword": "三大急流",
+          "answer": "最上川 河口に酒田港"
+        }
+      ]
+    },
+    {
+      "prefecture": "福島県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "もも",
+          "answer": "福島盆地"
+        },
+        {
+          "id": 2,
+          "keyword": "日本で4番目に大きい湖",
+          "answer": "猪苗代湖"
+        },
+        {
+          "id": 3,
+          "keyword": "安積疏水",
+          "answer": "猪苗代湖から郡山盆地"
+        }
+      ]
+    },
+    {
+      "prefecture": "茨城県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "農業",
+          "answer": "ピーマンなどの近郊農業"
+        },
+        {
+          "id": 2,
+          "keyword": "飼育",
+          "answer": "採卵鶏"
+        },
+        {
+          "id": 3,
+          "keyword": "早場米",
+          "answer": "水郷"
+        },
+        {
+          "id": 4,
+          "keyword": "日本で2番目に大きい湖",
+          "answer": "霞ヶ浦"
+        },
+        {
+          "id": 5,
+          "keyword": "日本初の原子力発電",
+          "answer": "東海村"
+        },
+        {
+          "id": 6,
+          "keyword": "日本三名園",
+          "answer": "偕楽園 (水戸市)"
+        },
+        {
+          "id": 7,
+          "keyword": "鉄鋼業",
+          "answer": "鹿島臨海工業地域 (鹿嶋市)"
+        }
+      ]
+    },
+    {
+      "prefecture": "栃木県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "農作物",
+          "answer": "いちご・かんぴょう"
+        },
+        {
+          "id": 2,
+          "keyword": "世界文化遺産",
+          "answer": "日光"
+        }
+      ]
+    },
+    {
+      "prefecture": "群馬県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "浅間山山麓・キャベツ",
+          "answer": "嬬恋村"
+        },
+        {
+          "id": 2,
+          "keyword": "こんにゃくいも・ねぎ",
+          "answer": "下仁田町"
+        },
+        {
+          "id": 3,
+          "keyword": "冬のからっ風を防ぐ",
+          "answer": "屋敷森"
+        },
+        {
+          "id": 4,
+          "keyword": "自動車工業",
+          "answer": "太田市"
+        },
+        {
+          "id": 5,
+          "keyword": "絹織物",
+          "answer": "桐生市"
+        },
+        {
+          "id": 6,
+          "keyword": "世界文化遺産",
+          "answer": "富岡製糸場"
+        }
+      ]
+    },
+    {
+      "prefecture": "埼玉県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "農業",
+          "answer": "狭山茶・ねぎ"
+        },
+        {
+          "id": 2,
+          "keyword": "セメント工業",
+          "answer": "秩父市"
+        },
+        {
+          "id": 3,
+          "keyword": "特徴",
+          "answer": "東京のベッドタウン・市の数が日本一"
+        }
+      ]
+    },
+    {
+      "prefecture": "千葉県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "農業",
+          "answer": "ほうれん草などの近郊農業"
+        },
+        {
+          "id": 2,
+          "keyword": "漁業",
+          "answer": "銚子港 (利根川の河口)"
+        },
+        {
+          "id": 3,
+          "keyword": "石油化学工業",
+          "answer": "市原市"
+        },
+        {
+          "id": 4,
+          "keyword": "鉄鋼業",
+          "answer": "千葉市・君津市"
+        },
+        {
+          "id": 5,
+          "keyword": "貿易額日本一",
+          "answer": "成田国際空港"
+        }
+      ]
+    },
+    {
+      "prefecture": "東京都",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "武蔵野(荒川と多摩川の間)",
+          "answer": "関東ローム"
+        },
+        {
+          "id": 2,
+          "keyword": "東京湾沿い",
+          "answer": "ゼロメートル地帯"
+        }
+      ]
+    },
+    {
+      "prefecture": "神奈川県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "漁業",
+          "answer": "三崎港(三浦半島) マグロ"
+        },
+        {
+          "id": 2,
+          "keyword": "鉄鋼業・石油化学工業",
+          "answer": "川崎市 (2023年高炉による製鉄終了)"
+        },
+        {
+          "id": 3,
+          "keyword": "造船業・自動車工業",
+          "answer": "横須賀市"
+        },
+        {
+          "id": 4,
+          "keyword": "東京湾アクアライン",
+          "answer": "川崎市と千葉県木更津を結ぶ"
+        }
+      ]
+    },
+    {
+      "prefecture": "新潟県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "稲作",
+          "answer": "越後平野 (コシヒカリ)・信濃川河口"
+        },
+        {
+          "id": 2,
+          "keyword": "世界文化遺産",
+          "answer": "佐渡島"
+        },
+        {
+          "id": 3,
+          "keyword": "第二水俣病",
+          "answer": "阿賀野川流域"
+        }
+      ]
+    },
+    {
+      "prefecture": "富山県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "特徴",
+          "answer": "チューリップ・昔ながらの製薬業"
+        },
+        {
+          "id": 2,
+          "keyword": "立山連峰",
+          "answer": "黒部ダム"
+        },
+        {
+          "id": 3,
+          "keyword": "イタイイタイ病",
+          "answer": "神通川流域"
+        },
+        {
+          "id": 4,
+          "keyword": "世界文化遺産",
+          "answer": "五箇山の合掌造り"
+        }
+      ]
+    },
+    {
+      "prefecture": "石川県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "2024年大地震",
+          "answer": "能登半島"
+        },
+        {
+          "id": 2,
+          "keyword": "日本三名園",
+          "answer": "兼六園 (金沢市)"
+        }
+      ]
+    },
+    {
+      "prefecture": "福井県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "原子力発電所",
+          "answer": "若狭湾"
+        },
+        {
+          "id": 2,
+          "keyword": "メガネわく",
+          "answer": "鯖江市"
+        },
+        {
+          "id": 3,
+          "keyword": "北陸新幹線の終点",
+          "answer": "敦賀市"
+        }
+      ]
+    },
+    {
+      "prefecture": "山梨県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "農作物",
+          "answer": "ぶどう・もも (甲府盆地)"
+        },
+        {
+          "id": 2,
+          "keyword": "長野県との境",
+          "answer": "八ヶ岳"
+        },
+        {
+          "id": 3,
+          "keyword": "世界文化遺産",
+          "answer": "富士山 (静岡県との境)"
+        }
+      ]
+    },
+    {
+      "prefecture": "長野県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "レタス",
+          "answer": "野辺山原(八ヶ岳山ろく)"
+        },
+        {
+          "id": 2,
+          "keyword": "りんご・ぶどう",
+          "answer": "長野盆地"
+        },
+        {
+          "id": 3,
+          "keyword": "天竜川の水源",
+          "answer": "諏訪湖"
+        },
+        {
+          "id": 4,
+          "keyword": "三大美林",
+          "answer": "木曽ひのき"
+        },
+        {
+          "id": 5,
+          "keyword": "善光寺の門前町",
+          "answer": "長野市"
+        }
+      ]
+    },
+    {
+      "prefecture": "岐阜県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "濃尾平野",
+          "answer": "輪中"
+        },
+        {
+          "id": 2,
+          "keyword": "陶磁器",
+          "answer": "美濃焼 (多治見市)"
+        },
+        {
+          "id": 3,
+          "keyword": "面積最大の都市",
+          "answer": "高山市"
+        },
+        {
+          "id": 4,
+          "keyword": "世界文化遺産",
+          "answer": "白川郷の合掌造り"
+        }
+      ]
+    },
+    {
+      "prefecture": "静岡県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "茶",
+          "answer": "牧之原"
+        },
+        {
+          "id": 2,
+          "keyword": "漁業",
+          "answer": "焼津港 (遠洋漁業の基地)"
+        },
+        {
+          "id": 3,
+          "keyword": "三大急流",
+          "answer": "富士川"
+        },
+        {
+          "id": 4,
+          "keyword": "製紙パルプ工業",
+          "answer": "富士市"
+        },
+        {
+          "id": 5,
+          "keyword": "世界ジオパーク",
+          "answer": "伊豆半島"
+        }
+      ]
+    },
+    {
+      "prefecture": "愛知県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "電照菊・メロン",
+          "answer": "渥美半島"
+        },
+        {
+          "id": 2,
+          "keyword": "用水",
+          "answer": "豊川用水・豊川用水・明治用水"
+        },
+        {
+          "id": 3,
+          "keyword": "ラムサール条約",
+          "answer": "藤前干潟"
+        },
+        {
+          "id": 4,
+          "keyword": "名古屋市",
+          "answer": "人口200万人以上"
+        },
+        {
+          "id": 5,
+          "keyword": "自動車工業",
+          "answer": "豊田市 企業城下町"
+        },
+        {
+          "id": 6,
+          "keyword": "鉄鋼業",
+          "answer": "東海市"
+        },
+        {
+          "id": 7,
+          "keyword": "陶磁器",
+          "answer": "瀬戸市"
+        }, 
+        {
+          "id": 8,
+          "keyword": "空港",
+          "answer": "中部国際空港（セントレア）"
+        }
+      ]
+    },
+    {
+      "prefecture": "三重県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "農作物",
+          "answer": "伊勢茶・なばな"
+        },
+        {
+          "id": 2,
+          "keyword": "津市",
+          "answer": "伊勢神宮・志摩半島の真珠養殖・四日市コンビナート（石油化学工業）"
+        }
+      ]
+    },
+    {
+      "prefecture": "滋賀県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "大津市",
+          "answer": "琵琶湖（県面積の約1/6）・日本最大の湖・延暦寺（世界文化遺産）"
+        }
+      ]
+    },
+    {
+      "prefecture": "京都府",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "京都市",
+          "answer": "宇治茶・古都京都の文化財（世界文化遺産）"
+        }
+      ]
+    },
+    {
+      "prefecture": "大阪府",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "大阪市",
+          "answer": "天下の台所・堺市：刃物産業・関西国際空港"
+        }
+      ]
+    },
+    {
+      "prefecture": "兵庫県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "神戸市",
+          "answer": "神戸港・六甲山地・淡路島と明石海峡大橋・姫路城（世界文化遺産）"
+        }
+      ]
+    },
+    {
+      "prefecture": "奈良県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "奈良市",
+          "answer": "法隆寺（世界文化遺産）・吉野杉・古都奈良の文化財（世界文化遺産）"
+        }
+      ]
+    },
+    {
+      "prefecture": "和歌山県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "和歌山市",
+          "answer": "みかん・うめ・熊野古道（世界文化遺産）"
+        }
+      ]
+    },
+    {
+      "prefecture": "鳥取県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "鳥取市",
+          "answer": "鳥取砂丘・らっきょう・二十世紀なし"
+        }
+      ]
+    },
+    {
+      "prefecture": "島根県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "松江市",
+          "answer": "宍道湖のしじみ・出雲大社・石見銀山遺跡（世界文化遺産）"
+        }
+      ]
+    },
+    {
+      "prefecture": "岡山県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "岡山市",
+          "answer": "マスカット・後楽園（日本三名園）・倉敷（繊維工業）"
+        }
+      ]
+    },
+    {
+      "prefecture": "広島県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "広島市",
+          "answer": "自動車工業・平和記念碑・原爆ドーム（世界文化遺産）・宮島・厳島神社（世界文化遺産）"
+        }
+      ]
+    },
+    {
+      "prefecture": "山口県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "山口市",
+          "answer": "秋吉台カルスト台地・下関ふぐ・関門トンネル"
+        }
+      ]
+    },
+    {
+      "prefecture": "徳島県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "徳島市",
+          "answer": "吉野川の扇状地・阿波踊り・すだち"
+        }
+      ]
+    },
+    {
+      "prefecture": "香川県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "高松市",
+          "answer": "讃岐平野・讃岐うどん・小豆島のオリーブ・瀬戸大橋で岡山県と結ばれる"
+        }
+      ]
+    },
+    {
+      "prefecture": "愛媛県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "松山市",
+          "answer": "段々畑でみかん栽培・タオル生産・石鎚山・道後温泉"
+        }
+      ]
+    },
+    {
+      "prefecture": "高知県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "高知市",
+          "answer": "促成栽培のなす・ピーマン・きゅうり・四万十川・よさこい祭り"
+        }
+      ]
+    },
+    {
+      "prefecture": "福岡県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "福岡市",
+          "answer": "北九州工業地帯・博多祇園山笠・あまおう苺"
+        }
+      ]
+    },
+    {
+      "prefecture": "佐賀県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "佐賀市",
+          "answer": "有明海干拓・佐賀平野の稲作・吉野ヶ里遺跡"
+        }
+      ]
+    },
+    {
+      "prefecture": "長崎県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "長崎市",
+          "answer": "島原半島・雲仙岳・原爆資料館・平和公園・カステラ"
+        }
+      ]
+    },
+    {
+      "prefecture": "熊本県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "熊本市",
+          "answer": "阿蘇山カルデラ・畳表のいぐさ生産・熊本城"
+        }
+      ]
+    },
+    {
+      "prefecture": "大分県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "大分市",
+          "answer": "別府温泉・由布院温泉・石油化学工業"
+        }
+      ]
+    },
+    {
+      "prefecture": "宮崎県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "宮崎市",
+          "answer": "フェニックス（景観樹木）・ピーマン・きゅうり栽培・日向夏"
+        }
+      ]
+    },
+    {
+      "prefecture": "鹿児島県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "鹿児島市",
+          "answer": "桜島・さつまいも・黒豚・屋久島（世界自然遺産）"
+        }
+      ]
+    },
+    {
+      "prefecture": "沖縄県",
+      "questions": [
+        {
+          "id": 1,
+          "keyword": "那覇市",
+          "answer": "さとうきび・ゴーヤー・首里城・やんばるの森・アメリカ軍基地"
+        }
+      ]
+    }
+  ]
+}
