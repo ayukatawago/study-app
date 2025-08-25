@@ -41,6 +41,12 @@ export default function Home() {
               >
                 国際社会
               </Link>
+              <Link
+                href="/prefectures"
+                className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+              >
+                都道府県
+              </Link>
             </div>
           </div>
 

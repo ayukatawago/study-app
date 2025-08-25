@@ -46,6 +46,19 @@ export interface HumanQuizData extends BaseFlashcardData {
   answer: string;
 }
 
+// Prefecture question data
+export interface PrefectureQuestionData extends BaseFlashcardData {
+  id: number; // Unique identifier for the question
+  keyword: string;
+  answer: string;
+}
+
+// Prefecture data
+export interface PrefectureData extends BaseFlashcardData {
+  prefecture: string; // Name of the prefecture
+  questions: PrefectureQuestionData[];
+}
+
 // Base settings interface
 export interface BaseFlashcardSettings {
   randomOrder: boolean;
@@ -77,6 +90,11 @@ export interface AnimalQuizSettings extends BaseFlashcardSettings {
 // Human quiz settings
 export interface HumanQuizSettings extends BaseFlashcardSettings {
   // No additional settings needed for human quiz
+}
+
+// Prefecture settings
+export interface PrefectureSettings extends BaseFlashcardSettings {
+  // No additional settings needed for prefecture quiz
 }
 
 // Base progress interface
