@@ -47,7 +47,7 @@ export default function PrefectureSettingsPanel({
       <div className="pt-4 border-t border-gray-200">
         <button
           onClick={onResetProgress}
-          className="w-full px-4 py-2 text-sm font-medium text-red-600 bg-red-50 border border-red-300 rounded-md hover:bg-red-100 transition-colors duration-200"
+          className="w-full py-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded"
         >
           進捗をリセット
         </button>

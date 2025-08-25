@@ -51,21 +51,25 @@ export default function PrefectureFlashcard({
       >
         {/* Front of card */}
         <div
-          className="absolute inset-0 backface-hidden bg-white border border-gray-300 rounded-lg shadow-md flex flex-col justify-center items-center p-6"
+          className="absolute inset-0 backface-hidden bg-white dark:bg-gray-800 rounded-xl shadow-md flex flex-col justify-center items-center p-6"
           style={{ backfaceVisibility: 'hidden' }}
         >
-          <div className="text-sm text-gray-500 mb-2">{question.prefecture}</div>
-          <div className="text-2xl font-bold text-center text-gray-800">{question.keyword}</div>
-          <div className="text-sm text-gray-400 mt-4">タップして答えを表示</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">{question.prefecture}</div>
+          <div className="text-2xl font-bold text-center text-gray-900 dark:text-white">
+            {question.keyword}
+          </div>
+          <div className="text-sm text-gray-500 dark:text-gray-400 mt-4">タップして答えを表示</div>
         </div>
 
         {/* Back of card */}
         <div
-          className="absolute inset-0 backface-hidden bg-blue-50 border border-blue-300 rounded-lg shadow-md flex flex-col justify-center items-center p-6 rotate-y-180"
+          className="absolute inset-0 backface-hidden bg-white dark:bg-gray-800 rounded-xl shadow-md flex flex-col justify-center items-center p-6 rotate-y-180"
           style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
-          <div className="text-sm text-gray-500 mb-4">{question.prefecture}</div>
-          <div className="text-base text-center text-gray-700 mb-6">{question.answer}</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">{question.prefecture}</div>
+          <div className="text-base text-center text-gray-900 dark:text-white mb-6">
+            {question.answer}
+          </div>
 
           {/* Action buttons */}
           <div className="flex space-x-4">
