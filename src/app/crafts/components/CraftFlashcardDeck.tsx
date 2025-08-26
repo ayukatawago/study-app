@@ -13,6 +13,7 @@ export default function CraftFlashcardDeck() {
   const [settings, setSettings] = useLocalStorage<CraftSettings>('craft_settings', {
     randomOrder: true,
     showIncorrectOnly: false,
+    cardDirection: 'prefecture-to-craft',
   });
 
   // Filter craft questions based on settings
@@ -22,7 +23,14 @@ export default function CraftFlashcardDeck() {
 
   // Render individual craft flashcard
   const renderCard = (question: CraftData, onCorrect: () => void, onIncorrect: () => void) => {
-    return <CraftFlashcard question={question} onCorrect={onCorrect} onIncorrect={onIncorrect} />;
+    return (
+      <CraftFlashcard
+        question={question}
+        onCorrect={onCorrect}
+        onIncorrect={onIncorrect}
+        settings={settings}
+      />
+    );
   };
 
   // Render settings panel

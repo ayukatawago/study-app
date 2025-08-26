@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CraftData } from '@/types/flashcard';
+import { CraftData, CraftSettings } from '@/types/flashcard';
 import { createLogger } from '@/utils/logger';
 
 const logger = createLogger({ prefix: 'CraftFlashcard' });
@@ -10,9 +10,15 @@ interface CraftFlashcardProps {
   question: CraftData;
   onCorrect: () => void;
   onIncorrect: () => void;
+  settings: CraftSettings;
 }
 
-export default function CraftFlashcard({ question, onCorrect, onIncorrect }: CraftFlashcardProps) {
+export default function CraftFlashcard({
+  question,
+  onCorrect,
+  onIncorrect,
+  settings,
+}: CraftFlashcardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleFlip = () => {
@@ -50,14 +56,29 @@ export default function CraftFlashcard({ question, onCorrect, onIncorrect }: Cra
           className="absolute inset-0 backface-hidden bg-white dark:bg-gray-800 rounded-xl shadow-md flex flex-col justify-center items-center p-6"
           style={{ backfaceVisibility: 'hidden' }}
         >
-          <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">都道府県</div>
-          <div className="text-2xl font-bold text-center text-gray-900 dark:text-white">
-            {question.prefecture}
-          </div>
-          {question.answer.length > 1 && (
-            <div className="text-sm text-blue-600 dark:text-blue-400 mt-2">
-              {question.answer.length}項目
-            </div>
+          {settings.cardDirection === 'prefecture-to-craft' ? (
+            <>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">都道府県</div>
+              <div className="text-2xl font-bold text-center text-gray-900 dark:text-white">
+                {question.prefecture}
+              </div>
+              {question.answer.length > 1 && (
+                <div className="text-sm text-blue-600 dark:text-blue-400 mt-2">
+                  {question.answer.length}項目
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">伝統工芸品</div>
+              <div className="text-2xl font-bold text-center text-gray-900 dark:text-white">
+                {question.answer.map((craft, index) => (
+                  <div key={index} className="mb-1">
+                    {craft}
+                  </div>
+                ))}
+              </div>
+            </>
           )}
           <div className="text-sm text-gray-500 dark:text-gray-400 mt-4">タップして答えを表示</div>
         </div>
@@ -67,14 +88,29 @@ export default function CraftFlashcard({ question, onCorrect, onIncorrect }: Cra
           className="absolute inset-0 backface-hidden bg-white dark:bg-gray-800 rounded-xl shadow-md flex flex-col justify-center items-center p-6 rotate-y-180"
           style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
-          <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">{question.prefecture}</div>
-          <div className="text-base text-center text-gray-900 dark:text-white mb-6">
-            {question.answer.map((craft, index) => (
-              <div key={index} className="mb-1">
-                {craft}
+          {settings.cardDirection === 'prefecture-to-craft' ? (
+            <>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                {question.prefecture}
               </div>
-            ))}
-          </div>
+              <div className="text-base text-center text-gray-900 dark:text-white mb-6">
+                {question.answer.map((craft, index) => (
+                  <div key={index} className="mb-1">
+                    {craft}
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                {question.answer.join(', ')}
+              </div>
+              <div className="text-base text-center text-gray-900 dark:text-white mb-6">
+                {question.prefecture}
+              </div>
+            </>
+          )}
 
           {/* Action buttons */}
           <div className="flex space-x-4">

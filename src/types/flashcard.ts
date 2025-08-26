@@ -101,7 +101,7 @@ export interface PrefectureSettings extends BaseFlashcardSettings {
 
 // Craft settings
 export interface CraftSettings extends BaseFlashcardSettings {
-  // No additional settings needed for craft quiz
+  cardDirection: 'prefecture-to-craft' | 'craft-to-prefecture';
 }
 
 // Base progress interface

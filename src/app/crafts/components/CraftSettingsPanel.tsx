@@ -17,6 +17,24 @@ export default function CraftSettingsPanel({
     <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
       <h3 className="text-lg font-semibold mb-4">設定</h3>
 
+      {/* Card Direction Toggle */}
+      <div className="flex items-center justify-between mb-4">
+        <span>カード方向</span>
+        <select
+          value={settings.cardDirection}
+          onChange={e =>
+            onSettingsChange({
+              ...settings,
+              cardDirection: e.target.value as 'prefecture-to-craft' | 'craft-to-prefecture',
+            })
+          }
+          className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700"
+        >
+          <option value="prefecture-to-craft">都道府県 → 工芸品</option>
+          <option value="craft-to-prefecture">工芸品 → 都道府県</option>
+        </select>
+      </div>
+
       {/* Random Order Toggle */}
       <div className="flex items-center justify-between mb-4">
         <span>ランダム順序</span>
