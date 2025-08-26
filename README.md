@@ -4,12 +4,14 @@ A Next.js application to help users memorize important points in social studies 
 
 ## Features
 
-- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, international community, animal science, and human biology
+- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, prefecture specialties, traditional crafts, international community, animal science, and human biology
 - Multiple study modes:
   - History: Toggle between year-to-event and event-to-year modes
   - Culture: Toggle between keyword-to-description and description-to-keyword modes
   - Constitution: Interactive quiz with tap-to-reveal answers
   - World Geography: Interactive map with country highlights and information
+  - Prefectures: Flashcards for prefecture specialties and products
+  - Traditional Crafts: Toggle between prefecture-to-craft and craft-to-prefecture modes
   - International Community: Interactive quiz about United Nations and international organizations
   - Animal Science: Quiz questions with answers
   - Human Biology: Quiz questions with answers
@@ -75,7 +77,9 @@ study-app/
 │       │   ├── constitution.json # Japanese constitution data
 │       │   └── united_nations.json # United Nations and international organizations data
 │       ├── geography/            # Geography data directory
-│       │   └── world_countries.json # World countries data with zoom levels
+│       │   ├── world_countries.json # World countries data with zoom levels
+│       │   ├── prefectures.json     # Prefecture quiz data
+│       │   └── crafts.json          # Traditional crafts data
 │       └── science/              # Science data directory
 │           ├── animals.json      # Animal quiz data
 │           └── human.json        # Human biology quiz data
@@ -93,7 +97,11 @@ study-app/
 │   │   │   └── components/ # Page-specific components
 │   │   ├── animals/        # Animal quiz flashcards page
 │   │   │   └── components/ # Page-specific components
-│   │   └── human/          # Human biology quiz flashcards page
+│   │   ├── human/          # Human biology quiz flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   ├── prefectures/    # Prefecture flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   └── crafts/         # Traditional crafts flashcards page
 │   │       └── components/ # Page-specific components
 │   ├── components/   # React components
 │   │   ├── common/   # Common UI components
@@ -116,6 +124,8 @@ study-app/
 - Japanese Cultural Figures (文化人物)
 - Japanese Constitution (日本国憲法)
 - World Geography (世界地図)
+- Prefecture Specialties (都道府県)
+- Traditional Crafts (伝統工芸品)
 - International Community (国際社会)
 
 ### Science (理科)
@@ -302,6 +312,52 @@ The application uses the following JSON structure for human biology quiz data (f
       "answer": "肝臓"
     }
     // More human biology questions
+  ]
+}
+```
+
+### Prefecture Quiz
+
+The application uses the following JSON structure for prefecture quiz data (from `public/data/geography/prefectures.json`):
+
+```json
+{
+  "prefectures": [
+    {
+      "id": 1,
+      "prefecture": "北海道",
+      "keyword": "稲作",
+      "answer": "石狩平野・上川盆地 石狩川"
+    },
+    {
+      "id": 2,
+      "prefecture": "北海道",
+      "keyword": "特産物",
+      "answer": "じゃがいも・とうもろこし・小麦・大豆・てんさい・酪農"
+    }
+    // More prefecture-specialty pairs
+  ]
+}
+```
+
+### Traditional Crafts
+
+The application uses the following JSON structure for traditional crafts data (from `public/data/geography/crafts.json`):
+
+```json
+{
+  "traditional_crafts": [
+    {
+      "id": 1,
+      "prefecture": "青森県",
+      "answer": ["津軽塗"]
+    },
+    {
+      "id": 12,
+      "prefecture": "石川県",
+      "answer": ["輪島塗", "九谷焼", "加賀友禅"]
+    }
+    // More prefecture-craft pairs
   ]
 }
 ```
