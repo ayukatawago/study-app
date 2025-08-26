@@ -58,7 +58,9 @@ study-app/
 │       │   ├── constitution.json # Japanese constitution data
 │       │   └── united_nations.json # United Nations and international organizations data
 │       ├── geography/            # Geography data directory
-│       │   └── world_countries.json # World countries data with zoom levels
+│       │   ├── world_countries.json # World countries data with zoom levels
+│       │   ├── prefectures.json     # Prefecture quiz data
+│       │   └── crafts.json          # Traditional crafts data
 │       └── science/              # Science data directory
 │           ├── animals.json      # Animal quiz data
 │           └── human.json        # Human biology quiz data
@@ -77,7 +79,11 @@ study-app/
 │   │   │   └── components/ # Page-specific components
 │   │   ├── animals/ # Animal quiz flashcards page
 │   │   │   └── components/ # Page-specific components
-│   │   └── human/   # Human biology quiz flashcards page
+│   │   ├── human/   # Human biology quiz flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   ├── prefectures/ # Prefecture flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   └── crafts/  # Traditional crafts flashcards page
 │   │       └── components/ # Page-specific components
 │   ├── components/   # React components
 │   │   ├── common/   # Common UI components
@@ -169,22 +175,38 @@ logger.error('Error occurred', errorObject);
    - Track correct/incorrect responses in local storage
    - Adaptable card height based on content length
 
-8. **Data Management**
-   - Uses local storage to persist user progress
-   - Pulls history flashcard data from history/events.json
-   - Pulls culture flashcard data from history/culture.json
-   - Pulls constitution quiz data from civics/constitution.json
-   - Pulls world country data from geography/world_countries.json
-   - Pulls animal quiz data from science/animals.json
-   - Pulls human quiz data from science/human.json
-   - Pulls international community quiz data from civics/united_nations.json
+8. **Prefecture Flashcard System**
+   - Display Japanese prefecture names and associated specialties/products
+   - Allow flipping between prefecture and specialty content
+   - Show number of items when multiple specialties exist for a prefecture
+   - Track correct/incorrect responses in local storage
 
-9. **User Interface**
-   - Responsive design using TailwindCSS
-   - Simple and intuitive flashcard interaction
-   - Settings panel for customizing study experience
-   - Interactive world map for geography learning
-   - Organized by subject category (社会 and 理科)
+9. **Traditional Crafts Flashcard System**
+   - Display Japanese prefectures and their traditional crafts
+   - Bidirectional card modes: prefecture-to-craft and craft-to-prefecture
+   - Show number of crafts when multiple items exist for a prefecture
+   - Track correct/incorrect responses in local storage
+
+10. **Data Management**
+
+- Uses local storage to persist user progress
+- Pulls history flashcard data from history/events.json
+- Pulls culture flashcard data from history/culture.json
+- Pulls constitution quiz data from civics/constitution.json
+- Pulls world country data from geography/world_countries.json
+- Pulls animal quiz data from science/animals.json
+- Pulls human quiz data from science/human.json
+- Pulls international community quiz data from civics/united_nations.json
+- Pulls prefecture quiz data from geography/prefectures.json
+- Pulls traditional crafts data from geography/crafts.json
+
+11. **User Interface**
+
+- Responsive design using TailwindCSS
+- Simple and intuitive flashcard interaction
+- Settings panel for customizing study experience
+- Interactive world map for geography learning
+- Organized by subject category (社会 and 理科)
 
 ## Data Structure
 
@@ -344,6 +366,52 @@ The application uses the following JSON structure for human biology quiz data (f
 }
 ```
 
+### Prefecture Quiz
+
+The application uses the following JSON structure for prefecture quiz data (from `public/data/geography/prefectures.json`):
+
+```json
+{
+  "prefectures": [
+    {
+      "id": 1,
+      "prefecture": "北海道",
+      "keyword": "稲作",
+      "answer": "石狩平野・上川盆地 石狩川"
+    },
+    {
+      "id": 2,
+      "prefecture": "北海道",
+      "keyword": "特産物",
+      "answer": "じゃがいも・とうもろこし・小麦・大豆・てんさい・酪農"
+    }
+    // More prefecture-specialty pairs
+  ]
+}
+```
+
+### Traditional Crafts
+
+The application uses the following JSON structure for traditional crafts data (from `public/data/geography/crafts.json`):
+
+```json
+{
+  "traditional_crafts": [
+    {
+      "id": 1,
+      "prefecture": "青森県",
+      "answer": ["津軽塗"]
+    },
+    {
+      "id": 12,
+      "prefecture": "石川県",
+      "answer": ["輪島塗", "九谷焼", "加賀友禅"]
+    }
+    // More prefecture-craft pairs
+  ]
+}
+```
+
 ## Local Storage
 
 ### History Flashcards
@@ -462,6 +530,43 @@ User progress and settings for human quiz flashcards are stored in local storage
 }
 ```
 
+### Prefecture Flashcards
+
+User progress and settings for prefecture flashcards are stored in local storage with the following structure:
+
+```json
+{
+  "prefecture_progress": {
+    "seen": [1, 2, 3],
+    "correct": [1, 2],
+    "incorrect": [3]
+  },
+  "prefecture_settings": {
+    "randomOrder": true,
+    "showIncorrectOnly": false
+  }
+}
+```
+
+### Traditional Crafts Flashcards
+
+User progress and settings for traditional crafts flashcards are stored in local storage with the following structure:
+
+```json
+{
+  "craft_progress": {
+    "seen": [1, 2, 3],
+    "correct": [1, 2],
+    "incorrect": [3]
+  },
+  "craft_settings": {
+    "randomOrder": true,
+    "showIncorrectOnly": false,
+    "cardDirection": "prefecture-to-craft"
+  }
+}
+```
+
 ## Development Workflow
 
 1. Build out the Next.js application structure
@@ -482,6 +587,7 @@ User progress and settings for human quiz flashcards are stored in local storage
 4. **Card Direction**:
    - For history: Switch between year-to-event and event-to-year directions
    - For culture: Switch between keyword-to-description and description-to-keyword directions
+   - For crafts: Switch between prefecture-to-craft and craft-to-prefecture directions
 5. **Random Order**: Option to study cards in random or sequential order
 6. **Reset Progress**: Clear study history when needed
 7. **Dynamic Card Height**: Adjusts card height based on content length
