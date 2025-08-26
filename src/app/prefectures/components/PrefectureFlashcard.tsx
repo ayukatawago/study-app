@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { PrefectureQuestionData } from '@/types/flashcard';
+import { PrefectureData } from '@/types/flashcard';
 import { createLogger } from '@/utils/logger';
 
 const logger = createLogger({ prefix: 'PrefectureFlashcard' });
 
 interface PrefectureFlashcardProps {
-  question: PrefectureQuestionData & { prefecture: string };
+  question: PrefectureData;
   onCorrect: () => void;
   onIncorrect: () => void;
 }

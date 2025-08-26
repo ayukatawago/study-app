@@ -46,17 +46,12 @@ export interface HumanQuizData extends BaseFlashcardData {
   answer: string;
 }
 
-// Prefecture question data
-export interface PrefectureQuestionData extends BaseFlashcardData {
+// Prefecture data (now flattened)
+export interface PrefectureData extends BaseFlashcardData {
   id: number; // Unique identifier for the question
+  prefecture: string; // Name of the prefecture
   keyword: string;
   answer: string;
-}
-
-// Prefecture data
-export interface PrefectureData extends BaseFlashcardData {
-  prefecture: string; // Name of the prefecture
-  questions: PrefectureQuestionData[];
 }
 
 // Base settings interface

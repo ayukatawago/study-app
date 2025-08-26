@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { PrefectureData, PrefectureQuestionData } from '@/types/flashcard';
+import { PrefectureData } from '@/types/flashcard';
 import { createLogger } from '@/utils/logger';
 
 const logger = createLogger({ prefix: 'usePrefectures' });
@@ -16,7 +16,7 @@ interface PrefecturesData {
  * @returns Object with prefecture questions, loading state, and error state
  */
 export function usePrefectures() {
-  const [prefectureQuestions, setPrefectureQuestions] = useState<PrefectureQuestionData[]>([]);
+  const [prefectureQuestions, setPrefectureQuestions] = useState<PrefectureData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,23 +32,8 @@ export function usePrefectures() {
 
         const data: PrefecturesData = await response.json();
 
-        // Flatten all questions from all prefectures and add prefecture info
-        const allQuestions: PrefectureQuestionData[] = [];
-
-        data.prefectures?.forEach(prefecture => {
-          prefecture.questions?.forEach(question => {
-            // Create a unique identifier combining prefecture and question id
-            const uniqueId = `${prefecture.prefecture}-${question.id || question.keyword}`;
-            allQuestions.push({
-              ...question,
-              id: uniqueId,
-              // Store prefecture info in the question for display
-              prefecture: prefecture.prefecture,
-            } as PrefectureQuestionData & { prefecture: string });
-          });
-        });
-
-        setPrefectureQuestions(allQuestions);
+        // Data is already flattened, just use it directly
+        setPrefectureQuestions(data.prefectures || []);
         setError(null);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました';
