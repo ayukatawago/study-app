@@ -27,6 +27,12 @@ export default function Home() {
                 >
                   都道府県
                 </Link>
+                <Link
+                  href="/crafts"
+                  className="bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                >
+                  伝統工芸品
+                </Link>
               </div>
             </div>
 

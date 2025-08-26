@@ -1,0 +1,119 @@
+{
+    "traditional_crafts": [
+        {
+            "id": 1,
+            "prefecture": "青森県",
+            "answer": ["津軽塗"]
+        },
+        {
+            "id": 2,
+            "prefecture": "岩手県",
+            "answer": ["南部鉄器"]
+        },
+        {
+            "id": 3,
+            "prefecture": "秋田県",
+            "answer": ["大館曲げわっぱ"]
+        },
+        {
+            "id": 4,
+            "prefecture": "山形県",
+            "answer": ["天童将棋駒"]
+        },
+        {
+            "id": 5,
+            "prefecture": "宮城県",
+            "answer": ["宮城伝統こけし"]
+        },
+        {
+            "id": 6,
+            "prefecture": "福島県",
+            "answer": ["会津塗"]
+        },
+        {
+            "id": 7,
+            "prefecture": "栃木県",
+            "answer": ["益子焼"]
+        },
+        {
+            "id": 8,
+            "prefecture": "東京都",
+            "answer": ["黄八丈"]
+        },
+        {
+            "id": 9,
+            "prefecture": "神奈川県",
+            "answer": ["箱根寄木細工"]
+        },
+        {
+            "id": 10,
+            "prefecture": "新潟県",
+            "answer": ["小千谷ちぢみ"]
+        },
+        {
+            "id": 11,
+            "prefecture": "福井県",
+            "answer": ["越前和紙"]
+        },
+        {
+            "id": 12,
+            "prefecture": "石川県",
+            "answer": ["輪島塗", "九谷焼", "加賀友禅"]
+        },
+        {
+            "id": 13,
+            "prefecture": "岐阜県",
+            "answer": ["美濃和紙"]
+        },
+        {
+            "id": 14,
+            "prefecture": "滋賀県",
+            "answer": ["信楽焼"]
+        },
+        {
+            "id": 15,
+            "prefecture": "京都府",
+            "answer": ["西陣織", "京友禅", "清水焼"]
+        },
+        {
+            "id": 16,
+            "prefecture": "岡山県",
+            "answer": ["備前焼"]
+        },
+        {
+            "id": 17,
+            "prefecture": "広島県",
+            "answer": ["熊野筆"]
+        },
+        {
+            "id": 18,
+            "prefecture": "山口県",
+            "answer": ["萩焼"]
+        },
+        {
+            "id": 19,
+            "prefecture": "高知県",
+            "answer": ["土佐和紙"]
+        },
+        {
+            "id": 20,
+            "prefecture": "福岡県",
+            "answer": ["博多織", "博多人形", "久留米がすり"]
+        },
+        {
+            "id": 21,
+            "prefecture": "佐賀県",
+            "answer": ["有田焼", "伊万里焼"]
+        },
+        {
+            "id": 22,
+            "prefecture": "鹿児島県",
+            "answer": ["大島つむぎ"]
+        },
+        {
+            "id": 23,
+            "prefecture": "沖縄県",
+            "answer": ["琉球びんがた"]
+        }
+    ]
+}

@@ -54,6 +54,13 @@ export interface PrefectureData extends BaseFlashcardData {
   answer: string;
 }
 
+// Traditional craft data
+export interface CraftData extends BaseFlashcardData {
+  id: number; // Unique identifier for the craft
+  prefecture: string; // Prefecture name
+  answer: string[]; // Traditional crafts of the prefecture
+}
+
 // Base settings interface
 export interface BaseFlashcardSettings {
   randomOrder: boolean;
@@ -90,6 +97,11 @@ export interface HumanQuizSettings extends BaseFlashcardSettings {
 // Prefecture settings
 export interface PrefectureSettings extends BaseFlashcardSettings {
   // No additional settings needed for prefecture quiz
+}
+
+// Craft settings
+export interface CraftSettings extends BaseFlashcardSettings {
+  // No additional settings needed for craft quiz
 }
 
 // Base progress interface
