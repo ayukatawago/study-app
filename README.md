@@ -19,7 +19,7 @@ A Next.js application to help users memorize important points in social studies 
 - Show/hide memorization aids and summaries
 - Card-by-card navigation with options for random or sequential order
 - Focus on incorrect answers with filtering options
-- Category filtering for specialized content
+- Category filtering for specialized content (prefectures, ranking, cities)
 - Responsive design with TailwindCSS
 
 ## Tech Stack
@@ -124,7 +124,7 @@ study-app/
 - Japanese Cultural Figures (文化人物)
 - Japanese Constitution (日本国憲法)
 - World Geography (世界地図)
-- Prefecture Specialties (都道府県)
+- Prefecture Specialties (都道府県) - includes 192 prefecture entries, ranking data, and cities data
 - Traditional Crafts (伝統工芸品)
 - International Community (国際社会)
 
@@ -327,15 +327,31 @@ The application uses the following JSON structure for prefecture quiz data (from
       "id": 1,
       "prefecture": "北海道",
       "keyword": "稲作",
-      "answer": "石狩平野・上川盆地 石狩川"
+      "answer": ["石狩平野・上川盆地", "石狩川"]
     },
     {
       "id": 2,
       "prefecture": "北海道",
       "keyword": "特産物",
-      "answer": "じゃがいも・とうもろこし・小麦・大豆・てんさい・酪農"
+      "answer": ["じゃがいも", "とうもろこし", "小麦", "大豆", "てんさい", "酪農"]
     }
-    // More prefecture-specialty pairs
+    // More prefecture-specialty pairs (192 total)
+  ],
+  "ranking": [
+    {
+      "id": 1,
+      "keyword": "面積の大きい都道府県",
+      "answer": ["北海道", "岩手県", "福島県"]
+    }
+    // More ranking data (5 total)
+  ],
+  "cities": [
+    {
+      "id": 1,
+      "keyword": "政令指定都市",
+      "answer": ["札幌市", "仙台市", "さいたま市", "千葉市", "横浜市"]
+    }
+    // More cities data (5 total)
   ]
 }
 ```
