@@ -107,6 +107,73 @@ The project uses ESLint for code quality with the following configuration:
 - No-unused-vars warnings are disabled to avoid false positives with TypeScript interfaces
 - Console logs are only allowed in the logger utility
 
+### UI/UX Consistency Rules
+
+#### Settings Panel Requirements
+
+**MANDATORY**: All flashcard pages MUST use collapsible settings panels for consistent user experience.
+
+**Implementation Rules:**
+
+1. **Use BaseSettingsPanel component** - All settings panels must extend `@/components/flashcard/BaseSettingsPanel`
+2. **Collapsible by default** - Settings should be hidden behind a clickable settings button (gear icon)
+3. **Consistent naming** - Settings panel components should follow the pattern `[PageName]SettingsPanel.tsx`
+4. **Radio buttons for options** - Use radio buttons instead of dropdowns for single-choice selections
+5. **Proper state handling** - Settings changes must reset card navigation (currentIndex and key)
+
+**Example Implementation:**
+
+```typescript
+// Create [PageName]SettingsPanel.tsx
+export default function MyPageSettingsPanel({
+  settings,
+  onSettingsChange,
+  onResetProgress,
+}: MyPageSettingsPanelProps) {
+  const renderAdditionalSettings = () => {
+    // Custom settings using radio buttons
+    return (
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-2">Option</label>
+        <div className="space-y-2">
+          <label className="flex items-center">
+            <input type="radio" name="option" value="value1" />
+            <span>Label 1</span>
+          </label>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <BaseSettingsPanel
+      settings={settings}
+      onSettingsChange={onSettingsChange}
+      onResetProgress={onResetProgress}
+      renderAdditionalSettings={renderAdditionalSettings}
+    />
+  );
+}
+
+// In deck component, handle settings changes properly
+const handleSettingsChange = (newSettings: typeof settings) => {
+  setSettings(newSettings);
+  setCurrentIndex(0); // Reset to first card
+  setKey(prevKey => prevKey + 1); // Force re-render
+};
+```
+
+**Current Compliant Pages:**
+
+- History, Culture, Constitution, World Country, International Community, Animals, Human, Prefectures, Crafts
+
+**Prohibited Patterns:**
+
+- ❌ Always-visible settings buttons
+- ❌ Dropdown selectors for category/option selection
+- ❌ Custom settings implementations without BaseSettingsPanel
+- ❌ Settings that don't reset card navigation
+
 ### Debug Logging
 
 The application includes a structured logging utility (`src/utils/logger.ts`) with the following features:
