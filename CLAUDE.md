@@ -177,8 +177,10 @@ logger.error('Error occurred', errorObject);
 
 8. **Prefecture Flashcard System**
    - Display Japanese prefecture names and associated specialties/products
-   - Allow flipping between prefecture and specialty content
-   - Show number of items when multiple specialties exist for a prefecture
+   - Comprehensive data including 192 prefecture entries, 5 ranking items, and 5 cities items
+   - Category filtering: all, prefectures only, ranking only, cities only
+   - Array-based answers for better organization of multiple items
+   - Collapsible settings panel with radio button selection
    - Track correct/incorrect responses in local storage
 
 9. **Traditional Crafts Flashcard System**
@@ -377,15 +379,31 @@ The application uses the following JSON structure for prefecture quiz data (from
       "id": 1,
       "prefecture": "北海道",
       "keyword": "稲作",
-      "answer": "石狩平野・上川盆地 石狩川"
+      "answer": ["石狩平野・上川盆地", "石狩川"]
     },
     {
       "id": 2,
       "prefecture": "北海道",
       "keyword": "特産物",
-      "answer": "じゃがいも・とうもろこし・小麦・大豆・てんさい・酪農"
+      "answer": ["じゃがいも", "とうもろこし", "小麦", "大豆", "てんさい", "酪農"]
     }
-    // More prefecture-specialty pairs
+    // More prefecture-specialty pairs (192 total)
+  ],
+  "ranking": [
+    {
+      "id": 1,
+      "keyword": "面積の大きい都道府県",
+      "answer": ["北海道", "岩手県", "福島県"]
+    }
+    // More ranking data (5 total)
+  ],
+  "cities": [
+    {
+      "id": 1,
+      "keyword": "政令指定都市",
+      "answer": ["札幌市", "仙台市", "さいたま市", "千葉市", "横浜市"]
+    }
+    // More cities data (5 total)
   ]
 }
 ```
@@ -543,7 +561,8 @@ User progress and settings for prefecture flashcards are stored in local storage
   },
   "prefecture_settings": {
     "randomOrder": true,
-    "showIncorrectOnly": false
+    "showIncorrectOnly": false,
+    "category": "all"
   }
 }
 ```
