@@ -68,7 +68,15 @@ export default function PrefectureFlashcard({
         >
           <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">{question.prefecture}</div>
           <div className="text-base text-center text-gray-900 dark:text-white mb-6">
-            {question.answer}
+            {Array.isArray(question.answer) ? (
+              <ul className="list-none space-y-1">
+                {question.answer.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            ) : (
+              question.answer
+            )}
           </div>
 
           {/* Action buttons */}

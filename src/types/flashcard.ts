@@ -51,7 +51,21 @@ export interface PrefectureData extends BaseFlashcardData {
   id: number; // Unique identifier for the question
   prefecture: string; // Name of the prefecture
   keyword: string;
-  answer: string;
+  answer: string[];
+}
+
+// Ranking data
+export interface RankingData extends BaseFlashcardData {
+  id: number; // Unique identifier for the ranking
+  keyword: string; // Name of the ranking category
+  answer: string[]; // Array of ranking items
+}
+
+// Cities data
+export interface CitiesData extends BaseFlashcardData {
+  id: number; // Unique identifier for the cities category
+  keyword: string; // Name of the cities category
+  answer: string[]; // Array of cities
 }
 
 // Traditional craft data
@@ -96,7 +110,7 @@ export interface HumanQuizSettings extends BaseFlashcardSettings {
 
 // Prefecture settings
 export interface PrefectureSettings extends BaseFlashcardSettings {
-  // No additional settings needed for prefecture quiz
+  category: 'all' | 'prefectures' | 'ranking' | 'cities';
 }
 
 // Craft settings
