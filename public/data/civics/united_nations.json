@@ -49,67 +49,67 @@
         },
         {
             "id": 7,
-            "title": "<span>国連環境計画</span> (<span>UNEP</span>)",
+            "title": "<span>国連環境計画</span> - <span>UNEP</span>",
             "description": ["環境保護分野での国際的な協力"]
         },
         {
             "id": 8,
-            "title": "<span>国連児童基金</span> (<span>UNICEF</span>)",
+            "title": "<span>国連児童基金</span> - <span>UNICEF</span>",
             "description": ["発展途上国の児童への援助"]
         },
         {
             "id": 9,
-            "title": "<span>国連難民高等弁務官事務所</span> (<span>UNHCR</span>)",
+            "title": "<span>国連難民高等弁務官事務所</span> - <span>UNHCR</span>",
             "description": ["難民の保護と支援"]
         },
         {
             "id": 10,
-            "title": "<span>国連貿易開発会議</span> (<span>UNCTAD</span>)",
+            "title": "<span>国連貿易開発会議</span> - <span>UNCTAD</span>",
             "description": ["南北問題の解決"]
         },
         {
             "id": 11,
-            "title": "<span>国連世界食料計画</span> (<span>WEP</span>)",
+            "title": "<span>国連世界食料計画</span> - <span>WEP</span>",
             "description": ["飢餓問題の解決"]
         },
         {
             "id": 12,
-            "title": "<span>国際原子力機関</span> (<span>IAEA</span>)",
+            "title": "<span>国際原子力機関</span> - <span>IAEA</span>",
             "description": ["原子力の平和的利用の推進"]
         },
         {
             "id": 13,
-            "title": "<span>世界貿易機関</span> (<span>WTO</span>)",
+            "title": "<span>世界貿易機関</span> - <span>WTO</span>",
             "description": ["自由貿易の推進"]
         },
         {
             "id": 14,
-            "title": "<span>国連教育科学文化機関</span> (<span>UNESCO</span>)",
+            "title": "<span>国連教育科学文化機関</span> - <span>UNESCO</span>",
             "description": ["世界遺産の登録"]
         },
         {
             "id": 15,
-            "title": "<span>世界保健機関</span> (<span>WHO</span>)",
+            "title": "<span>世界保健機関</span> - <span>WHO</span>",
             "description": ["健康の増進や感染症の予防"]
         },
         {
             "id": 16,
-            "title": "<span>国際労働機関</span> (<span>ILO</span>)",
+            "title": "<span>国際労働機関</span> - <span>ILO</span>",
             "description": ["労働環境や労働条件の改善"]
         },
         {
             "id": 17,
-            "title": "<span>国際通貨基金</span> (<span>IMF</span>)",
+            "title": "<span>国際通貨基金</span> - <span>IMF</span>",
             "description": ["通貨や為替相場の安定"]
         },
         {
             "id": 18,
-            "title": "<span>国連食糧農業機関</span> (<span>FAO</span>)",
+            "title": "<span>国連食糧農業機関</span> - <span>FAO</span>",
             "description": ["食料安全保障の実現"]
         },
         {
             "id": 19,
-            "title": "<span>国連平和維持活動</span> (<span>PKO</span>)",
+            "title": "<span>国連平和維持活動</span> - <span>PKO</span>",
             "description": ["紛争地域での停戦監視や人道支援を行う", "安全保障理事会や総会の決議によって実施される"]
         }
     ],
