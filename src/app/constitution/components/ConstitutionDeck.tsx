@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useConstitution } from '@/hooks/useConstitution';
 import ConstitutionCard from './ConstitutionCard';
+import ConstitutionSettingsPanel from './ConstitutionSettingsPanel';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 interface ConstitutionDeckProps {
@@ -172,25 +173,9 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
     });
   };
 
-  const toggleShowIncorrectOnly = () => {
-    setSettings({
-      ...settings,
-      showIncorrectOnly: !settings.showIncorrectOnly,
-    });
-
-    // Reset index to 0 when the setting changes
-    setCurrentIndex(0);
-    // Force re-render of the card
-    setKey(prevKey => prevKey + 1);
-  };
-
-  const toggleRandomOrder = () => {
-    setSettings({
-      ...settings,
-      randomOrder: !settings.randomOrder,
-    });
-
-    // Reset index to 0 when the setting changes
+  const handleSettingsChange = (newSettings: typeof settings) => {
+    setSettings(newSettings);
+    // Reset index to 0 when settings change
     setCurrentIndex(0);
     // Force re-render of the card
     setKey(prevKey => prevKey + 1);
@@ -234,34 +219,11 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
     return (
       <div>
         <div className="flex justify-end mb-6">
-          <div className="flex space-x-2">
-            <button
-              onClick={toggleRandomOrder}
-              className={`px-3 py-1 text-sm rounded-md ${
-                settings.randomOrder
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
-              }`}
-            >
-              ランダム順
-            </button>
-            <button
-              onClick={toggleShowIncorrectOnly}
-              className={`px-3 py-1 text-sm rounded-md ${
-                settings.showIncorrectOnly
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
-              }`}
-            >
-              不正解のみ
-            </button>
-            <button
-              onClick={handleResetProgress}
-              className="px-3 py-1 text-sm bg-red-500 text-white rounded-md hover:bg-red-600"
-            >
-              リセット
-            </button>
-          </div>
+          <ConstitutionSettingsPanel
+            settings={settings}
+            onSettingsChange={handleSettingsChange}
+            onResetProgress={handleResetProgress}
+          />
         </div>
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center p-6 bg-green-100 dark:bg-green-900 rounded-lg">
@@ -275,34 +237,11 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
     return (
       <div>
         <div className="flex justify-end mb-6">
-          <div className="flex space-x-2">
-            <button
-              onClick={toggleRandomOrder}
-              className={`px-3 py-1 text-sm rounded-md ${
-                settings.randomOrder
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
-              }`}
-            >
-              ランダム順
-            </button>
-            <button
-              onClick={toggleShowIncorrectOnly}
-              className={`px-3 py-1 text-sm rounded-md ${
-                settings.showIncorrectOnly
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
-              }`}
-            >
-              不正解のみ
-            </button>
-            <button
-              onClick={handleResetProgress}
-              className="px-3 py-1 text-sm bg-red-500 text-white rounded-md hover:bg-red-600"
-            >
-              リセット
-            </button>
-          </div>
+          <ConstitutionSettingsPanel
+            settings={settings}
+            onSettingsChange={handleSettingsChange}
+            onResetProgress={handleResetProgress}
+          />
         </div>
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
@@ -324,34 +263,11 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
             {currentIndex + 1} / {displayArticles.length}
           </p>
         </div>
-        <div className="flex space-x-2">
-          <button
-            onClick={toggleRandomOrder}
-            className={`px-3 py-1 text-sm rounded-md ${
-              settings.randomOrder
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
-            }`}
-          >
-            ランダム順
-          </button>
-          <button
-            onClick={toggleShowIncorrectOnly}
-            className={`px-3 py-1 text-sm rounded-md ${
-              settings.showIncorrectOnly
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
-            }`}
-          >
-            不正解のみ
-          </button>
-          <button
-            onClick={handleResetProgress}
-            className="px-3 py-1 text-sm bg-red-500 text-white rounded-md hover:bg-red-600"
-          >
-            リセット
-          </button>
-        </div>
+        <ConstitutionSettingsPanel
+          settings={settings}
+          onSettingsChange={setSettings}
+          onResetProgress={handleResetProgress}
+        />
       </div>
 
       {displayArticles.length > 0 ? (
