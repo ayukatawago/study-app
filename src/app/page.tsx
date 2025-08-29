@@ -17,19 +17,19 @@ export default function Home() {
               <div className="flex flex-col space-y-2">
                 <Link
                   href="/world-country"
-                  className="bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                  className="bg-cyan-500 hover:bg-cyan-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
                 >
                   世界地図
                 </Link>
                 <Link
                   href="/prefectures"
-                  className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                  className="bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
                 >
                   都道府県
                 </Link>
                 <Link
                   href="/crafts"
-                  className="bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
                 >
                   伝統工芸品
                 </Link>
@@ -42,13 +42,13 @@ export default function Home() {
               <div className="flex flex-col space-y-2">
                 <Link
                   href="/history"
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                  className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
                 >
                   年代
                 </Link>
                 <Link
                   href="/culture"
-                  className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                  className="bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
                 >
                   文化・人物
                 </Link>
@@ -61,7 +61,7 @@ export default function Home() {
               <div className="flex flex-col space-y-2">
                 <Link
                   href="/constitution"
-                  className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                  className="bg-violet-600 hover:bg-violet-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
                 >
                   日本国憲法
                 </Link>
@@ -77,7 +77,7 @@ export default function Home() {
 
           {/* 理科セクション */}
           <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6">
-            <h2 className="text-2xl font-bold text-teal-600 mb-4">理科</h2>
+            <h2 className="text-2xl font-bold text-green-600 mb-4">理科</h2>
 
             {/* 生物 */}
             <div className="mb-6">
@@ -85,13 +85,13 @@ export default function Home() {
               <div className="flex flex-col space-y-2">
                 <Link
                   href="/animals"
-                  className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                  className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
                 >
                   動物
                 </Link>
                 <Link
                   href="/human"
-                  className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                  className="bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
                 >
                   人体
                 </Link>
