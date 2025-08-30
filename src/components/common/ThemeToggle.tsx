@@ -1,13 +1,11 @@
 'use client';
 
-import { useTheme } from '@/contexts/ThemeContext';
+import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-
-type Theme = 'light' | 'dark' | 'system';
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
