@@ -12,6 +12,7 @@ This is a flashcard web application built with Next.js and TailwindCSS to help u
 
 - Next.js (React framework)
 - TailwindCSS (styling)
+- next-themes (theme management with SSR support)
 - Local Storage (data persistence)
 - react-simple-maps (for world map visualization)
 - Prettier (code formatting)
@@ -272,6 +273,7 @@ logger.error('Error occurred', errorObject);
 11. **User Interface**
 
 - Responsive design using TailwindCSS
+- Dark/light theme switching with system preference support (next-themes)
 - Simple and intuitive flashcard interaction
 - Settings panel for customizing study experience
 - Interactive world map for geography learning
@@ -687,3 +689,4 @@ User progress and settings for traditional crafts flashcards are stored in local
 15. **Dynamic Zoom Levels**: Country-specific zoom levels for optimal map viewing
 16. **Subject Categorization**: Organized by subject areas (社会 and 理科)
 17. **Category Filtering**: For animal quiz questions between different sets
+18. **Theme Switching**: Dark/light mode toggle with system preference detection

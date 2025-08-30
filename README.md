@@ -20,6 +20,7 @@ A Next.js application to help users memorize important points in social studies 
 - Card-by-card navigation with options for random or sequential order
 - Focus on incorrect answers with filtering options
 - Category filtering for specialized content (prefectures, ranking, cities)
+- Dark/light theme switching with system preference support
 - Responsive design with TailwindCSS
 
 ## Tech Stack
@@ -28,6 +29,7 @@ A Next.js application to help users memorize important points in social studies 
 - React
 - TypeScript
 - TailwindCSS
+- next-themes (theme management with SSR support)
 - Prettier (code formatting)
 - ESLint (code linting)
 - Husky & lint-staged (pre-commit hooks)
