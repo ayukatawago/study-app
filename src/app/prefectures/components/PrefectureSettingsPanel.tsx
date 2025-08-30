@@ -25,7 +25,9 @@ export default function PrefectureSettingsPanel({
   const renderCategorySelection = () => {
     return (
       <div className="mb-4">
-        <label className="block text-sm font-medium mb-2">カテゴリー</label>
+        <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
+          カテゴリー
+        </label>
         <div className="space-y-2">
           <label className="flex items-center">
             <input

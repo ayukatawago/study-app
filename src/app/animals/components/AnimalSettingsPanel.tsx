@@ -18,7 +18,9 @@ export default function AnimalSettingsPanel({
   const renderAdditionalSettings = () => {
     return (
       <div className="mb-4">
-        <label className="block text-sm font-medium mb-2">カテゴリー</label>
+        <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
+          カテゴリー
+        </label>
         <div className="space-y-2">
           <div className="flex items-center">
             <input
@@ -34,7 +36,7 @@ export default function AnimalSettingsPanel({
               }
               className="mr-2"
             />
-            <label htmlFor="all" className="text-sm">
+            <label htmlFor="all" className="text-sm text-gray-700 dark:text-gray-300">
               全て
             </label>
           </div>
@@ -52,7 +54,7 @@ export default function AnimalSettingsPanel({
               }
               className="mr-2"
             />
-            <label htmlFor="animal_1" className="text-sm">
+            <label htmlFor="animal_1" className="text-sm text-gray-700 dark:text-gray-300">
               セット1（メダカと生き物）
             </label>
           </div>
@@ -70,7 +72,7 @@ export default function AnimalSettingsPanel({
               }
               className="mr-2"
             />
-            <label htmlFor="animal_2" className="text-sm">
+            <label htmlFor="animal_2" className="text-sm text-gray-700 dark:text-gray-300">
               セット2（昆虫とその他）
             </label>
           </div>

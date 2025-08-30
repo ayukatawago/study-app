@@ -18,7 +18,9 @@ export default function CultureSettingsPanel({
   const renderDirectionToggle = () => {
     return (
       <div className="mb-4">
-        <label className="block text-sm font-medium mb-2">カードの方向</label>
+        <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
+          カードの方向
+        </label>
         <div className="space-y-2">
           <div className="flex items-center">
             <input
@@ -34,7 +36,7 @@ export default function CultureSettingsPanel({
               }
               className="mr-2"
             />
-            <label htmlFor="keyword-to-desc" className="text-sm">
+            <label htmlFor="keyword-to-desc" className="text-sm text-gray-700 dark:text-gray-300">
               キーワード → 説明
             </label>
           </div>
@@ -52,7 +54,7 @@ export default function CultureSettingsPanel({
               }
               className="mr-2"
             />
-            <label htmlFor="desc-to-keyword" className="text-sm">
+            <label htmlFor="desc-to-keyword" className="text-sm text-gray-700 dark:text-gray-300">
               説明 → キーワード
             </label>
           </div>

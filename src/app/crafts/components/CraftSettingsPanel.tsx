@@ -18,7 +18,9 @@ export default function CraftSettingsPanel({
   const renderDirectionToggle = () => {
     return (
       <div className="mb-4">
-        <label className="block text-sm font-medium mb-2">カードの方向</label>
+        <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
+          カードの方向
+        </label>
         <div className="space-y-2">
           <div className="flex items-center">
             <input
@@ -34,7 +36,10 @@ export default function CraftSettingsPanel({
               }
               className="mr-2"
             />
-            <label htmlFor="prefecture-to-craft" className="text-sm">
+            <label
+              htmlFor="prefecture-to-craft"
+              className="text-sm text-gray-700 dark:text-gray-300"
+            >
               都道府県 → 工芸品
             </label>
           </div>
@@ -52,7 +57,10 @@ export default function CraftSettingsPanel({
               }
               className="mr-2"
             />
-            <label htmlFor="craft-to-prefecture" className="text-sm">
+            <label
+              htmlFor="craft-to-prefecture"
+              className="text-sm text-gray-700 dark:text-gray-300"
+            >
               工芸品 → 都道府県
             </label>
           </div>
