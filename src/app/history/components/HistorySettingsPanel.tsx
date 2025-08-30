@@ -3,17 +3,17 @@
 import BaseSettingsPanel from '@/components/flashcard/BaseSettingsPanel';
 import { HistoryFlashcardSettings } from '@/types/flashcard';
 
-type SettingsPanelProps = {
+interface HistorySettingsPanelProps {
   settings: HistoryFlashcardSettings;
   onSettingsChange: (settings: HistoryFlashcardSettings) => void;
   onResetProgress?: () => void;
-};
+}
 
-export default function SettingsPanel({
+export default function HistorySettingsPanel({
   settings,
   onSettingsChange,
   onResetProgress = () => {},
-}: SettingsPanelProps) {
+}: HistorySettingsPanelProps) {
   // Render the direction toggle
   const renderDirectionToggle = () => {
     return (

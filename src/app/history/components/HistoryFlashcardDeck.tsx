@@ -3,7 +3,7 @@
 import HistoryFlashcard from './HistoryFlashcard';
 import { useHistoryEvents } from '@/hooks/useHistoryEvents';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import SettingsPanel from './SettingsPanel';
+import HistorySettingsPanel from './HistorySettingsPanel';
 import BaseDeck from '@/components/flashcard/BaseDeck';
 import { HistoryEventData, HistoryFlashcardSettings } from '@/types/flashcard';
 
@@ -38,7 +38,7 @@ export default function HistoryFlashcardDeck() {
   // Render settings panel
   const renderSettingsPanel = (onResetProgress: () => void) => {
     return (
-      <SettingsPanel
+      <HistorySettingsPanel
         settings={settings}
         onSettingsChange={setSettings}
         onResetProgress={onResetProgress}
