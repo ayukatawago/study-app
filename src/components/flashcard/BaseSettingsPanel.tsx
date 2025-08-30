@@ -64,7 +64,7 @@ export default function BaseSettingsPanel<T extends BaseFlashcardSettings>({
       </button>
 
       {showSettings && (
-        <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 shadow-lg rounded-md p-4 z-10">
+        <div className="absolute right-0 mt-2 w-64 bg-slate-100 dark:bg-slate-800 shadow-lg rounded-md p-4 z-50 border border-slate-300 dark:border-slate-600">
           <h3 className="font-medium text-lg mb-3">設定</h3>
 
           {/* Direction toggle (if provided) */}
