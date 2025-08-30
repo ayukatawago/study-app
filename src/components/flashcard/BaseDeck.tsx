@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo, ReactNode } from 'react';
 import { BaseFlashcardData, BaseFlashcardSettings, BaseFlashcardProgress } from '@/types/flashcard';
+import StudyProgressStats from '@/components/flashcard/StudyProgressStats';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 interface BaseDeckProps<T extends BaseFlashcardData, S extends BaseFlashcardSettings> {
@@ -321,26 +322,13 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
         </div>
       )}
 
-      <div className="mt-8 bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mx-4 sm:mx-0">
-        <h2 className="font-bold mb-2 text-gray-900 dark:text-white">学習状況</h2>
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">学習済み</p>
-            <p className="text-xl font-bold text-gray-900 dark:text-white">{progressStats.seen}</p>
-          </div>
-          <div>
-            <p className="text-sm text-green-500">正解</p>
-            <p className="text-xl font-bold text-gray-900 dark:text-white">
-              {progressStats.correct}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-red-500">不正解</p>
-            <p className="text-xl font-bold text-gray-900 dark:text-white">
-              {progressStats.incorrect}
-            </p>
-          </div>
-        </div>
+      <div className="mx-4 sm:mx-0">
+        <StudyProgressStats
+          categoryName="全体"
+          seenCount={progressStats.seen}
+          correctCount={progressStats.correct}
+          incorrectCount={progressStats.incorrect}
+        />
       </div>
     </div>
   );
