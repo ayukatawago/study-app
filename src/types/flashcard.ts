@@ -75,6 +75,14 @@ export interface CraftData extends BaseFlashcardData {
   answer: string[]; // Traditional crafts of the prefecture
 }
 
+// Idiom data
+export interface IdiomData extends BaseFlashcardData {
+  id: number; // Unique identifier for the idiom
+  idiom: string; // The idiom itself
+  meaning: string; // Meaning explanation
+  example: string; // Usage example
+}
+
 // Base settings interface
 export interface BaseFlashcardSettings {
   randomOrder: boolean;
@@ -116,6 +124,11 @@ export interface PrefectureSettings extends BaseFlashcardSettings {
 // Craft settings
 export interface CraftSettings extends BaseFlashcardSettings {
   cardDirection: 'prefecture-to-craft' | 'craft-to-prefecture';
+}
+
+// Idiom settings
+export interface IdiomSettings extends BaseFlashcardSettings {
+  cardDirection: 'idiom-to-meaning' | 'meaning-to-idiom';
 }
 
 // Base progress interface

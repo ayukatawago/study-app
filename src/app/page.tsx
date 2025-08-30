@@ -6,7 +6,7 @@ export default function Home() {
       <div className="max-w-4xl w-full text-center space-y-8 px-4 sm:px-0">
         <h1 className="text-blue-600 dark:text-blue-400 text-4xl font-bold">暗記学習サポート</h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
           {/* 社会セクション */}
           <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6">
             <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4">社会</h2>
@@ -117,6 +117,24 @@ export default function Home() {
                   化学
                 </h3>
                 <div className="text-gray-500 dark:text-gray-400 italic text-sm">近日追加予定</div>
+              </div>
+            </div>
+          </div>
+
+          {/* 国語セクション */}
+          <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6">
+            <h2 className="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-4">国語</h2>
+
+            {/* 言語 */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3">言語</h3>
+              <div className="flex flex-col space-y-2">
+                <Link
+                  href="/idioms"
+                  className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                >
+                  慣用句
+                </Link>
               </div>
             </div>
           </div>
