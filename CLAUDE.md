@@ -62,9 +62,11 @@ study-app/
 │       │   ├── world_countries.json # World countries data with zoom levels
 │       │   ├── prefectures.json     # Prefecture quiz data
 │       │   └── crafts.json          # Traditional crafts data
-│       └── science/              # Science data directory
-│           ├── animals.json      # Animal quiz data
-│           └── human.json        # Human biology quiz data
+│       ├── science/              # Science data directory
+│       │   ├── animals.json      # Animal quiz data
+│       │   └── human.json        # Human biology quiz data
+│       └── japanese/             # Japanese language data directory
+│           └── idioms.json       # Japanese idioms data
 ├── src/
 │   ├── app/          # Next.js app router pages
 │   │   ├── page.tsx  # Home page
@@ -84,7 +86,9 @@ study-app/
 │   │   │   └── components/ # Page-specific components
 │   │   ├── prefectures/ # Prefecture flashcards page
 │   │   │   └── components/ # Page-specific components
-│   │   └── crafts/  # Traditional crafts flashcards page
+│   │   ├── crafts/  # Traditional crafts flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   └── idioms/  # Japanese idioms flashcards page
 │   │       └── components/ # Page-specific components
 │   ├── components/   # React components
 │   │   ├── common/   # Common UI components
@@ -166,7 +170,7 @@ const handleSettingsChange = (newSettings: typeof settings) => {
 
 **Current Compliant Pages:**
 
-- History, Culture, Constitution, World Country, International Community, Animals, Human, Prefectures, Crafts
+- History, Culture, Constitution, World Country, International Community, Animals, Human, Prefectures, Crafts, Idioms
 
 **Prohibited Patterns:**
 
@@ -257,7 +261,15 @@ logger.error('Error occurred', errorObject);
    - Show number of crafts when multiple items exist for a prefecture
    - Track correct/incorrect responses in local storage
 
-10. **Data Management**
+10. **Japanese Idioms Flashcard System**
+
+- Display Japanese idioms and their meanings with usage examples
+- Bidirectional card modes: idiom-to-meaning and meaning-to-idiom
+- Always show usage examples on answer cards for better understanding
+- Track correct/incorrect responses in local storage
+- Adaptable card height based on content length
+
+11. **Data Management**
 
 - Uses local storage to persist user progress
 - Pulls history flashcard data from history/events.json
@@ -269,15 +281,16 @@ logger.error('Error occurred', errorObject);
 - Pulls international community quiz data from civics/united_nations.json
 - Pulls prefecture quiz data from geography/prefectures.json
 - Pulls traditional crafts data from geography/crafts.json
+- Pulls Japanese idioms data from japanese/idioms.json
 
-11. **User Interface**
+12. **User Interface**
 
 - Responsive design using TailwindCSS
 - Dark/light theme switching with system preference support (next-themes)
 - Simple and intuitive flashcard interaction
 - Settings panel for customizing study experience
 - Interactive world map for geography learning
-- Organized by subject category (社会 and 理科)
+- Organized by subject category (社会, 理科, and 国語)
 
 ## Data Structure
 
@@ -499,6 +512,30 @@ The application uses the following JSON structure for traditional crafts data (f
 }
 ```
 
+### Japanese Idioms
+
+The application uses the following JSON structure for Japanese idioms data (from `public/data/japanese/idioms.json`):
+
+```json
+{
+  "idioms": [
+    {
+      "id": 1,
+      "idiom": "石の上にも三年",
+      "meaning": "どんなに辛くても、辛抱強く努力を続ければ、必ず成功することのたとえ",
+      "example": "この仕事は大変だが、石の上にも三年というから頑張ろう"
+    },
+    {
+      "id": 2,
+      "idiom": "猫に小判",
+      "meaning": "価値のわからない者に貴重なものを与えても無駄であること",
+      "example": "彼に高級なワインを贈るなんて猫に小判だ"
+    }
+    // More idiom entries
+  ]
+}
+```
+
 ## Local Storage
 
 ### History Flashcards
@@ -655,6 +692,25 @@ User progress and settings for traditional crafts flashcards are stored in local
 }
 ```
 
+### Japanese Idioms Flashcards
+
+User progress and settings for Japanese idioms flashcards are stored in local storage with the following structure:
+
+```json
+{
+  "idiom_progress": {
+    "seen": [1, 2, 3],
+    "correct": [1, 2],
+    "incorrect": [3]
+  },
+  "idiom_settings": {
+    "cardDirection": "idiom-to-meaning",
+    "randomOrder": true,
+    "showIncorrectOnly": false
+  }
+}
+```
+
 ## Development Workflow
 
 1. Build out the Next.js application structure
@@ -676,6 +732,7 @@ User progress and settings for traditional crafts flashcards are stored in local
    - For history: Switch between year-to-event and event-to-year directions
    - For culture: Switch between keyword-to-description and description-to-keyword directions
    - For crafts: Switch between prefecture-to-craft and craft-to-prefecture directions
+   - For idioms: Switch between idiom-to-meaning and meaning-to-idiom directions
 5. **Random Order**: Option to study cards in random or sequential order
 6. **Reset Progress**: Clear study history when needed
 7. **Dynamic Card Height**: Adjusts card height based on content length
@@ -687,6 +744,6 @@ User progress and settings for traditional crafts flashcards are stored in local
 13. **Paragraph Numbering**: Automatically numbers paragraphs in multi-paragraph articles
 14. **Interactive World Map**: Shows countries on an interactive map with zoom controls
 15. **Dynamic Zoom Levels**: Country-specific zoom levels for optimal map viewing
-16. **Subject Categorization**: Organized by subject areas (社会 and 理科)
+16. **Subject Categorization**: Organized by subject areas (社会, 理科, and 国語)
 17. **Category Filtering**: For animal quiz questions between different sets
 18. **Theme Switching**: Dark/light mode toggle with system preference detection

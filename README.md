@@ -4,7 +4,7 @@ A Next.js application to help users memorize important points in social studies 
 
 ## Features
 
-- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, prefecture specialties, traditional crafts, international community, animal science, and human biology
+- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, prefecture specialties, traditional crafts, international community, animal science, human biology, and Japanese idioms
 - Multiple study modes:
   - History: Toggle between year-to-event and event-to-year modes
   - Culture: Toggle between keyword-to-description and description-to-keyword modes
@@ -15,6 +15,7 @@ A Next.js application to help users memorize important points in social studies 
   - International Community: Interactive quiz about United Nations and international organizations
   - Animal Science: Quiz questions with answers
   - Human Biology: Quiz questions with answers
+  - Japanese Idioms: Toggle between idiom-to-meaning and meaning-to-idiom modes with usage examples
 - Track learning progress with local storage
 - Show/hide memorization aids and summaries
 - Card-by-card navigation with options for random or sequential order
@@ -82,9 +83,11 @@ study-app/
 │       │   ├── world_countries.json # World countries data with zoom levels
 │       │   ├── prefectures.json     # Prefecture quiz data
 │       │   └── crafts.json          # Traditional crafts data
-│       └── science/              # Science data directory
-│           ├── animals.json      # Animal quiz data
-│           └── human.json        # Human biology quiz data
+│       ├── science/              # Science data directory
+│       │   ├── animals.json      # Animal quiz data
+│       │   └── human.json        # Human biology quiz data
+│       └── japanese/             # Japanese language data directory
+│           └── idioms.json       # Japanese idioms data
 ├── src/
 │   ├── app/          # Next.js App Router
 │   │   ├── history/        # History flashcards page
@@ -103,7 +106,9 @@ study-app/
 │   │   │   └── components/ # Page-specific components
 │   │   ├── prefectures/    # Prefecture flashcards page
 │   │   │   └── components/ # Page-specific components
-│   │   └── crafts/         # Traditional crafts flashcards page
+│   │   ├── crafts/         # Traditional crafts flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   └── idioms/         # Japanese idioms flashcards page
 │   │       └── components/ # Page-specific components
 │   ├── components/   # React components
 │   │   ├── common/   # Common UI components
@@ -135,6 +140,10 @@ study-app/
 - Animal Science (動物)
 - Human Biology (人体)
 - (More coming soon)
+
+### Japanese Language (国語)
+
+- Japanese Idioms (慣用句)
 
 ## Data Structure
 
@@ -376,6 +385,30 @@ The application uses the following JSON structure for traditional crafts data (f
       "answer": ["輪島塗", "九谷焼", "加賀友禅"]
     }
     // More prefecture-craft pairs
+  ]
+}
+```
+
+### Japanese Idioms
+
+The application uses the following JSON structure for Japanese idioms data (from `public/data/japanese/idioms.json`):
+
+```json
+{
+  "idioms": [
+    {
+      "id": 1,
+      "idiom": "石の上にも三年",
+      "meaning": "どんなに辛くても、辛抱強く努力を続ければ、必ず成功することのたとえ",
+      "example": "この仕事は大変だが、石の上にも三年というから頑張ろう"
+    },
+    {
+      "id": 2,
+      "idiom": "猫に小判",
+      "meaning": "価値のわからない者に貴重なものを与えても無駄であること",
+      "example": "彼に高級なワインを贈るなんて猫に小判だ"
+    }
+    // More idiom entries
   ]
 }
 ```
