@@ -23,7 +23,9 @@ export default function HistoryFlashcard({
     if (direction === 'year-to-event') {
       return (
         <div>
-          <h2 className="text-4xl font-bold text-center">{event.year}</h2>
+          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white">
+            {event.year}
+          </h2>
         </div>
       );
     } else {
@@ -31,7 +33,7 @@ export default function HistoryFlashcard({
       return (
         <div className="text-center">
           {event.events.map((item, index) => (
-            <p key={index} className="mb-2">
+            <p key={index} className="mb-2 text-gray-900 dark:text-white">
               {item}
             </p>
           ))}
@@ -46,7 +48,7 @@ export default function HistoryFlashcard({
       return (
         <div className="text-center">
           {event.events.map((item, index) => (
-            <p key={index} className="mb-2">
+            <p key={index} className="mb-2 text-gray-900 dark:text-white">
               {item}
             </p>
           ))}
@@ -61,7 +63,9 @@ export default function HistoryFlashcard({
       // For event-to-year, show the year instead
       return (
         <div>
-          <h2 className="text-4xl font-bold text-center">{event.year}</h2>
+          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white">
+            {event.year}
+          </h2>
           {showMemorize && event.memorize && (
             <div className="mt-4 p-2 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-md">
               <p className="text-sm text-blue-800 dark:text-blue-300">{event.memorize}</p>

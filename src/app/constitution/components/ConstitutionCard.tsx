@@ -73,9 +73,9 @@ export default function ConstitutionCard({
                       className="cursor-pointer"
                     >
                       {isRevealed ? (
-                        <span className="font-bold text-blue-600">{part}</span>
+                        <span className="font-bold text-blue-600 dark:text-blue-400">{part}</span>
                       ) : (
-                        <span className="text-red-600">( ??? )</span>
+                        <span className="text-red-600 dark:text-red-400">( ??? )</span>
                       )}
                     </span>
                   );
@@ -101,7 +101,7 @@ export default function ConstitutionCard({
     <div className="w-full mb-6 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
       <div className="mb-4">
         <span className="text-xs text-gray-500 dark:text-gray-400">{section.title}</span>
-        <h2 className="text-xl font-bold">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
           {article.article !== 0 ? `第${article.article}条` : '前文'}
         </h2>
         {article.summary && allRevealed && (

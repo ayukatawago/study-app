@@ -193,8 +193,12 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center p-6 bg-red-100 dark:bg-red-900 rounded-lg">
-          <h2 className="text-xl font-bold mb-2">エラーが発生しました</h2>
-          <p>{error || 'データを取得できませんでした。'}</p>
+          <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+            エラーが発生しました
+          </h2>
+          <p className="text-gray-900 dark:text-white">
+            {error || 'データを取得できませんでした。'}
+          </p>
         </div>
       </div>
     );
@@ -227,8 +231,12 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
         </div>
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center p-6 bg-green-100 dark:bg-green-900 rounded-lg">
-            <h2 className="text-xl font-bold mb-2">おめでとうございます！</h2>
-            <p>すべてのカードに正解しました！学習を続けるには「リセット」してください。</p>
+            <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+              おめでとうございます！
+            </h2>
+            <p className="text-gray-900 dark:text-white">
+              すべてのカードに正解しました！学習を続けるには「リセット」してください。
+            </p>
           </div>
         </div>
       </div>
@@ -245,8 +253,10 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
         </div>
         <div className="min-h-[60vh] flex items-center justify-center">
           <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-            <h2 className="text-xl font-bold mb-2">不正解のカードがありません</h2>
-            <p>
+            <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+              不正解のカードがありません
+            </h2>
+            <p className="text-gray-900 dark:text-white">
               不正解のカードのみ表示モードですが、不正解のカードがありません。設定を変更してください。
             </p>
           </div>
@@ -259,7 +269,7 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
     <div className="space-y-8">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <p className="text-sm font-medium">
+          <p className="text-sm font-medium text-gray-900 dark:text-white">
             {currentIndex + 1} / {displayArticles.length}
           </p>
         </div>
@@ -304,26 +314,30 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
       ) : (
         <div className="min-h-[300px] flex items-center justify-center">
           <div className="text-center p-6 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-            <h2 className="text-xl font-bold mb-2">カードがありません</h2>
-            <p>現在の設定に合うカードがありません。設定を変更してください。</p>
+            <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+              カードがありません
+            </h2>
+            <p className="text-gray-900 dark:text-white">
+              現在の設定に合うカードがありません。設定を変更してください。
+            </p>
           </div>
         </div>
       )}
 
       <div className="mt-8 bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
-        <h2 className="font-bold mb-2">学習状況</h2>
+        <h2 className="font-bold mb-2 text-gray-900 dark:text-white">学習状況</h2>
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
             <p className="text-sm text-gray-500 dark:text-gray-400">学習済み</p>
-            <p className="text-xl font-bold">{seenCount}</p>
+            <p className="text-xl font-bold text-gray-900 dark:text-white">{seenCount}</p>
           </div>
           <div>
             <p className="text-sm text-green-500">正解</p>
-            <p className="text-xl font-bold">{correctCount}</p>
+            <p className="text-xl font-bold text-gray-900 dark:text-white">{correctCount}</p>
           </div>
           <div>
             <p className="text-sm text-red-500">不正解</p>
-            <p className="text-xl font-bold">{incorrectCount}</p>
+            <p className="text-xl font-bold text-gray-900 dark:text-white">{incorrectCount}</p>
           </div>
         </div>
       </div>

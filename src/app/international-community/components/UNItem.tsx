@@ -66,9 +66,9 @@ export default function UNItem({ item, onCorrect, onIncorrect }: UNItemProps) {
             className="cursor-pointer"
           >
             {isRevealed ? (
-              <span className="font-bold text-blue-600">{part}</span>
+              <span className="font-bold text-blue-600 dark:text-blue-400">{part}</span>
             ) : (
-              <span className="text-red-600">( ??? )</span>
+              <span className="text-red-600 dark:text-red-400">( ??? )</span>
             )}
           </span>
         );

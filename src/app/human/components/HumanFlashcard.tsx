@@ -28,14 +28,14 @@ export default function HumanFlashcard({ quiz, onCorrect, onIncorrect }: HumanFl
   const renderFrontContent = () => {
     // Safety check in case quiz is undefined
     if (!quiz) {
-      return <div className="text-lg">No question available</div>;
+      return <div className="text-lg text-gray-900 dark:text-white">No question available</div>;
     }
 
     // Show question on front side
     return (
       <div className="w-full h-full flex flex-col items-center justify-center">
-        <div className="text-lg font-medium mb-3">問題 {quiz.id}</div>
-        <div className="text-xl text-center">{quiz.question}</div>
+        <div className="text-lg font-medium mb-3 text-gray-900 dark:text-white">問題 {quiz.id}</div>
+        <div className="text-xl text-center text-gray-900 dark:text-white">{quiz.question}</div>
       </div>
     );
   };
@@ -43,16 +43,18 @@ export default function HumanFlashcard({ quiz, onCorrect, onIncorrect }: HumanFl
   const renderBackContent = () => {
     // Safety check in case quiz is undefined
     if (!quiz) {
-      return <div className="text-lg">No answer available</div>;
+      return <div className="text-lg text-gray-900 dark:text-white">No answer available</div>;
     }
 
     // Show answer on back side
     return (
       <div className="w-full h-full flex flex-col items-center justify-center">
-        <div className="text-lg font-medium mb-3">問題 {quiz.id}</div>
-        <div className="text-xl text-center mb-4">{quiz.question}</div>
+        <div className="text-lg font-medium mb-3 text-gray-900 dark:text-white">問題 {quiz.id}</div>
+        <div className="text-xl text-center mb-4 text-gray-900 dark:text-white">
+          {quiz.question}
+        </div>
         <div className="mt-2 border-t pt-4 w-full">
-          <div className="font-bold text-lg mb-1">答え:</div>
+          <div className="font-bold text-lg mb-1 text-gray-900 dark:text-white">答え:</div>
           <div className="text-xl text-center text-blue-600 dark:text-blue-400">{quiz.answer}</div>
         </div>
       </div>

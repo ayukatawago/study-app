@@ -14,7 +14,7 @@ export default function PageHeader({ title }: PageHeaderProps) {
       <div className="absolute left-0">
         <Link
           href="/"
-          className="text-blue-600 hover:text-blue-800 p-2 rounded-full hover:bg-blue-100"
+          className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -19,24 +19,28 @@ export default function CultureFlashcard({
   const renderFrontContent = () => {
     // Safety check in case event is undefined
     if (!event) {
-      return <div className="text-lg">No card available</div>;
+      return <div className="text-lg text-gray-900 dark:text-white">No card available</div>;
     }
 
     return direction === 'keyword-to-desc' ? (
       <>
-        <div className="text-3xl font-bold mb-3">{event.keyword}</div>
-        <div className="text-sm text-gray-500">項目数: {event.descriptions.length}</div>
+        <div className="text-3xl font-bold mb-3 text-gray-900 dark:text-white">{event.keyword}</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">
+          項目数: {event.descriptions.length}
+        </div>
       </>
     ) : (
       <>
         <div className="text-lg mb-3">
           {event.descriptions.map((item, index) => (
-            <div key={index} className={index > 0 ? 'mt-2' : ''}>
+            <div key={index} className={`${index > 0 ? 'mt-2' : ''} text-gray-900 dark:text-white`}>
               {item}
             </div>
           ))}
         </div>
-        <div className="text-sm text-gray-500">項目数: {event.descriptions.length}</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">
+          項目数: {event.descriptions.length}
+        </div>
       </>
     );
   };
@@ -44,24 +48,24 @@ export default function CultureFlashcard({
   const renderBackContent = () => {
     // Safety check in case event is undefined
     if (!event) {
-      return <div className="text-lg">No card available</div>;
+      return <div className="text-lg text-gray-900 dark:text-white">No card available</div>;
     }
 
     return direction === 'keyword-to-desc' ? (
       <>
         <div className="text-lg mb-3">
           {event.descriptions.map((item, index) => (
-            <div key={index} className={index > 0 ? 'mt-2' : ''}>
+            <div key={index} className={`${index > 0 ? 'mt-2' : ''} text-gray-900 dark:text-white`}>
               {item}
             </div>
           ))}
         </div>
-        <div className="text-sm text-gray-500 mt-4">時代: {event.period}</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400 mt-4">時代: {event.period}</div>
       </>
     ) : (
       <>
-        <div className="text-3xl font-bold mb-3">{event.keyword}</div>
-        <div className="text-sm text-gray-500 mt-4">時代: {event.period}</div>
+        <div className="text-3xl font-bold mb-3 text-gray-900 dark:text-white">{event.keyword}</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400 mt-4">時代: {event.period}</div>
       </>
     );
   };

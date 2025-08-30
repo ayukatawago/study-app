@@ -4,12 +4,12 @@ export default function Home() {
   return (
     <main className="bg-white dark:bg-gray-900 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
       <div className="max-w-4xl w-full text-center space-y-8 px-4 sm:px-0">
-        <h1 className="text-blue-600 text-4xl font-bold">暗記学習サポート</h1>
+        <h1 className="text-blue-600 dark:text-blue-400 text-4xl font-bold">暗記学習サポート</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
           {/* 社会セクション */}
           <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6">
-            <h2 className="text-2xl font-bold text-blue-600 mb-4">社会</h2>
+            <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4">社会</h2>
 
             {/* 地理 */}
             <div className="mb-6">
@@ -77,7 +77,7 @@ export default function Home() {
 
           {/* 理科セクション */}
           <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6">
-            <h2 className="text-2xl font-bold text-green-600 mb-4">理科</h2>
+            <h2 className="text-2xl font-bold text-green-600 dark:text-green-400 mb-4">理科</h2>
 
             {/* 生物 */}
             <div className="mb-6">
