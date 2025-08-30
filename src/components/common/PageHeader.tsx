@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import ThemeToggle from './ThemeToggle';
 
 interface PageHeaderProps {
   title: string;
@@ -31,7 +32,10 @@ export default function PageHeader({ title }: PageHeaderProps) {
           </svg>
         </Link>
       </div>
-      <h1 className="text-3xl font-bold">{title}</h1>
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{title}</h1>
+      <div className="absolute right-0">
+        <ThemeToggle />
+      </div>
     </div>
   );
 }
