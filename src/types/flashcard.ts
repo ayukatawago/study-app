@@ -79,7 +79,7 @@ export interface CraftData extends BaseFlashcardData {
 export interface IdiomData extends BaseFlashcardData {
   id: number; // Unique identifier for the idiom
   idiom: string; // The idiom itself
-  meaning: string; // Meaning explanation
+  meaning: string[]; // Meaning explanation (array format)
   example: string; // Usage example
 }
 
