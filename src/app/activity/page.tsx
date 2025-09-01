@@ -1,7 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getDailyActivityList, getPageDisplayName, DailyActivityData } from '@/utils/dailyActivity';
+import {
+  getDailyActivityList,
+  getPageDisplayName,
+  getSubjectName,
+  getPageUrl,
+  DailyActivityData,
+} from '@/utils/dailyActivity';
 import PageHeader from '@/components/common/PageHeader';
 import Link from 'next/link';
 
@@ -116,6 +122,9 @@ export default function ActivityPage() {
                           <thead>
                             <tr className="border-b border-gray-200 dark:border-gray-700">
                               <th className="text-left py-2 text-gray-900 dark:text-white font-medium">
+                                科目
+                              </th>
+                              <th className="text-left py-2 text-gray-900 dark:text-white font-medium">
                                 学習ページ
                               </th>
                               <th className="text-right py-2 text-gray-900 dark:text-white font-medium">
@@ -143,8 +152,16 @@ export default function ActivityPage() {
                                   key={index}
                                   className="border-b border-gray-100 dark:border-gray-700"
                                 >
-                                  <td className="py-3 text-gray-900 dark:text-white">
-                                    {getPageDisplayName(activity.pageName)}
+                                  <td className="py-3 text-gray-900 dark:text-white font-medium">
+                                    {getSubjectName(activity.pageName)}
+                                  </td>
+                                  <td className="py-3">
+                                    <Link
+                                      href={getPageUrl(activity.pageName)}
+                                      className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium hover:underline"
+                                    >
+                                      {getPageDisplayName(activity.pageName)}
+                                    </Link>
                                   </td>
                                   <td className="py-3 text-right text-gray-600 dark:text-gray-400">
                                     {activity.quizAttempts}問

@@ -93,17 +93,51 @@ export function getDailyActivityList(): DailyActivityData[] {
 
 export function getPageDisplayName(pageName: string): string {
   const pageNameMap: { [key: string]: string } = {
-    history: '歴史年号',
-    culture: '文化人物',
+    history: '年代',
+    culture: '文化・人物',
     constitution: '日本国憲法',
-    'world-country': '世界の国々',
+    world_country: '世界地図',
     'international-community': '国際社会',
-    animals: '動物クイズ',
-    human: '人体クイズ',
-    prefectures: '都道府県',
-    crafts: '伝統工芸',
-    idioms: '日本のことわざ',
+    animal_quiz: '動物',
+    human_quiz: '人体',
+    prefecture: '都道府県',
+    craft: '伝統工芸品',
+    idiom: '慣用句',
   };
 
   return pageNameMap[pageName] || pageName;
+}
+
+export function getSubjectName(pageName: string): string {
+  const subjectMap: { [key: string]: string } = {
+    history: '社会',
+    culture: '社会',
+    constitution: '社会',
+    world_country: '社会',
+    'international-community': '社会',
+    prefecture: '社会',
+    craft: '社会',
+    animal_quiz: '理科',
+    human_quiz: '理科',
+    idiom: '国語',
+  };
+
+  return subjectMap[pageName] || '不明';
+}
+
+export function getPageUrl(pageName: string): string {
+  const urlMap: { [key: string]: string } = {
+    history: '/history',
+    culture: '/culture',
+    constitution: '/constitution',
+    world_country: '/world-country',
+    'international-community': '/international-community',
+    animal_quiz: '/animals',
+    human_quiz: '/human',
+    prefecture: '/prefectures',
+    craft: '/crafts',
+    idiom: '/idioms',
+  };
+
+  return urlMap[pageName] || `/${pageName}`;
 }
