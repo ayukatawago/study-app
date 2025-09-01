@@ -6,6 +6,7 @@ import {
   getPageDisplayName,
   getSubjectName,
   getPageUrl,
+  clearAllActivityData,
   DailyActivityData,
 } from '@/utils/dailyActivity';
 import PageHeader from '@/components/common/PageHeader';
@@ -54,6 +55,13 @@ export default function ActivityPage() {
     );
   };
 
+  const handleClearActivity = () => {
+    if (confirm('学習活動履歴をすべて削除しますか？この操作は取り消せません。')) {
+      clearAllActivityData();
+      setActivityData([]);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -69,7 +77,33 @@ export default function ActivityPage() {
   return (
     <main className="min-h-screen p-4 sm:p-6 bg-white dark:bg-gray-900">
       <div className="max-w-6xl mx-auto">
-        <PageHeader title="学習活動履歴" />
+        <div className="relative mb-8">
+          <PageHeader title="学習活動履歴" />
+          {Object.keys(groupedByDate).length > 0 && (
+            <div className="absolute top-0 right-16">
+              <button
+                onClick={handleClearActivity}
+                className="p-2 rounded-md bg-red-600 hover:bg-red-700 text-white transition-colors"
+                title="履歴をクリア"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
+        </div>
 
         {Object.keys(groupedByDate).length === 0 ? (
           <div className="text-center py-12">

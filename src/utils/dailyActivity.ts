@@ -141,3 +141,9 @@ export function getPageUrl(pageName: string): string {
 
   return urlMap[pageName] || `/${pageName}`;
 }
+
+export function clearAllActivityData(): void {
+  if (typeof window === 'undefined') return;
+
+  localStorage.removeItem(DAILY_ACTIVITY_KEY);
+}
