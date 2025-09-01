@@ -147,3 +147,56 @@ export function clearAllActivityData(): void {
 
   localStorage.removeItem(DAILY_ACTIVITY_KEY);
 }
+
+export interface HistogramData {
+  date: string;
+  totalAttempts: number;
+  totalCorrect: number;
+  accuracyRate: number;
+}
+
+export function getHistogramData(pageFilter?: string): HistogramData[] {
+  const stats = getDailyStats();
+  const result: HistogramData[] = [];
+
+  Object.entries(stats).forEach(([date, dateStats]) => {
+    let totalAttempts = 0;
+    let totalCorrect = 0;
+
+    Object.entries(dateStats).forEach(([pageName, pageStats]) => {
+      // Apply page filter if specified
+      if (!pageFilter || pageFilter === 'all' || pageName === pageFilter) {
+        totalAttempts += pageStats.quizAttempts;
+        totalCorrect += pageStats.correctAnswers;
+      }
+    });
+
+    // Only include dates that have data after filtering
+    if (totalAttempts > 0) {
+      const accuracyRate = Math.round((totalCorrect / totalAttempts) * 100);
+
+      result.push({
+        date,
+        totalAttempts,
+        totalCorrect,
+        accuracyRate,
+      });
+    }
+  });
+
+  // Sort by date (newest first)
+  return result.sort((a, b) => b.date.localeCompare(a.date));
+}
+
+export function getAvailablePages(): string[] {
+  const stats = getDailyStats();
+  const pages = new Set<string>();
+
+  Object.values(stats).forEach(dateStats => {
+    Object.keys(dateStats).forEach(pageName => {
+      pages.add(pageName);
+    });
+  });
+
+  return Array.from(pages).sort();
+}
