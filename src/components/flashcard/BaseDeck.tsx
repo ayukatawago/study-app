@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo, ReactNode } from 'react';
 import { BaseFlashcardData, BaseFlashcardSettings, BaseFlashcardProgress } from '@/types/flashcard';
 import StudyProgressStats from '@/components/flashcard/StudyProgressStats';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { trackQuizAttempt, trackCorrectAnswer } from '@/utils/dailyActivity';
 
 interface BaseDeckProps<T extends BaseFlashcardData, S extends BaseFlashcardSettings> {
   id: string; // Unique identifier for localStorage keys
@@ -93,6 +94,10 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
 
     const currentItemId = getItemId(filteredItems[currentIndex]);
 
+    // Track quiz attempt and correct answer
+    trackQuizAttempt(id);
+    trackCorrectAnswer(id);
+
     setProgress(prev => {
       // Add to seen and correct lists if not already there
       const newSeen = prev.seen.includes(currentItemId) ? prev.seen : [...prev.seen, currentItemId];
@@ -118,6 +123,9 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
     if (!filteredItems.length) return;
 
     const currentItemId = getItemId(filteredItems[currentIndex]);
+
+    // Track quiz attempt (but not correct answer)
+    trackQuizAttempt(id);
 
     setProgress(prev => {
       // Add to seen and incorrect lists if not already there

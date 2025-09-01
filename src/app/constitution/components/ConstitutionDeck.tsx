@@ -6,6 +6,7 @@ import ConstitutionCard from './ConstitutionCard';
 import ConstitutionSettingsPanel from './ConstitutionSettingsPanel';
 import StudyProgressStats from '@/components/flashcard/StudyProgressStats';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { trackQuizAttempt, trackCorrectAnswer } from '@/utils/dailyActivity';
 
 interface ConstitutionDeckProps {
   showNextButton?: boolean;
@@ -109,6 +110,10 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
   };
 
   const handleCorrect = (sectionId: number, articleId: number) => {
+    // Track quiz attempt and correct answer
+    trackQuizAttempt('constitution');
+    trackCorrectAnswer('constitution');
+
     setProgress(prev => {
       // Add to seen and correct lists if not already there
       const newSeen = [...prev.seen];
@@ -138,6 +143,9 @@ export default function ConstitutionDeck({ showNextButton = true }: Constitution
   };
 
   const handleIncorrect = (sectionId: number, articleId: number) => {
+    // Track quiz attempt (but not correct answer)
+    trackQuizAttempt('constitution');
+
     setProgress(prev => {
       // Add to seen and incorrect lists if not already there
       const newSeen = [...prev.seen];
