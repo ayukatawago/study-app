@@ -117,53 +117,48 @@ export default function ActivityPage() {
   return (
     <main className="min-h-screen p-4 sm:p-6 bg-white dark:bg-gray-900">
       <div className="max-w-6xl mx-auto">
-        <div className="relative mb-8">
-          <PageHeader title="学習活動履歴" />
-          {histogramData.length > 0 && (
-            <div className="absolute top-0 right-16">
-              <button
-                onClick={handleClearActivity}
-                className="p-2 rounded-md bg-red-600 hover:bg-red-700 text-white transition-colors"
-                title="履歴をクリア"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16"
-                  />
-                </svg>
-              </button>
-            </div>
-          )}
-        </div>
+        <PageHeader title="学習活動履歴" />
 
         {/* Page Filter */}
         {availablePages.length > 0 && (
           <div className="mb-6">
-            <div className="flex items-center space-x-3">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                ページフィルター:
-              </label>
-              <select
-                value={selectedPage}
-                onChange={e => handlePageFilterChange(e.target.value)}
-                className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="all">すべてのページ</option>
-                {availablePages.map(pageName => (
-                  <option key={pageName} value={pageName}>
-                    {getPageDisplayName(pageName)} ({getSubjectName(pageName)})
-                  </option>
-                ))}
-              </select>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <select
+                  value={selectedPage}
+                  onChange={e => handlePageFilterChange(e.target.value)}
+                  className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="all">すべてのページ</option>
+                  {availablePages.map(pageName => (
+                    <option key={pageName} value={pageName}>
+                      {getPageDisplayName(pageName)} ({getSubjectName(pageName)})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {histogramData.length > 0 && (
+                <button
+                  onClick={handleClearActivity}
+                  className="p-2 rounded-md bg-red-600 hover:bg-red-700 text-white transition-colors"
+                  title="履歴をクリア"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16"
+                    />
+                  </svg>
+                </button>
+              )}
             </div>
           </div>
         )}
