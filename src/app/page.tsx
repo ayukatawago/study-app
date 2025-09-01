@@ -10,9 +10,7 @@ export default function Home() {
             <ThemeToggle />
           </div>
           <div className="flex flex-col items-center space-y-4">
-            <h1 className="text-blue-600 dark:text-blue-400 text-4xl font-bold">
-              暗記学習サポート
-            </h1>
+            <h1 className="text-blue-600 dark:text-blue-400 text-4xl font-bold">暗記学習</h1>
             <Link
               href="/activity"
               className="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors text-sm"

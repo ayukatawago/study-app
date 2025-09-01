@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a flashcard web application built with Next.js and TailwindCSS to help users memorize important points in social studies and science subjects. The application (暗記学習サポート) uses JSON data from various files in `public/data/` to create interactive flashcards and stores user progress in local storage.
+This is a flashcard web application built with Next.js and TailwindCSS to help users memorize important points in social studies and science subjects. The application (暗記学習) uses JSON data from various files in `public/data/` to create interactive flashcards and stores user progress in local storage.
 
 ## Development Setup
 

@@ -1,4 +1,4 @@
-# 暗記学習サポート (Memorization Learning Support)
+# 暗記学習 (Memorization Learning)
 
 A Next.js application to help users memorize important points in social studies and science subjects using interactive flashcards.
 

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 
 export const metadata: Metadata = {
-  title: '暗記学習サポート',
+  title: '暗記学習',
   description: '社会・理科の重要ポイントを効率的に暗記するための学習アプリ',
 };
 
