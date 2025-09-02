@@ -5,9 +5,10 @@ A Next.js application to help users memorize important points in social studies 
 ## Features
 
 - Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, prefecture specialties, traditional crafts, international community, animal science, human biology, and Japanese idioms
+- Daily activity tracking with visual histogram showing study progress
 - Multiple study modes:
   - History: Toggle between year-to-event and event-to-year modes
-  - Culture: Toggle between keyword-to-description and description-to-keyword modes
+  - Culture: Toggle between keyword-to-description and description-to-keyword modes with category filtering (culture/figures)
   - Constitution: Interactive quiz with tap-to-reveal answers
   - World Geography: Interactive map with country highlights and information
   - Prefectures: Flashcards for prefecture specialties and products
@@ -31,6 +32,7 @@ A Next.js application to help users memorize important points in social studies 
 - TypeScript
 - TailwindCSS
 - next-themes (theme management with SSR support)
+- Chart.js & react-chartjs-2 (for activity tracking charts)
 - Prettier (code formatting)
 - ESLint (code linting)
 - Husky & lint-staged (pre-commit hooks)
@@ -108,8 +110,9 @@ study-app/
 │   │   │   └── components/ # Page-specific components
 │   │   ├── crafts/         # Traditional crafts flashcards page
 │   │   │   └── components/ # Page-specific components
-│   │   └── idioms/         # Japanese idioms flashcards page
-│   │       └── components/ # Page-specific components
+│   │   ├── idioms/         # Japanese idioms flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   └── activity/        # Daily activity tracking page
 │   ├── components/   # React components
 │   │   ├── common/   # Common UI components
 │   │   ├── flashcard/ # Common flashcard related components

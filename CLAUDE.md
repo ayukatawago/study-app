@@ -88,8 +88,9 @@ study-app/
 │   │   │   └── components/ # Page-specific components
 │   │   ├── crafts/  # Traditional crafts flashcards page
 │   │   │   └── components/ # Page-specific components
-│   │   └── idioms/  # Japanese idioms flashcards page
-│   │       └── components/ # Page-specific components
+│   │   ├── idioms/  # Japanese idioms flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   └── activity/ # Daily activity tracking page
 │   ├── components/   # React components
 │   │   ├── common/   # Common UI components
 │   │   ├── flashcard/ # Common flashcard related components
@@ -210,10 +211,11 @@ logger.error('Error occurred', errorObject);
    - Use the "memorize" field for memory aids
 
 2. **Culture Flashcard System**
-   - Display Japanese cultural keywords and their descriptions
+   - Display Japanese cultural keywords/figures and their descriptions
    - Allow flipping between keyword and description content
-   - Show period information and description count on cards
-   - Track correct/incorrect responses in local storage
+   - Show era information and description count on cards
+   - Category filtering: all, culture only, figures only
+   - Track correct/incorrect responses in local storage using numeric IDs
 
 3. **Constitution Quiz System**
    - Display Japanese constitution articles with hidden quiz elements
@@ -292,6 +294,16 @@ logger.error('Error occurred', errorObject);
 - Interactive world map for geography learning
 - Organized by subject category (社会, 理科, and 国語)
 
+13. **Daily Activity Tracking**
+
+- Automatically tracks daily quiz attempts and correct answers
+- Visual histogram showing last 14 days of activity
+- Interactive chart with click-to-view daily details
+- Shows attempts count, correct answers, and accuracy rate
+- Stacked bar chart displaying correct/incorrect ratio
+- Filterable by specific study pages
+- Persistent data storage in local storage
+
 ## Data Structure
 
 ### History Events
@@ -328,16 +340,27 @@ The application also uses the following JSON structure for culture flashcard dat
 {
   "culture": [
     {
+      "id": 1,
       "keyword": "井原西鶴",
-      "period": "元禄文化",
+      "era": "元禄文化",
       "descriptions": ["浮世草子"]
     },
     {
+      "id": 2,
       "keyword": "近松門左衛門",
-      "period": "元禄文化",
+      "era": "元禄文化",
       "descriptions": ["人形浄瑠璃の脚本", "「曽根崎心中」"]
     }
-    // More keyword-description pairs
+    // More culture entries
+  ],
+  "figures": [
+    {
+      "id": 1,
+      "keyword": "卑弥呼",
+      "era": "弥生時代",
+      "descriptions": ["邪馬台国の女王", "まじないで人々を支配した"]
+    }
+    // More historical figures
   ]
 }
 ```
@@ -565,15 +588,16 @@ User progress and settings for culture flashcards are stored in local storage wi
 ```json
 {
   "culture_flashcard_progress": {
-    "seen": ["井原西鶴", "近松門左衛門", "松尾芭蕉"],
-    "correct": ["井原西鶴", "近松門左衛門"],
-    "incorrect": ["松尾芭蕉"]
+    "seen": [1, 2, 3],
+    "correct": [1, 2],
+    "incorrect": [3]
   },
   "culture_flashcard_settings": {
     "cardDirection": "keyword-to-desc",
     "showMemorize": true,
     "randomOrder": true,
-    "showIncorrectOnly": false
+    "showIncorrectOnly": false,
+    "category": "all"
   }
 }
 ```
@@ -747,3 +771,5 @@ User progress and settings for Japanese idioms flashcards are stored in local st
 16. **Subject Categorization**: Organized by subject areas (社会, 理科, and 国語)
 17. **Category Filtering**: For animal quiz questions between different sets
 18. **Theme Switching**: Dark/light mode toggle with system preference detection
+19. **Daily Activity Tracking**: Track daily quiz attempts and correct answers with visual histogram
+20. **Activity History**: View detailed daily study statistics with interactive charts
