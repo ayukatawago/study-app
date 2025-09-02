@@ -60,12 +60,12 @@ export default function CultureFlashcard({
             </div>
           ))}
         </div>
-        <div className="text-sm text-gray-500 dark:text-gray-400 mt-4">時代: {event.period}</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400 mt-4">時代: {event.era}</div>
       </>
     ) : (
       <>
         <div className="text-3xl font-bold mb-3 text-gray-900 dark:text-white">{event.keyword}</div>
-        <div className="text-sm text-gray-500 dark:text-gray-400 mt-4">時代: {event.period}</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400 mt-4">時代: {event.era}</div>
       </>
     );
   };

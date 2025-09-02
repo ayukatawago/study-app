@@ -18,9 +18,11 @@ export interface HistoryEventData extends BaseFlashcardData {
 
 // Culture event data
 export interface CultureEventData extends BaseFlashcardData {
-  keyword: string; // Used as the unique id for culture events
-  period: string;
+  id: number; // Unique identifier for the culture event
+  keyword: string;
+  era: string; // Changed from period to era
   descriptions: string[];
+  type?: 'culture' | 'figures'; // Optional type field to distinguish between culture and figures
 }
 
 // World country data
@@ -99,6 +101,7 @@ export interface HistoryFlashcardSettings extends BaseFlashcardSettings {
 export interface CultureFlashcardSettings extends BaseFlashcardSettings {
   cardDirection: 'keyword-to-desc' | 'desc-to-keyword';
   showMemorize: boolean;
+  category: 'all' | 'culture' | 'figures';
 }
 
 // World country settings

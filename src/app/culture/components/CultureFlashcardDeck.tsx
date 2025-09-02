@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import CultureFlashcard from './CultureFlashcard';
 import { useCultureEvents } from '@/hooks/useCultureEvents';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
@@ -17,12 +18,21 @@ export default function CultureFlashcardDeck() {
       showMemorize: true,
       randomOrder: true,
       showIncorrectOnly: false,
+      category: 'all',
     }
   );
 
-  // Filter culture events based on settings
+  // Apply category filtering to all items
+  const filteredByCategory = useMemo(() => {
+    if (settings.category === 'all') {
+      return cultureEvents;
+    }
+    return cultureEvents.filter(event => event.type === settings.category);
+  }, [cultureEvents, settings.category]);
+
+  // Filter culture events based on settings (only handle incorrect items filtering since category is handled above)
   const filterItems = (items: CultureEventData[], incorrectIds: (string | number)[]) => {
-    return items.filter(event => incorrectIds.includes(event.keyword));
+    return items.filter(event => incorrectIds.includes(event.id));
   };
 
   // Render individual culture flashcard
@@ -49,12 +59,12 @@ export default function CultureFlashcardDeck() {
   };
 
   // Extract the unique identifier from a culture event
-  const getItemId = (event: CultureEventData) => event.keyword;
+  const getItemId = (event: CultureEventData) => event.id;
 
   return (
     <BaseDeck
       id="culture"
-      items={cultureEvents}
+      items={filteredByCategory}
       isLoading={isLoading}
       error={error}
       settings={settings}

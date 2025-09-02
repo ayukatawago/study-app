@@ -8,6 +8,7 @@ const logger = createLogger({ prefix: 'useCultureEvents' });
 
 interface CultureData {
   culture: CultureEventData[];
+  figures: CultureEventData[];
 }
 
 /**
@@ -31,12 +32,21 @@ export function useCultureEvents() {
         }
 
         const data: CultureData = await response.json();
-        // Map to ensure each event has an id
-        const eventsWithId = (data.culture || []).map(event => ({
+        // Combine culture and figures arrays, ensuring each event has proper id
+        const cultureItems: CultureEventData[] = (data.culture || []).map(event => ({
           ...event,
-          id: event.keyword, // Use keyword as id
+          id: typeof event.id === 'number' ? event.id : 0, // Ensure id is a number
+          type: 'culture' as const,
         }));
-        setCultureEvents(eventsWithId);
+
+        const figureItems: CultureEventData[] = (data.figures || []).map(event => ({
+          ...event,
+          id: typeof event.id === 'number' ? event.id : 0, // Ensure id is a number
+          type: 'figures' as const,
+        }));
+
+        const allEvents = [...cultureItems, ...figureItems];
+        setCultureEvents(allEvents);
         setError(null);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました';
