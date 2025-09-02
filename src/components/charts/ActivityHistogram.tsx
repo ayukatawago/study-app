@@ -37,17 +37,17 @@ export default function ActivityHistogram({
     labels: data.map(item => formatDate(item.date)),
     datasets: [
       {
-        label: '挑戦問題数',
-        data: data.map(item => item.totalAttempts),
-        backgroundColor: 'rgba(59, 130, 246, 0.8)', // blue-500 with opacity
-        borderColor: 'rgba(59, 130, 246, 1)',
-        borderWidth: 1,
-      },
-      {
         label: '正解数',
         data: data.map(item => item.totalCorrect),
         backgroundColor: 'rgba(34, 197, 94, 0.8)', // green-500 with opacity
         borderColor: 'rgba(34, 197, 94, 1)',
+        borderWidth: 1,
+      },
+      {
+        label: '不正解数',
+        data: data.map(item => item.totalAttempts - item.totalCorrect),
+        backgroundColor: 'rgba(239, 68, 68, 0.8)', // red-500 with opacity
+        borderColor: 'rgba(239, 68, 68, 1)',
         borderWidth: 1,
       },
     ],
@@ -68,10 +68,15 @@ export default function ActivityHistogram({
       },
       tooltip: {
         callbacks: {
-          afterLabel: function (context: any) {
-            const dataIndex = context.dataIndex;
-            const accuracy = data[dataIndex]?.accuracyRate || 0;
-            return `正解率: ${accuracy}%`;
+          title: function (tooltipItems: any) {
+            const dataIndex = tooltipItems[0].dataIndex;
+            const item = data[dataIndex];
+            return formatDate(item.date);
+          },
+          afterBody: function (tooltipItems: any) {
+            const dataIndex = tooltipItems[0].dataIndex;
+            const item = data[dataIndex];
+            return [`挑戦問題数: ${item.totalAttempts}問`, `正解率: ${item.accuracyRate}%`];
           },
         },
       },
