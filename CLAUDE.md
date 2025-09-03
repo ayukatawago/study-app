@@ -14,7 +14,8 @@ This is a flashcard web application built with Next.js and TailwindCSS to help u
 - TailwindCSS (styling)
 - next-themes (theme management with SSR support)
 - Local Storage (data persistence)
-- react-simple-maps (for world map visualization)
+- React Leaflet & Leaflet (interactive maps)
+- Natural Earth GeoJSON data (world country boundaries)
 - Prettier (code formatting)
 - ESLint (code linting)
 - Husky & lint-staged (pre-commit hooks)
@@ -225,10 +226,11 @@ logger.error('Error occurred', errorObject);
    - Track correct/incorrect responses in local storage
 
 4. **World Countries Flashcard System**
-   - Display interactive maps highlighting various countries
+   - Display interactive React Leaflet maps highlighting various countries
    - Show country information on card flip
    - Zoom in/out functionality for better map visibility
    - Country-specific zoom levels stored in JSON data
+   - Uses Natural Earth GeoJSON data for complete world coverage including Russia's eastern regions
    - Track correct/incorrect responses in local storage
 
 5. **Animal Quiz System**
@@ -766,10 +768,11 @@ User progress and settings for Japanese idioms flashcards are stored in local st
 11. **Interactive Quiz**: For constitution content, clickable placeholders reveal answers when tapped
 12. **Contextual Information**: Shows article summaries when all quiz answers are revealed
 13. **Paragraph Numbering**: Automatically numbers paragraphs in multi-paragraph articles
-14. **Interactive World Map**: Shows countries on an interactive map with zoom controls
+14. **Interactive World Map**: Shows countries on an interactive React Leaflet map with zoom controls
 15. **Dynamic Zoom Levels**: Country-specific zoom levels for optimal map viewing
-16. **Subject Categorization**: Organized by subject areas (社会, 理科, and 国語)
-17. **Category Filtering**: For animal quiz questions between different sets
-18. **Theme Switching**: Dark/light mode toggle with system preference detection
-19. **Daily Activity Tracking**: Track daily quiz attempts and correct answers with visual histogram
-20. **Activity History**: View detailed daily study statistics with interactive charts
+16. **Complete World Coverage**: Uses Natural Earth GeoJSON data ensuring all country territories are properly displayed
+17. **Subject Categorization**: Organized by subject areas (社会, 理科, and 国語)
+18. **Category Filtering**: For animal quiz questions between different sets
+19. **Theme Switching**: Dark/light mode toggle with system preference detection
+20. **Daily Activity Tracking**: Track daily quiz attempts and correct answers with visual histogram
+21. **Activity History**: View detailed daily study statistics with interactive charts

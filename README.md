@@ -10,7 +10,7 @@ A Next.js application to help users memorize important points in social studies 
   - History: Toggle between year-to-event and event-to-year modes
   - Culture: Toggle between keyword-to-description and description-to-keyword modes with category filtering (culture/figures)
   - Constitution: Interactive quiz with tap-to-reveal answers
-  - World Geography: Interactive map with country highlights and information
+  - World Geography: Interactive React Leaflet map with country highlights, zoom controls, and responsive design
   - Prefectures: Flashcards for prefecture specialties and products
   - Traditional Crafts: Toggle between prefecture-to-craft and craft-to-prefecture modes
   - International Community: Interactive quiz about United Nations and international organizations
@@ -32,12 +32,13 @@ A Next.js application to help users memorize important points in social studies 
 - TypeScript
 - TailwindCSS
 - next-themes (theme management with SSR support)
+- React Leaflet & Leaflet (interactive maps)
+- Natural Earth GeoJSON data (world country boundaries)
 - Chart.js & react-chartjs-2 (for activity tracking charts)
 - Prettier (code formatting)
 - ESLint (code linting)
 - Husky & lint-staged (pre-commit hooks)
 - Local Storage for data persistence
-- react-simple-maps (for world map visualization)
 - Structured logging system for debugging
 
 ## Getting Started
