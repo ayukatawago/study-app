@@ -78,10 +78,10 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
             const props = f.properties || {};
 
             // Use ISO numeric codes if available, otherwise create mapping
-            if (props.ISO_N3) {
+            if (props.ISO_N3 && props.ISO_N3 !== '-99') {
               // Natural Earth provides ISO_N3 as string, ensure it's the right format
               f.id = String(props.ISO_N3).padStart(3, '0');
-            } else if (props.ISO_A3) {
+            } else if (props.ISO_A3 && props.ISO_A3 !== '-99') {
               // Map ISO_A3 codes to ISO numeric codes for compatibility with world_countries.json
               const isoMapping: { [key: string]: string } = {
                 RUS: '643', // Russia
@@ -129,6 +129,54 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
                 NZL: '554', // New Zealand
               };
               f.id = isoMapping[props.ISO_A3] || String(props.ISO_N3 || '999').padStart(3, '0');
+            } else if (props.ADM0_A3) {
+              // Use ADM0_A3 as fallback when ISO codes are -99 (like for France)
+              const isoMapping: { [key: string]: string } = {
+                RUS: '643', // Russia
+                CHN: '156', // China
+                USA: '840', // United States
+                JPN: '392', // Japan
+                DEU: '276', // Germany
+                FRA: '250', // France
+                GBR: '826', // United Kingdom
+                IND: '356', // India
+                BRA: '076', // Brazil
+                AUS: '036', // Australia
+                CAN: '124', // Canada
+                ITA: '380', // Italy
+                ESP: '724', // Spain
+                KOR: '410', // South Korea
+                MEX: '484', // Mexico
+                IDN: '360', // Indonesia
+                TUR: '792', // Turkey
+                SAU: '682', // Saudi Arabia
+                ARG: '032', // Argentina
+                ZAF: '710', // South Africa
+                EGY: '818', // Egypt
+                THA: '764', // Thailand
+                IRN: '364', // Iran
+                POL: '616', // Poland
+                UKR: '804', // Ukraine
+                MYS: '458', // Malaysia
+                VNM: '704', // Vietnam
+                PHL: '608', // Philippines
+                NLD: '528', // Netherlands
+                BEL: '056', // Belgium
+                GRC: '300', // Greece
+                PRT: '620', // Portugal
+                CZE: '203', // Czech Republic
+                HUN: '348', // Hungary
+                SWE: '752', // Sweden
+                NOR: '578', // Norway
+                FIN: '246', // Finland
+                DNK: '208', // Denmark
+                CHE: '756', // Switzerland
+                AUT: '040', // Austria
+                ISR: '376', // Israel
+                SGP: '702', // Singapore
+                NZL: '554', // New Zealand
+              };
+              f.id = isoMapping[props.ADM0_A3] || String(props.ISO_N3 || '999').padStart(3, '0');
             } else {
               // Fallback to country name
               f.id = props.NAME || props.ADMIN || props.NAME_EN || props.SOVEREIGNT;

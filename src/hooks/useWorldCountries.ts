@@ -37,6 +37,7 @@ export function useWorldCountries() {
           id: country.countryCode, // Use country code as id
         }));
         setWorldCountries(countriesWithId);
+
         setError(null);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました';
