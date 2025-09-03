@@ -82,7 +82,7 @@
         "面積は日本の琵琶湖とほぼ同じで、人口密度が高い"
       ],
       "isoCode": "SGP",
-      "zoomLevel": 5
+      "zoomLevel": 4.5
     },
     {
       "countryCode": "360",
@@ -201,7 +201,7 @@
         "2022年2月にウクライナへの軍事侵攻を開始"
       ],
       "isoCode": "RUS",
-      "zoomLevel": 1
+      "zoomLevel": 0.8
     },
     {
       "countryCode": "620",
@@ -222,7 +222,7 @@
         "国土の1/4がポルダーと呼ばれる干拓地"
       ],
       "isoCode": "NLD",
-      "zoomLevel": 4
+      "zoomLevel": 3
     },
     {
       "countryCode": "276",
@@ -256,7 +256,7 @@
         "ノーベル賞の授与式が行われる国(平和賞の授賞式のみノルウェーのオスロで開催)"
       ],
       "isoCode": "SWE",
-      "zoomLevel": 3
+      "zoomLevel": 2.5
     },
     {
       "countryCode": "380",
@@ -301,7 +301,7 @@
         "人口・面積はともに世界3位"
       ],
       "isoCode": "USA",
-      "zoomLevel": 2
+      "zoomLevel": 1.5
     },
     {
       "countryCode": "192",
@@ -400,7 +400,7 @@
         "ワインやチーズなどの食文化が豊か"
       ],
       "isoCode": "FRA",
-      "zoomLevel": 3
+      "zoomLevel": 2.5
     },
     {
       "countryCode": "036",
