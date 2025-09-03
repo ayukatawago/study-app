@@ -208,9 +208,42 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
       return feature;
     };
 
+    const processedFeatures = rawGeoData.features
+      .map(processCountryGeometry)
+      .filter((f: any) => f !== null);
+
+    // Add a shifted copy of Russia to show eastern regions
+    const russiaFeature = processedFeatures.find((f: any) => String(f.id) === '643');
+    if (russiaFeature) {
+      const shiftCoordinates = (coords: any): any => {
+        if (Array.isArray(coords) && coords.length === 2 && typeof coords[0] === 'number') {
+          // This is a coordinate pair [lng, lat]
+          const lng = coords[0];
+          const lat = coords[1];
+          // Shift all coordinates by +360 to show on the right side
+          return [lng + 360, lat];
+        } else if (Array.isArray(coords)) {
+          // Recursively process arrays
+          return coords.map(shiftCoordinates);
+        }
+        return coords;
+      };
+
+      const shiftedRussia = {
+        ...russiaFeature,
+        id: '643_east',
+        geometry: {
+          ...russiaFeature.geometry,
+          coordinates: shiftCoordinates(russiaFeature.geometry.coordinates),
+        },
+      };
+
+      processedFeatures.push(shiftedRussia);
+    }
+
     const processedGeoJson = {
       ...rawGeoData,
-      features: rawGeoData.features.map(processCountryGeometry).filter((f: any) => f !== null),
+      features: processedFeatures,
     };
 
     setGeoData(processedGeoJson);
@@ -218,7 +251,8 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
 
   // Style function for countries
   const countryStyle = (feature: any) => {
-    const isHighlighted = highlightedCountry && String(feature.id) === String(highlightedCountry);
+    const baseId = String(feature.id).replace('_east', '');
+    const isHighlighted = highlightedCountry && String(baseId) === String(highlightedCountry);
 
     return {
       fillColor: isHighlighted ? '#FF0000' : '#D6D6DA',
@@ -232,7 +266,8 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
 
   // Event handlers for country interactions
   const onEachCountry = (feature: any, layer: L.Layer) => {
-    const isHighlighted = highlightedCountry && String(feature.id) === String(highlightedCountry);
+    const baseId = String(feature.id).replace('_east', '');
+    const isHighlighted = highlightedCountry && String(baseId) === String(highlightedCountry);
 
     layer.on({
       mouseover: e => {
@@ -272,7 +307,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
       minZoom={0.1}
       maxZoom={6}
       bounds={[
-        [-70, -240],
+        [-85, -240],
         [85, 240],
       ]}
       boundsOptions={{ padding: [5, 5] }}
@@ -292,7 +327,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
       touchZoom={false}
       boxZoom={false}
       keyboard={false}
-      worldCopyJump={true}
+      worldCopyJump={false}
     >
       <MapController position={position} isTransitioning={isTransitioning} />
 
