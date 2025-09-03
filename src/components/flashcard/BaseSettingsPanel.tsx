@@ -35,7 +35,7 @@ export default function BaseSettingsPanel<T extends BaseFlashcardSettings>({
   };
 
   return (
-    <div className="relative">
+    <div className="relative" style={{ zIndex: 9999 }}>
       <button
         onClick={() => setShowSettings(!showSettings)}
         className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 flex items-center"
@@ -64,7 +64,10 @@ export default function BaseSettingsPanel<T extends BaseFlashcardSettings>({
       </button>
 
       {showSettings && (
-        <div className="absolute right-0 mt-2 w-64 bg-slate-100 dark:bg-slate-800 shadow-lg rounded-md p-4 z-50 border border-slate-300 dark:border-slate-600">
+        <div
+          className="absolute right-0 mt-2 w-64 bg-slate-100 dark:bg-slate-800 shadow-lg rounded-md p-4 border border-slate-300 dark:border-slate-600"
+          style={{ zIndex: 10000 }}
+        >
           <h3 className="font-medium text-lg mb-3 text-gray-900 dark:text-white">設定</h3>
 
           {/* Direction toggle (if provided) */}

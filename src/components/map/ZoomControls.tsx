@@ -14,10 +14,13 @@ export const ZoomControls: React.FC<ZoomControlsProps> = ({
   onZoomOut,
 }) => {
   return (
-    <div className="absolute top-2 right-2 z-10 flex space-x-1">
+    <div
+      className="absolute top-4 right-4 z-50 flex space-x-2"
+      style={{ position: 'absolute', zIndex: 5000 }}
+    >
       {showZoomIn && (
         <button
-          className="p-1.5 rounded-full bg-white shadow-md hover:bg-blue-100 active:bg-blue-200 transition-all duration-300 text-blue-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="p-2 rounded-full bg-white shadow-lg hover:bg-blue-100 active:bg-blue-200 transition-all duration-300 text-blue-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
           onClick={onZoomIn}
           title="Zoom to country"
           aria-label="Zoom in to country"
@@ -39,7 +42,7 @@ export const ZoomControls: React.FC<ZoomControlsProps> = ({
 
       {showZoomOut && (
         <button
-          className="p-1.5 rounded-full bg-white shadow-md hover:bg-blue-100 active:bg-blue-200 transition-all duration-300 text-blue-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="p-2 rounded-full bg-white shadow-lg hover:bg-blue-100 active:bg-blue-200 transition-all duration-300 text-blue-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
           onClick={onZoomOut}
           title="Zoom out"
           aria-label="Zoom out to world view"

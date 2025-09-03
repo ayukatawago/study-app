@@ -8,13 +8,15 @@ import 'leaflet/dist/leaflet.css';
 
 const logger = createLogger({ prefix: 'LeafletMap' });
 
-// World map JSON data - use jsdelivr CDN source
-const geoUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json';
+// Use Natural Earth data directly from their GitHub which includes complete Russia geometry
+const geoUrl =
+  'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson';
 
 interface LeafletMapProps {
   highlightedCountry?: string;
   position: { coordinates: [number, number]; zoom: number };
   isTransitioning: boolean;
+  width: number;
   height: number;
 }
 
@@ -54,8 +56,10 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
   highlightedCountry,
   position,
   isTransitioning,
+  width,
   height,
 }) => {
+  const [rawGeoData, setRawGeoData] = useState<any>(null);
   const [geoData, setGeoData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -64,18 +68,75 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
     const loadGeoData = async () => {
       try {
         const response = await fetch(geoUrl);
-        const topojsonData = await response.json();
+        const geojsonData = await response.json();
 
-        // Use topojson-client to properly convert the data
-        const { feature } = await import('topojson-client');
-        const properGeoJson = {
-          type: 'FeatureCollection',
-          features: topojsonData.objects.countries.geometries.map((geom: any) =>
-            feature(topojsonData, geom)
-          ),
-        };
+        // This is already GeoJSON format, so we can use it directly
+        // Need to map country names/codes properly for highlighting
+        if (geojsonData && geojsonData.features) {
+          geojsonData.features.forEach((f: any) => {
+            // Create a country code mapping based on various properties
+            const props = f.properties || {};
 
-        setGeoData(properGeoJson);
+            // Use ISO numeric codes if available, otherwise create mapping
+            if (props.ISO_N3) {
+              // Natural Earth provides ISO_N3 as string, ensure it's the right format
+              f.id = String(props.ISO_N3).padStart(3, '0');
+            } else if (props.ISO_A3) {
+              // Map ISO_A3 codes to ISO numeric codes for compatibility with world_countries.json
+              const isoMapping: { [key: string]: string } = {
+                RUS: '643', // Russia
+                CHN: '156', // China
+                USA: '840', // United States
+                JPN: '392', // Japan
+                DEU: '276', // Germany
+                FRA: '250', // France
+                GBR: '826', // United Kingdom
+                IND: '356', // India
+                BRA: '076', // Brazil
+                AUS: '036', // Australia
+                CAN: '124', // Canada
+                ITA: '380', // Italy
+                ESP: '724', // Spain
+                KOR: '410', // South Korea
+                MEX: '484', // Mexico
+                IDN: '360', // Indonesia
+                TUR: '792', // Turkey
+                SAU: '682', // Saudi Arabia
+                ARG: '032', // Argentina
+                ZAF: '710', // South Africa
+                EGY: '818', // Egypt
+                THA: '764', // Thailand
+                IRN: '364', // Iran
+                POL: '616', // Poland
+                UKR: '804', // Ukraine
+                MYS: '458', // Malaysia
+                VNM: '704', // Vietnam
+                PHL: '608', // Philippines
+                NLD: '528', // Netherlands
+                BEL: '056', // Belgium
+                GRC: '300', // Greece
+                PRT: '620', // Portugal
+                CZE: '203', // Czech Republic
+                HUN: '348', // Hungary
+                SWE: '752', // Sweden
+                NOR: '578', // Norway
+                FIN: '246', // Finland
+                DNK: '208', // Denmark
+                CHE: '756', // Switzerland
+                AUT: '040', // Austria
+                ISR: '376', // Israel
+                SGP: '702', // Singapore
+                NZL: '554', // New Zealand
+              };
+              f.id = isoMapping[props.ISO_A3] || String(props.ISO_N3 || '999').padStart(3, '0');
+            } else {
+              // Fallback to country name
+              f.id = props.NAME || props.ADMIN || props.NAME_EN || props.SOVEREIGNT;
+            }
+          });
+        }
+
+        setRawGeoData(geojsonData);
         setLoading(false);
       } catch (error) {
         logger.error('Error loading geo data:', error);
@@ -86,6 +147,27 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
     loadGeoData();
   }, []);
 
+  // Process geo data based on highlighted country
+  useEffect(() => {
+    if (!rawGeoData) return;
+
+    const processCountryGeometry = (feature: any) => {
+      // Filter out features that might cause rendering issues
+      if (!feature || !feature.geometry || !feature.id) {
+        return null;
+      }
+
+      return feature;
+    };
+
+    const processedGeoJson = {
+      ...rawGeoData,
+      features: rawGeoData.features.map(processCountryGeometry).filter((f: any) => f !== null),
+    };
+
+    setGeoData(processedGeoJson);
+  }, [rawGeoData, highlightedCountry]);
+
   // Style function for countries
   const countryStyle = (feature: any) => {
     const isHighlighted = highlightedCountry && String(feature.id) === String(highlightedCountry);
@@ -95,7 +177,8 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
       weight: 1,
       opacity: 1,
       color: '#999',
-      fillOpacity: 0.7,
+      fillOpacity: isHighlighted ? 0.8 : 0.7,
+      stroke: true,
     };
   };
 
@@ -117,7 +200,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
         layer.setStyle({
           fillColor: isHighlighted ? '#FF0000' : '#D6D6DA',
           weight: 1,
-          fillOpacity: 0.7,
+          fillOpacity: isHighlighted ? 0.8 : 0.7,
         });
       },
     });
@@ -126,8 +209,8 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
   if (loading || !geoData) {
     return (
       <div
-        className="flex items-center justify-center"
-        style={{ width: '100%', height: `${height}px` }}
+        className="flex items-center justify-center w-full h-full"
+        style={{ minHeight: `${height}px` }}
       >
         <div className="text-gray-500">Loading map...</div>
       </div>
@@ -138,11 +221,18 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
     <MapContainer
       center={[position.coordinates[1], position.coordinates[0]]}
       zoom={position.zoom}
-      minZoom={1}
+      minZoom={0.1}
       maxZoom={6}
+      bounds={[
+        [-70, -240],
+        [85, 240],
+      ]}
+      boundsOptions={{ padding: [5, 5] }}
       style={{
         width: '100%',
         height: '100%',
+        minHeight: `${height}px`,
+        maxWidth: `${width}px`,
         filter: isTransitioning ? 'brightness(1.05)' : 'none',
         transition: 'filter 0.3s ease-in-out',
       }}
@@ -154,12 +244,26 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
       touchZoom={false}
       boxZoom={false}
       keyboard={false}
+      worldCopyJump={true}
     >
       <MapController position={position} isTransitioning={isTransitioning} />
 
       {/* No tile layer - we only want the country boundaries */}
 
-      {geoData && <GeoJSON data={geoData} style={countryStyle} onEachFeature={onEachCountry} />}
+      {geoData && (
+        <GeoJSON
+          data={geoData}
+          style={countryStyle}
+          onEachFeature={(feature, layer) => {
+            try {
+              onEachCountry(feature, layer);
+            } catch (error) {
+              logger.error('Error in onEachCountry:', error, 'Feature:', feature);
+            }
+          }}
+          key={`geojson-${highlightedCountry || 'default'}`}
+        />
+      )}
     </MapContainer>
   );
 };

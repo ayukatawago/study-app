@@ -49,12 +49,14 @@ export default function BaseFlashcard<T extends BaseFlashcardData>({
         className={`relative w-full max-w-sm sm:max-w-md md:w-96 ${getCardHeight()} cursor-pointer transition-all duration-500 ${
           isFlipped ? 'shadow-xl' : 'shadow-md'
         } mx-auto`}
+        style={{ overflow: 'visible' }}
         onClick={handleFlip}
       >
         <div
           className={`absolute inset-0 rounded-xl p-6 flex flex-col items-center justify-center backface-hidden transition-all duration-500 ${
             isFlipped ? 'opacity-0 rotate-y-180' : 'opacity-100'
           } bg-white dark:bg-gray-800`}
+          style={{ overflow: 'visible' }}
         >
           {renderFrontContent()}
           <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">

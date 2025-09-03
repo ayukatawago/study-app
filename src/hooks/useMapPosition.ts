@@ -13,7 +13,7 @@ interface CountryPosition {
 export const useMapPosition = () => {
   const [position, setPosition] = useState<MapPosition>({
     coordinates: [0, 0],
-    zoom: 1,
+    zoom: 0.2,
   });
   const [isZoomed, setIsZoomed] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -95,13 +95,13 @@ export const useMapPosition = () => {
     const currentCoords = position.coordinates;
     const currentZoom = position.zoom;
     const worldCoords: [number, number] = [0, 0];
-    const worldZoom = 1;
+    const worldZoom = 0.2;
 
     animateToPosition(currentCoords, worldCoords, currentZoom, worldZoom, () => setIsZoomed(false));
   }, [position, animateToPosition]);
 
   const resetPosition = useCallback(() => {
-    setPosition({ coordinates: [0, 0] as [number, number], zoom: 1 });
+    setPosition({ coordinates: [0, 0] as [number, number], zoom: 0.2 });
     setIsZoomed(false);
     setCountryPosition(null);
   }, []);

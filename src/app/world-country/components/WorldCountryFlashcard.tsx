@@ -15,21 +15,9 @@ export default function WorldCountryFlashcard({
   onCorrect,
   onIncorrect,
 }: WorldCountryFlashcardProps) {
-  // Determine card height based on content
+  // Use fixed card height
   const getCardHeight = () => {
-    // Increase height if there are descriptions
-    if (event.descriptions && event.descriptions.length > 0) {
-      // Adjust height based on number of descriptions
-      const descCount = event.descriptions.length;
-      if (descCount >= 3) {
-        return 'h-96'; // 24rem = 384px for 3+ descriptions
-      } else if (descCount === 2) {
-        return 'h-80'; // 20rem = 320px for 2 descriptions
-      } else {
-        return 'h-72'; // 18rem = 288px for 1 description
-      }
-    }
-    return 'h-64'; // 16rem = 256px for no descriptions
+    return 'h-96'; // Fixed height of 24rem = 384px for all cards
   };
 
   const renderFrontContent = () => {
@@ -40,7 +28,10 @@ export default function WorldCountryFlashcard({
 
     // Always show map on front side
     return (
-      <div className="w-full h-full">
+      <div
+        className="w-full h-full flex items-center justify-center relative"
+        style={{ overflow: 'visible' }}
+      >
         <WorldMap highlightedCountry={String(event.countryCode)} />
       </div>
     );

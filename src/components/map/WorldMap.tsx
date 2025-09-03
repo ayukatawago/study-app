@@ -22,19 +22,32 @@ interface WorldMapProps {
   height?: number;
 }
 
-const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, height = 300 }) => {
+const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width, height }) => {
   const { position, isZoomed, isTransitioning, countryPosition, handleZoomIn, handleZoomOut } =
     useCountryPosition(highlightedCountry);
+
+  // Calculate responsive dimensions with 4:3 aspect ratio
+  const mapAspectRatio = 4 / 3;
+  const containerMaxWidth = 320;
+  const containerMaxHeight = 240;
+
+  // Use provided dimensions or calculate responsive ones
+  const mapWidth = width || containerMaxWidth;
+  const mapHeight = height || containerMaxHeight;
 
   return (
     <div
       className={`world-map-container relative ${isTransitioning ? 'transition-opacity' : ''}`}
       style={{
         width: '100%',
-        height: `${height}px`,
+        maxWidth: `${mapWidth}px`,
+        aspectRatio: `${mapAspectRatio}`,
+        height: 'auto',
+        maxHeight: `${mapHeight}px`,
         padding: 0,
-        margin: 0,
+        margin: '0 auto',
         transition: 'all 0.5s ease-in-out',
+        overflow: 'visible',
       }}
     >
       <ZoomControls
@@ -50,7 +63,8 @@ const WorldMap: React.FC<WorldMapProps> = ({ highlightedCountry, width = 800, he
         highlightedCountry={highlightedCountry}
         position={position}
         isTransitioning={isTransitioning}
-        height={height}
+        width={mapWidth}
+        height={mapHeight}
       />
     </div>
   );
