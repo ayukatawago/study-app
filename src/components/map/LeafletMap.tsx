@@ -318,6 +318,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
         maxWidth: `${width}px`,
         filter: isTransitioning ? 'brightness(1.05)' : 'none',
         transition: 'filter 0.3s ease-in-out',
+        backgroundColor: '#ADD8E6', // Light blue sea background
       }}
       attributionControl={false}
       zoomControl={false}
