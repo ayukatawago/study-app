@@ -44,8 +44,8 @@ export const ZoomControls: React.FC<ZoomControlsProps> = ({
         <button
           className="p-2 rounded-full bg-white shadow-lg hover:bg-blue-100 active:bg-blue-200 transition-all duration-300 text-blue-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400"
           onClick={onZoomOut}
-          title="Zoom out"
-          aria-label="Zoom out to world view"
+          title="Zoom out to maximum"
+          aria-label="Zoom out to maximum world view"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
