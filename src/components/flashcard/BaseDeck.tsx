@@ -269,14 +269,17 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
     );
   } else if (error || !items.length) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="text-center p-6 bg-red-100 dark:bg-red-900 rounded-lg">
-          <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-            エラーが発生しました
-          </h2>
-          <p className="text-gray-900 dark:text-white">
-            {error || 'データを取得できませんでした。'}
-          </p>
+      <div>
+        <div className="flex justify-end mb-6">{renderSettingsPanel(handleResetProgress)}</div>
+        <div className="min-h-[60vh] flex items-center justify-center">
+          <div className="text-center p-6 bg-red-100 dark:bg-red-900 rounded-lg">
+            <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+              エラーが発生しました
+            </h2>
+            <p className="text-gray-900 dark:text-white">
+              {error || 'データを取得できませんでした。'}
+            </p>
+          </div>
         </div>
       </div>
     );
