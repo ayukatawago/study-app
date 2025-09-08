@@ -1,0 +1,420 @@
+{
+    "diet": [
+        {
+            "id": 1,
+            "keyword": "国会の地位",
+            "description": [
+                "国会は国憲の<span>最高機関</span>で、国の唯一の<span>立法機関</span>である",
+                "日本国憲法第<span>41</span>条"
+            ]
+        },
+        {
+            "id": 2,
+            "keyword": "衆議院の議員定数",
+            "description": [
+                "合計<span>465</span>名",
+                "小選挙区選出<span>289</span>名",
+                "比例代表選出<span>176</span>名"
+            ]
+        },
+        {
+            "id": 3,
+            "keyword": "参議院の議員定数",
+            "description": [
+                "合計<span>248</span>名",
+                "選挙区選出<span>148</span>名",
+                "比例代表選出<span>100</span>名"
+            ]
+        },
+        {
+            "id": 4,
+            "keyword": "衆議院の任期",
+            "description": [
+                "<span>4</span>年",
+                "解散すると、任期途中でも資格を失う"
+            ]
+        },
+        {
+            "id": 5,
+            "keyword": "参議院の任期",
+            "description": [
+                "<span>6</span>年",
+                "<span>3</span>年ごとに半数を改選"
+            ]
+        },
+        {
+            "id": 6,
+            "keyword": "選挙権",
+            "description": [
+                "満<span>18</span>歳以上の日本国民に与えられる",
+                "2022年6月の公職選挙法改正で、選挙権年齢が<span>20</span>歳以上から引き下げられた"
+            ]
+        },
+        {
+            "id": 7,
+            "keyword": "被選挙権",
+            "description": [
+                "衆議院：満<span>25</span>歳以上の日本国民",
+                "参議院：満<span>30</span>歳以上の日本国民"
+            ]
+        },
+        {
+            "id": 8,
+            "keyword": "<span>通常</span>国会",
+            "description": [
+                "毎年1回、<span>1</span>月に召集される",
+                "会期は通常<span>150</span>日間",
+                "おもに次の年度の<span>予算</span>を審議する"
+            ]
+        },
+        {
+            "id": 9,
+            "keyword": "<span>臨時</span>国会",
+            "description": [
+                "<span>内閣</span>が認めた場合に召集される",
+                "どちらかの議員の総議員の<span>4分の1</span>以上の要求で招集される"
+            ]
+        },
+        {
+            "id": 10,
+            "keyword": "<span>特別</span>国会",
+            "description": [
+                "衆議院の解散後の総選挙の日から<span>30</span>日以内に召集される",
+                "<span>内閣総理大臣</span>を指名する"
+            ]
+        },
+        {
+            "id": 11,
+            "keyword": "<span>緊急集会</span>",
+            "description": [
+                "衆議院が解散された後、次の国会が招集されるまでの間、内閣は参議院を召集することができる"
+            ]
+        },
+        {
+            "id": 12,
+            "keyword": "国会の役割",
+            "description": [
+                "<span>法律</span>の制定",
+                "<span>予算</span>の議決・承認",
+                "<span>条約</span>の承認",
+                "<span>内閣総理大臣</span>の指名",
+                "<span>内閣不信任</span>の決議",
+                "<span>憲法改正</span>の発議",
+                "<span>弾劾裁判所</span>の設置",
+                "<span>国政調査権</span>の行使"
+            ]
+        },
+        {
+            "id": 13,
+            "keyword": "法律ができるまでの流れ",
+            "description": [
+                "<span>国会議員</span>または<span>内閣</span>が法律案を提出",
+                "衆議院と参議院で審議、委員会(<span>公聴会</span>)、本会議を経て、採決",
+                "両院での可決により成立",
+                "天皇の公布"
+            ],
+            "memo": "法律案は衆議院・参議院のどちらに先に提出しても良いが、予算案は、必ず先に<span>衆議院</span>に提出される"
+        },
+        {
+            "id": 14,
+            "keyword": "衆議院の優越",
+            "description": [
+                "<span>任期</span>が短く、<span>解散</span>もあるため、衆議院は主権者である<span>国民</span>の意思をより反映しやすい",
+                "<span>予算案</span>の先議権と<span>内閣不信任</span>の決議は、衆議院にのみ認められている"
+            ]
+        },
+        {
+            "id": 15,
+            "keyword": "内閣不信任の決議から内閣総理大臣の指名までの流れ",
+            "description": [
+                "内閣不信任の決議後、<span>10</span>日以内に衆議院が<span>解散</span>されなければ、内閣は<span>総辞職</span>しなければならない",
+                "衆議院の<span>解散</span>後、<span>40</span>日以内に衆議院総選挙を実施",
+                "その後<span>30</span>日以内に<span>特別</span>国会が召集され、内閣総理大臣を指名"
+            ]
+        }
+    ],
+    "cabinet": [
+        {
+            "id": 1,
+            "keyword": "内閣の地位",
+            "description": [
+                "<span>行政権</span>は、内閣に属する",
+                "日本国憲法第<span>65</span>条"
+            ]
+        },
+        {
+            "id": 2,
+            "keyword": "内閣の構成",
+            "description": [
+                "内閣総理大臣と<span>国務大臣</span>で構成される",
+                "内閣総理大臣は<span>国会</span>が指名し、<span>天皇</span>が任命する",
+                "<span>国務大臣</span>は、<span>内閣総理大臣</span>が任命する",
+                "内閣総理大臣と<span>国務大臣</span>は、すべて<span>文民</span>でならなければならない"
+            ]
+        },
+        {
+            "id": 3,
+            "keyword": "<span>議員内閣制</span>",
+            "description": [
+                "内閣は国会に対して政治上の責任を連帯して負っている"
+            ]
+        },
+        {
+            "id": 4,
+            "keyword": "内閣と政党の関係",
+            "description": [
+                "内閣をつくる政党：<span>与党</span>",
+                "内閣に加わらない政党：<span>野党</span>",
+                "複数の政党が<span>与党</span>となる内閣を<span>連立内閣</span>という"
+            ]
+        },
+        {
+            "id": 5,
+            "keyword": "内閣の仕事",
+            "description": [
+                "<span>憲法</span>と<span>法律</span>に基づいて政治を行う",
+                "<span>法律案</span>・<span>予算案</span>の国会提出",
+                "外国と<span>条約</span>を結ぶ",
+                "内閣が出す命令である<span>政令</span>を定める",
+                "国会の招集や、<span>衆議院の解散</span>を決定する",
+                "<span>最高裁判所長官</span>の指名、その他の<span>裁判官</span>の任命",
+                "天皇<span>の国事行為</span>に対して<span>助言</span>と<span>承認</span>"
+            ],
+            "memo": "内閣の仕事の方針は<span>閣議</span>で決定される"
+        },
+        {
+            "id": 7,
+            "keyword": "行政機関",
+            "description": [
+                "内閣とその下の行政機関は<span>政府</span>ともよばれる"
+            ]
+        },
+        {
+            "id": 8,
+            "keyword": "<span>会計検査院</span>",
+            "description": [
+                "国の収入・支出を検査する"
+            ]
+        },
+        {
+            "id": 9,
+            "keyword": "<span>人事院</span>",
+            "description": [
+                "公務員の任用や給与に関する事務を行う"
+            ]
+        },
+        {
+            "id": 10,
+            "keyword": "<span>内閣府</span>",
+            "description": [
+                "首相を中心に国の基本的な方針を決める"
+            ]
+        },
+        {
+            "id": 11,
+            "keyword": "<span>こども家庭庁</span>",
+            "description": [
+                "子育て支援や環境づくり"
+            ]
+        },
+        {
+            "id": 12,
+            "keyword": "<span>総務省</span>",
+            "description": [
+                "行政・地方自治・情報通信・選挙に関する仕事"
+            ]
+        },
+        {
+            "id": 13,
+            "keyword": "<span>法務省</span>",
+            "description": [
+                "法律を整え、犯罪を防ぐ"
+            ]
+        },
+        {
+            "id": 14,
+            "keyword": "<span>外務省</span>",
+            "description": [
+                "外国と交渉する",
+                "条約・国際連合に関する仕事"
+            ]
+        },
+        {
+            "id": 15,
+            "keyword": "<span>財務省</span>",
+            "description": [
+                "予算案をつくる",
+                "税金を集める"
+            ]
+        },
+        {
+            "id": 16,
+            "keyword": "<span>農林水産省</span>",
+            "description": [
+                "農業・林業・水産業をさかんにする"
+            ]
+        },
+        {
+            "id": 17,
+            "keyword": "<span>国土交通省</span>",
+            "description": [
+                "土地の利用・開発や交通の整備、気象に関する仕事"
+            ]
+        },
+        {
+            "id": 18,
+            "keyword": "<span>経済産業省</span>",
+            "description": [
+                "産業・貿易をさかんにする"
+            ]
+        },
+        {
+            "id": 19,
+            "keyword": "<span>環境省</span>",
+            "description": [
+                "公害を防ぎ、地球環境を守る"
+            ]
+        },
+        {
+            "id": 20,
+            "keyword": "<span>厚生労働省</span>",
+            "description": [
+                "医療・福祉の発展、雇用や労働に関する仕事"
+            ]
+        },
+        {
+            "id": 21,
+            "keyword": "<span>文部科学省</span>",
+            "description": [
+                "教育・文化・スポーツ・科学技術をさかんにする"
+            ]
+        },
+        {
+            "id": 22,
+            "keyword": "<span>防衛省</span>",
+            "description": [
+                "国を守り、国際社会の平和と安定をめざす"
+            ]
+        }
+    ],
+    "court": [
+        {
+            "id": 1,
+            "keyword": "司法権",
+            "description": [
+                "すべての司法権は、<span>最高裁判所</span>及び下級裁判所に属する",
+                "日本国憲法第<span>76</span>条"
+            ]
+        },
+        {
+            "id": 2,
+            "keyword": "司法権の独立",
+            "description": [
+                "裁判所は、<span>内閣</span>や<span>国会</span>から独立して、司法権を行使する",
+                "裁判官は、その<span>良心</span>に従い、<span>憲法</span>と法律にのみ拘束される"
+            ]
+        },
+        {
+            "id": 3,
+            "keyword": "<span>民事裁判</span>",
+            "description": [
+                "個人と個人、個人と法人などの権利や義務についての争いを裁く"
+            ]
+        },
+        {
+            "id": 4,
+            "keyword": "<span>刑事裁判</span>",
+            "description": [
+                "犯罪を裁く",
+                "<span>検察官</span>が<span>民事裁判</span>での原告の立場で裁判所に訴える"
+            ]
+        },
+        {
+            "id": 5,
+            "keyword": "<span>最高裁判所</span>",
+            "description": [
+                "長官を含む合計<span>15</span>人の裁判官で構成される",
+                "東京に1か所"
+            ]
+        },
+        {
+            "id": 6,
+            "keyword": "<span>高等裁判所</span>",
+            "description": [
+                "8地方に1か所ずつ",
+                "<span>札幌</span>, <span>仙台</span>, <span>東京</span>, <span>名古屋</span>, <span>大阪</span>, <span>広島</span>, <span>高松</span>, <span>福岡</span>"
+            ]
+        },
+        {
+            "id": 7,
+            "keyword": "<span>地方裁判所</span>",
+            "description": [
+                "全国に50か所 (北海道に4か所、各都道府県に1か所ずつ)"
+            ]   
+        },
+        {
+            "id": 8,
+            "keyword": "<span>家庭裁判所</span>",
+            "description": [
+                "家庭内のもめごとや少年犯罪の審判などを行う",
+                "<span>地方裁判所</span>に併設されている"
+            ]
+        },
+        {
+            "id": 9,
+            "keyword": "<span>簡易裁判所</span>",
+            "description": [
+                "交通違反や軽犯罪などを裁く",
+                "全国に438か所"
+            ]
+        },
+        {
+            "id": 10,
+            "keyword": "<span>違憲立法審査権</span>",
+            "description": [
+                "法律や命令が憲法に違反していないかを審査する (すべての裁判所)",
+                "最高裁判所は、憲法に違反しているかどうかの最終判断を下すため、<span>法の番人</span>とよばれる"
+            ]
+        },
+        {
+            "id": 11,
+            "keyword": "司法制度改革",
+            "description": [
+                "国民から選ばれた<span>裁判員</span>が、裁判官とともに、刑罰の重い<span>刑事事件</span>の第一審に参加する"
+            ]
+        },
+        {
+            "id": 12,
+            "keyword": "<span>請求権</span>",
+            "description": [
+                "人権が侵された場合、救済を裁判所に求める権利"
+            ]
+        },
+        {
+            "id": 13,
+            "keyword": "<span>三審制</span>",
+            "description": [
+                "判決に不服がある場合に3回まで裁判を受けることができる仕組み"
+            ]
+        },
+        {
+            "id": 14,
+            "keyword": "被疑者・被告人の人権",
+            "description": [
+                "刑事裁判では誰でも<span>弁護士</span>をたのむことができる",
+                "自分に不利益になる質問には答えなくても良い<span>黙秘権</span>が認められている",
+                "証拠が自白だけの場合は有罪にならない",
+                "近年は被害者の人権も、一層の保護が求められている"
+            ]
+        },
+        {
+            "id": 15,
+            "keyword": "三権分立",
+            "description": [
+                "国の権力を<span>立法</span>・<span>行政</span>・<span>司法</span>の3つに分ける",
+                "お互いの権力をおさえ合い、つりあいを保つ政治の仕組み",
+                "権力が集中することによって起こる<span>独裁</span>政治を防ぎ、国民の<span>基本的人権</span>を守る"
+            ]
+        }
+    ]
+}
