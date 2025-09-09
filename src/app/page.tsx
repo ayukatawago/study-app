@@ -93,6 +93,12 @@ export default function Home() {
                 >
                   国際社会
                 </Link>
+                <Link
+                  href="/politics"
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                >
+                  政治
+                </Link>
               </div>
             </div>
           </div>
