@@ -4,7 +4,7 @@ A Next.js application to help users memorize important points in social studies 
 
 ## Features
 
-- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, prefecture specialties, traditional crafts, international community, animal science, human biology, and Japanese idioms
+- Interactive flashcards for studying Japanese historical events, cultural figures, constitution articles, world geography, prefecture specialties, traditional crafts, international community, politics, animal science, human biology, and Japanese idioms
 - Daily activity tracking with visual histogram showing study progress
 - Multiple study modes:
   - History: Toggle between year-to-event and event-to-year modes
@@ -14,6 +14,7 @@ A Next.js application to help users memorize important points in social studies 
   - Prefectures: Flashcards for prefecture specialties and products
   - Traditional Crafts: Toggle between prefecture-to-craft and craft-to-prefecture modes
   - International Community: Interactive quiz about United Nations and international organizations
+  - Politics: Interactive quiz about Japanese government structure (diet, cabinet, court)
   - Animal Science: Quiz questions with answers
   - Human Biology: Quiz questions with answers
   - Japanese Idioms: Toggle between idiom-to-meaning and meaning-to-idiom modes with usage examples
@@ -81,7 +82,8 @@ study-app/
 │       │   └── culture.json     # Cultural figures data
 │       ├── civics/               # Civics data directory
 │       │   ├── constitution.json # Japanese constitution data
-│       │   └── united_nations.json # United Nations and international organizations data
+│       │   ├── united_nations.json # United Nations and international organizations data
+│       │   └── politics.json    # Politics data (diet, cabinet, court)
 │       ├── geography/            # Geography data directory
 │       │   ├── world_countries.json # World countries data with zoom levels
 │       │   ├── prefectures.json     # Prefecture quiz data
@@ -113,6 +115,8 @@ study-app/
 │   │   │   └── components/ # Page-specific components
 │   │   ├── idioms/         # Japanese idioms flashcards page
 │   │   │   └── components/ # Page-specific components
+│   │   ├── politics/       # Politics flashcards page
+│   │   │   └── components/ # Page-specific components
 │   │   └── activity/        # Daily activity tracking page
 │   ├── components/   # React components
 │   │   ├── common/   # Common UI components
@@ -138,6 +142,7 @@ study-app/
 - Prefecture Specialties (都道府県) - includes 192 prefecture entries, ranking data, and cities data
 - Traditional Crafts (伝統工芸品)
 - International Community (国際社会)
+- Politics (政治)
 
 ### Science (理科)
 
@@ -416,6 +421,39 @@ The application uses the following JSON structure for Japanese idioms data (from
   ]
 }
 ```
+
+### Politics
+
+The application uses the following JSON structure for politics quiz data (from `public/data/civics/politics.json`):
+
+```json
+{
+  "diet": [
+    {
+      "id": 1,
+      "keyword": "国会の地位",
+      "description": [
+        "国会は国憲の<span>最高機関</span>で、国の唯一の<span>立法機関</span>である",
+        "日本国憲法第<span>41</span>条"
+      ]
+    },
+    {
+      "id": 13,
+      "keyword": "法律ができるまでの流れ",
+      "description": [
+        "<span>国会議員</span>または<span>内閣</span>が法律案を提出",
+        "衆議院と参議院で審議、委員会(<span>公聴会</span>)、本会議を経て、採決",
+        "両院での可決により成立",
+        "天皇の公布"
+      ],
+      "memo": "法律案は衆議院・参議院のどちらに先に提出しても良いが、予算案は、必ず先に<span>衆議院</span>に提出される"
+    }
+    // More entries for diet, cabinet, and court
+  ]
+}
+```
+
+Text within `<span>` tags becomes interactive quiz elements that can be revealed by tapping. The optional `memo` field provides additional context.
 
 ## Scripts
 

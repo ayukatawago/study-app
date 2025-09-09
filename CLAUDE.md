@@ -58,7 +58,8 @@ study-app/
 │       │   └── culture.json     # Cultural figures data
 │       ├── civics/               # Civics data directory
 │       │   ├── constitution.json # Japanese constitution data
-│       │   └── united_nations.json # United Nations and international organizations data
+│       │   ├── united_nations.json # United Nations and international organizations data
+│       │   └── politics.json    # Politics data (diet, cabinet, court)
 │       ├── geography/            # Geography data directory
 │       │   ├── world_countries.json # World countries data with zoom levels
 │       │   ├── prefectures.json     # Prefecture quiz data
@@ -90,6 +91,8 @@ study-app/
 │   │   ├── crafts/  # Traditional crafts flashcards page
 │   │   │   └── components/ # Page-specific components
 │   │   ├── idioms/  # Japanese idioms flashcards page
+│   │   │   └── components/ # Page-specific components
+│   │   ├── politics/ # Politics flashcards page
 │   │   │   └── components/ # Page-specific components
 │   │   └── activity/ # Daily activity tracking page
 │   ├── components/   # React components
@@ -172,7 +175,7 @@ const handleSettingsChange = (newSettings: typeof settings) => {
 
 **Current Compliant Pages:**
 
-- History, Culture, Constitution, World Country, International Community, Animals, Human, Prefectures, Crafts, Idioms
+- History, Culture, Constitution, World Country, International Community, Animals, Human, Prefectures, Crafts, Idioms, Politics
 
 **Prohibited Patterns:**
 
@@ -273,7 +276,16 @@ logger.error('Error occurred', errorObject);
 - Track correct/incorrect responses in local storage
 - Adaptable card height based on content length
 
-11. **Data Management**
+11. **Politics Quiz System**
+
+- Display political concepts about Japanese government structure
+- Interactive text revealing - tap on placeholder text to reveal answers
+- Category filtering between different topics (diet, cabinet, court)
+- Track correct/incorrect responses in local storage
+- Show optional memo field for additional context
+- Bullet-point formatting for multiple description items
+
+12. **Data Management**
 
 - Uses local storage to persist user progress
 - Pulls history flashcard data from history/events.json
@@ -286,8 +298,9 @@ logger.error('Error occurred', errorObject);
 - Pulls prefecture quiz data from geography/prefectures.json
 - Pulls traditional crafts data from geography/crafts.json
 - Pulls Japanese idioms data from japanese/idioms.json
+- Pulls politics quiz data from civics/politics.json
 
-12. **User Interface**
+13. **User Interface**
 
 - Responsive design using TailwindCSS
 - Dark/light theme switching with system preference support (next-themes)
@@ -296,7 +309,7 @@ logger.error('Error occurred', errorObject);
 - Interactive world map for geography learning
 - Organized by subject category (社会, 理科, and 国語)
 
-13. **Daily Activity Tracking**
+14. **Daily Activity Tracking**
 
 - Automatically tracks daily quiz attempts and correct answers
 - Visual histogram showing last 14 days of activity
@@ -561,6 +574,56 @@ The application uses the following JSON structure for Japanese idioms data (from
 }
 ```
 
+### Politics
+
+The application uses the following JSON structure for politics quiz data (from `public/data/civics/politics.json`):
+
+```json
+{
+  "diet": [
+    {
+      "id": 1,
+      "keyword": "国会の地位",
+      "description": [
+        "国会は国憲の<span>最高機関</span>で、国の唯一の<span>立法機関</span>である",
+        "日本国憲法第<span>41</span>条"
+      ]
+    },
+    {
+      "id": 13,
+      "keyword": "法律ができるまでの流れ",
+      "description": [
+        "<span>国会議員</span>または<span>内閣</span>が法律案を提出",
+        "衆議院と参議院で審議、委員会(<span>公聴会</span>)、本会議を経て、採決",
+        "両院での可決により成立",
+        "天皇の公布"
+      ],
+      "memo": "法律案は衆議院・参議院のどちらに先に提出しても良いが、予算案は、必ず先に<span>衆議院</span>に提出される"
+    }
+    // More diet entries
+  ],
+  "cabinet": [
+    {
+      "id": 1,
+      "keyword": "内閣の地位",
+      "description": ["<span>行政権</span>は、内閣に属する", "日本国憲法第<span>65</span>条"]
+    }
+    // More cabinet entries
+  ],
+  "court": [
+    {
+      "id": 1,
+      "keyword": "司法権",
+      "description": [
+        "すべての司法権は、<span>最高裁判所</span>及び下級裁判所に属する",
+        "日本国憲法第<span>76</span>条"
+      ]
+    }
+    // More court entries
+  ]
+}
+```
+
 ## Local Storage
 
 ### History Flashcards
@@ -733,6 +796,25 @@ User progress and settings for Japanese idioms flashcards are stored in local st
     "cardDirection": "idiom-to-meaning",
     "randomOrder": true,
     "showIncorrectOnly": false
+  }
+}
+```
+
+### Politics Flashcards
+
+User progress and settings for politics flashcards are stored in local storage with the following structure:
+
+```json
+{
+  "politics_progress": {
+    "seen": [1, 2, 3],
+    "correct": [1, 2],
+    "incorrect": [3]
+  },
+  "politics_settings": {
+    "randomOrder": true,
+    "showIncorrectOnly": false,
+    "category": "all"
   }
 }
 ```
