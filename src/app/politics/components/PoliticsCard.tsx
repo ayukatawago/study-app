@@ -10,84 +10,72 @@ type PoliticsCardProps = {
 };
 
 export default function PoliticsCard({ item, onCorrect, onIncorrect }: PoliticsCardProps) {
-  // Track revealed answers for each span and pre
+  // Track revealed answers for each span
   const [revealedAnswers, setRevealedAnswers] = useState<{ [key: string]: boolean }>({});
   // Track if all answers are revealed
   const [allRevealed, setAllRevealed] = useState(false);
 
-  // Count total number of span and pre tags in all descriptions
-  const totalTags = useMemo(() => {
-    return item.description.reduce((total, desc) => {
-      // Count <span> and <pre> tags in the description
-      const spanMatches = desc.match(/<span>/g);
-      const preMatches = desc.match(/<pre>/g);
-      return total + (spanMatches ? spanMatches.length : 0) + (preMatches ? preMatches.length : 0);
+  // Count total number of span tags in keyword and all descriptions
+  const totalSpans = useMemo(() => {
+    let total = 0;
+
+    // Count spans in keyword
+    const keywordMatches = item.keyword.match(/<span>/g);
+    total += keywordMatches ? keywordMatches.length : 0;
+
+    // Count spans in descriptions
+    total += item.description.reduce((descTotal, desc) => {
+      const matches = desc.match(/<span>/g);
+      return descTotal + (matches ? matches.length : 0);
     }, 0);
-  }, [item.description]);
+
+    // Count spans in memo if it exists
+    if (item.memo) {
+      const memoMatches = item.memo.match(/<span>/g);
+      total += memoMatches ? memoMatches.length : 0;
+    }
+
+    return total;
+  }, [item.keyword, item.description, item.memo]);
 
   // Check if all answers are revealed
   useEffect(() => {
     const revealedCount = Object.values(revealedAnswers).filter(value => value).length;
-    setAllRevealed(revealedCount === totalTags && totalTags > 0);
-  }, [revealedAnswers, totalTags]);
+    setAllRevealed(revealedCount === totalSpans && totalSpans > 0);
+  }, [revealedAnswers, totalSpans]);
 
-  // Function to process text and handle <span>, <pre> tags
-  const processText = (text: string, descriptionIndex: number) => {
-    // Split by both <span> and <pre> tags
-    const parts = text.split(/(<span>.*?<\/span>|<pre>.*?<\/pre>)/);
+  // Function to process text and handle <span> tags
+  const processText = (text: string, sectionIndex: number) => {
+    // Split by <span> and </span> tags
+    const parts = text.split(/<span>|<\/span>/);
 
     return parts.map((part, index) => {
-      if (part.includes('<span>')) {
-        // Extract content from span tag
-        const content = part.replace(/<\/?span>/g, '');
-        const answerKey = `${descriptionIndex}-span-${index}`;
-        const isRevealed = revealedAnswers[answerKey];
-
-        return (
-          <span
-            key={answerKey}
-            onClick={() => {
-              setRevealedAnswers(prev => ({
-                ...prev,
-                [answerKey]: !prev[answerKey],
-              }));
-            }}
-            className="cursor-pointer"
-          >
-            {isRevealed ? (
-              <span className="font-bold text-blue-600 dark:text-blue-400">{content}</span>
-            ) : (
-              <span className="text-red-600 dark:text-red-400">( ??? )</span>
-            )}
-          </span>
-        );
-      } else if (part.includes('<pre>')) {
-        // Extract content from pre tag
-        const content = part.replace(/<\/?pre>/g, '');
-        const answerKey = `${descriptionIndex}-pre-${index}`;
-        const isRevealed = revealedAnswers[answerKey];
-
-        return (
-          <span
-            key={answerKey}
-            onClick={() => {
-              setRevealedAnswers(prev => ({
-                ...prev,
-                [answerKey]: !prev[answerKey],
-              }));
-            }}
-            className="cursor-pointer"
-          >
-            {isRevealed ? (
-              <span className="font-bold text-green-600 dark:text-green-400">{content}</span>
-            ) : (
-              <span className="text-red-600 dark:text-red-400">( ??? )</span>
-            )}
-          </span>
-        );
+      // Even indexes are regular text, odd indexes are quiz content
+      if (index % 2 === 0) {
+        return <span key={`${sectionIndex}-${index}`}>{part}</span>;
       } else {
-        // Regular text
-        return <span key={index}>{part}</span>;
+        // This is content inside a span tag
+        const answerKey = `${sectionIndex}-${index}`;
+        const isRevealed = revealedAnswers[answerKey];
+
+        return (
+          <span
+            key={answerKey}
+            onClick={() => {
+              setRevealedAnswers(prev => ({
+                ...prev,
+                [answerKey]: !prev[answerKey],
+              }));
+            }}
+            className="cursor-pointer"
+          >
+            {isRevealed ? (
+              <span className="font-bold text-blue-600 dark:text-blue-400">{part}</span>
+            ) : (
+              <span className="text-red-600 dark:text-red-400">( ??? )</span>
+            )}
+          </span>
+        );
       }
     });
   };
@@ -95,21 +83,23 @@ export default function PoliticsCard({ item, onCorrect, onIncorrect }: PoliticsC
   return (
     <div className="w-full mb-6 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
       <div className="mb-4">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{item.keyword}</h2>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+          {processText(item.keyword, -1)}
+        </h2>
       </div>
 
       <div className="mb-6">
         {item.description.map((desc, index) => (
           <div key={index} className="text-gray-700 dark:text-gray-300 mb-3">
+            <span className="text-gray-500 dark:text-gray-400 mr-2">•</span>
             {processText(desc, index)}
           </div>
         ))}
 
-        {item.memo && allRevealed && (
-          <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-500 animate-fade-in">
+        {item.memo && (
+          <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-500">
             <p className="text-sm text-yellow-700 dark:text-yellow-300">
-              <span className="font-semibold">メモ：</span>
-              {processText(item.memo, -1)}
+              {processText(item.memo, -2)}
             </p>
           </div>
         )}
@@ -124,9 +114,9 @@ export default function PoliticsCard({ item, onCorrect, onIncorrect }: PoliticsC
         </button>
         <button
           onClick={() => onCorrect()}
-          disabled={!allRevealed && totalTags > 0}
+          disabled={!allRevealed && totalSpans > 0}
           className={`px-4 py-2 text-sm rounded-md transition-colors ${
-            allRevealed || totalTags === 0
+            allRevealed || totalSpans === 0
               ? 'bg-green-500 text-white hover:bg-green-600'
               : 'bg-gray-300 text-gray-500 cursor-not-allowed'
           }`}
