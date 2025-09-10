@@ -103,6 +103,7 @@ export function getPageDisplayName(pageName: string): string {
     prefecture: '都道府県',
     craft: '伝統工芸品',
     idiom: '慣用句',
+    politics: '政治',
   };
 
   return pageNameMap[pageName] || pageName;
@@ -117,6 +118,7 @@ export function getSubjectName(pageName: string): string {
     'international-community': '社会',
     prefecture: '社会',
     craft: '社会',
+    politics: '社会',
     animal_quiz: '理科',
     human_quiz: '理科',
     idiom: '国語',
@@ -137,6 +139,7 @@ export function getPageUrl(pageName: string): string {
     prefecture: '/prefectures',
     craft: '/crafts',
     idiom: '/idioms',
+    politics: '/politics',
   };
 
   return urlMap[pageName] || `/${pageName}`;
