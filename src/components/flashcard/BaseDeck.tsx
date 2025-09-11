@@ -5,6 +5,7 @@ import { BaseFlashcardData, BaseFlashcardSettings, BaseFlashcardProgress } from 
 import StudyProgressStats from '@/components/flashcard/StudyProgressStats';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { trackQuizAttempt, trackCorrectAnswer } from '@/utils/dailyActivity';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 interface BaseDeckProps<T extends BaseFlashcardData, S extends BaseFlashcardSettings> {
   id: string; // Unique identifier for localStorage keys
@@ -220,11 +221,7 @@ export default function BaseDeck<T extends BaseFlashcardData, S extends BaseFlas
   };
 
   if (isLoading) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   // Check if all cards have been answered correctly (when not in showIncorrectOnly mode)

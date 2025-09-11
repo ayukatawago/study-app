@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import AnimalFlashcardDeck from './components/AnimalFlashcardDeck';
 import PageHeader from '@/components/common/PageHeader';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 export default function AnimalsPage() {
   const [isClient, setIsClient] = useState(false);
@@ -12,11 +13,7 @@ export default function AnimalsPage() {
   }, []);
 
   if (!isClient) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   return (
