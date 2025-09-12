@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { PrefectureData } from '@/types/flashcard';
 import { createLogger } from '@/utils/logger';
+import ActionButton from '@/components/common/ActionButton';
 
 const logger = createLogger({ prefix: 'PrefectureFlashcard' });
 
@@ -81,24 +82,26 @@ export default function PrefectureFlashcard({
 
           {/* Action buttons */}
           <div className="flex space-x-4">
-            <button
+            <ActionButton
               onClick={e => {
                 e.stopPropagation();
                 handleIncorrect();
               }}
-              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-200"
+              variant="incorrect"
+              size="lg"
             >
               不正解
-            </button>
-            <button
+            </ActionButton>
+            <ActionButton
               onClick={e => {
                 e.stopPropagation();
                 handleCorrect();
               }}
-              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-200"
+              variant="correct"
+              size="lg"
             >
               正解
-            </button>
+            </ActionButton>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import { ConstitutionArticle, ConstitutionSection } from '@/hooks/useConstitution';
 import { useState, useEffect, useMemo } from 'react';
+import ActionButton from '@/components/common/ActionButton';
 
 type ConstitutionCardProps = {
   section: ConstitutionSection;
@@ -125,23 +126,16 @@ export default function ConstitutionCard({
       </div>
 
       <div className="flex justify-end gap-3">
-        <button
-          onClick={() => onIncorrect()}
-          className="px-4 py-2 text-sm rounded-md bg-red-500 text-white hover:bg-red-600 transition-colors"
-        >
+        <ActionButton onClick={() => onIncorrect()} variant="incorrect">
           不正解
-        </button>
-        <button
+        </ActionButton>
+        <ActionButton
           onClick={() => onCorrect()}
+          variant="correct"
           disabled={!allRevealed && totalSpans > 0}
-          className={`px-4 py-2 text-sm rounded-md transition-colors ${
-            allRevealed || totalSpans === 0
-              ? 'bg-green-500 text-white hover:bg-green-600'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-          }`}
         >
           正解
-        </button>
+        </ActionButton>
       </div>
     </div>
   );

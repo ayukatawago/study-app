@@ -2,6 +2,7 @@
 
 import { ReactNode, useState } from 'react';
 import { BaseFlashcardProps, BaseFlashcardData } from '@/types/flashcard';
+import ActionButton from '@/components/common/ActionButton';
 
 interface BaseFlashcardExtendedProps<T extends BaseFlashcardData> extends BaseFlashcardProps<T> {
   renderFrontContent: () => ReactNode;
@@ -70,18 +71,12 @@ export default function BaseFlashcard<T extends BaseFlashcardData>({
         >
           {renderBackContent()}
           <div className="mt-4 flex flex-wrap justify-center gap-3">
-            <button
-              onClick={handleIncorrect}
-              className="px-3 py-1.5 text-sm bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
-            >
+            <ActionButton onClick={handleIncorrect} variant="incorrect">
               不正解
-            </button>
-            <button
-              onClick={handleCorrect}
-              className="px-3 py-1.5 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
-            >
+            </ActionButton>
+            <ActionButton onClick={handleCorrect} variant="correct">
               正解
-            </button>
+            </ActionButton>
           </div>
         </div>
       </div>
