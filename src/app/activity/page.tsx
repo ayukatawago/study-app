@@ -22,6 +22,7 @@ import EmptyState from '@/components/common/EmptyState';
 import Modal from '@/components/common/Modal';
 import DataTable from '@/components/common/DataTable';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
+import PageContainer from '@/components/common/PageContainer';
 
 export default function ActivityPage() {
   const [activityData, setActivityData] = useState<DailyActivityData[]>([]);
@@ -113,130 +114,126 @@ export default function ActivityPage() {
   }
 
   return (
-    <main className="min-h-screen p-4 sm:p-6 bg-white dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto">
-        <PageHeader title="学習活動履歴" />
+    <PageContainer variant="wide">
+      <PageHeader title="学習活動履歴" />
 
-        {/* Page Filter */}
-        {availablePages.length > 0 && (
-          <div className="mb-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <FilterDropdown
-                  value={selectedPage}
-                  onChange={handlePageFilterChange}
-                  options={[
-                    { value: 'all', label: 'すべてのページ' },
-                    ...availablePages.map(pageName => ({
-                      value: pageName,
-                      label: `${getPageDisplayName(pageName)} (${getSubjectName(pageName)})`,
-                    })),
-                  ]}
-                />
-              </div>
-              {histogramData.length > 0 && (
-                <ClearButton onClick={handleClearActivity} title="履歴をクリア" />
-              )}
+      {/* Page Filter */}
+      {availablePages.length > 0 && (
+        <div className="mb-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <FilterDropdown
+                value={selectedPage}
+                onChange={handlePageFilterChange}
+                options={[
+                  { value: 'all', label: 'すべてのページ' },
+                  ...availablePages.map(pageName => ({
+                    value: pageName,
+                    label: `${getPageDisplayName(pageName)} (${getSubjectName(pageName)})`,
+                  })),
+                ]}
+              />
             </div>
+            {histogramData.length > 0 && (
+              <ClearButton onClick={handleClearActivity} title="履歴をクリア" />
+            )}
           </div>
-        )}
+        </div>
+      )}
 
-        {histogramData.length === 0 ? (
-          <EmptyState
-            title="学習活動がありません"
-            description="まだクイズに取り組んでいません。学習を始めてみましょう！"
-            actionLabel="学習を始める"
-            actionHref="/"
+      {histogramData.length === 0 ? (
+        <EmptyState
+          title="学習活動がありません"
+          description="まだクイズに取り組んでいません。学習を始めてみましょう！"
+          actionLabel="学習を始める"
+          actionHref="/"
+        />
+      ) : (
+        <div className="space-y-6">
+          <ActivityHistogram
+            data={histogramData.slice(0, 14).reverse()}
+            onBarClick={handleDateClick}
+            isDarkMode={isDarkMode}
           />
-        ) : (
-          <div className="space-y-6">
-            <ActivityHistogram
-              data={histogramData.slice(0, 14).reverse()}
-              onBarClick={handleDateClick}
-              isDarkMode={isDarkMode}
-            />
-          </div>
-        )}
+        </div>
+      )}
 
-        {/* Modal for detailed view */}
-        <Modal
-          isOpen={!!selectedDate}
-          onClose={closeModal}
-          title={selectedDate ? `${formatDate(selectedDate)} の詳細` : ''}
-        >
-          <DataTable
-            columns={[
-              {
-                key: 'subject',
-                label: '科目',
-                render: (_, activity) => (
-                  <span className="text-gray-900 dark:text-white font-medium">
-                    {getSubjectName(activity.pageName)}
-                  </span>
-                ),
-              },
-              {
-                key: 'page',
-                label: '学習ページ',
-                render: (_, activity) => (
-                  <Link
-                    href={getPageUrl(activity.pageName)}
-                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium hover:underline"
-                    onClick={closeModal}
+      {/* Modal for detailed view */}
+      <Modal
+        isOpen={!!selectedDate}
+        onClose={closeModal}
+        title={selectedDate ? `${formatDate(selectedDate)} の詳細` : ''}
+      >
+        <DataTable
+          columns={[
+            {
+              key: 'subject',
+              label: '科目',
+              render: (_, activity) => (
+                <span className="text-gray-900 dark:text-white font-medium">
+                  {getSubjectName(activity.pageName)}
+                </span>
+              ),
+            },
+            {
+              key: 'page',
+              label: '学習ページ',
+              render: (_, activity) => (
+                <Link
+                  href={getPageUrl(activity.pageName)}
+                  className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium hover:underline"
+                  onClick={closeModal}
+                >
+                  {getPageDisplayName(activity.pageName)}
+                </Link>
+              ),
+            },
+            {
+              key: 'attempts',
+              label: '挑戦問題数',
+              align: 'right',
+              render: (_, activity) => (
+                <span className="text-gray-600 dark:text-gray-400">{activity.quizAttempts}問</span>
+              ),
+            },
+            {
+              key: 'correct',
+              label: '正解数',
+              align: 'right',
+              render: (_, activity) => (
+                <span className="text-gray-600 dark:text-gray-400">
+                  {activity.correctAnswers}問
+                </span>
+              ),
+            },
+            {
+              key: 'accuracy',
+              label: '正解率',
+              align: 'right',
+              render: (_, activity) => {
+                const pageAccuracy =
+                  activity.quizAttempts > 0
+                    ? Math.round((activity.correctAnswers / activity.quizAttempts) * 100)
+                    : 0;
+                return (
+                  <span
+                    className={`font-medium ${
+                      pageAccuracy >= 80
+                        ? 'text-green-600 dark:text-green-400'
+                        : pageAccuracy >= 60
+                          ? 'text-yellow-600 dark:text-yellow-400'
+                          : 'text-red-600 dark:text-red-400'
+                    }`}
                   >
-                    {getPageDisplayName(activity.pageName)}
-                  </Link>
-                ),
-              },
-              {
-                key: 'attempts',
-                label: '挑戦問題数',
-                align: 'right',
-                render: (_, activity) => (
-                  <span className="text-gray-600 dark:text-gray-400">
-                    {activity.quizAttempts}問
+                    {pageAccuracy}%
                   </span>
-                ),
+                );
               },
-              {
-                key: 'correct',
-                label: '正解数',
-                align: 'right',
-                render: (_, activity) => (
-                  <span className="text-gray-600 dark:text-gray-400">
-                    {activity.correctAnswers}問
-                  </span>
-                ),
-              },
-              {
-                key: 'accuracy',
-                label: '正解率',
-                align: 'right',
-                render: (_, activity) => {
-                  const pageAccuracy =
-                    activity.quizAttempts > 0
-                      ? Math.round((activity.correctAnswers / activity.quizAttempts) * 100)
-                      : 0;
-                  return (
-                    <span
-                      className={`font-medium ${
-                        pageAccuracy >= 80
-                          ? 'text-green-600 dark:text-green-400'
-                          : pageAccuracy >= 60
-                            ? 'text-yellow-600 dark:text-yellow-400'
-                            : 'text-red-600 dark:text-red-400'
-                      }`}
-                    >
-                      {pageAccuracy}%
-                    </span>
-                  );
-                },
-              },
-            ]}
-            data={getSelectedDateActivities()}
-          />
-        </Modal>
-      </div>
-    </main>
+            },
+          ]}
+          data={getSelectedDateActivities()}
+        />
+      </Modal>
+    </PageContainer>
   );
 }
