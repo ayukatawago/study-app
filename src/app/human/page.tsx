@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import HumanFlashcardDeck from './components/HumanFlashcardDeck';
-import PageHeader from '@/components/common/PageHeader';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import PageContainer from '@/components/common/PageContainer';
 
@@ -18,8 +17,7 @@ export default function HumanPage() {
   }
 
   return (
-    <PageContainer>
-      <PageHeader title="人体" />
+    <PageContainer title="人体">
       <HumanFlashcardDeck />
     </PageContainer>
   );

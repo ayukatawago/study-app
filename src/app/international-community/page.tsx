@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import UNDeck from './components/UNDeck';
-import PageHeader from '@/components/common/PageHeader';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import PageContainer from '@/components/common/PageContainer';
 
@@ -18,8 +17,7 @@ export default function InternationalCommunityPage() {
   }
 
   return (
-    <PageContainer>
-      <PageHeader title="国際社会" />
+    <PageContainer title="国際社会">
       <UNDeck showNextButton={true} />
     </PageContainer>
   );

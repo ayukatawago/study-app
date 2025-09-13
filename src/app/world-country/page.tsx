@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import WorldCountryFlashcardDeck from './components/WorldCountryFlashcardDeck';
-import PageHeader from '@/components/common/PageHeader';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import PageContainer from '@/components/common/PageContainer';
 
@@ -18,8 +17,7 @@ export default function WorldCountryPage() {
   }
 
   return (
-    <PageContainer>
-      <PageHeader title="世界地図" />
+    <PageContainer title="世界地図">
       <WorldCountryFlashcardDeck />
     </PageContainer>
   );

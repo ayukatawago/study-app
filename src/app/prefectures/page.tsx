@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import PrefectureFlashcardDeck from './components/PrefectureFlashcardDeck';
-import PageHeader from '@/components/common/PageHeader';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import PageContainer from '@/components/common/PageContainer';
 
@@ -18,8 +17,7 @@ export default function PrefecturePage() {
   }
 
   return (
-    <PageContainer>
-      <PageHeader title="都道府県" />
+    <PageContainer title="都道府県">
       <PrefectureFlashcardDeck />
     </PageContainer>
   );

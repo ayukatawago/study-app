@@ -12,7 +12,6 @@ import {
   DailyActivityData,
   HistogramData,
 } from '@/utils/dailyActivity';
-import PageHeader from '@/components/common/PageHeader';
 import Link from 'next/link';
 import ActivityHistogram from '@/components/charts/ActivityHistogram';
 import { useIsDarkMode } from '@/hooks/useTheme';
@@ -114,9 +113,7 @@ export default function ActivityPage() {
   }
 
   return (
-    <PageContainer variant="wide">
-      <PageHeader title="学習活動履歴" />
-
+    <PageContainer variant="wide" title="学習活動履歴">
       {/* Page Filter */}
       {availablePages.length > 0 && (
         <div className="mb-6">

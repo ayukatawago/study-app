@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import IdiomFlashcardDeck from './components/IdiomFlashcardDeck';
-import PageHeader from '@/components/common/PageHeader';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import PageContainer from '@/components/common/PageContainer';
 
@@ -18,8 +17,7 @@ export default function IdiomsPage() {
   }
 
   return (
-    <PageContainer>
-      <PageHeader title="慣用句" />
+    <PageContainer title="慣用句">
       <IdiomFlashcardDeck />
     </PageContainer>
   );
