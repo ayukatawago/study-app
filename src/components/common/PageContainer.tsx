@@ -29,7 +29,7 @@ export default function PageContainer({
   return (
     <main className={`${mainClasses[variant]} ${className}`}>
       <div className={containerClasses[variant]}>
-        {title && <PageHeader title={title} />}
+        {title && <PageHeader title={title} showBackButton={variant !== 'home'} />}
         {variant === 'home' ? <div className="text-center space-y-8">{children}</div> : children}
       </div>
     </main>

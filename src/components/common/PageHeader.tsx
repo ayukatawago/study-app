@@ -6,30 +6,35 @@ import ThemeToggle from './ThemeToggle';
 
 interface PageHeaderProps {
   title: string;
+  showBackButton?: boolean;
 }
 
-export default function PageHeader({ title }: PageHeaderProps) {
+export default function PageHeader({ title, showBackButton = true }: PageHeaderProps) {
   return (
     <div className="flex justify-between items-center mb-8">
-      <Link
-        href="/"
-        className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 flex-shrink-0"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+      {showBackButton ? (
+        <Link
+          href="/"
+          className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 flex-shrink-0"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"
-          />
-        </svg>
-      </Link>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
+          </svg>
+        </Link>
+      ) : (
+        <div className="flex-shrink-0 w-10 h-10" />
+      )}
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white text-center flex-1 mx-2 truncate">
         {title}
       </h1>
