@@ -8,6 +8,7 @@ export default function JapaneseSection() {
       {/* 言語 */}
       <SubjectSubsection title="言語" className="">
         <StudyLink href="/idioms" title="慣用句" color="bg-purple-500 hover:bg-purple-600" />
+        <StudyLink href="/wago" title="和語" color="bg-fuchsia-500 hover:bg-fuchsia-600" />
       </SubjectSubsection>
     </SubjectSection>
   );

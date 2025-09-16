@@ -85,6 +85,16 @@ export interface IdiomData extends BaseFlashcardData {
   example: string; // Usage example
 }
 
+// Wago data
+export interface WagoData extends BaseFlashcardData {
+  id: number; // Unique identifier for the wago
+  word: string; // The wago word itself
+  meanings: {
+    meaning: string; // Meaning explanation
+    example: string; // Usage example
+  }[]; // Array of meanings with examples
+}
+
 // Base settings interface
 export interface BaseFlashcardSettings {
   randomOrder: boolean;
@@ -132,6 +142,11 @@ export interface CraftSettings extends BaseFlashcardSettings {
 // Idiom settings
 export interface IdiomSettings extends BaseFlashcardSettings {
   cardDirection: 'idiom-to-meaning' | 'meaning-to-idiom';
+}
+
+// Wago settings
+export interface WagoSettings extends BaseFlashcardSettings {
+  cardDirection: 'word-to-meaning' | 'meaning-to-word';
 }
 
 // Base progress interface
